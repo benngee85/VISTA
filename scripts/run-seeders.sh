@@ -29,12 +29,14 @@ UPSTASH_REDIS_REST_URL="${UPSTASH_REDIS_REST_URL:-http://localhost:8079}"
 if [ -n "${REDIS_TOKEN:-}" ]; then
   UPSTASH_REDIS_REST_TOKEN="$REDIS_TOKEN"
 fi
+
 if [ -z "${UPSTASH_REDIS_REST_TOKEN:-}" ]; then
   echo "ERROR: REDIS_TOKEN (or UPSTASH_REDIS_REST_TOKEN) is required." >&2
   echo "       Generate with: openssl rand -hex 32, then add to .env" >&2
   echo "       See SELF_HOSTING.md → Required Environment Variables." >&2
   exit 1
 fi
+
 export UPSTASH_REDIS_REST_URL UPSTASH_REDIS_REST_TOKEN
 
 # Source API keys from docker-compose.override.yml if present.
@@ -52,6 +54,28 @@ if [ -f "$OVERRIDE" ]; then
   . "$_env_tmp"
   rm -f "$_env_tmp"
 fi
+
+# Seeders execute directly on the host, not inside Docker.
+# Translate the host-specific endpoint into the variable expected by
+# the shared LLM client code.
+LLM_API_URL="${LLM_API_URL_HOST:-http://localhost:1234/v1/chat/completions}"
+export LLM_API_URL
+
+if [ -z "${LLM_API_KEY:-}" ]; then
+  echo "ERROR: LLM_API_KEY is required for host-side LLM seeders." >&2
+  exit 1
+fi
+
+if [ -z "${LLM_MODEL:-}" ]; then
+  echo "ERROR: LLM_MODEL is required for host-side LLM seeders." >&2
+  exit 1
+fi
+
+printf '%s\n' "Host seeder endpoints:"
+printf '  Redis REST: %s\n' "$UPSTASH_REDIS_REST_URL"
+printf '  LLM API:    %s\n' "$LLM_API_URL"
+printf '  LLM model:  %s\n' "$LLM_MODEL"
+
 # Per-seeder wall-clock cap for STANDALONE seeders. They run sequentially, so a
 # single upstream that hangs (e.g. a slow NOAA/NSIDC fetch that doesn't honour its
 # own AbortSignal and keeps the node process alive for an hour) would burn the rest
