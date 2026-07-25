@@ -1904,6 +1904,37 @@ export async function createLocalApiServer(options = {}) {
           );
         }
       }
+      // Docker self-host ONLY: WS_RELAY_URL points to the internal AIS/OpenSky
+      // relay service. Add only the configured relay origin to the private-fetch
+      // allowlist; do not relax the generic SSRF policy for other private hosts.
+      if (context.mode === 'docker' && process.env.WS_RELAY_URL) {
+        try {
+          const relayUrl = new URL(
+            process.env.WS_RELAY_URL
+              .replace(/^ws:\/\//i, 'http://')
+              .replace(/^wss:\/\//i, 'https://'),
+          );
+
+          if (
+            relayUrl.protocol !== 'http:' ||
+            relayUrl.hostname !== 'ais-relay' ||
+            relayUrl.port !== '3004'
+          ) {
+            context.logger.warn(
+              `[local-api] unexpected Docker relay origin ${relayUrl.origin}; not added to the private-fetch allowlist`,
+            );
+          } else {
+            extraAllowedPrivateOrigins.push(relayUrl.origin);
+            context.logger.log(
+              `[local-api] allowed internal Docker relay origin ${relayUrl.origin}`,
+            );
+          }
+        } catch (err) {
+          context.logger.warn(
+            `[local-api] WS_RELAY_URL is not a valid URL; not added to the private-fetch allowlist (relay calls will be SSRF-blocked): ${err.message}`,
+          );
+        }
+      }      
       if (context.allowPrivateRemoteBase) {
         try { extraAllowedPrivateOrigins.push(new URL(context.remoteBase).origin); } catch {}
       }
