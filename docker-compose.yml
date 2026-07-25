@@ -28,9 +28,13 @@ services:
       LOCAL_API_CLOUD_FALLBACK: "false"
       WS_RELAY_URL: "http://ais-relay:3004"
       # LLM provider (any OpenAI-compatible endpoint)
-      LLM_API_URL: "${LLM_API_URL:-}"
+      LLM_API_URL: "${LLM_API_URL_DOCKER:-http://host.docker.internal:1234/v1/chat/completions}"
       LLM_API_KEY: "${LLM_API_KEY:-}"
       LLM_MODEL: "${LLM_MODEL:-}"
+      LLM_REASONING_MODEL: "${LLM_REASONING_MODEL:-}"
+      LLM_TOOL_MODEL: "${LLM_TOOL_MODEL:-}"
+      LLM_REASONING_PROVIDER: "${LLM_REASONING_PROVIDER:-generic}"
+      LLM_TOOL_PROVIDER: "${LLM_TOOL_PROVIDER:-generic}"
       GROQ_API_KEY: "${GROQ_API_KEY:-}"
       OPENROUTER_API_KEY: "${OPENROUTER_API_KEY:-}"
       # Data source API keys (optional — features degrade gracefully)
