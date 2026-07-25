@@ -16,6 +16,15 @@ import {
 } from "./constants";
 import { isValidIso2, validIso2Codes } from "./lib/iso2";
 import { userIdToShard } from "./lib/shards";
+import type {
+  FollowMutationResult,
+  MergeAnonymousLocalResult,
+} from "../src/shared/followed-countries-types";
+
+export type {
+  FollowMutationResult,
+  MergeAnonymousLocalResult,
+} from "../src/shared/followed-countries-types";
 
 /**
  * Layer-2 entitlement gate for the followed-countries watchlist primitive
@@ -278,11 +287,6 @@ async function readRawCountryFollowerCount(
  * for the same pattern. Skill:
  * `convex-gotchas/reference/convex-autosentry-forwards-intentional-convexerror-throws.md`.
  */
-export type FollowMutationResult =
-  | { ok: true; idempotent: false }
-  | { ok: true; idempotent: true }
-  | { ok: false; reason: "FREE_CAP"; currentCount: number; limit: number };
-
 /**
  * Return shape for `mergeAnonymousLocal`. `accepted` is the list of
  * NEWLY-inserted countries (in canonicalized first-seen order); existing
@@ -291,13 +295,6 @@ export type FollowMutationResult =
  * over-cap inputs for free users that the client should surface in an
  * upgrade modal. PRO users receive `droppedDueToCap: []`.
  */
-export type MergeAnonymousLocalResult = {
-  totalCount: number;
-  accepted: string[];
-  droppedInvalid: string[];
-  droppedDueToCap: string[];
-};
-
 /**
  * `followCountry({ country })` — authoritative single-country follow.
  *
