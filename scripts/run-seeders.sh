@@ -42,9 +42,9 @@ export UPSTASH_REDIS_REST_URL UPSTASH_REDIS_REST_TOKEN
 OVERRIDE="$PROJECT_DIR/docker-compose.override.yml"
 if [ -f "$OVERRIDE" ]; then
   _env_tmp=$(mktemp)
-  grep -E '^\s+[A-Z_]+:' "$OVERRIDE" \
+  grep -E '^[[:space:]]+[A-Z_]+:' "$OVERRIDE" \
     | grep -v '#' \
-    | sed 's/^\s*//' \
+    | sed 's/^[[:space:]]*//' \
     | sed 's/: */=/' \
     | sed "s/[\"']//g" \
     | grep -E '^(NASA_FIRMS|GROQ|AISSTREAM|FRED|FINNHUB|EIA|ACLED_ACCESS_TOKEN|ACLED_EMAIL|ACLED_PASSWORD|CLOUDFLARE|AVIATIONSTACK|OPENAQ_API_KEY|WAQI_API_KEY|OPENROUTER_API_KEY|LLM_API_URL|LLM_API_KEY|LLM_MODEL|OLLAMA_API_URL|OLLAMA_MODEL)' \
