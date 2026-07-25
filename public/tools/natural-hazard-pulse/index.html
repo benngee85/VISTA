@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Live Natural Hazard Tracker | World Monitor</title>
+    <meta name="description" content="See which natural hazards are active right now — earthquakes, storms, wildfires and floods from EONET, GDACS, NHC and HKO feeds — worldwide or filtered to one country.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.worldmonitor.app/tools/natural-hazard-pulse/">
+    <meta name="lastmod" content="2026-07-24">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Live Natural Hazard Tracker | World Monitor">
+    <meta property="og:description" content="See which natural hazards are active right now — earthquakes, storms, wildfires and floods from EONET, GDACS, NHC and HKO feeds — worldwide or filtered to one country.">
+    <meta property="og:url" content="https://www.worldmonitor.app/tools/natural-hazard-pulse/">
+    <meta property="og:site_name" content="World Monitor">
+    <meta property="og:image" content="https://www.worldmonitor.app/favico/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="World Monitor — real-time global intelligence dashboard with live markets, geopolitical data, and infrastructure monitoring">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Live Natural Hazard Tracker | World Monitor">
+    <meta name="twitter:description" content="See which natural hazards are active right now — earthquakes, storms, wildfires and floods from EONET, GDACS, NHC and HKO feeds — worldwide or filtered to one country.">
+    <meta name="twitter:image" content="https://www.worldmonitor.app/favico/og-image.png">
+    <meta name="twitter:image:alt" content="World Monitor — real-time global intelligence dashboard with live markets, geopolitical data, and infrastructure monitoring">
+    <meta name="twitter:site" content="@worldmonitorai">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"World Monitor natural-hazard pulse","description":"See which natural hazards are active right now — earthquakes, storms, wildfires and floods from EONET, GDACS, NHC and HKO feeds — worldwide or filtered to one country.","url":"https://www.worldmonitor.app/tools/natural-hazard-pulse/","applicationCategory":"DataApplication","operatingSystem":"Any"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.worldmonitor.app/"},{"@type":"ListItem","position":2,"name":"Live tools","item":"https://www.worldmonitor.app/tools/"},{"@type":"ListItem","position":3,"name":"Natural-hazard pulse","item":"https://www.worldmonitor.app/tools/natural-hazard-pulse/"}]}</script>
+    <style>
+      :root { color-scheme: dark; --bg: #050807; --panel: #0c1210; --text: #eef8f0; --muted: #a8b8ad; --line: #1b2b22; --accent: #4ade80; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.55; }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      header, main, footer { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+      header { padding-top: 24px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+      nav { display: flex; gap: 4px 14px; flex-wrap: wrap; font-size: 14px; }
+      nav a { display: inline-flex; align-items: center; min-height: 44px; }
+      main { padding-top: 36px; padding-bottom: 52px; }
+      h1 { font-size: clamp(32px, 5vw, 54px); line-height: 1; margin: 0 0 16px; letter-spacing: 0; }
+      h2 { margin-top: 36px; font-size: 22px; }
+      p { color: var(--muted); }
+      .lede { font-size: 18px; max-width: 760px; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 24px; }
+      .card, .metric { border: 1px solid var(--line); border-radius: 8px; padding: 16px; background: var(--panel); }
+      .metric strong { display: block; font-size: 28px; color: var(--text); }
+      .metric small { display: block; color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+      .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px; font-weight: 700; }
+      .cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; padding: 13px 18px; border-radius: 8px; background: var(--accent); color: #04170c; font-weight: 700; font-size: 15px; }
+      .cta:hover { text-decoration: none; filter: brightness(1.08); }
+      .live-tool { margin-top: 28px; padding: 20px; border: 1px solid #28543a; border-radius: 12px; background: linear-gradient(145deg, #0e1712, #09100c); }
+      .live-tool h2 { margin: 3px 0 0; }
+      .live-tool .grid { margin-top: 18px; }
+      .tool-head, .tool-meta { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+      .tool-note { max-width: 760px; margin-bottom: 0; }
+      .tool-meta { margin-top: 16px; color: var(--muted); font-size: 13px; }
+      .live-status { padding: 5px 9px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: 12px; font-weight: 700; }
+      .live-tool[data-state="ready"] .live-status { border-color: #28543a; color: var(--accent); }
+      .live-tool[data-state="partial"] .live-status { border-color: #7c6322; color: #fde68a; }
+      .live-tool[data-state="error"] .live-status { border-color: #6f3b3b; color: #fca5a5; }
+      .refresh { border: 1px solid var(--line); border-radius: 7px; padding: 12px 14px; background: #121d16; color: var(--text); cursor: pointer; font: inherit; }
+      .refresh:hover:not(:disabled) { border-color: var(--accent); }
+      .refresh:disabled { cursor: wait; opacity: 0.55; }
+      .tool-controls { display: flex; align-items: end; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+      .tool-controls label { display: grid; gap: 6px; color: var(--muted); font-size: 13px; }
+      .tool-controls select { min-width: 240px; border: 1px solid var(--line); border-radius: 7px; padding: 12px 34px 12px 12px; background: #121d16; color: var(--text); font: inherit; }
+      .result-list { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 8px; }
+      .result-list li { border-left: 2px solid var(--line); padding: 8px 12px; color: var(--muted); font-size: 14px; }
+      .split { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 18px; }
+      .split > section { border: 1px solid var(--line); border-radius: 8px; padding: 16px; background: var(--panel); }
+      .split h3 { margin: 0; font-size: 18px; }
+      .split .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .split .metric strong { font-size: 22px; }
+      .routes { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 8px; }
+      .routes li { border: 1px solid var(--line); border-radius: 8px; padding: 11px 14px; background: var(--panel); color: var(--text); font-size: 14px; }
+      .routes .vol { color: var(--muted); }
+      .related { list-style: none; padding: 0; margin: 12px 0 0; display: flex; flex-wrap: wrap; gap: 0 20px; }
+      .related a { display: inline-flex; align-items: center; min-height: 44px; }
+      .source { margin-top: 34px; font-size: 13px; color: var(--muted); }
+      footer { border-top: 1px solid var(--line); padding-top: 20px; padding-bottom: 28px; color: var(--muted); font-size: 13px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav aria-label="Primary">
+        <a href="/">World Monitor</a>
+        <a href="/countries/">Countries</a>
+        <a href="/chokepoints/">Chokepoints</a>
+        <a href="/crises/">Crises</a>
+        <a href="/tools/">Live tools</a>
+        <a href="/reference/changelog/">Changelog</a>
+        <a href="/blog/glossary/">Glossary</a>
+      </nav>
+    </header>
+    <main>
+      <p class="eyebrow">Natural-hazard pulse</p>
+      <h1>What natural hazards are active now?</h1>
+      <p class="lede">See which natural hazards are active right now — earthquakes, storms, wildfires and floods from EONET, GDACS, NHC and HKO feeds — worldwide or filtered to one country.</p>
+      <p>The country selector is an approximate geographic filter, not a territorial polygon. Coastal and border events can overlap neighbouring countries. Countries with oversized or discontinuous envelopes are omitted so every country query remains bounded. Agency observations and wind averaging periods remain distinct.</p>
+      <section class="live-tool" data-natural-hazard-tool data-state="loading">
+        <div class="tool-head">
+          <div>
+            <p class="eyebrow">Current source snapshot</p>
+            <h2>Open event pulse</h2>
+          </div>
+          <span class="live-status" data-live-status role="status" aria-live="polite">Connecting…</span>
+        </div>
+        <div class="tool-controls">
+          <label>Geographic filter
+            <select data-country-select>
+          <option value="">Worldwide</option>
+          <option value="AF" data-bounds="29.39,60.49,38.47,74.89">Afghanistan</option>
+          <option value="AL" data-bounds="39.69,19.31,42.55,20.97">Albania</option>
+          <option value="DZ" data-bounds="18.98,-8.68,37.08,11.97">Algeria</option>
+          <option value="AO" data-bounds="-18.03,11.74,-4.39,24">Angola</option>
+          <option value="AR" data-bounds="-54.91,-73.47,-21.79,-53.67">Argentina</option>
+          <option value="AM" data-bounds="38.86,43.44,41.29,46.6">Armenia</option>
+          <option value="AU" data-bounds="-43.63,113.39,-10.93,153.61">Australia</option>
+          <option value="AT" data-bounds="46.42,9.52,49.01,17.15">Austria</option>
+          <option value="AZ" data-bounds="38.43,44.77,41.89,49.59">Azerbaijan</option>
+          <option value="BD" data-bounds="21.06,88.02,26.42,92.58">Bangladesh</option>
+          <option value="BY" data-bounds="51.48,23.49,56.14,32.72">Belarus</option>
+          <option value="BE" data-bounds="49.54,2.52,51.38,6.12">Belgium</option>
+          <option value="BZ" data-bounds="15.89,-89.24,18.48,-88.09">Belize</option>
+          <option value="BJ" data-bounds="6.21,0.77,12.4,3.84">Benin</option>
+          <option value="BT" data-bounds="26.7,88.89,28.34,92.04">Bhutan</option>
+          <option value="BO" data-bounds="-22.83,-69.58,-9.83,-57.55">Bolivia</option>
+          <option value="BA" data-bounds="42.56,15.72,45.28,19.62">Bosnia and Herzegovina</option>
+          <option value="BW" data-bounds="-26.86,19.98,-17.79,29.35">Botswana</option>
+          <option value="BR" data-bounds="-33.74,-73.77,5.2,-34.8">Brazil</option>
+          <option value="BN" data-bounds="4.02,114,4.89,114.98">Brunei</option>
+          <option value="BG" data-bounds="41.24,22.35,44.23,28.58">Bulgaria</option>
+          <option value="BF" data-bounds="9.49,-5.52,15.07,2.39">Burkina Faso</option>
+          <option value="MM" data-bounds="10.35,92.27,28.53,101.16">Burma</option>
+          <option value="BI" data-bounds="-4.45,29.02,-2.4,30.83">Burundi</option>
+          <option value="KH" data-bounds="10.42,102.33,14.7,107.6">Cambodia</option>
+          <option value="CM" data-bounds="1.91,8.59,13.08,16.2">Cameroon</option>
+          <option value="CF" data-bounds="2.24,14.52,11,27.44">Central African Republic</option>
+          <option value="TD" data-bounds="7.52,13.45,23.44,23.98">Chad</option>
+          <option value="CL" data-bounds="-55.63,-75.7,-17.51,-67.01">Chile</option>
+          <option value="CO" data-bounds="-4.24,-78.83,12.47,-66.88">Colombia</option>
+          <option value="CR" data-bounds="8.03,-85.86,11.08,-82.57">Costa Rica</option>
+          <option value="CI" data-bounds="4.35,-8.57,10.43,-2.51">Côte d’Ivoire</option>
+          <option value="HR" data-bounds="42.42,13.59,46.5,19.02">Croatia</option>
+          <option value="CU" data-bounds="19.86,-84.02,23.2,-74.27">Cuba</option>
+          <option value="CY" data-bounds="34.63,32.58,35.19,34.02">Cyprus</option>
+          <option value="CZ" data-bounds="48.59,12.34,50.92,18.83">Czech Republic</option>
+          <option value="DK" data-bounds="54.81,8.29,57.59,12.6">Denmark</option>
+          <option value="DJ" data-bounds="10.97,41.75,12.71,43.41">Djibouti</option>
+          <option value="DO" data-bounds="18.04,-71.91,19.94,-68.74">Dominican Republic</option>
+          <option value="CD" data-bounds="-13.43,12.21,5.37,31.24">DR Congo</option>
+          <option value="EC" data-bounds="-4.96,-80.85,1.43,-75.28">Ecuador</option>
+          <option value="EG" data-bounds="21.99,24.69,31.66,36.88">Egypt</option>
+          <option value="SV" data-bounds="13.25,-90.1,14.42,-87.82">El Salvador</option>
+          <option value="GQ" data-bounds="1,9.41,2.34,11.34">Equatorial Guinea</option>
+          <option value="ER" data-bounds="12.47,36.42,18,43.12">Eritrea</option>
+          <option value="EE" data-bounds="57.52,23.47,59.63,28.02">Estonia</option>
+          <option value="SZ" data-bounds="-27.32,30.79,-25.91,32.11">Eswatini</option>
+          <option value="ET" data-bounds="3.46,33.05,14.88,47.98">Ethiopia</option>
+          <option value="FJ" data-bounds="-18.25,177.34,-16.15,180">Fiji</option>
+          <option value="FI" data-bounds="59.9,20.62,70.08,31.57">Finland</option>
+          <option value="GA" data-bounds="-3.94,8.8,2.3,14.5">Gabon</option>
+          <option value="GE" data-bounds="41.11,39.99,43.54,46.43">Georgia</option>
+          <option value="DE" data-bounds="47.3,5.99,54.9,14.81">Germany</option>
+          <option value="GH" data-bounds="4.74,-3.26,11.13,1.19">Ghana</option>
+          <option value="GR" data-bounds="34.93,20,41.71,26.64">Greece</option>
+          <option value="GT" data-bounds="13.73,-92.25,17.81,-88.22">Guatemala</option>
+          <option value="GN" data-bounds="7.25,-15.02,12.67,-7.69">Guinea</option>
+          <option value="GW" data-bounds="10.97,-16.73,12.68,-13.73">Guinea Bissau</option>
+          <option value="GY" data-bounds="1.27,-61.38,8.56,-56.48">Guyana</option>
+          <option value="HT" data-bounds="18.04,-72.89,19.94,-71.64">Haiti</option>
+          <option value="HN" data-bounds="12.98,-89.36,15.98,-83.13">Honduras</option>
+          <option value="HU" data-bounds="45.74,16.09,48.53,22.88">Hungary</option>
+          <option value="IS" data-bounds="63.4,-24.2,66.47,-13.53">Iceland</option>
+          <option value="IN" data-bounds="8.08,68.18,35.5,97.32">India</option>
+          <option value="ID" data-bounds="-10.34,95.2,5.55,140.98">Indonesia</option>
+          <option value="IR" data-bounds="25.2,44.06,39.69,62.75">Iran</option>
+          <option value="IQ" data-bounds="29.1,38.77,37.37,48.53">Iraq</option>
+          <option value="IE" data-bounds="51.59,-10.23,55.16,-6">Ireland</option>
+          <option value="IL" data-bounds="29.49,34.25,33.41,35.82">Israel</option>
+          <option value="IT" data-bounds="36.79,7.02,46.99,18.01">Italy</option>
+          <option value="JM" data-bounds="17.72,-78.08,18.52,-76.26">Jamaica</option>
+          <option value="JP" data-bounds="31.11,129.85,45.51,145.77">Japan</option>
+          <option value="JO" data-bounds="29.19,34.95,33.37,39.15">Jordan</option>
+          <option value="KZ" data-bounds="40.58,46.48,55.35,87.32">Kazakhstan</option>
+          <option value="KE" data-bounds="-4.68,33.89,4.98,41.89">Kenya</option>
+          <option value="XK" data-bounds="41.87,20.06,43.17,21.56">Kosovo</option>
+          <option value="KW" data-bounds="28.53,46.53,29.99,48.43">Kuwait</option>
+          <option value="KG" data-bounds="39.33,69.29,43.22,80.21">Kyrgyzstan</option>
+          <option value="LA" data-bounds="14.32,100.1,22.4,107.66">Laos</option>
+          <option value="LV" data-bounds="55.67,21.05,58.06,28.15">Latvia</option>
+          <option value="LB" data-bounds="33.09,35.11,34.65,36.6">Lebanon</option>
+          <option value="LS" data-bounds="-30.65,27.01,-28.6,29.44">Lesotho</option>
+          <option value="LR" data-bounds="4.35,-11.48,8.49,-7.45">Liberia</option>
+          <option value="LY" data-bounds="19.5,9.4,33.18,25.15">Libya</option>
+          <option value="LT" data-bounds="53.94,21.05,56.42,26.59">Lithuania</option>
+          <option value="LU" data-bounds="49.46,5.79,50.12,6.35">Luxembourg</option>
+          <option value="MG" data-bounds="-25.57,43.22,-12.3,50.5">Madagascar</option>
+          <option value="MW" data-bounds="-16.48,32.72,-9.41,35.85">Malawi</option>
+          <option value="MY" data-bounds="0.85,100.13,6.71,119.16">Malaysia</option>
+          <option value="ML" data-bounds="10.16,-12.26,25,4.23">Mali</option>
+          <option value="MR" data-bounds="14.77,-17.06,27.29,-4.82">Mauritania</option>
+          <option value="MX" data-bounds="14.55,-117.13,32.53,-86.74">Mexico</option>
+          <option value="MD" data-bounds="45.46,26.62,48.45,29.73">Moldova</option>
+          <option value="MN" data-bounds="41.6,87.82,52.11,119.7">Mongolia</option>
+          <option value="ME" data-bounds="41.85,18.44,43.53,20.35">Montenegro</option>
+          <option value="MA" data-bounds="21.42,-17.01,35.92,-1.25">Morocco</option>
+          <option value="MZ" data-bounds="-26.85,30.21,-10.47,40.84">Mozambique</option>
+          <option value="NA" data-bounds="-28.96,11.77,-16.96,25.26">Namibia</option>
+          <option value="NP" data-bounds="26.35,80.04,30.41,88.12">Nepal</option>
+          <option value="NL" data-bounds="50.75,4.14,53.41,7.19">Netherlands</option>
+          <option value="NC" data-bounds="-22.29,164.37,-20.3,167.03">New Caledonia</option>
+          <option value="NZ" data-bounds="-46.68,166.49,-35.01,178.29">New Zealand</option>
+          <option value="NI" data-bounds="10.72,-87.31,15,-83.13">Nicaragua</option>
+          <option value="NE" data-bounds="11.7,0.15,23.52,15.95">Niger</option>
+          <option value="NG" data-bounds="4.28,2.67,13.87,14.67">Nigeria</option>
+          <option value="KP" data-bounds="37.83,124.37,42.53,130.7">North Korea</option>
+          <option value="MK" data-bounds="40.85,20.48,42.31,22.92">North Macedonia</option>
+          <option value="NO" data-bounds="58.03,4.96,80.33,31.06">Norway</option>
+          <option value="OM" data-bounds="16.64,51.98,24.98,59.79">Oman</option>
+          <option value="PK" data-bounds="23.8,60.84,37.02,77.05">Pakistan</option>
+          <option value="PS" data-bounds="31.21,34.2,32.38,35.56">Palestine</option>
+          <option value="PA" data-bounds="7.21,-82.9,9.63,-77.2">Panama</option>
+          <option value="PG" data-bounds="-10.35,140.97,-2.6,155.93">Papua New Guinea</option>
+          <option value="PY" data-bounds="-27.49,-62.65,-19.29,-54.25">Paraguay</option>
+          <option value="PE" data-bounds="-18.34,-81.25,-0.11,-68.68">Peru</option>
+          <option value="PH" data-bounds="5.8,119.88,18.54,126.57">Philippines</option>
+          <option value="PL" data-bounds="49.07,14.2,54.82,24.11">Poland</option>
+          <option value="PT" data-bounds="37.12,-9.49,41.97,-6.21">Portugal</option>
+          <option value="PR" data-bounds="17.93,-67.21,18.52,-65.63">Puerto Rico</option>
+          <option value="QA" data-bounds="24.63,50.75,26.05,51.62">Qatar</option>
+          <option value="CG" data-bounds="-5.02,11.11,3.62,18.63">Republic of the Congo</option>
+          <option value="RO" data-bounds="43.65,20.24,48.26,29.66">Romania</option>
+          <option value="RW" data-bounds="-2.81,28.86,-1.07,30.83">Rwanda</option>
+          <option value="SA" data-bounds="16.37,34.63,32.12,55.64">Saudi Arabia</option>
+          <option value="SN" data-bounds="12.31,-17.18,16.64,-11.39">Senegal</option>
+          <option value="RS" data-bounds="42.25,18.9,46.11,22.94">Serbia</option>
+          <option value="SL" data-bounds="6.92,-13.3,10,-10.28">Sierra Leone</option>
+          <option value="SK" data-bounds="47.75,16.95,49.51,22.54">Slovakia</option>
+          <option value="SI" data-bounds="45.49,13.59,46.86,16.52">Slovenia</option>
+          <option value="SO" data-bounds="-1.7,40.97,11.99,51.14">Somalia</option>
+          <option value="ZA" data-bounds="-34.81,16.49,-22.19,32.89">South Africa</option>
+          <option value="KR" data-bounds="34.44,126.27,38.62,129.45">South Korea</option>
+          <option value="SS" data-bounds="3.49,24.17,11.71,35.92">South Sudan</option>
+          <option value="ES" data-bounds="36.14,-9.22,43.71,3.18">Spain</option>
+          <option value="LK" data-bounds="5.92,79.76,9.5,81.88">Sri Lanka</option>
+          <option value="SD" data-bounds="8.69,22.07,22,38.6">Sudan</option>
+          <option value="SR" data-bounds="1.94,-58.07,6.01,-53.99">Suriname</option>
+          <option value="SE" data-bounds="55.4,11.22,69.04,24.16">Sweden</option>
+          <option value="CH" data-bounds="45.91,6.06,47.8,10.45">Switzerland</option>
+          <option value="SY" data-bounds="32.32,35.76,37.11,42.36">Syria</option>
+          <option value="TJ" data-bounds="36.7,67.76,40.88,75.16">Tajikistan</option>
+          <option value="TZ" data-bounds="-11.72,29.4,-1,40.44">Tanzania</option>
+          <option value="TH" data-bounds="5.64,97.77,20.32,105.65">Thailand</option>
+          <option value="TL" data-bounds="-9.49,124.92,-8.31,127.01">Timor-Leste</option>
+          <option value="TG" data-bounds="6.1,-0.17,11.13,1.62">Togo</option>
+          <option value="TN" data-bounds="30.23,7.48,37.34,11.51">Tunisia</option>
+          <option value="TR" data-bounds="35.92,26.04,42.09,44.81">Turkey</option>
+          <option value="TM" data-bounds="35.22,52.44,42.78,66.55">Turkmenistan</option>
+          <option value="UG" data-bounds="-1.39,29.58,4.22,34.98">Uganda</option>
+          <option value="UA" data-bounds="45.22,22.13,52.35,40.14">Ukraine</option>
+          <option value="AE" data-bounds="22.62,51.57,26.06,56.38">United Arab Emirates</option>
+          <option value="GB" data-bounds="50.23,-8.16,58.66,1.77">United Kingdom</option>
+          <option value="UY" data-bounds="-34.97,-58.39,-30.1,-53.13">Uruguay</option>
+          <option value="UZ" data-bounds="37.19,55.98,45.56,72.62">Uzbekistan</option>
+          <option value="VE" data-bounds="0.76,-73.01,11.85,-59.82">Venezuela</option>
+          <option value="VN" data-bounds="8.82,102.12,23.32,109.47">Viet Nam</option>
+          <option value="EH" data-bounds="20.77,-17.06,27.66,-8.68">Western Sahara</option>
+          <option value="YE" data-bounds="12.62,42.7,19,53.09">Yemen</option>
+          <option value="ZM" data-bounds="-17.94,21.98,-8.19,33.67">Zambia</option>
+          <option value="ZW" data-bounds="-22.4,25.26,-15.64,33.03">Zimbabwe</option>
+            </select>
+          </label>
+          <button class="refresh" type="button" data-live-refresh disabled>Refresh live data</button>
+        </div>
+        <div class="grid" data-live-grid aria-label="Current natural hazard metrics" aria-busy="true">
+          <div class="metric"><span>Open matches</span><strong data-hazard-total>—</strong></div>
+          <div class="metric"><span>Categories</span><strong data-hazard-categories>Loading</strong></div>
+          <div class="metric"><span>Strongest reported magnitude</span><strong data-hazard-strongest>—</strong></div>
+          <div class="metric"><span>Most recent event</span><strong data-hazard-latest>—</strong></div>
+        </div>
+        <ul class="result-list" data-hazard-list aria-label="Recent matching natural events"><li>Loading current events…</li></ul>
+        <div class="tool-meta"><time data-live-updated>Requesting the latest available snapshot…</time></div>
+        <noscript><p>Enable JavaScript to load and filter the current event snapshot. This page still documents the tool’s coverage and sources.</p></noscript>
+      </section>
+      <a class="cta" data-dashboard-link href="https://www.worldmonitor.app/?utm_source=seo-tool">Open the selected area in World Monitor →</a>
+      <h2>Sources and limits</h2>
+      <p>World Monitor reads its seeded natural-event snapshot from maintained <a href="https://eonet.gsfc.nasa.gov/">NASA EONET</a>, <a href="https://www.gdacs.org/">GDACS</a>, <a href="https://www.nhc.noaa.gov/">NHC</a>, and <a href="https://www.hko.gov.hk/">HKO</a> ingestion paths. Source names are retained on individual events. A zero is shown only when a source snapshot is explicitly available; unavailable snapshots fail closed. Coverage and update cadence are documented in <a href="/docs/natural-disasters">natural disaster tracking</a>.</p>
+      <p class="source">Geographic filters: shared/country-bboxes.js. Live metrics: <code>/api/natural/v1/list-natural-events</code>.</p>
+    </main>
+    <footer>World Monitor reference corpus. Crawlable pages use committed snapshots; live API results are labelled separately.</footer>
+    <script type="module" nonce="wm-static-bootstrap" src="/tools/live-tools.js"></script>
+  </body>
+</html>
