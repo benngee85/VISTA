@@ -90,3 +90,19 @@ tmp/
 docs/plans/
 docs/brainstorms/
 playground-pricing.html
+
+# Local environment
+env
+.env.local
+.env.development.local
+.env.production.local
+
+# Generated output
+effective.json
+
+# Local backups
+*.bak
+*.backup
+*.backup.*
+*.backup-*
+*.bak.*
