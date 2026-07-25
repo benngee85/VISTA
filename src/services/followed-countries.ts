@@ -51,7 +51,7 @@ import {
 import type {
   FollowMutationResult as ServerFollowMutationResult,
   MergeAnonymousLocalResult as ServerMergeAnonymousLocalResult,
-} from '../../convex/followedCountries';
+} from '../shared/followed-countries-types';
 
 // ---------------------------------------------------------------------------
 // Public constants & types
