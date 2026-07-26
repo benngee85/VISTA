@@ -4,34 +4,10 @@ import { sanitizeForPrompt } from './llm-sanitize.js';
 import { buildLlmCallEvent, deliverUsageEvents, type LlmCallEvent } from './usage';
 import {
   getLlmAttemptTimeoutMs,
+  OPENROUTER_PROVIDER_ROUTING,
 } from '../../scripts/_llm-model-timeouts.mjs';
 
-import {
-  getProviderCredentials,
-  LLM_PROVIDER_CHAIN,
-  LLM_PROVIDER_SET,
-  resolveProviderChain,
-  stripThinkingTags,
-} from '../../shared/llm-provider-runtime.js';
-
-import type {
-  LlmProviderName,
-  ProviderCredentials,
-  ProviderCredentialOverrides,
-} from '../../shared/llm-provider-runtime.js';
-
 export { getLlmAttemptTimeoutMs } from '../../scripts/_llm-model-timeouts.mjs';
-
-export {
-  getProviderCredentials,
-  stripThinkingTags,
-};
-
-export type {
-  LlmProviderName,
-  ProviderCredentials,
-  ProviderCredentialOverrides,
-};
 
 function promptChars(messages: Array<{ role: string; content: string }>): number {
   return messages.reduce((sum, m) => sum + (m.content?.length ?? 0), 0);
@@ -46,6 +22,124 @@ async function flushLlmEvents(events: LlmCallEvent[]): Promise<void> {
   try {
     await deliverUsageEvents(events);
   } catch { /* telemetry must never affect the call result */ }
+}
+
+export interface ProviderCredentials {
+  apiUrl: string;
+  model: string;
+  headers: Record<string, string>;
+  extraBody?: Record<string, unknown>;
+}
+
+export type LlmProviderName = 'ollama' | 'groq' | 'openrouter' | 'generic';
+
+export interface ProviderCredentialOverrides {
+  model?: string;
+  /** OpenRouter only: let reasoning-capable models reason (reasoning profile). Default false — utility calls must not pay reasoning tokens. */
+  enableReasoning?: boolean;
+}
+
+const OLLAMA_HOST_ALLOWLIST = new Set([
+  'localhost', '127.0.0.1', '::1', '[::1]', 'host.docker.internal',
+]);
+
+function isLocalDeployment(): boolean {
+  const mode = typeof process !== 'undefined' ? (process.env?.LOCAL_API_MODE || '') : '';
+  return mode.includes('sidecar') || mode.includes('docker');
+}
+
+// OpenRouter provider routing now lives in scripts/_llm-model-timeouts.mjs, next to
+// the Flash completion timeout it is inseparable from. It used to be defined HERE
+// only, which meant the Railway forecast seeder (which cannot import server/) had the
+// timeout but NOT the routing: OpenRouter free-routed its calls to backends 4-7x
+// slower than the timeout allowed, and every market_implications run failed. One
+// source of truth so a consumer cannot pick up the timeout without the routing.
+
+export function getProviderCredentials(
+  provider: string,
+  overrides: ProviderCredentialOverrides = {},
+): ProviderCredentials | null {
+  if (provider === 'ollama') {
+    const baseUrl = process.env.OLLAMA_API_URL;
+    if (!baseUrl) return null;
+
+    if (!isLocalDeployment()) {
+      try {
+        const hostname = new URL(baseUrl).hostname;
+        if (!OLLAMA_HOST_ALLOWLIST.has(hostname)) {
+          console.warn(`[llm] Ollama blocked: hostname "${hostname}" not in allowlist`);
+          return null;
+        }
+      } catch {
+        return null;
+      }
+    }
+
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+    const apiKey = process.env.OLLAMA_API_KEY;
+    if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
+
+    return {
+      apiUrl: new URL('/v1/chat/completions', baseUrl).toString(),
+      model: overrides.model || process.env.OLLAMA_MODEL || 'llama3.1:8b',
+      headers,
+      extraBody: { think: false },
+    };
+  }
+
+  if (provider === 'groq') {
+    const apiKey = process.env.GROQ_API_KEY;
+    if (!apiKey) return null;
+    return {
+      apiUrl: 'https://api.groq.com/openai/v1/chat/completions',
+      model: overrides.model || 'llama-3.3-70b-versatile',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+    };
+  }
+
+  if (provider === 'openrouter') {
+    const apiKey = process.env.OPENROUTER_API_KEY;
+    if (!apiKey) return null;
+    return {
+      apiUrl: 'https://openrouter.ai/api/v1/chat/completions',
+      model: overrides.model || 'deepseek/deepseek-v4-flash',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': 'https://worldmonitor.app',
+        'X-Title': 'World Monitor',
+      },
+      // Hybrid-reasoning models (DeepSeek V4) reason by default via
+      // OpenRouter's normalized `reasoning` param; utility calls must not
+      // pay reasoning tokens. The reasoning profile opts back in, letting
+      // the model's own default apply. `provider` routing is always sent —
+      // the China-provider exclusion is not optional (see the constant).
+      extraBody: {
+        ...(overrides.enableReasoning ? {} : { reasoning: { enabled: false } }),
+        provider: OPENROUTER_PROVIDER_ROUTING,
+      },
+    };
+  }
+
+  // Generic OpenAI-compatible endpoint via LLM_API_URL/LLM_API_KEY/LLM_MODEL
+  if (provider === 'generic') {
+    const apiUrl = process.env.LLM_API_URL;
+    const apiKey = process.env.LLM_API_KEY;
+    if (!apiUrl || !apiKey) return null;
+    return {
+      apiUrl,
+      model: overrides.model || process.env.LLM_MODEL || 'gpt-3.5-turbo',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+    };
+  }
+
+  return null;
 }
 
 /**
@@ -72,12 +166,34 @@ async function readBoundedErrorBody(resp: Response, cap: number): Promise<string
   return out.slice(0, cap);
 }
 
+export function stripThinkingTags(text: string): string {
+  let s = text
+    .replace(/<think>[\s\S]*?<\/think>/gi, '')
+    .replace(/<\|thinking\|>[\s\S]*?<\|\/thinking\|>/gi, '')
+    .replace(/<reasoning>[\s\S]*?<\/reasoning>/gi, '')
+    .replace(/<reflection>[\s\S]*?<\/reflection>/gi, '')
+    .replace(/<\|begin_of_thought\|>[\s\S]*?<\|end_of_thought\|>/gi, '')
+    .trim();
+
+  // Strip unterminated opening tags (no closing tag present)
+  s = s
+    .replace(/<think>[\s\S]*/gi, '')
+    .replace(/<\|thinking\|>[\s\S]*/gi, '')
+    .replace(/<reasoning>[\s\S]*/gi, '')
+    .replace(/<reflection>[\s\S]*/gi, '')
+    .replace(/<\|begin_of_thought\|>[\s\S]*/gi, '')
+    .trim();
+
+  return s;
+}
+
+
 // openrouter ahead of groq since #4944: core surfaces run DeepSeek V4 Flash
 // via OpenRouter; groq (llama-3.3-70b-versatile) is the free-tier/outage
 // fallback. Ollama stays first so self-hosted deployments are untouched —
 // it is skipped in cloud where OLLAMA_API_URL is unset.
-const PROVIDER_CHAIN = LLM_PROVIDER_CHAIN;
-const PROVIDER_SET: ReadonlySet<string> = LLM_PROVIDER_SET;
+const PROVIDER_CHAIN = ['ollama', 'openrouter', 'groq', 'generic'] as const;
+const PROVIDER_SET = new Set<string>(PROVIDER_CHAIN);
 
 export interface LlmCallOptions {
   messages: Array<{ role: string; content: string }>;
@@ -150,6 +266,26 @@ function isLengthLimitedCompletion(
   if (normalized && TOKEN_LIMIT_FINISH_REASONS.has(normalized)) return true;
   if (completionTokens < maxTokens) return false;
   return normalized === null || !KNOWN_NON_LIMIT_FINISH_REASONS.has(normalized);
+}
+
+function resolveProviderChain(opts: {
+  forcedProvider?: string;
+  providerOrder?: string[];
+}): string[] {
+  if (opts.forcedProvider) return [opts.forcedProvider];
+  if (!Array.isArray(opts.providerOrder) || opts.providerOrder.length === 0) {
+    return [...PROVIDER_CHAIN];
+  }
+
+  const seen = new Set<string>();
+  const providers: string[] = [];
+  for (const provider of opts.providerOrder) {
+    if (!PROVIDER_SET.has(provider) || seen.has(provider)) continue;
+    seen.add(provider);
+    providers.push(provider);
+  }
+
+  return providers.length > 0 ? providers : [...PROVIDER_CHAIN];
 }
 
 function callLlmProfile(

@@ -18,12 +18,6 @@ import {
   OPENROUTER_PROVIDER_ROUTING,
   DEEPSEEK_V4_FLASH_LONG_COMPLETION_TIMEOUT_MS,
 } from './_llm-model-timeouts.mjs';
-
-import {
-  getProviderCredentials,
-  LLM_PROVIDER_CHAIN,
-  parseProviderOrder,
-} from '../shared/llm-provider-runtime.js';
 import { loadTickerSet } from './_ticker-validation.mjs';
 import { computeEmaWindows, computeRisk24h } from './_ema-threat-engine.mjs';
 import { CII_RISK_SCORE_CACHE_KEYS } from './_cii-risk-cache-keys.mjs';
@@ -14637,20 +14631,20 @@ function selectForecastsForEnrichment(predictions, options = {}) {
 // llama-3.3-70b-versatile is the free-tier/outage fallback. Per-stage
 // FORECAST_LLM_*_PROVIDER_ORDER env still overrides.
 const FORECAST_LLM_PROVIDERS = [
-  // Forecast defaults remain OpenRouter first and Groq second. Credential,
-  // endpoint, model and request-header resolution come from the shared LLM
-  // provider runtime. Ollama and generic are available through stage/global
-  // FORECAST_LLM_*_PROVIDER_ORDER configuration without changing cloud defaults.
-  { name: 'openrouter', timeout: 25_000 },
-  { name: 'groq', timeout: 20_000 },
-  { name: 'ollama', timeout: 45_000 },
-  { name: 'generic', timeout: 45_000 },
+  // `provider.sort: 'throughput'` makes OpenRouter dispatch to its fastest backend
+  // instead of free-routing. Without it the SAME model lands on backends spanning
+  // an order of magnitude (17s .. 110s), and no completion timeout is reliable —
+  // this is the routing that DEEPSEEK_V4_FLASH_COMPLETION_TIMEOUT_MS has always
+  // assumed but never had. Fallbacks stay enabled, so a fast backend going down
+  // degrades latency rather than hard-failing the call.
+  // This 25s timeout governs NON-Flash models only (critical_signals overrides this
+  // same entry onto google/gemini-2.5-flash and must keep its 25s window). Flash uses
+  // its own completion deadline via getLlmAttemptTimeoutMs — see _llm-model-timeouts.
+  { name: 'openrouter', envKey: 'OPENROUTER_API_KEY', apiUrl: 'https://openrouter.ai/api/v1/chat/completions', model: 'deepseek/deepseek-v4-flash', timeout: 25_000, extraBody: { reasoning: { enabled: false }, provider: OPENROUTER_PROVIDER_ROUTING } },
+  { name: 'groq', envKey: 'GROQ_API_KEY', apiUrl: 'https://api.groq.com/openai/v1/chat/completions', model: 'llama-3.3-70b-versatile', timeout: 20_000 },
 ];
 
-const FORECAST_LLM_DEFAULT_PROVIDER_ORDER = [
-  'openrouter',
-  'groq',
-];// market_implications does NOT fall back to groq. Groq's free tier caps at 100k
+// market_implications does NOT fall back to groq. Groq's free tier caps at 100k
 // tokens/day and this stage alone needs ~114k (4,749 tokens x 24 hourly runs), so
 // the fallback 429s for most of the day. Reserving 20s of run budget for a provider
 // that returns 429 in 86ms only raises the admission bar and starves the stage.
@@ -14662,7 +14656,7 @@ const MARKET_IMPLICATIONS_DEFAULT_PROVIDER_ORDER = ['openrouter'];
 // completion cap so the cap (not this) is the binding constraint; the provider
 // entry's own 25s stays reserved for the non-Flash models stages pin onto it.
 const FORECAST_FLASH_REQUESTED_TIMEOUT_MS = 45_000;
-const FORECAST_LLM_PROVIDER_NAMES = new Set(LLM_PROVIDER_CHAIN);
+const FORECAST_LLM_PROVIDER_NAMES = new Set(FORECAST_LLM_PROVIDERS.map(provider => provider.name));
 // 3 retries (=4 attempts/provider): during an OpenRouter slowdown 2 retries all timed
 // out and market_implications wrote an error seed-meta. Bounded by the per-stage /
 // per-run LLM budgets below, so extra attempts can't blow the 240s seed lock.
@@ -14699,12 +14693,20 @@ function __setForecastLlmRunDeadlineForTests(deadlineMs = null) {
 }
 
 function parseForecastProviderOrder(raw) {
-  const providers = parseProviderOrder(raw);
+  if (typeof raw !== 'string' || !raw.trim()) return null;
+  const seen = new Set();
+  const providers = [];
+  for (const item of raw.split(',')) {
+    const provider = item.trim().toLowerCase();
+    if (!FORECAST_LLM_PROVIDER_NAMES.has(provider) || seen.has(provider)) continue;
+    seen.add(provider);
+    providers.push(provider);
+  }
   return providers.length > 0 ? providers : null;
 }
 
 function getForecastLlmCallOptions(stage = 'default') {
-  const defaultProviderOrder = [...FORECAST_LLM_DEFAULT_PROVIDER_ORDER];
+  const defaultProviderOrder = FORECAST_LLM_PROVIDERS.map(provider => provider.name);
   const globalProviderOrder = parseForecastProviderOrder(process.env.FORECAST_LLM_PROVIDER_ORDER);
   const combinedProviderOrder = parseForecastProviderOrder(process.env.FORECAST_LLM_COMBINED_PROVIDER_ORDER);
   const criticalProviderOrder = parseForecastProviderOrder(process.env.FORECAST_LLM_CRITICAL_PROVIDER_ORDER);
@@ -14768,83 +14770,51 @@ function getForecastLlmCallOptions(stage = 'default') {
 }
 
 function resolveForecastLlmProviders(options = {}) {
-  const requestedOrder = Array.isArray(options.providerOrder)
-    && options.providerOrder.length > 0
+  const requestedOrder = Array.isArray(options.providerOrder) && options.providerOrder.length > 0
     ? options.providerOrder
-    : FORECAST_LLM_DEFAULT_PROVIDER_ORDER;
-
-  const timeoutByProvider = new Map(
-    FORECAST_LLM_PROVIDERS.map(provider => [
-      provider.name,
-      provider.timeout,
-    ]),
-  );
+    : FORECAST_LLM_PROVIDERS.map(provider => provider.name);
 
   const seen = new Set();
   const providers = [];
-
   for (const providerName of requestedOrder) {
-    if (
-      seen.has(providerName)
-      || !FORECAST_LLM_PROVIDER_NAMES.has(providerName)
-    ) {
-      continue;
-    }
-
+    if (seen.has(providerName)) continue;
+    const provider = FORECAST_LLM_PROVIDERS.find(item => item.name === providerName);
+    if (!provider) continue;
     seen.add(providerName);
-
-    const credentials = getProviderCredentials(providerName, {
-      model: options.modelOverrides?.[providerName],
-      // Forecast narrative calls historically disable OpenRouter reasoning.
-      // The critical_signals override below retains its legacy body parity.
-      enableReasoning: false,
-    });
-
-    if (!credentials) continue;
-
-    const model = credentials.model;
+    const model = options.modelOverrides?.[provider.name] || provider.model;
     const failFastOnTimeout = isDeepseekV4FlashModel(model);
-    const configuredTimeout =
-      timeoutByProvider.get(providerName) ?? 45_000;
-
     providers.push({
-      name: providerName,
-      apiUrl: credentials.apiUrl,
+      ...provider,
       model,
-      headers: credentials.headers,
+      // #5246: cut off Flash's 25s stall tail while preserving enough room for
+      // the pinned endpoint's observed median completion. Other models are unchanged.
+      // Flash is a LONG generation here (max_tokens 2500 => ~1.2-1.9k completion
+      // tokens, p90 22.4s) and needs its own requested window: the entry's 25s is
+      // calibrated for the NON-Flash models stages override onto it (Gemini), so
+      // reusing it would re-clamp Flash to 25s. getLlmAttemptTimeoutMs still MINs
+      // this against the Flash cap, and leaves non-Flash models on provider.timeout.
       timeout: getLlmAttemptTimeoutMs(
         model,
-        isDeepseekV4FlashModel(model)
-          ? FORECAST_FLASH_REQUESTED_TIMEOUT_MS
-          : configuredTimeout,
+        isDeepseekV4FlashModel(model) ? FORECAST_FLASH_REQUESTED_TIMEOUT_MS : provider.timeout,
         DEEPSEEK_V4_FLASH_LONG_COMPLETION_TIMEOUT_MS,
       ),
       failFastOnTimeout,
-      // null explicitly clears the shared provider extraBody; undefined
-      // retains it.
-      extraBody:
-        options.extraBodyOverrides?.[providerName] !== undefined
-          ? (
-              options.extraBodyOverrides[providerName]
-              || undefined
-            )
-          : credentials.extraBody,
+      // `null` explicitly clears the table entry's extraBody (R13 pin);
+      // undefined leaves it untouched.
+      extraBody: options.extraBodyOverrides?.[provider.name] !== undefined
+        ? (options.extraBodyOverrides[provider.name] || undefined)
+        : provider.extraBody,
     });
   }
-
-  return providers;
+  return providers.length > 0 ? providers : FORECAST_LLM_PROVIDERS;
 }
 
 function moveForecastLlmProviderToBack(options = {}, providerName = '') {
   if (!providerName) return options;
   const requestedOrder = Array.isArray(options.providerOrder) && options.providerOrder.length > 0
     ? options.providerOrder
-    : FORECAST_LLM_DEFAULT_PROVIDER_ORDER;
-    const providerOrder = [...new Set(
-      requestedOrder.filter(
-        name => FORECAST_LLM_PROVIDER_NAMES.has(name),
-      ),
-    )];
+    : FORECAST_LLM_PROVIDERS.map(provider => provider.name);
+  const providerOrder = [...new Set(requestedOrder.filter(name => FORECAST_LLM_PROVIDER_NAMES.has(name)))];
   if (providerOrder.length < 2 || !providerOrder.includes(providerName)) return options;
   return {
     ...options,
@@ -15243,6 +15213,8 @@ async function callForecastLLM(systemPrompt, userPrompt, options = {}) {
 
   try {
     for (const provider of providers) {
+      const apiKey = process.env[provider.envKey];
+      if (!apiKey) continue;
       let attemptT0 = Date.now();
       try {
         const forecastFetch = forecastLlmFetchForTests || ((...args) => globalThis.fetch(...args));
@@ -15258,9 +15230,11 @@ async function callForecastLLM(systemPrompt, userPrompt, options = {}) {
             const response = await forecastFetch(provider.apiUrl, {
               method: 'POST',
               headers: {
-                  ...provider.headers,
-                  'User-Agent': CHROME_UA,
-                },
+                Authorization: `Bearer ${apiKey}`,
+                'Content-Type': 'application/json',
+                'User-Agent': CHROME_UA,
+                ...(provider.name === 'openrouter' ? { 'HTTP-Referer': 'https://worldmonitor.app', 'X-Title': 'World Monitor' } : {}),
+              },
               body: JSON.stringify({
                 model: provider.model,
                 messages: [
@@ -17062,7 +17036,7 @@ const MARKET_IMPLICATIONS_STAGE_CACHE_PREFIX = 'forecast:llm-market-implications
 // that chain needs (no over-skip); a chain with NO runnable providers reserves just the guard,
 // so a genuine no-key outage is admitted and surfaces SEED_ERROR instead of hiding as a starve.
 function getMarketImplicationsMinRunBudgetMs(llmOptions = {}) {
-  const runnable = resolveForecastLlmProviders(llmOptions);
+  const runnable = resolveForecastLlmProviders(llmOptions).filter((provider) => process.env[provider.envKey]);
   const chainMs = runnable.reduce((sum, provider) => sum + (provider.timeout || 0), 0);
   return chainMs + FORECAST_LLM_STAGE_BUDGET_GUARD_MS;
 }
