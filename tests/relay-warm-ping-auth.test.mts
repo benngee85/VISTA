@@ -85,11 +85,68 @@ describe('relay warm-ping internal auth', () => {
 describe('relay warm-ping auth wiring (source guardrail)', () => {
   it('keeps the active Service Statuses relay loop on shared warm-ping auth headers', async () => {
     const src = await readFile(new URL('../scripts/ais-relay.cjs', import.meta.url), 'utf8');
-    assert.match(src, /const SERVICE_STATUSES_RPC_URL = 'https:\/\/api\.worldmonitor\.app\/api\/infrastructure\/v1\/list-service-statuses'/);
+    assert.match(
+      src,
+      /process\.env\.WORLDMONITOR_API_BASE_URL/,
+      'relay API base must be configurable',
+    );
+    assert.match(
+      src,
+      /\|\| 'https:\/\/api\.worldmonitor\.app'/,
+      'hosted deployments must retain the production API default',
+    );
+    assert.match(
+      src,
+      /const SERVICE_STATUSES_RPC_URL = `\$\{WORLDMONITOR_API_BASE_URL\}\/api\/infrastructure\/v1\/list-service-statuses`/,
+      'Service Statuses must resolve against the configured API base',
+    );
     assert.match(
       src,
       /fetch\(SERVICE_STATUSES_RPC_URL,\s*\{[\s\S]{0,240}?headers: warmPingHeaders\(\{ 'Content-Type': 'application\/json' \}\)/,
       'Service Statuses warm-ping must keep sending the relay key via warmPingHeaders()',
+    );
+  });
+
+  it('pins self-hosted Compose routing and the OREF no-proxy guard', async () => {
+    const relaySrc = await readFile(
+      new URL('../scripts/ais-relay.cjs', import.meta.url),
+      'utf8',
+    );
+    const composeSrc = await readFile(
+      new URL('../docker-compose.yml', import.meta.url),
+      'utf8',
+    );
+
+    assert.match(
+      composeSrc,
+      /WORLDMONITOR_API_BASE_URL: "http:\/\/worldmonitor:8080"/,
+      'self-hosted relay must target the local application',
+    );
+
+    assert.equal(
+      (
+        composeSrc.match(
+          /WORLDMONITOR_RELAY_KEY: "\$\{WORLDMONITOR_RELAY_KEY:-\}"/g,
+        ) || []
+      ).length,
+      2,
+      'Compose must forward the relay key to both services',
+    );
+
+    const guardIndex = relaySrc.indexOf('if (!OREF_PROXY_AVAILABLE)');
+    const retryIndex = relaySrc.indexOf(
+      'const MAX_ATTEMPTS = 3;',
+      guardIndex,
+    );
+
+    assert.ok(guardIndex >= 0, 'OREF no-proxy guard is missing');
+    assert.ok(
+      retryIndex > guardIndex,
+      'OREF no-proxy guard must precede upstream retry execution',
+    );
+    assert.match(
+      relaySrc,
+      /OREF upstream bootstrap skipped — OREF_PROXY_AUTH not configured/,
     );
   });
 

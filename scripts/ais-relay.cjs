@@ -123,6 +123,13 @@ const OREF_POLL_INTERVAL_MS = Math.max(30_000, Number(process.env.OREF_POLL_INTE
 const OREF_PROXY_AVAILABLE = !!OREF_PROXY_AUTH;
 const SIREN_ALERTS_ENABLED = true; // Tzeva Adom is free, no proxy needed
 
+// API target used by relay warm-pings. Hosted deployments retain the public
+// API default; self-hosted Compose points this at the local application.
+const WORLDMONITOR_API_BASE_URL = (
+  process.env.WORLDMONITOR_API_BASE_URL
+  || 'https://api.worldmonitor.app'
+).replace(/\/+$/, '');
+
 // Hebrew→English translation dictionaries for siren alerts
 const OREF_THREAT_TRANSLATIONS = (() => {
   try { return JSON.parse(require('fs').readFileSync(path.join(__dirname, '..', 'data', 'oref-threat-translations-he-en.json'), 'utf8')); }
@@ -1530,7 +1537,15 @@ async function orefBootstrapHistoryWithRetry() {
     console.warn('[Relay] OREF Redis bootstrap failed:', err?.message || err);
   }
 
-  // Phase 2: upstream with retry + exponential backoff
+  // Phase 2: upstream requires the explicitly configured Israeli proxy.
+  // Never construct or pass an empty `http://` proxy URL to curl.
+  if (!OREF_PROXY_AVAILABLE) {
+    orefState.bootstrapSource = null;
+    console.log('[Relay] OREF upstream bootstrap skipped — OREF_PROXY_AUTH not configured');
+    return;
+  }
+
+  // Phase 3: upstream with retry + exponential backoff
   const MAX_ATTEMPTS = 3;
   const BASE_DELAY_MS = 3000;
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
@@ -3806,7 +3821,7 @@ async function classifyFetchLlm(titles) {
 let classifyInFlight = false;
 
 async function seedClassifyForVariant(variant, seenTitles) {
-  const digestUrl = `https://api.worldmonitor.app/api/news/v1/list-feed-digest?variant=${variant}&lang=en`;
+  const digestUrl = `${WORLDMONITOR_API_BASE_URL}/api/news/v1/list-feed-digest?variant=${variant}&lang=en`;
   let digest;
   try {
     const resp = await new Promise((resolve, reject) => {
@@ -4037,7 +4052,7 @@ async function startClassifySeedLoop() {
 // so service statuses are always cached (TTL is 30 min).
 // ─────────────────────────────────────────────────────────────
 const SERVICE_STATUSES_SEED_INTERVAL_MS = 15 * 60 * 1000; // 15 min (TTL/2)
-const SERVICE_STATUSES_RPC_URL = 'https://api.worldmonitor.app/api/infrastructure/v1/list-service-statuses';
+const SERVICE_STATUSES_RPC_URL = `${WORLDMONITOR_API_BASE_URL}/api/infrastructure/v1/list-service-statuses`;
 
 async function seedServiceStatuses() {
   try {
@@ -4652,7 +4667,7 @@ function warmPingHeaders(extra = {}) {
 // keeps CDN caching from hiding the handler from the warm-ping loop.
 // ─────────────────────────────────────────────────────────────
 const CII_WARM_PING_INTERVAL_MS = 8 * 60 * 1000; // 8 min (live cache TTL is 10 min)
-const CII_RPC_URL = 'https://api.worldmonitor.app/api/intelligence/v1/get-risk-scores';
+const CII_RPC_URL = `${WORLDMONITOR_API_BASE_URL}/api/intelligence/v1/get-risk-scores`;
 
 function ciiWarmPingUrl() {
   return `${CII_RPC_URL}?_wm_warm_ping=${Date.now()}`;
@@ -4688,7 +4703,7 @@ function startCiiWarmPingLoop() {
 // Interval matches health.js maxStaleMin (60 min) with a 2× margin.
 // ─────────────────────────────────────────────────────────────
 const CHOKEPOINT_WARM_PING_INTERVAL_MS = 30 * 60 * 1000; // 30 min
-const CHOKEPOINT_RPC_URL = 'https://api.worldmonitor.app/api/supply-chain/v1/get-chokepoint-status';
+const CHOKEPOINT_RPC_URL = `${WORLDMONITOR_API_BASE_URL}/api/supply-chain/v1/get-chokepoint-status`;
 
 async function seedChokepointWarmPing() {
   try {
@@ -4723,7 +4738,7 @@ function startChokepointWarmPingLoop() {
 // seed-meta on every live fetch; we just need to call it regularly.
 // ─────────────────────────────────────────────────────────────
 const CABLE_HEALTH_WARM_PING_INTERVAL_MS = 30 * 60 * 1000; // 30 min
-const CABLE_HEALTH_RPC_URL = 'https://api.worldmonitor.app/api/infrastructure/v1/get-cable-health';
+const CABLE_HEALTH_RPC_URL = `${WORLDMONITOR_API_BASE_URL}/api/infrastructure/v1/get-cable-health`;
 
 async function seedCableHealthWarmPing() {
   try {
