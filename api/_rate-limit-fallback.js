@@ -1,4 +1,4 @@
-import { redisPipeline } from './_upstash-json.js';
+import { redisMultiExec } from './_upstash-json.js';
 
 const FALLBACK_REDIS_TIMEOUT_MS = 1_000;
 
@@ -20,17 +20,20 @@ function commandError(entry, command) {
   return new Error(`rate-limit fallback: ${command} failed: ${entry.error}`);
 }
 
-// Non-Lua fixed-window fallback: INCR + EXPIRE-NX + TTL over the plain REST
-// pipeline endpoint (no EVAL/EVALSHA/SCRIPT). EXPIRE's NX flag requires Redis
-// 7+; if a self-hosted Redis 6 endpoint returns a per-command error or leaves
-// the key without a TTL, degrade instead of creating a permanent counter.
+// Atomic non-Lua fixed-window fallback. INCR, EXPIRE-NX and TTL execute
+// inside one authenticated Redis MULTI/EXEC transaction. General-purpose
+// EVAL/EVALSHA remains blocked by the self-hosted Redis REST proxy.
+//
+// EXPIRE's NX flag requires Redis 7+. If an older endpoint returns a
+// per-command error or leaves the key without a TTL, degrade instead of
+// creating a permanent counter.
 async function fixedWindowLimit(key, limit, windowSeconds) {
-  const result = await redisPipeline([
+  const result = await redisMultiExec([
     ['INCR', key],
     ['EXPIRE', key, String(windowSeconds), 'NX'],
     ['TTL', key],
   ], FALLBACK_REDIS_TIMEOUT_MS);
-  if (!result) throw new Error('rate-limit fallback: Redis pipeline unavailable');
+  if (!result) throw new Error('rate-limit fallback: Redis transaction unavailable');
 
   const incrError = commandError(result[0], 'INCR');
   if (incrError) throw incrError;
@@ -64,7 +67,7 @@ export async function limitWithFallback(rl, identifier, fallbackKey, limit, wind
       const msg = err instanceof Error ? err.message : String(err);
       if (!/Command not allowed: (EVAL|EVALSHA|SCRIPT)\b/i.test(msg)) throw err;
       luaUnsupported = true;
-      console.warn('[rate-limit] EVAL/EVALSHA rejected by this Redis endpoint — switching to the non-Lua fixed-window fallback for the rest of this process');
+      console.warn('[rate-limit] EVAL/EVALSHA rejected by this Redis endpoint — switching to the transactional non-Lua fixed-window fallback for the rest of this process');
     }
   }
 

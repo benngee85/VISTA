@@ -141,7 +141,7 @@ const server = http.createServer(async (req, res) => {
           res.end(JSON.stringify({ error: `Command not allowed: ${cmdName}` }));
           return;
         }
-        multi.sendCommand(cmd.map(String));
+        multi.addCommand(cmd.map(String));
       }
       const results = await multi.exec();
       res.writeHead(200);

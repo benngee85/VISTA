@@ -103,6 +103,48 @@ export async function redisPipeline(commands, timeoutMs = 5_000) {
 }
 
 /**
+ * Execute Redis commands atomically through the self-hosted proxy's
+ * authenticated MULTI/EXEC endpoint.
+ *
+ * The hosted Upstash rate limiter does not call this helper; it continues to
+ * use its native sliding-window Lua implementation. This helper exists for the
+ * self-hosted compatibility fallback, where general EVAL/EVALSHA remains
+ * intentionally blocked.
+ *
+ * Returns null on missing credentials, HTTP error, timeout, or invalid shape.
+ *
+ * @param {Array<string[]>} commands
+ * @param {number} [timeoutMs=5000]
+ * @returns {Promise<Array<{ result?: unknown, error?: string }> | null>}
+ */
+export async function redisMultiExec(commands, timeoutMs = 5_000) {
+  const creds = getRedisCredentials();
+  if (!creds) return null;
+
+  try {
+    const resp = await fetch(`${creds.url}/multi-exec`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${creds.token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(commands),
+      signal: AbortSignal.timeout(timeoutMs),
+    });
+
+    if (!resp.ok) return null;
+
+    const result = await resp.json();
+
+    if (!Array.isArray(result)) return null;
+
+    return result;
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Write a JSON value to Redis with a TTL (SET + EXPIRE as pipeline).
  * @param {string} key
  * @param {unknown} value - will be JSON.stringify'd
