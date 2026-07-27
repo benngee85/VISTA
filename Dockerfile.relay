@@ -22,7 +22,9 @@ WORKDIR /app
 # tree. ws/telegram fall back to pure JS when native helpers are unavailable.
 # Mirrors the main Dockerfile's stage-2 pattern.
 COPY scripts/package.json scripts/package-lock.json ./scripts/
-RUN npm ci --prefix scripts --omit=dev --omit=optional --ignore-scripts
+RUN npm ci --prefix scripts --omit=dev --omit=optional --ignore-scripts && \
+    npm uninstall --prefix scripts --ignore-scripts --no-audit --no-fund exceljs && \
+    test ! -d /app/scripts/node_modules/exceljs
 
 # Relay script and shared helpers
 COPY scripts/ais-relay.cjs ./scripts/ais-relay.cjs
@@ -75,6 +77,15 @@ COPY shared/ ./shared/
 
 # Data files required by the relay (telegram-channels.json, etc.)
 COPY data/ ./data/
+
+# The service starts directly with node; package-management tooling is not
+# required in the runtime image.
+RUN rm -rf /usr/local/lib/node_modules/npm \
+           /usr/local/bin/npm \
+           /usr/local/bin/npx \
+           /usr/local/bin/corepack
+
+USER node
 
 EXPOSE 3004
 

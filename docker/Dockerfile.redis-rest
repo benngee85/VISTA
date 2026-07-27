@@ -1,6 +1,21 @@
 FROM node:24-alpine@sha256:a0b9bf06e4e6193cf7a0f58816cc935ff8c2a908f81e6f1a95432d679c54fbfd
+
 WORKDIR /app
-RUN npm init -y && npm install redis@4
-COPY redis-rest-proxy.mjs .
-EXPOSE 80
+
+RUN npm init -y && \
+    npm install --omit=dev --ignore-scripts --no-audit --no-fund redis@4 && \
+    rm -rf /usr/local/lib/node_modules/npm \
+           /usr/local/bin/npm \
+           /usr/local/bin/npx \
+           /usr/local/bin/corepack && \
+    chown -R node:node /app
+
+COPY --chown=node:node redis-rest-proxy.mjs .
+
+ENV PORT=8080
+
+USER node
+
+EXPOSE 8080
+
 CMD ["node", "redis-rest-proxy.mjs"]
