@@ -394,7 +394,7 @@
     "q3": "Who is Enterprise for?",
     "a3": "Enterprise is for teams that need shared use, APIs, integrations, deployment options, and direct support.",
     "q4": "Can I start with Pro and upgrade later?",
-    "a4": "Yes. Pro is for personal use. Pro Business ($69.99/mo) adds the commercial license, data export, 25 dashboards, and 250 MCP calls/day. API plans cover programmatic access, and Enterprise covers custom deployments. Upgrades run through the billing portal — the app guides you through the steps.",
+    "a4": "Yes. Pro is for personal use. Pro Business ($49.99/mo) adds the commercial license, data export, 25 dashboards, and 250 MCP calls/day. API plans cover programmatic access, and Enterprise covers custom deployments. Upgrades run through the billing portal — the app guides you through the steps.",
     "q5": "Is this only for conflict monitoring?",
     "a5": "No. World Monitor is primarily a global intelligence platform covering stock markets, macroeconomics, geopolitical analysis, energy, infrastructure, and more. Conflict tracking is one of many capabilities — not the focus.",
     "q6": "Why keep the core platform free?",
@@ -438,6 +438,8 @@
       "depth": "Depth",
       "pricing": "Pricing",
       "faq": "FAQ",
+      "blog": "Blog",
+      "menu": "Menu",
       "docs": "Docs",
       "launch": "Launch Dashboard"
     },
@@ -661,7 +663,9 @@
       "q8": "Do I need an account?",
       "a8": "No. The dashboard works instantly with no signup. An account only matters when you upgrade to Pro or want settings synced across devices.",
       "q9": "Is it open source?",
-      "a9": "Yes — open source under AGPL-3.0 on GitHub: read the code, self-host it, or build on it. Native desktop apps for Windows, macOS and Linux are available too, plus an Android TV app for wall displays."
+      "a9": "Yes — open source under AGPL-3.0 on GitHub: read the code, self-host it, or build on it. Native desktop apps for Windows, macOS and Linux are available too, plus an Android TV app for wall displays.",
+      "q10": "Why isn't World Monitor Palantir?",
+      "a10": "Palantir makes an institution's own data operational inside that institution. World Monitor starts from the other end: it assembles, normalizes, correlates, and monitors public-world data, then publishes that intelligence layer through a free dashboard and open-source code. Different job, different product."
     },
     "cta": {
       "title": "The world map doesn't wait for you.",

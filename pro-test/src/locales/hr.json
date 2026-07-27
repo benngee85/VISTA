@@ -282,7 +282,7 @@
     "q3": "Za koga je Enterprise?",
     "a3": "Enterprise je za timove kojima trebaju zajedničko korištenje, API-ji, integracije, opcije implementacije i izravna podrška.",
     "q4": "Mogu li početi s Pro planom i kasnije nadograditi?",
-    "a4": "Da. Pro je za osobnu upotrebu. Pro Business (69,99 €/mj) dodaje komercijalnu licenciju, izvoz podataka, 25 nadzornih ploča i 250 MCP poziva/dan. API planovi pokrivaju programatski pristup, a Enterprise pokriva prilagođene implementacije. Nadogradnje se vrše preko portala naplate — aplikacija vas vodi kroz korake.",
+    "a4": "Da. Pro je za osobnu upotrebu. Pro Business (49,99 €/mj) dodaje komercijalnu licenciju, izvoz podataka, 25 nadzornih ploča i 250 MCP poziva/dan. API planovi pokrivaju programatski pristup, a Enterprise pokriva prilagođene implementacije. Nadogradnje se vrše preko portala naplate — aplikacija vas vodi kroz korake.",
     "q5": "Je li ovo samo za monitoring sukoba?",
     "a5": "Ne. World Monitor je prvenstveno globalna obavještajna platforma koja pokriva burze, makroekonomiju, geopolitičku analizu, energiju, infrastrukturu i više. Praćenje sukoba samo je jedna od mnogih sposobnosti — nije fokus.",
     "q6": "Zašto temeljnu platformu zadržati besplatnom?",
@@ -439,7 +439,9 @@
       "pricing": "Cijene",
       "faq": "Često postavljana pitanja",
       "docs": "Dokumentacija",
-      "launch": "Pokreni nadzornu ploču"
+      "launch": "Pokreni nadzornu ploču",
+      "blog": "Blog",
+      "menu": "Izbornik"
     },
     "hero": {
       "eyebrow": "Besplatna nadzorna ploča globalne obavještajne službe · sada dostupna",
@@ -661,7 +663,9 @@
       "q8": "Trebam li račun?",
       "a8": "Ne. Dashboard radi odmah bez prijave. Račun je bitan samo kada nadogradiš na Pro ili želiš sinkronizirati postavke na više uređaja.",
       "q9": "Je li to open source?",
-      "a9": "Da — open source pod AGPL-3.0 na GitHubu: čitaj kod, samodostavi ili izgradi na njemu. Izvorne desktop aplikacije za Windows, macOS i Linux dostupne su, plus Android TV aplikacija za zidne zaslone."
+      "a9": "Da — open source pod AGPL-3.0 na GitHubu: čitaj kod, samodostavi ili izgradi na njemu. Izvorne desktop aplikacije za Windows, macOS i Linux dostupne su, plus Android TV aplikacija za zidne zaslone.",
+      "q10": "Zašto World Monitor nije Palantir?",
+      "a10": "Palantir čini podatke institucije operativnima unutar te institucije. World Monitor počinje s druge strane: skuplja, normalizira, korelira i prati javne podatke svijeta, a zatim objavljuje taj sloj obavještajnih podataka kroz besplatnu nadzornu ploču i kod otvorenog koda. Drugi zadatak, drugi proizvod."
     },
     "cta": {
       "title": "Mapa svijeta ne čeka za tebe.",
