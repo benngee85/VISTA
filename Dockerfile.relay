@@ -33,6 +33,10 @@ COPY scripts/lib/usni-fleet-parser.cjs ./scripts/lib/usni-fleet-parser.cjs
 # llm-telemetry.cjs is transitively imported by _seed-utils.mjs (SIGTERM
 # telemetry flush, #4954) — missing it = silent startup crash in the image.
 COPY scripts/lib/llm-telemetry.cjs ./scripts/lib/llm-telemetry.cjs
+# anthropic-messages.cjs provides the environment-driven local Anthropic
+# transport used directly by ais-relay.cjs. Missing it causes the relay image
+# to fail at startup with ERR_MODULE_NOT_FOUND.
+COPY scripts/lib/anthropic-messages.cjs ./scripts/lib/anthropic-messages.cjs
 COPY scripts/shared/country-name-to-iso2.cjs ./scripts/shared/country-name-to-iso2.cjs
 # country-names.json backs the full name→ISO2 map (#5359 uniform country
 # scoping); required by country-name-to-iso2.cjs at startup.
