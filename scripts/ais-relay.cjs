@@ -27,6 +27,11 @@ const crypto = require('crypto');
 const v8 = require('v8');
 const { WebSocketServer, WebSocket } = require('ws');
 const { parseProxyConfig, resolveProxyString } = require('./_proxy-utils.cjs');
+const {
+  createAnthropicProvider,
+  buildProviderRequest,
+  parseProviderResponse,
+} = require('./lib/anthropic-messages.cjs');
 const { countryNameToIso2 } = require('./shared/country-name-to-iso2.cjs');
 const {
   buildDedupMaterial,
@@ -3730,6 +3735,10 @@ function classifyCacheKey(title) {
 // server/_shared/llm.ts: DeepSeek V4 Flash primary with reasoning disabled,
 // groq llama-3.3-70b-versatile as the free-tier/outage fallback).
 const CLASSIFY_LLM_PROVIDERS = [
+  createAnthropicProvider({
+    timeout: 60_000,
+    userAgent: CHROME_UA,
+  }),
   {
     name: 'ollama',
     envKey: 'OLLAMA_API_URL',
@@ -3763,20 +3772,19 @@ const CLASSIFY_LLM_PROVIDERS = [
   },
 ];
 
-function classifyFetchLlmSingle(titles, _apiKey, apiUrl, model, headers, extraBody, timeout) {
+function classifyFetchLlmSingle(titles, _apiKey, apiUrl, model, headers, extraBody, timeout, protocol = 'openai') {
   return new Promise((resolve) => {
     const sanitized = titles.map((t) => t.replace(/[\n\r]/g, ' ').replace(/\|/g, '/').slice(0, 200).trim());
     const prompt = sanitized.map((t, i) => `${i}|${t}`).join('\n');
-    const bodyStr = JSON.stringify({
+    const provider = { protocol };
+    const bodyStr = JSON.stringify(buildProviderRequest(provider, {
       model,
-      messages: [
-        { role: 'system', content: CLASSIFY_SYSTEM_PROMPT },
-        { role: 'user', content: prompt },
-      ],
+      systemPrompt: CLASSIFY_SYSTEM_PROMPT,
+      userPrompt: prompt,
       temperature: 0,
-      max_tokens: titles.length * 40,
-      ...extraBody,
-    });
+      maxTokens: titles.length * 40,
+      extraBody,
+    }));
 
     const parsed = new URL(apiUrl);
     const transport = parsed.protocol === 'http:' ? http : https;
@@ -3794,7 +3802,7 @@ function classifyFetchLlmSingle(titles, _apiKey, apiUrl, model, headers, extraBo
       resp.on('end', () => {
         try {
           const json = JSON.parse(data);
-          const raw = json?.choices?.[0]?.message?.content?.trim();
+          const raw = parseProviderResponse(provider, json).text;
           if (!raw) return resolve(null);
           const match = raw.match(/\[[\s\S]*\]/);
           if (!match) return resolve(null);
@@ -3814,10 +3822,20 @@ async function classifyFetchLlm(titles) {
     if (!envVal) continue;
 
     const apiUrl = provider.apiUrlFn ? provider.apiUrlFn(envVal) : provider.apiUrl;
+    if (!apiUrl) continue;
     const model = typeof provider.model === 'function' ? provider.model() : provider.model;
     const headers = provider.headers(envVal);
 
-    const result = await classifyFetchLlmSingle(titles, envVal, apiUrl, model, headers, provider.extraBody || {}, provider.timeout);
+    const result = await classifyFetchLlmSingle(
+      titles,
+      envVal,
+      apiUrl,
+      model,
+      headers,
+      provider.extraBody || {},
+      provider.timeout,
+      provider.protocol || 'openai',
+    );
     if (result) {
       return result;
     }

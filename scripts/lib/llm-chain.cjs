@@ -1,6 +1,12 @@
 'use strict';
 
 const { buildLlmCallEvent, emitLlmEvents } = require('./llm-telemetry.cjs');
+const {
+  createAnthropicProvider,
+  buildProviderRequest,
+  parseProviderResponse,
+  isTokenLimited,
+} = require('./anthropic-messages.cjs');
 
 const SERVICE_UA = 'worldmonitor-llm/1.0';
 
@@ -18,6 +24,10 @@ function stripReasoningPreamble(text) {
 }
 
 const LLM_PROVIDERS = [
+  createAnthropicProvider({
+    timeout: 60_000,
+    userAgent: SERVICE_UA,
+  }),
   {
     name: 'ollama',
     envKey: 'OLLAMA_API_URL',
@@ -81,6 +91,7 @@ async function callLLM(systemPrompt, userPrompt, opts = {}) {
     if (!envVal) continue;
 
     const apiUrl = provider.apiUrlFn ? provider.apiUrlFn(envVal) : provider.apiUrl;
+    if (!apiUrl) continue;
     const model = typeof provider.model === 'function' ? provider.model() : provider.model;
     const timeout = timeoutMs ?? provider.timeout;
 
@@ -100,16 +111,14 @@ async function callLLM(systemPrompt, userPrompt, opts = {}) {
       const resp = await fetch(apiUrl, {
         method: 'POST',
         headers: provider.headers(envVal),
-        body: JSON.stringify({
+        body: JSON.stringify(buildProviderRequest(provider, {
           model,
-          messages: [
-            { role: 'system', content: systemPrompt },
-            { role: 'user', content: userPrompt },
-          ],
-          max_tokens: maxTokens,
+          systemPrompt,
+          userPrompt,
+          maxTokens,
           temperature,
-          ...provider.extraBody,
-        }),
+          extraBody: provider.extraBody,
+        })),
         signal: AbortSignal.timeout(timeout),
       });
 
@@ -120,18 +129,15 @@ async function callLLM(systemPrompt, userPrompt, opts = {}) {
       }
 
       const json = await resp.json();
-      const usage = {
-        tokensTotal: json.usage?.total_tokens ?? 0,
-        tokensPrompt: json.usage?.prompt_tokens ?? 0,
-        tokensCompletion: json.usage?.completion_tokens ?? 0,
-      };
-      if (json.choices?.[0]?.finish_reason === 'length') {
+      const parsed = parseProviderResponse(provider, json);
+      const usage = parsed.usage;
+      if (isTokenLimited(provider, parsed)) {
         console.warn(`[llm-chain] ${provider.name}: length-limited response, trying next provider`);
         record(false, { ...usage, reason: 'length' });
         continue;
       }
 
-      const rawText = json.choices?.[0]?.message?.content?.trim();
+      const rawText = parsed.text;
       if (!rawText) {
         console.warn(`[llm-chain] ${provider.name}: empty response`);
         record(false, { ...usage, reason: 'empty' });
