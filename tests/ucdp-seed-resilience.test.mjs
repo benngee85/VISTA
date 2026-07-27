@@ -97,6 +97,58 @@ const fnStart = src.indexOf('async function seedUcdpEvents()');
 const fnEnd = src.indexOf('\nasync function startUcdpSeedLoop()');
 const fnBody = src.slice(fnStart, fnEnd);
 
+describe('UCDP credential guard', () => {
+  it('accepts the canonical token and compatibility alias', () => {
+    assert.match(
+      src,
+      /process\.env\.UCDP_ACCESS_TOKEN\s*\|\|\s*process\.env\.UC_DP_KEY/,
+      'UCDP_ACCESS_TOKEN must remain canonical while UC_DP_KEY remains compatible',
+    );
+  });
+
+  it('skips before discovery when no token is configured', () => {
+    const guardIndex = fnBody.indexOf('if (!UCDP_ACCESS_TOKEN)');
+    const discoveryIndex = fnBody.indexOf('await ucdpDiscoverVersion()');
+
+    assert.ok(guardIndex >= 0, 'missing absent-token guard');
+    assert.ok(
+      discoveryIndex > guardIndex,
+      'credential guard must execute before any UCDP discovery request',
+    );
+
+    const guardBranch = fnBody.slice(guardIndex, discoveryIndex);
+
+    assert.match(
+      guardBranch,
+      /Seed skipped: UCDP_ACCESS_TOKEN not configured/,
+      'absent credentials must be reported as a skipped integration',
+    );
+    assert.match(
+      guardBranch,
+      /return;/,
+      'absent credentials must return before discovery',
+    );
+    assert.doesNotMatch(
+      guardBranch,
+      /ucdpFetchPage|ucdpDiscoverVersion|envelopeWrite|upstashSet|upstashExpire/,
+      'the disabled path must not perform network or Redis operations',
+    );
+    assert.doesNotMatch(
+      guardBranch,
+      /console\.warn|throw new Error/,
+      'an unconfigured optional integration must not be reported as a failure',
+    );
+  });
+
+  it('preserves common startBootSeedLoop scheduling', () => {
+    assert.match(
+      src,
+      /startBootSeedLoop\('UCDP',\s*'seed-meta:conflict:ucdp-events',\s*UCDP_POLL_INTERVAL_MS,\s*seedUcdpEvents/,
+      'UCDP must retain the shared boot-freshness scheduling contract',
+    );
+  });
+});
+
 describe('UCDP seed resilience branches', () => {
   it('logs error details on page fetch failures instead of silently swallowing', () => {
     // The .catch must include console.warn with the page number and error

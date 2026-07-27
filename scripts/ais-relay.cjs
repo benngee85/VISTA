@@ -1676,6 +1676,14 @@ async function ucdpDiscoverVersion() {
 }
 
 async function seedUcdpEvents() {
+  // UCDP requires an access token. Treat an unconfigured optional integration
+  // as skipped: do not make unauthorized requests, refresh cached payload TTL,
+  // or update seed-meta freshness.
+  if (!UCDP_ACCESS_TOKEN) {
+    console.log('[UCDP] Seed skipped: UCDP_ACCESS_TOKEN not configured');
+    return;
+  }
+
   try {
     const { version, page0 } = await ucdpDiscoverVersion();
     const totalPages = Math.max(1, Number(page0?.TotalPages) || 1);
