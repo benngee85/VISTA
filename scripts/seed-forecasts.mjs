@@ -12,6 +12,13 @@ import { attachResolutionSpecs } from './_forecast-resolution.mjs';
 import { assessFunnelDiversity } from './_forecast-funnel.mjs';
 import { resolveR2StorageConfig, putR2JsonObject, getR2JsonObject } from './_r2-storage.mjs';
 import { extractFirstJsonObject, extractFirstJsonArray, cleanJsonText } from './_llm-json.mjs';
+import anthropicMessages from './lib/anthropic-messages.cjs';
+
+const {
+  createAnthropicProvider,
+  buildProviderRequest,
+  parseProviderResponse,
+} = anthropicMessages;
 import {
   getLlmAttemptTimeoutMs,
   isDeepseekV4FlashModel,
@@ -14631,6 +14638,14 @@ function selectForecastsForEnrichment(predictions, options = {}) {
 // llama-3.3-70b-versatile is the free-tier/outage fallback. Per-stage
 // FORECAST_LLM_*_PROVIDER_ORDER env still overrides.
 const FORECAST_LLM_PROVIDERS = [
+  // Local Anthropic-compatible transport is first whenever its centralized
+  // ANTHROPIC_BASE_URL, ANTHROPIC_MODEL and ANTHROPIC_API_KEY module is set.
+  // The adapter resolves these values at call time so one environment change
+  // updates every migrated consumer without embedding deployment addresses.
+  createAnthropicProvider({
+    timeout: 60_000,
+    userAgent: CHROME_UA,
+  }),
   // `provider.sort: 'throughput'` makes OpenRouter dispatch to its fastest backend
   // instead of free-routing. Without it the SAME model lands on backends spanning
   // an order of magnitude (17s .. 110s), and no completion timeout is reliable —
@@ -14643,6 +14658,14 @@ const FORECAST_LLM_PROVIDERS = [
   { name: 'openrouter', envKey: 'OPENROUTER_API_KEY', apiUrl: 'https://openrouter.ai/api/v1/chat/completions', model: 'deepseek/deepseek-v4-flash', timeout: 25_000, extraBody: { reasoning: { enabled: false }, provider: OPENROUTER_PROVIDER_ROUTING } },
   { name: 'groq', envKey: 'GROQ_API_KEY', apiUrl: 'https://api.groq.com/openai/v1/chat/completions', model: 'llama-3.3-70b-versatile', timeout: 20_000 },
 ];
+
+function hasConfiguredAnthropicForecastProvider() {
+  return [
+    process.env.ANTHROPIC_BASE_URL,
+    process.env.ANTHROPIC_MODEL,
+    process.env.ANTHROPIC_API_KEY,
+  ].every(value => String(value || '').trim().length > 0);
+}
 
 // market_implications does NOT fall back to groq. Groq's free tier caps at 100k
 // tokens/day and this stage alone needs ~114k (4,749 tokens x 24 hourly runs), so
@@ -14706,7 +14729,13 @@ function parseForecastProviderOrder(raw) {
 }
 
 function getForecastLlmCallOptions(stage = 'default') {
-  const defaultProviderOrder = FORECAST_LLM_PROVIDERS.map(provider => provider.name);
+  const anthropicConfigured =
+    hasConfiguredAnthropicForecastProvider();
+  const defaultProviderOrder = FORECAST_LLM_PROVIDERS
+    .filter(provider =>
+      provider.name !== 'anthropic' || anthropicConfigured
+    )
+    .map(provider => provider.name);
   const globalProviderOrder = parseForecastProviderOrder(process.env.FORECAST_LLM_PROVIDER_ORDER);
   const combinedProviderOrder = parseForecastProviderOrder(process.env.FORECAST_LLM_COMBINED_PROVIDER_ORDER);
   const criticalProviderOrder = parseForecastProviderOrder(process.env.FORECAST_LLM_CRITICAL_PROVIDER_ORDER);
@@ -14723,7 +14752,14 @@ function getForecastLlmCallOptions(stage = 'default') {
       // this stage must not depend on (see MARKET_IMPLICATIONS_DEFAULT_PROVIDER_ORDER).
       // Its own stage env still overrides.
       : stage === 'market_implications'
-        ? (marketImplicationsProviderOrder || MARKET_IMPLICATIONS_DEFAULT_PROVIDER_ORDER)
+        ? (
+            marketImplicationsProviderOrder ||
+            (
+              anthropicConfigured
+                ? ['anthropic', ...MARKET_IMPLICATIONS_DEFAULT_PROVIDER_ORDER]
+                : MARKET_IMPLICATIONS_DEFAULT_PROVIDER_ORDER
+            )
+          )
       : (globalProviderOrder || defaultProviderOrder);
 
   const openrouterModel = stage === 'combined'
@@ -14747,7 +14783,9 @@ function getForecastLlmCallOptions(stage = 'default') {
   // probability-coupled stage as a side effect (review finding on #4965).
   if (stage === 'critical_signals' && !criticalProviderOrder) {
     return {
-      providerOrder: ['groq', 'openrouter'],
+      providerOrder: anthropicConfigured
+        ? ['anthropic', 'groq', 'openrouter']
+        : ['groq', 'openrouter'],
       modelOverrides: {
         groq: 'llama-3.1-8b-instant',
         // ONLY the stage-scoped model env may change the pinned fallback —
@@ -14781,10 +14819,19 @@ function resolveForecastLlmProviders(options = {}) {
     const provider = FORECAST_LLM_PROVIDERS.find(item => item.name === providerName);
     if (!provider) continue;
     seen.add(providerName);
-    const model = options.modelOverrides?.[provider.name] || provider.model;
+    const modelSource =
+      options.modelOverrides?.[provider.name] || provider.model;
+    const model = typeof modelSource === 'function'
+      ? modelSource()
+      : modelSource;
+    const apiUrl = typeof provider.apiUrlFn === 'function'
+      ? provider.apiUrlFn()
+      : provider.apiUrl;
+    if (!model || !apiUrl) continue;
     const failFastOnTimeout = isDeepseekV4FlashModel(model);
     providers.push({
       ...provider,
+      apiUrl,
       model,
       // #5246: cut off Flash's 25s stall tail while preserving enough room for
       // the pinned endpoint's observed median completion. Other models are unchanged.
@@ -15229,22 +15276,27 @@ async function callForecastLLM(systemPrompt, userPrompt, options = {}) {
           try {
             const response = await forecastFetch(provider.apiUrl, {
               method: 'POST',
-              headers: {
-                Authorization: `Bearer ${apiKey}`,
-                'Content-Type': 'application/json',
-                'User-Agent': CHROME_UA,
-                ...(provider.name === 'openrouter' ? { 'HTTP-Referer': 'https://worldmonitor.app', 'X-Title': 'World Monitor' } : {}),
-              },
-              body: JSON.stringify({
+              headers: provider.headers
+                ? provider.headers(apiKey)
+                : {
+                    Authorization: `Bearer ${apiKey}`,
+                    'Content-Type': 'application/json',
+                    'User-Agent': CHROME_UA,
+                    ...(provider.name === 'openrouter'
+                      ? {
+                          'HTTP-Referer': 'https://worldmonitor.app',
+                          'X-Title': 'World Monitor',
+                        }
+                      : {}),
+                  },
+              body: JSON.stringify(buildProviderRequest(provider, {
                 model: provider.model,
-                messages: [
-                  { role: 'system', content: systemPrompt },
-                  { role: 'user', content: userPrompt },
-                ],
-                max_tokens: options.maxTokens || 1500,
+                systemPrompt,
+                userPrompt,
+                maxTokens: options.maxTokens || 1500,
                 temperature: options.temperature ?? 0.3,
-                ...(provider.extraBody || {}),
-              }),
+                extraBody: provider.extraBody,
+              })),
               signal: AbortSignal.timeout(attemptTimeoutMs),
             });
             if (!response.ok) {
@@ -15300,18 +15352,15 @@ async function callForecastLLM(systemPrompt, userPrompt, options = {}) {
           recordLlmAttempt(provider.name, provider.model, false, attemptT0, { reason: 'invalid_json' });
           continue;
         }
-        const tokensExtra = {
-          tokensTotal: json.usage?.total_tokens ?? 0,
-          tokensPrompt: json.usage?.prompt_tokens ?? 0,
-          tokensCompletion: json.usage?.completion_tokens ?? 0,
-        };
-        const text = json.choices?.[0]?.message?.content?.trim();
+        const parsed = parseProviderResponse(provider, json);
+        const tokensExtra = parsed.usage;
+        const text = parsed.text;
         if (!text || text.length < 20) {
           sawProviderFailure = true;
           recordLlmAttempt(provider.name, provider.model, false, attemptT0, { ...tokensExtra, reason: 'empty' });
           continue;
         }
-        const model = json.model || provider.model;
+        const model = parsed.model || provider.model;
         console.log(`  [LLM:${stage}] ${provider.name} success model=${model}`);
         recordLlmAttempt(provider.name, model, true, attemptT0, tokensExtra);
         return { text, model, provider: provider.name };
