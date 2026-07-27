@@ -14680,26 +14680,74 @@ const MARKET_IMPLICATIONS_DEFAULT_PROVIDER_ORDER = ['openrouter'];
 // entry's own 25s stays reserved for the non-Flash models stages pin onto it.
 const FORECAST_FLASH_REQUESTED_TIMEOUT_MS = 45_000;
 const FORECAST_LLM_PROVIDER_NAMES = new Set(FORECAST_LLM_PROVIDERS.map(provider => provider.name));
-// 3 retries (=4 attempts/provider): during an OpenRouter slowdown 2 retries all timed
-// out and market_implications wrote an error seed-meta. Bounded by the per-stage /
-// per-run LLM budgets below, so extra attempts can't blow the 240s seed lock.
+// Retries remain bounded by both stage and run budgets. Local Anthropic models
+// receive a separate market-stage window so other forecast stages retain their
+// existing 60-second provider ceiling.
 const FORECAST_LLM_PROVIDER_MAX_RETRIES = 3;
 const FORECAST_LLM_RETRY_BASE_MS = 1_000;
 const FORECAST_LLM_RETRY_AFTER_MAX_MS = 10_000;
-// The forecast seed lock is 240s; leave headroom for non-LLM work and cleanup.
-const FORECAST_LLM_STAGE_BUDGET_MS = 120_000;
+// Trial-hardware profile for the local 27B model. These windows deliberately
+// favour completion over latency while performance is assessed on the current
+// Apple Silicon host. Production deployments should reduce them using measured
+// model, accelerator, prompt-size and concurrency percentiles.
+const FORECAST_LLM_STAGE_BUDGET_MS =
+  hasConfiguredAnthropicForecastProvider()
+    ? 660_000
+    : 120_000;
 const FORECAST_LLM_STAGE_BUDGET_GUARD_MS = 5_000;
-// Cumulative LLM ceiling for one seed run. The per-stage budget bounds a single
-// call, but a run makes ~10 LLM calls (scenario/combined/critique/impact +
-// market-implications in afterPublish) — all under the same 240s lock with no
-// lock renewal. Without a run-level cap, several degraded stages still serialize
-// past 240s and the lock expires mid-run, letting the next cron tick start a
-// duplicate. 200s leaves 40s for input reads, publish, and cleanup.
-// The seed lock bounds the WHOLE run (fetch + publish + afterPublish tail).
-// FORECAST_LLM_RUN_BUDGET_MS must stay strictly below it with cleanup headroom;
-// tests/forecast-llm-flash-routing-and-timeout pins that invariant.
-const FORECAST_SEED_LOCK_TTL_MS = 240_000;
-const FORECAST_LLM_RUN_BUDGET_MS = 200_000;
+
+const FORECAST_ANTHROPIC_TIMEOUT_DEFAULT_MS = 300_000;
+const FORECAST_ANTHROPIC_TIMEOUT_MIN_MS = 60_000;
+const FORECAST_ANTHROPIC_TIMEOUT_MAX_MS = 600_000;
+
+const FORECAST_MARKET_ANTHROPIC_TIMEOUT_DEFAULT_MS = 600_000;
+const FORECAST_MARKET_ANTHROPIC_TIMEOUT_MIN_MS = 120_000;
+const FORECAST_MARKET_ANTHROPIC_TIMEOUT_MAX_MS = 900_000;
+
+function readBoundedForecastTimeout(
+  name,
+  fallback,
+  minimum,
+  maximum,
+) {
+  const parsed = Number.parseInt(process.env[name] || '', 10);
+
+  if (!Number.isFinite(parsed)) return fallback;
+
+  return Math.min(maximum, Math.max(minimum, parsed));
+}
+
+function getForecastAnthropicTimeoutMs() {
+  return readBoundedForecastTimeout(
+    'FORECAST_ANTHROPIC_TIMEOUT_MS',
+    FORECAST_ANTHROPIC_TIMEOUT_DEFAULT_MS,
+    FORECAST_ANTHROPIC_TIMEOUT_MIN_MS,
+    FORECAST_ANTHROPIC_TIMEOUT_MAX_MS,
+  );
+}
+
+function getForecastMarketAnthropicTimeoutMs() {
+  return readBoundedForecastTimeout(
+    'FORECAST_MARKET_ANTHROPIC_TIMEOUT_MS',
+    FORECAST_MARKET_ANTHROPIC_TIMEOUT_DEFAULT_MS,
+    FORECAST_MARKET_ANTHROPIC_TIMEOUT_MIN_MS,
+    FORECAST_MARKET_ANTHROPIC_TIMEOUT_MAX_MS,
+  );
+}
+
+// The expanded budgets apply only when the complete local Anthropic module is
+// configured. Cloud-only deployments retain the established 200s/240s
+// run-and-lock contract. The local trial receives a 25-minute LLM budget and a
+// 30-minute lock, preserving five minutes for publication and cleanup while
+// remaining below the hourly forecast cadence.
+const FORECAST_SEED_LOCK_TTL_MS =
+  hasConfiguredAnthropicForecastProvider()
+    ? 1_800_000
+    : 240_000;
+const FORECAST_LLM_RUN_BUDGET_MS =
+  hasConfiguredAnthropicForecastProvider()
+    ? 1_500_000
+    : 200_000;
 // Anchored at the start of the direct seed run; null in tests and the deep-forecast
 // worker (separate entry/lock) so only the per-stage budget applies there.
 let forecastLlmRunDeadlineMs = null;
@@ -14804,6 +14852,14 @@ function getForecastLlmCallOptions(stage = 'default') {
   return {
     providerOrder,
     modelOverrides: openrouterModel ? { openrouter: openrouterModel } : {},
+    timeoutOverrides: anthropicConfigured
+      ? {
+          anthropic:
+            stage === 'market_implications'
+              ? getForecastMarketAnthropicTimeoutMs()
+              : getForecastAnthropicTimeoutMs(),
+        }
+      : {},
   };
 }
 
@@ -14828,7 +14884,18 @@ function resolveForecastLlmProviders(options = {}) {
       ? provider.apiUrlFn()
       : provider.apiUrl;
     if (!model || !apiUrl) continue;
-    const failFastOnTimeout = isDeepseekV4FlashModel(model);
+    // Restarting a slow local generation wastes the completed prompt and token
+    // work. Give Anthropic one bounded attempt and defer retry to the next seed.
+    const failFastOnTimeout =
+      isDeepseekV4FlashModel(model) ||
+      provider.name === 'anthropic';
+    const requestedTimeout =
+      options.timeoutOverrides?.[provider.name];
+    const providerTimeout =
+      Number.isFinite(requestedTimeout) && requestedTimeout > 0
+        ? Math.floor(requestedTimeout)
+        : provider.timeout;
+
     providers.push({
       ...provider,
       apiUrl,
@@ -14842,7 +14909,7 @@ function resolveForecastLlmProviders(options = {}) {
       // this against the Flash cap, and leaves non-Flash models on provider.timeout.
       timeout: getLlmAttemptTimeoutMs(
         model,
-        isDeepseekV4FlashModel(model) ? FORECAST_FLASH_REQUESTED_TIMEOUT_MS : provider.timeout,
+        isDeepseekV4FlashModel(model) ? FORECAST_FLASH_REQUESTED_TIMEOUT_MS : providerTimeout,
         DEEPSEEK_V4_FLASH_LONG_COMPLETION_TIMEOUT_MS,
       ),
       failFastOnTimeout,
@@ -18941,6 +19008,11 @@ export {
   parseForecastProviderOrder,
   getForecastLlmCallOptions,
   getMarketImplicationsMinRunBudgetMs,
+  getForecastAnthropicTimeoutMs,
+  getForecastMarketAnthropicTimeoutMs,
+  FORECAST_ANTHROPIC_TIMEOUT_DEFAULT_MS,
+  FORECAST_MARKET_ANTHROPIC_TIMEOUT_DEFAULT_MS,
+  FORECAST_LLM_STAGE_BUDGET_MS,
   FORECAST_LLM_RUN_BUDGET_MS,
   FORECAST_SEED_LOCK_TTL_MS,
   resolveForecastLlmProviders,
