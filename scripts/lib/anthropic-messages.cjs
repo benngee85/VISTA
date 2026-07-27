@@ -49,7 +49,7 @@ function createAnthropicProvider(options = {}) {
     model: () => (
       String(process.env.ANTHROPIC_MODEL || '').trim()
       || options.defaultModel
-      || 'qwen36'
+      || ''
     ),
     headers: key => ({
       'Content-Type': 'application/json',

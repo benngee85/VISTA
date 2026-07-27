@@ -115,7 +115,7 @@ export function getProviderCredentials(
 
     return {
       apiUrl,
-      model: overrides.model || process.env.ANTHROPIC_MODEL || 'qwen36',
+      model: overrides.model || process.env.ANTHROPIC_MODEL,
       protocol: 'anthropic',
       headers: {
         'x-api-key': apiKey,
