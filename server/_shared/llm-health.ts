@@ -96,6 +96,19 @@ export function warmHealthCache(): void {
     : undefined;
   if (ollamaUrl) providerUrls.push(ollamaUrl);
 
+  const anthropicBaseUrl = typeof process !== 'undefined'
+    ? process.env?.ANTHROPIC_BASE_URL
+    : undefined;
+  if (anthropicBaseUrl) {
+    try {
+      providerUrls.push(
+        new URL('/v1/messages', anthropicBaseUrl).toString(),
+      );
+    } catch {
+      console.warn('[llm-health] Invalid ANTHROPIC_BASE_URL');
+    }
+  }
+
   if (typeof process !== 'undefined' && process.env?.GROQ_API_KEY) {
     providerUrls.push('https://api.groq.com/openai/v1/chat/completions');
   }

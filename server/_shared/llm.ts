@@ -1,6 +1,7 @@
 import { CHROME_UA } from './constants';
 import { isProviderAvailable } from './llm-health';
 import { sanitizeForPrompt } from './llm-sanitize.js';
+import { fetchLlmProvider, type LlmWireProtocol } from './llm-anthropic-adapter';
 import { buildLlmCallEvent, deliverUsageEvents, type LlmCallEvent } from './usage';
 import {
   getLlmAttemptTimeoutMs,
@@ -29,9 +30,10 @@ export interface ProviderCredentials {
   model: string;
   headers: Record<string, string>;
   extraBody?: Record<string, unknown>;
+  protocol?: LlmWireProtocol;
 }
 
-export type LlmProviderName = 'ollama' | 'groq' | 'openrouter' | 'generic';
+export type LlmProviderName = 'anthropic' | 'ollama' | 'groq' | 'openrouter' | 'generic';
 
 export interface ProviderCredentialOverrides {
   model?: string;
@@ -84,6 +86,42 @@ export function getProviderCredentials(
       model: overrides.model || process.env.OLLAMA_MODEL || 'llama3.1:8b',
       headers,
       extraBody: { think: false },
+    };
+  }
+
+  if (provider === 'anthropic') {
+    const baseUrl = process.env.ANTHROPIC_BASE_URL;
+    const apiKey = process.env.ANTHROPIC_API_KEY;
+    if (!baseUrl || !apiKey) return null;
+
+    // Private/local Anthropic-compatible endpoints are an explicit
+    // self-hosted deployment feature. They must never become an
+    // arbitrary cloud-side SSRF primitive.
+    if (!isLocalDeployment()) {
+      console.warn('[llm] Local Anthropic endpoint blocked outside a local deployment');
+      return null;
+    }
+
+    let apiUrl: string;
+    try {
+      const parsed = new URL(baseUrl);
+      if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+        return null;
+      }
+      apiUrl = new URL('/v1/messages', parsed).toString();
+    } catch {
+      return null;
+    }
+
+    return {
+      apiUrl,
+      model: overrides.model || process.env.ANTHROPIC_MODEL || 'qwen36',
+      protocol: 'anthropic',
+      headers: {
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'Content-Type': 'application/json',
+      },
     };
   }
 
@@ -192,7 +230,7 @@ export function stripThinkingTags(text: string): string {
 // via OpenRouter; groq (llama-3.3-70b-versatile) is the free-tier/outage
 // fallback. Ollama stays first so self-hosted deployments are untouched —
 // it is skipped in cloud where OLLAMA_API_URL is unset.
-const PROVIDER_CHAIN = ['ollama', 'openrouter', 'groq', 'generic'] as const;
+const PROVIDER_CHAIN = ['anthropic', 'ollama', 'openrouter', 'groq', 'generic'] as const;
 const PROVIDER_SET = new Set<string>(PROVIDER_CHAIN);
 
 export interface LlmCallOptions {
@@ -434,7 +472,7 @@ export function callLlmReasoningStream(opts: LlmStreamOptions): ReadableStream<U
 
         let hasContent = false;
         try {
-          const resp = await fetch(creds.apiUrl, {
+          const resp = await fetchLlmProvider(creds.protocol || 'openai', creds.apiUrl, {
             method: 'POST',
             headers: { ...creds.headers, 'User-Agent': CHROME_UA },
             body: JSON.stringify({
@@ -593,7 +631,7 @@ export async function callLlm(opts: LlmCallOptions): Promise<LlmCallResult | nul
       };
 
       try {
-        const resp = await fetch(creds.apiUrl, {
+        const resp = await fetchLlmProvider(creds.protocol || 'openai', creds.apiUrl, {
           method: 'POST',
           headers: { ...creds.headers, 'User-Agent': CHROME_UA },
           body: JSON.stringify({
