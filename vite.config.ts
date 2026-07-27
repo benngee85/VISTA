@@ -1116,7 +1116,7 @@ export default defineConfig(({ mode }) => {
           onlyExplicitManualChunks: true,
           manualChunks(id) {
             if (id.includes('node_modules')) {
-              if (id.includes('/@xenova/transformers/')) {
+              if (id.includes('/@huggingface/transformers/')) {
                 return 'transformers';
               }
               if (id.includes('/onnxruntime-web/')) {
