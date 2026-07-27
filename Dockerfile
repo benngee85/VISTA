@@ -77,6 +77,7 @@ COPY docker/supervisord.conf /etc/supervisor/conf.d/worldmonitor.conf
 COPY docker/entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh && \
     rm -rf /usr/local/lib/node_modules/npm \
+           /usr/local/lib/node_modules/corepack \
            /usr/local/bin/npm \
            /usr/local/bin/npx \
            /usr/local/bin/corepack
