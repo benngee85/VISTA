@@ -4064,7 +4064,7 @@ const SERVICE_STATUSES_RPC_URL = `${WORLDMONITOR_API_BASE_URL}/api/infrastructur
 
 async function seedServiceStatuses() {
   try {
-    const resp = await fetch(SERVICE_STATUSES_RPC_URL, {
+    const resp = await fetchInternalWarmPing(SERVICE_STATUSES_RPC_URL, {
       method: 'POST',
       headers: warmPingHeaders({ 'Content-Type': 'application/json' }),
       body: '{}',
@@ -4657,6 +4657,61 @@ if (!RELAY_API_KEY) {
   console.log('[Relay] WORLDMONITOR_RELAY_KEY configured — warm-pings will send X-WorldMonitor-Key');
 }
 
+async function fetchInternalWarmPing(url, init = {}, dependencies = {}) {
+  const fetchImpl = dependencies.fetchImpl || fetch;
+  const sleep = dependencies.sleep || (
+    (delayMs) => new Promise((resolve) => setTimeout(resolve, delayMs))
+  );
+  const maxAttempts = Math.max(
+    1,
+    Number(dependencies.maxAttempts || process.env.INTERNAL_WARM_PING_MAX_ATTEMPTS || 5),
+  );
+  const baseDelayMs = Math.max(
+    0,
+    Number(dependencies.baseDelayMs ?? process.env.INTERNAL_WARM_PING_RETRY_BASE_MS ?? 1000),
+  );
+
+  let lastError;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      const response = await fetchImpl(url, init);
+      const retryableStatus = [
+        408,
+        425,
+        429,
+        502,
+        503,
+        504,
+      ].includes(response.status);
+
+      if (!retryableStatus || attempt === maxAttempts) {
+        return response;
+      }
+
+      await response.body?.cancel?.();
+
+      const delayMs = baseDelayMs * (2 ** (attempt - 1));
+      console.warn(
+        `[Relay] Internal warm-ping HTTP ${response.status}; retrying in ${delayMs}ms (${attempt}/${maxAttempts})`,
+      );
+      await sleep(delayMs);
+    } catch (error) {
+      lastError = error;
+
+      if (attempt === maxAttempts) throw error;
+
+      const delayMs = baseDelayMs * (2 ** (attempt - 1));
+      console.warn(
+        `[Relay] Internal warm-ping transport failure; retrying in ${delayMs}ms (${attempt}/${maxAttempts})`,
+      );
+      await sleep(delayMs);
+    }
+  }
+
+  throw lastError || new Error('Internal warm-ping retry exhausted');
+}
+
 function warmPingHeaders(extra = {}) {
   const h = {
     'User-Agent': CHROME_UA,
@@ -4683,7 +4738,7 @@ function ciiWarmPingUrl() {
 
 async function seedCiiWarmPing() {
   try {
-    const resp = await fetch(ciiWarmPingUrl(), {
+    const resp = await fetchInternalWarmPing(ciiWarmPingUrl(), {
       headers: warmPingHeaders(),
       signal: AbortSignal.timeout(60_000),
     });
@@ -4750,7 +4805,7 @@ const CABLE_HEALTH_RPC_URL = `${WORLDMONITOR_API_BASE_URL}/api/infrastructure/v1
 
 async function seedCableHealthWarmPing() {
   try {
-    const resp = await fetch(CABLE_HEALTH_RPC_URL, {
+    const resp = await fetchInternalWarmPing(CABLE_HEALTH_RPC_URL, {
       method: 'POST',
       headers: warmPingHeaders({ 'Content-Type': 'application/json' }),
       body: '{}',

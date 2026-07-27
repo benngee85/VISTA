@@ -102,7 +102,7 @@ describe('relay warm-ping auth wiring (source guardrail)', () => {
     );
     assert.match(
       src,
-      /fetch\(SERVICE_STATUSES_RPC_URL,\s*\{[\s\S]{0,240}?headers: warmPingHeaders\(\{ 'Content-Type': 'application\/json' \}\)/,
+      /fetchInternalWarmPing\(SERVICE_STATUSES_RPC_URL,\s*\{[\s\S]{0,240}?headers: warmPingHeaders\(\{ 'Content-Type': 'application\/json' \}\)/,
       'Service Statuses warm-ping must keep sending the relay key via warmPingHeaders()',
     );
   });

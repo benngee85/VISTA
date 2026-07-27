@@ -88,7 +88,7 @@ test('relay CII warm-ping delegates risk-score health count to the RPC handler',
   );
   assert.match(
     warmPing,
-    /fetch\(ciiWarmPingUrl\(\)/,
+    /fetchInternalWarmPing\(ciiWarmPingUrl\(\)/,
     'relay warm-ping must bypass CDN cache so the handler can refresh its own seed-meta on fresh fetches',
   );
   assert.match(
