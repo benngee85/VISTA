@@ -25,6 +25,13 @@ import { createHash } from 'node:crypto';
 import { extractFirstJsonObject, cleanJsonText } from '../_llm-json.mjs';
 import { withRetry, httpRetryError, createLlmBudgetError, isLlmBudgetError } from '../_seed-utils.mjs';
 import { buildLlmCallEvent, emitLlmEvents } from '../lib/llm-telemetry.cjs';
+import anthropicMessages from '../lib/anthropic-messages.cjs';
+
+const {
+  createAnthropicProvider,
+  buildProviderRequest,
+  parseProviderResponse,
+} = anthropicMessages;
 
 const CHROME_UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
@@ -53,6 +60,10 @@ const MAX_WATCH_ITEMS = 3;
  * Provider chain. Order matters: first provider with a configured env var wins.
  */
 const DEFAULT_PROVIDERS = [
+  createAnthropicProvider({
+    timeout: 60_000,
+    userAgent: CHROME_UA,
+  }),
   {
     name: 'openrouter',
     envKey: 'OPENROUTER_API_KEY',
@@ -332,10 +343,13 @@ export async function callLlmDefault({ systemPrompt, userPrompt }, opts = {}) {
   for (const provider of DEFAULT_PROVIDERS) {
     const envVal = process.env[provider.envKey];
     if (!envVal) continue;
+    const apiUrl = provider.apiUrlFn ? provider.apiUrlFn(envVal) : provider.apiUrl;
+    if (!apiUrl) continue;
+    const model = typeof provider.model === 'function' ? provider.model() : provider.model;
     const t0 = Date.now();
     const record = (ok, extra = {}) => {
       events.push(buildLlmCallEvent({
-        provider: provider.name, model: provider.model, stage: 'regional-narrative', ok,
+        provider: provider.name, model, stage: 'regional-narrative', ok,
         durationMs: Date.now() - t0, promptChars, maxTokens: NARRATIVE_MAX_TOKENS,
         fallbackIndex: attemptIndex++,
         ...extra,
@@ -345,20 +359,22 @@ export async function callLlmDefault({ systemPrompt, userPrompt }, opts = {}) {
       const resp = await withRetry(async () => {
         const usable = usableBudgetMs();
         if (usable <= 0) throw createLlmBudgetError('narrative llm budget exhausted');
-        const response = await narrativeFetch(provider.apiUrl, {
+        const response = await narrativeFetch(apiUrl, {
           method: 'POST',
           headers: provider.headers(envVal),
-          body: JSON.stringify({
-            model: provider.model,
+          body: JSON.stringify(buildProviderRequest(provider, {
+            model,
             messages: [
               { role: 'system', content: systemPrompt },
               { role: 'user', content: userPrompt },
             ],
-            max_tokens: NARRATIVE_MAX_TOKENS,
+            maxTokens: NARRATIVE_MAX_TOKENS,
             temperature: NARRATIVE_TEMPERATURE,
-            response_format: { type: 'json_object' },
-            ...(provider.extraBody || {}),
-          }),
+            extraBody: {
+              response_format: { type: 'json_object' },
+              ...(provider.extraBody || {}),
+            },
+          })),
           signal: AbortSignal.timeout(Math.max(1, Math.min(provider.timeout, usable))),
         });
         if (!response.ok) {
@@ -368,12 +384,9 @@ export async function callLlmDefault({ systemPrompt, userPrompt }, opts = {}) {
       }, NARRATIVE_LLM_MAX_RETRIES, retryDelayMs);
 
       const json = /** @type {any} */ (await resp.json());
-      const usage = {
-        tokensTotal: json?.usage?.total_tokens ?? 0,
-        tokensPrompt: json?.usage?.prompt_tokens ?? 0,
-        tokensCompletion: json?.usage?.completion_tokens ?? 0,
-      };
-      const text = json?.choices?.[0]?.message?.content;
+      const parsedResponse = parseProviderResponse(provider, json);
+      const usage = parsedResponse.usage;
+      const text = parsedResponse.text;
       if (typeof text !== 'string' || text.trim().length === 0) {
         console.warn(`[narrative] ${provider.name}: empty response`);
         record(false, { ...usage, reason: 'empty' });
@@ -388,9 +401,7 @@ export async function callLlmDefault({ systemPrompt, userPrompt }, opts = {}) {
       }
 
       // Prefer the model the provider actually ran over the requested alias.
-      const actualModel = typeof json?.model === 'string' && json.model.length > 0
-        ? json.model
-        : provider.model;
+      const actualModel = parsedResponse.model || model;
 
       record(true, { ...usage, model: actualModel });
       void emitLlmEvents(events); // fire-and-forget: telemetry never delays the return path

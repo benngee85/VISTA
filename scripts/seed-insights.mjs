@@ -39,6 +39,13 @@ import { buildLlmCallEvent, emitLlmEvents, flushPendingLlmEvents } from './lib/l
 // line above. PR #3836 review caught this. See skill
 // railway-deploy-gotchas/reference/nixpacks-root-dir-scripts-cross-dir-import-escape.
 import { validateNoHallucinatedProperNouns } from './shared/brief-llm-core.js';
+import anthropicMessages from './lib/anthropic-messages.cjs';
+
+const {
+  createAnthropicProvider,
+  buildProviderRequest,
+  parseProviderResponse,
+} = anthropicMessages;
 
 // Hallucination validator rollout mode (PR-2 of brief-content-quality
 // regressions). `shadow` = log violations to Sentry but ship the LLM
@@ -222,6 +229,10 @@ async function readExistingInsights() {
 // Order: ollama → openrouter → groq (canonical chain since #4944: DeepSeek
 // V4 Flash primary with reasoning disabled, groq 70B free-tier fallback)
 const LLM_PROVIDERS = [
+  createAnthropicProvider({
+    timeout: 60_000,
+    userAgent: CHROME_UA,
+  }),
   {
     name: 'ollama',
     envKey: 'OLLAMA_API_URL',
@@ -319,16 +330,16 @@ async function callLLM(headline, options = {}) {
         const response = await insightsFetch(apiUrl, {
           method: 'POST',
           headers: provider.headers(envVal),
-          body: JSON.stringify({
+          body: JSON.stringify(buildProviderRequest(provider, {
             model,
             messages: [
               { role: 'system', content: systemPrompt },
               { role: 'user', content: userPrompt },
             ],
-            max_tokens: maxTokens,
+            maxTokens,
             temperature: 0.1,
-            ...provider.extraBody,
-          }),
+            extraBody: provider.extraBody || {},
+          })),
           signal: AbortSignal.timeout(Math.max(1, Math.min(provider.timeout, usable))),
         });
         if (!response.ok) {
@@ -338,12 +349,9 @@ async function callLLM(headline, options = {}) {
       }, INSIGHTS_LLM_MAX_RETRIES, retryDelayMs);
 
       const json = await resp.json();
-      const usage = {
-        tokensTotal: json.usage?.total_tokens ?? 0,
-        tokensPrompt: json.usage?.prompt_tokens ?? 0,
-        tokensCompletion: json.usage?.completion_tokens ?? 0,
-      };
-      const rawText = json.choices?.[0]?.message?.content?.trim();
+      const parsedResponse = parseProviderResponse(provider, json);
+      const usage = parsedResponse.usage;
+      const rawText = parsedResponse.text?.trim();
       if (!rawText) {
         console.warn(`  ${provider.name}: empty response`);
         record(false, { ...usage, reason: 'empty' });
@@ -362,9 +370,10 @@ async function callLLM(headline, options = {}) {
         continue;
       }
 
-      record(true, { ...usage, model: json.model || model });
+      const actualModel = parsedResponse.model || model;
+      record(true, { ...usage, model: actualModel });
       void emitLlmEvents(events); // fire-and-forget: telemetry never delays the return path
-      return { text, model: json.model || model, provider: provider.name };
+      return { text, model: actualModel, provider: provider.name };
     } catch (err) {
       console.warn(`  ${provider.name} failed: ${err.message}`);
       const httpMatch = /HTTP (\d{3})/.exec(err.message || '');

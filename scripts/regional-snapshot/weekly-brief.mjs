@@ -14,6 +14,13 @@
 
 import { extractFirstJsonObject, cleanJsonText } from '../_llm-json.mjs';
 import { buildLlmCallEvent, emitLlmEvents } from '../lib/llm-telemetry.cjs';
+import anthropicMessages from '../lib/anthropic-messages.cjs';
+
+const {
+  createAnthropicProvider,
+  buildProviderRequest,
+  parseProviderResponse,
+} = anthropicMessages;
 
 const CHROME_UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
@@ -24,6 +31,10 @@ const MAX_KEY_DEVELOPMENTS = 5;
 const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
 
 const DEFAULT_PROVIDERS = [
+  createAnthropicProvider({
+    timeout: 60_000,
+    userAgent: CHROME_UA,
+  }),
   {
     name: 'openrouter',
     envKey: 'OPENROUTER_API_KEY',
@@ -222,30 +233,35 @@ async function callLlmDefault({ systemPrompt, userPrompt }, opts = {}) {
   for (const provider of DEFAULT_PROVIDERS) {
     const envVal = process.env[provider.envKey];
     if (!envVal) continue;
+    const apiUrl = provider.apiUrlFn ? provider.apiUrlFn(envVal) : provider.apiUrl;
+    if (!apiUrl) continue;
+    const model = typeof provider.model === 'function' ? provider.model() : provider.model;
     const t0 = Date.now();
     const record = (ok, extra = {}) => {
       events.push(buildLlmCallEvent({
-        provider: provider.name, model: provider.model, stage: 'regional-weekly-brief', ok,
+        provider: provider.name, model, stage: 'regional-weekly-brief', ok,
         durationMs: Date.now() - t0, promptChars, maxTokens: BRIEF_MAX_TOKENS,
         fallbackIndex: attemptIndex++,
         ...extra,
       }));
     };
     try {
-      const resp = await fetch(provider.apiUrl, {
+      const resp = await fetch(apiUrl, {
         method: 'POST',
         headers: provider.headers(envVal),
-        body: JSON.stringify({
-          model: provider.model,
+        body: JSON.stringify(buildProviderRequest(provider, {
+          model,
           messages: [
             { role: 'system', content: systemPrompt },
             { role: 'user', content: userPrompt },
           ],
-          max_tokens: BRIEF_MAX_TOKENS,
+          maxTokens: BRIEF_MAX_TOKENS,
           temperature: BRIEF_TEMPERATURE,
-          response_format: { type: 'json_object' },
-          ...(provider.extraBody || {}),
-        }),
+          extraBody: {
+            response_format: { type: 'json_object' },
+            ...(provider.extraBody || {}),
+          },
+        })),
         signal: AbortSignal.timeout(provider.timeout),
       });
       if (!resp.ok) {
@@ -254,12 +270,9 @@ async function callLlmDefault({ systemPrompt, userPrompt }, opts = {}) {
         continue;
       }
       const json = /** @type {any} */ (await resp.json());
-      const usage = {
-        tokensTotal: json?.usage?.total_tokens ?? 0,
-        tokensPrompt: json?.usage?.prompt_tokens ?? 0,
-        tokensCompletion: json?.usage?.completion_tokens ?? 0,
-      };
-      const text = json?.choices?.[0]?.message?.content;
+      const parsedResponse = parseProviderResponse(provider, json);
+      const usage = parsedResponse.usage;
+      const text = parsedResponse.text;
       if (typeof text !== 'string' || text.trim().length === 0) {
         console.warn(`[weekly-brief] ${provider.name}: empty response`);
         record(false, { ...usage, reason: 'empty' });
@@ -271,9 +284,7 @@ async function callLlmDefault({ systemPrompt, userPrompt }, opts = {}) {
         record(false, { ...usage, reason: 'validate_reject' });
         continue;
       }
-      const actualModel = typeof json?.model === 'string' && json.model.length > 0
-        ? json.model
-        : provider.model;
+      const actualModel = parsedResponse.model || model;
       record(true, { ...usage, model: actualModel });
       void emitLlmEvents(events); // fire-and-forget: telemetry never delays the return path
       return { text: trimmed, provider: provider.name, model: actualModel };
