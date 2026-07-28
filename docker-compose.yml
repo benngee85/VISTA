@@ -155,6 +155,30 @@ services:
       SRH_CONNECTION_STRING: "redis://:${VALKEY_PASSWORD:?VALKEY_PASSWORD required — generate with: openssl rand -hex 32}@valkey:6379"
     depends_on:
       - valkey
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - >-
+          const token = process.env.SRH_TOKEN || process.env.CACHE_REST_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+          if (!token) process.exit(1);
+          fetch('http://127.0.0.1:8080/pipeline', {
+            method: 'POST',
+            headers: {
+              authorization: 'Bearer ' + token,
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify([['PING']]),
+            signal: AbortSignal.timeout(5000)
+          }).then(async response => {
+            const body = await response.text();
+            if (!response.ok || !body.includes('PONG')) process.exit(1);
+          }).catch(() => process.exit(1));
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
     restart: unless-stopped
 
 # Docker secrets — uncomment and point to your secret files.
