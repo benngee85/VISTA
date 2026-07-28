@@ -21,13 +21,23 @@ services:
     ports:
       - "${WM_PORT:-3000}:8080"
     environment:
-      UPSTASH_REDIS_REST_URL: "http://redis-rest:8080"
-      UPSTASH_REDIS_REST_TOKEN: "${REDIS_TOKEN:?REDIS_TOKEN required — generate with: openssl rand -hex 32}"
+      CACHE_REST_URL: "http://valkey-rest:8080"
+      UPSTASH_REDIS_REST_URL: "http://valkey-rest:8080"
+      CACHE_REST_TOKEN: "${CACHE_REST_TOKEN:?CACHE_REST_TOKEN required — generate with: openssl rand -hex 32}"
+      UPSTASH_REDIS_REST_TOKEN: "${CACHE_REST_TOKEN:?CACHE_REST_TOKEN required — generate with: openssl rand -hex 32}"
       LOCAL_API_PORT: "46123"
       LOCAL_API_MODE: "docker"
       LOCAL_API_CLOUD_FALLBACK: "false"
       WS_RELAY_URL: "http://ais-relay:3004"
       WORLDMONITOR_RELAY_KEY: "${WORLDMONITOR_RELAY_KEY:-}"
+      # Sovereign entitlement-provider boundary. Hosted remains the safe
+      # compatibility default until the local provider is deployed.
+      VISTA_DEPLOYMENT_PROFILE: "${VISTA_DEPLOYMENT_PROFILE:-hosted}"
+      VISTA_ENTITLEMENT_PROVIDER: "${VISTA_ENTITLEMENT_PROVIDER:-hosted}"
+      VISTA_ENTITLEMENT_PROVIDER_URL: "${VISTA_ENTITLEMENT_PROVIDER_URL:-}"
+      VISTA_ENTITLEMENT_PROVIDER_TOKEN: "${VISTA_ENTITLEMENT_PROVIDER_TOKEN:-}"
+      VISTA_ENTITLEMENT_PROVIDER_TIMEOUT_MS: "${VISTA_ENTITLEMENT_PROVIDER_TIMEOUT_MS:-3000}"
+      VISTA_ENTITLEMENT_ALLOW_INSECURE_HTTP: "${VISTA_ENTITLEMENT_ALLOW_INSECURE_HTTP:-false}"
       # Local Anthropic-compatible LLM module. The base URL, model and
       # adapter key are sourced once from .env and shared by every consumer.
       ANTHROPIC_BASE_URL: "${ANTHROPIC_BASE_URL:-}"
@@ -63,7 +73,7 @@ services:
     #   - NASA_FIRMS_API_KEY
     #   - LLM_API_KEY
     depends_on:
-      redis-rest:
+      valkey-rest:
         condition: service_started
       ais-relay:
         condition: service_started
@@ -81,8 +91,10 @@ services:
       AISSTREAM_API_KEY: "${AISSTREAM_API_KEY:-}"
       FINNHUB_API_KEY: "${FINNHUB_API_KEY:-}"
       MARKET_YAHOO_REFRESH_INTERVAL_MS: "${MARKET_YAHOO_REFRESH_INTERVAL_MS:-900000}"
-      UPSTASH_REDIS_REST_URL: "http://redis-rest:8080"
-      UPSTASH_REDIS_REST_TOKEN: "${REDIS_TOKEN:?REDIS_TOKEN required — generate with: openssl rand -hex 32}"
+      CACHE_REST_URL: "http://valkey-rest:8080"
+      UPSTASH_REDIS_REST_URL: "http://valkey-rest:8080"
+      CACHE_REST_TOKEN: "${CACHE_REST_TOKEN:?CACHE_REST_TOKEN required — generate with: openssl rand -hex 32}"
+      UPSTASH_REDIS_REST_TOKEN: "${CACHE_REST_TOKEN:?CACHE_REST_TOKEN required — generate with: openssl rand -hex 32}"
       UPSTASH_ALLOW_INSECURE_HTTP: "true"
       UCDP_ACCESS_TOKEN: "${UCDP_ACCESS_TOKEN:-}"
       LOCAL_API_MODE: "docker"
@@ -93,42 +105,55 @@ services:
       OPENROUTER_API_KEY: "${OPENROUTER_API_KEY:-}"
       PORT: "3004"
     depends_on:
-      redis-rest:
+      valkey-rest:
         condition: service_started
     restart: unless-stopped
 
-  redis:
-    image: docker.io/redis:7-alpine
-    container_name: worldmonitor-redis
-    # --requirepass closes off the network so any future sidecar / compromised
-    # dependency added to the worldmonitor network can't read or write cache
-    # entries without the password. Defense-in-depth alongside the REST token.
-    command: >
-      redis-server
-      --requirepass "${REDIS_PASSWORD:?REDIS_PASSWORD required — generate with: openssl rand -hex 32}"
-      --maxmemory 256mb
-      --maxmemory-policy allkeys-lru
-    volumes:
-      - redis-data:/data
+  valkey:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.rocky9-valkey
+    image: vista-valkey:latest
+    container_name: vista-valkey
     restart: unless-stopped
+    environment:
+      VALKEY_PASSWORD: "${VALKEY_PASSWORD:?VALKEY_PASSWORD required — generate with: openssl rand -hex 32}"
+    volumes:
+      - valkey-data:/data
+    read_only: true
+    tmpfs:
+      - /tmp:size=32m,mode=1777
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    stop_grace_period: 30s
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - REDISCLI_AUTH=$$VALKEY_PASSWORD valkey-cli ping | grep -q PONG
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
 
-  redis-rest:
+  valkey-rest:
     build:
       context: docker
       dockerfile: Dockerfile.redis-rest
-    image: worldmonitor-redis-rest:latest
-    container_name: worldmonitor-redis-rest
+    image: vista-valkey-rest:latest
+    container_name: vista-valkey-rest
     ports:
       - "127.0.0.1:8079:8080"
     environment:
-      SRH_TOKEN: "${REDIS_TOKEN:?REDIS_TOKEN required — generate with: openssl rand -hex 32}"
-      # Defense-in-depth: the redis service's --requirepass already fails
-      # compose validation if REDIS_PASSWORD is unset, but the explicit
+      SRH_TOKEN: "${CACHE_REST_TOKEN:?CACHE_REST_TOKEN required — generate with: openssl rand -hex 32}"
+      # Defense-in-depth: the Valkey service's --requirepass already fails
+      # Compose validation if VALKEY_PASSWORD is unset, but the explicit
       # :? here protects against a future PR removing --requirepass or
       # copying this connection string into a new service.
-      SRH_CONNECTION_STRING: "redis://:${REDIS_PASSWORD:?REDIS_PASSWORD required — generate with: openssl rand -hex 32}@redis:6379"
+      SRH_CONNECTION_STRING: "redis://:${VALKEY_PASSWORD:?VALKEY_PASSWORD required — generate with: openssl rand -hex 32}@valkey:6379"
     depends_on:
-      - redis
+      - valkey
     restart: unless-stopped
 
 # Docker secrets — uncomment and point to your secret files.
@@ -148,4 +173,4 @@ services:
 #     file: ./secrets/llm_api_key.txt
 
 volumes:
-  redis-data:
+  valkey-data:

@@ -1,5 +1,5 @@
 services:
-  redis-rest:
+  valkey-rest:
     healthcheck:
       test:
         - CMD
@@ -10,6 +10,42 @@ services:
       timeout: 5s
       start_period: 10s
       retries: 12
+
+  vista-entitlement-service:
+    profiles: ["rocky9-split"]
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.rocky9-entitlements
+      args:
+        VCS_REF: "${VCS_REF:-unknown}"
+    image: vista-entitlement-service:latest
+    container_name: vista-entitlement-service
+    environment:
+      VISTA_ENTITLEMENT_SERVICE_PORT: "46124"
+      VISTA_ENTITLEMENT_SERVICE_TOKEN: "${VISTA_ENTITLEMENT_PROVIDER_TOKEN:-}"
+      VISTA_ENTITLEMENT_KEY_PREFIX: "${VISTA_ENTITLEMENT_KEY_PREFIX:-vista:entitlements:v1}"
+      VISTA_ENTITLEMENT_AUDIT_KEY: "${VISTA_ENTITLEMENT_AUDIT_KEY:-vista:audit:entitlements:v1}"
+      VISTA_ENTITLEMENT_AUDIT_HMAC_KEY: "${VISTA_ENTITLEMENT_AUDIT_HMAC_KEY:-}"
+      CACHE_REST_URL: "http://valkey-rest:8080"
+      UPSTASH_REDIS_REST_URL: "http://valkey-rest:8080"
+      CACHE_REST_TOKEN: "${CACHE_REST_TOKEN:?CACHE_REST_TOKEN required}"
+      UPSTASH_REDIS_REST_TOKEN: "${CACHE_REST_TOKEN:?CACHE_REST_TOKEN required}"
+      UPSTASH_ALLOW_INSECURE_HTTP: "true"
+    depends_on:
+      valkey-rest:
+        condition: service_healthy
+    user: "1000710000:0"
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 128
+    mem_reservation: 128m
+    mem_limit: 256m
+    restart: unless-stopped
 
   worldmonitor-api-rocky9:
     profiles: ["rocky9-split"]
@@ -23,8 +59,10 @@ services:
     env_file:
       - .env
     environment:
-      UPSTASH_REDIS_REST_URL: "http://redis-rest:8080"
-      UPSTASH_REDIS_REST_TOKEN: "${REDIS_TOKEN:?REDIS_TOKEN required}"
+      CACHE_REST_URL: "http://valkey-rest:8080"
+      UPSTASH_REDIS_REST_URL: "http://valkey-rest:8080"
+      CACHE_REST_TOKEN: "${CACHE_REST_TOKEN:?CACHE_REST_TOKEN required}"
+      UPSTASH_REDIS_REST_TOKEN: "${CACHE_REST_TOKEN:?CACHE_REST_TOKEN required}"
       UPSTASH_ALLOW_INSECURE_HTTP: "true"
       LOCAL_API_PORT: "46123"
       LOCAL_API_MODE: "docker"
@@ -33,8 +71,14 @@ services:
       LOCAL_API_TOKEN: "${LOCAL_API_TOKEN:?LOCAL_API_TOKEN required}"
       WS_RELAY_URL: "http://worldmonitor-relay-rocky9:3004"
       WORLDMONITOR_RELAY_KEY: "${WORLDMONITOR_RELAY_KEY:-}"
+      VISTA_DEPLOYMENT_PROFILE: "${VISTA_DEPLOYMENT_PROFILE:-hosted}"
+      VISTA_ENTITLEMENT_PROVIDER: "${VISTA_ENTITLEMENT_PROVIDER:-hosted}"
+      VISTA_ENTITLEMENT_PROVIDER_URL: "${VISTA_ENTITLEMENT_PROVIDER_URL:-}"
+      VISTA_ENTITLEMENT_PROVIDER_TOKEN: "${VISTA_ENTITLEMENT_PROVIDER_TOKEN:-}"
+      VISTA_ENTITLEMENT_PROVIDER_TIMEOUT_MS: "${VISTA_ENTITLEMENT_PROVIDER_TIMEOUT_MS:-3000}"
+      VISTA_ENTITLEMENT_ALLOW_INSECURE_HTTP: "${VISTA_ENTITLEMENT_ALLOW_INSECURE_HTTP:-false}"
     depends_on:
-      redis-rest:
+      valkey-rest:
         condition: service_healthy
     user: "1000710000:0"
     read_only: true
@@ -66,8 +110,10 @@ services:
       AISSTREAM_API_KEY: "${AISSTREAM_API_KEY:-}"
       FINNHUB_API_KEY: "${FINNHUB_API_KEY:-}"
       MARKET_YAHOO_REFRESH_INTERVAL_MS: "${MARKET_YAHOO_REFRESH_INTERVAL_MS:-900000}"
-      UPSTASH_REDIS_REST_URL: "http://redis-rest:8080"
-      UPSTASH_REDIS_REST_TOKEN: "${REDIS_TOKEN:?REDIS_TOKEN required}"
+      CACHE_REST_URL: "http://valkey-rest:8080"
+      UPSTASH_REDIS_REST_URL: "http://valkey-rest:8080"
+      CACHE_REST_TOKEN: "${CACHE_REST_TOKEN:?CACHE_REST_TOKEN required}"
+      UPSTASH_REDIS_REST_TOKEN: "${CACHE_REST_TOKEN:?CACHE_REST_TOKEN required}"
       UPSTASH_ALLOW_INSECURE_HTTP: "true"
       UCDP_ACCESS_TOKEN: "${UCDP_ACCESS_TOKEN:-}"
       LOCAL_API_MODE: "docker"
@@ -78,7 +124,7 @@ services:
       OPENROUTER_API_KEY: "${OPENROUTER_API_KEY:-}"
       PORT: "3004"
     depends_on:
-      redis-rest:
+      valkey-rest:
         condition: service_healthy
       worldmonitor-api-rocky9:
         condition: service_healthy

@@ -24,6 +24,11 @@
  */
 
 import { getCachedJson, setCachedJson } from './redis';
+import {
+  getEntitlementProviderMode,
+  isSovereignEntitlementProviderConfigured,
+  resolveSovereignEntitlements,
+} from './sovereign-entitlement-provider';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -332,6 +337,16 @@ const NOT_APPLICABLE_VERIFICATION_TTL_SECONDS = 60;
  * lookup could ever succeed (fail open + page).
  */
 export function isEntitlementBackendConfigured(): boolean {
+  const providerMode = getEntitlementProviderMode();
+
+  if (providerMode === 'sovereign-http') {
+    return isSovereignEntitlementProviderConfigured();
+  }
+
+  if (providerMode === 'misconfigured') {
+    return false;
+  }
+
   return Boolean(process.env.CONVEX_SITE_URL && getConvexSharedSecret());
 }
 
@@ -464,6 +479,29 @@ function unavailableEntitlements(): CachedEntitlements {
 }
 
 async function _getEntitlementsImpl(userId: string): Promise<CachedEntitlements | null> {
+  const providerMode = getEntitlementProviderMode();
+
+  if (providerMode === 'misconfigured') {
+    console.warn(
+      '[entitlement-check] entitlement provider configuration is invalid',
+    );
+    return null;
+  }
+
+  if (providerMode === 'sovereign-http') {
+    const result = await resolveSovereignEntitlements(userId);
+
+    switch (result.kind) {
+      case 'found':
+        return result.entitlements;
+      case 'not-found':
+      case 'misconfigured':
+        return null;
+      case 'unavailable':
+        return unavailableEntitlements();
+    }
+  }
+
   try {
     // Redis cache check (raw=true: entitlements use user-scoped keys, no deployment prefix)
     const cached = await getCachedJson(`entitlements:${ENV_PREFIX}:${userId}`, true);
