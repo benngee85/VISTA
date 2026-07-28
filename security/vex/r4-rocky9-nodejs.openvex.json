@@ -1,0 +1,62 @@
+{
+  "@context": "https://openvex.dev/ns/v0.2.0",
+  "@id": "https://github.com/benngee85/VISTA/security/vex/r4-rocky9-nodejs-6baa8ac6-0e81-472e-a798-eadd7603d219",
+  "author": "https://github.com/benngee85/VISTA",
+  "role": "Document Creator",
+  "timestamp": "2026-07-28T07:22:40.376Z",
+  "version": 1,
+  "tooling": "worldmonitor R4 validation",
+  "statements": [
+    {
+      "vulnerability": [
+        {
+          "name": "CVE-2024-28182"
+        },
+        {
+          "name": "CVE-2024-27983"
+        },
+        {
+          "name": "CVE-2024-27982"
+        },
+        {
+          "name": "CVE-2024-25629"
+        },
+        {
+          "name": "CVE-2024-22025"
+        },
+        {
+          "name": "CVE-2024-22019"
+        },
+        {
+          "name": "CVE-2023-44487"
+        },
+        {
+          "name": "CVE-2023-32559"
+        },
+        {
+          "name": "CVE-2023-32006"
+        },
+        {
+          "name": "CVE-2023-32002"
+        },
+        {
+          "name": "CVE-2022-35256"
+        },
+        {
+          "name": "CVE-2022-35255"
+        }
+      ],
+      "products": [
+        {
+          "@id": "pkg:oci/worldmonitor-api-rocky9"
+        },
+        {
+          "@id": "pkg:oci/worldmonitor-relay-rocky9"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_present",
+      "impact_statement": "Docker Scout matched the npm 11.16 component of Rocky modular RPM metadata as an historical Node.js runtime. Executable and RPM evidence identifies the deployed runtime as Node.js 24.18.0; Node 11 and Node 16 runtimes are absent."
+    }
+  ]
+}

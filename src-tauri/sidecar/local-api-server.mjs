@@ -1737,7 +1737,18 @@ async function dispatch(requestUrl, req, routes, context) {
 
     const body = ['GET', 'HEAD'].includes(req.method) ? undefined : await readBody(req);
     const hdrs = toHeaders(req.headers, { stripOrigin: true });
-    hdrs.set('Origin', `http://127.0.0.1:${context.port}`);
+    const incomingOrigin = typeof req.headers.origin === 'string'
+      ? req.headers.origin.trim()
+      : '';
+    if (context.mode === 'docker' && incomingOrigin) {
+      // nginx is the authenticated transport in Docker mode. Preserve its
+      // caller Origin so bundled handlers can enforce the deployment's exact
+      // SELF_HOSTED_ALLOWED_ORIGINS boundary.
+      hdrs.set('Origin', incomingOrigin);
+    } else {
+      // Preserve the established desktop-sidecar normalization.
+      hdrs.set('Origin', `http://127.0.0.1:${context.port}`);
+    }
     // The transport credential authenticates the nginx/sidecar hop only. Do
     // not expose it to route handlers, where Authorization is caller identity
     // (OAuth bearer) and X-WorldMonitor-Key is the caller's API key.
@@ -1863,12 +1874,15 @@ export async function createLocalApiServer(options = {}) {
     routes,
     server,
     async start() {
+      const bindHost = context.mode === 'docker' && process.env.LOCAL_API_BIND_HOST === '0.0.0.0'
+        ? '0.0.0.0'
+        : '127.0.0.1';
       const tryListen = (port) => new Promise((resolve, reject) => {
         const onListening = () => { server.off('error', onError); resolve(); };
         const onError = (error) => { server.off('listening', onListening); reject(error); };
         server.once('listening', onListening);
         server.once('error', onError);
-        server.listen(port, '127.0.0.1');
+        server.listen(port, bindHost);
       });
 
       try {
@@ -1948,7 +1962,7 @@ export async function createLocalApiServer(options = {}) {
         try { writeFileSync(portFile, String(boundPort)); } catch {}
       }
 
-      context.logger.log(`[local-api] listening on http://127.0.0.1:${boundPort} (apiDir=${context.apiDir}, routes=${routes.length}, cloudFallback=${context.cloudFallback})`);
+      context.logger.log(`[local-api] listening on http://${bindHost}:${boundPort} (apiDir=${context.apiDir}, routes=${routes.length}, cloudFallback=${context.cloudFallback})`);
 
       // Warm LLM health cache in background (non-blocking)
       (async () => {

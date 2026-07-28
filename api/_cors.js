@@ -63,8 +63,31 @@ const EXPOSED_HEADERS = [
   'X-Military-Bbox',
 ].join(', ');
 
+function parseConfiguredAllowedOrigins(rawValue) {
+  const origins = new Set();
+  for (const candidate of String(rawValue || '').split(',').map(value => value.trim()).filter(Boolean)) {
+    try {
+      const parsed = new URL(candidate);
+      if (!['http:', 'https:'].includes(parsed.protocol)) continue;
+      if (parsed.username || parsed.password) continue;
+      if (parsed.origin !== candidate) continue;
+      origins.add(candidate);
+    } catch {
+      // Ignore malformed configuration entries; the default allowlist remains authoritative.
+    }
+  }
+  return origins;
+}
+
+const CONFIGURED_ALLOWED_ORIGINS = parseConfiguredAllowedOrigins(
+  process.env.SELF_HOSTED_ALLOWED_ORIGINS,
+);
+
 function isAllowedOrigin(origin) {
-  return Boolean(origin) && ALLOWED_ORIGIN_PATTERNS.some((pattern) => pattern.test(origin));
+  return Boolean(origin) && (
+    CONFIGURED_ALLOWED_ORIGINS.has(origin)
+    || ALLOWED_ORIGIN_PATTERNS.some((pattern) => pattern.test(origin))
+  );
 }
 
 export function getCorsHeaders(req, methods = 'GET, OPTIONS') {

@@ -1,0 +1,124 @@
+services:
+  redis-rest:
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:8080/ping',{headers:{Authorization:'Bearer '+process.env.SRH_TOKEN},signal:AbortSignal.timeout(4000)}).then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"
+      interval: 10s
+      timeout: 5s
+      start_period: 10s
+      retries: 12
+
+  worldmonitor-api-rocky9:
+    profiles: ["rocky9-split"]
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.rocky9-api
+      args:
+        VCS_REF: "${VCS_REF:-unknown}"
+    image: worldmonitor-api-rocky9:latest
+    container_name: worldmonitor-api-rocky9
+    env_file:
+      - .env
+    environment:
+      UPSTASH_REDIS_REST_URL: "http://redis-rest:8080"
+      UPSTASH_REDIS_REST_TOKEN: "${REDIS_TOKEN:?REDIS_TOKEN required}"
+      UPSTASH_ALLOW_INSECURE_HTTP: "true"
+      LOCAL_API_PORT: "46123"
+      LOCAL_API_MODE: "docker"
+      LOCAL_API_BIND_HOST: "0.0.0.0"
+      SELF_HOSTED_ALLOWED_ORIGINS: "http://127.0.0.1:${WM_ROCKY9_PORT:-3001},http://localhost:${WM_ROCKY9_PORT:-3001}"
+      LOCAL_API_TOKEN: "${LOCAL_API_TOKEN:?LOCAL_API_TOKEN required}"
+      WS_RELAY_URL: "http://worldmonitor-relay-rocky9:3004"
+      WORLDMONITOR_RELAY_KEY: "${WORLDMONITOR_RELAY_KEY:-}"
+    depends_on:
+      redis-rest:
+        condition: service_healthy
+    user: "1000710000:0"
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 256
+    restart: unless-stopped
+
+
+  worldmonitor-relay-rocky9:
+    profiles: ["rocky9-split"]
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.rocky9-relay
+      args:
+        VCS_REF: "${VCS_REF:-unknown}"
+    image: worldmonitor-relay-rocky9:latest
+    container_name: worldmonitor-relay-rocky9
+    env_file:
+      - .env
+    environment:
+      WORLDMONITOR_API_BASE_URL: "http://worldmonitor-api-rocky9:46123"
+      WORLDMONITOR_RELAY_KEY: "${WORLDMONITOR_RELAY_KEY:-}"
+      RELAY_SHARED_SECRET: "${RELAY_SHARED_SECRET:-}"
+      AISSTREAM_API_KEY: "${AISSTREAM_API_KEY:-}"
+      FINNHUB_API_KEY: "${FINNHUB_API_KEY:-}"
+      MARKET_YAHOO_REFRESH_INTERVAL_MS: "${MARKET_YAHOO_REFRESH_INTERVAL_MS:-900000}"
+      UPSTASH_REDIS_REST_URL: "http://redis-rest:8080"
+      UPSTASH_REDIS_REST_TOKEN: "${REDIS_TOKEN:?REDIS_TOKEN required}"
+      UPSTASH_ALLOW_INSECURE_HTTP: "true"
+      UCDP_ACCESS_TOKEN: "${UCDP_ACCESS_TOKEN:-}"
+      LOCAL_API_MODE: "docker"
+      ANTHROPIC_BASE_URL: "${ANTHROPIC_BASE_URL:-}"
+      ANTHROPIC_MODEL: "${ANTHROPIC_MODEL:-}"
+      ANTHROPIC_API_KEY: "${ANTHROPIC_API_KEY:-}"
+      GROQ_API_KEY: "${GROQ_API_KEY:-}"
+      OPENROUTER_API_KEY: "${OPENROUTER_API_KEY:-}"
+      PORT: "3004"
+    depends_on:
+      redis-rest:
+        condition: service_healthy
+      worldmonitor-api-rocky9:
+        condition: service_healthy
+    user: "1000710000:0"
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 256
+    mem_reservation: 384m
+    mem_limit: 768m
+    restart: unless-stopped
+
+  worldmonitor-web-rocky9:
+    profiles: ["rocky9-split"]
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.rocky9-web
+      args:
+        VCS_REF: "${VCS_REF:-unknown}"
+    image: worldmonitor-web-rocky9:latest
+    container_name: worldmonitor-web-rocky9
+    environment:
+      API_UPSTREAM: "http://worldmonitor-api-rocky9:46123"
+      LOCAL_API_TOKEN: "${LOCAL_API_TOKEN:?LOCAL_API_TOKEN required}"
+    depends_on:
+      worldmonitor-api-rocky9:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:${WM_ROCKY9_PORT:-3001}:8080"
+    user: "1000710000:0"
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 128
+    restart: unless-stopped

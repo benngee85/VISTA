@@ -1,0 +1,52 @@
+# syntax=docker/dockerfile:1.7
+# Parallel Rocky Linux 9 static web/proxy runtime.
+ARG ROCKY9_IMAGE=quay.io/rockylinux/rockylinux:9.8-minimal@sha256:e1d0a9f5ed99d52e7faf03afe7ee32e48b231c4dd9586808b3d1aedf894dff04
+ARG NODE_BUILDER_IMAGE=node:24-alpine@sha256:a0b9bf06e4e6193cf7a0f58816cc935ff8c2a908f81e6f1a95432d679c54fbfd
+
+FROM node:24-alpine@sha256:a0b9bf06e4e6193cf7a0f58816cc935ff8c2a908f81e6f1a95432d679c54fbfd AS builder
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --ignore-scripts
+COPY . .
+RUN npm run build:crawlable-corpus && \
+    npm run build:sitemap && \
+    npx tsc && \
+    npx vite build
+
+FROM quay.io/rockylinux/rockylinux:9.8-minimal@sha256:e1d0a9f5ed99d52e7faf03afe7ee32e48b231c4dd9586808b3d1aedf894dff04 AS final
+ARG ROCKY9_IMAGE
+ARG VCS_REF=unknown
+LABEL org.opencontainers.image.source="https://github.com/benngee85/VISTA" \
+      org.opencontainers.image.revision="${VCS_REF}" \
+      org.opencontainers.image.base.name="${ROCKY9_IMAGE}" \
+      org.opencontainers.image.title="World Monitor Rocky 9 Web"
+RUN microdnf -y update && \
+    microdnf -y install nginx gettext ca-certificates && \
+    microdnf clean all && \
+    rm -rf /var/cache/dnf && \
+    mkdir -p /app /tmp/nginx-client-body /tmp/nginx-proxy \
+             /tmp/nginx-fastcgi /tmp/nginx-uwsgi /tmp/nginx-scgi
+
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY docker/nginx-rocky9.conf.template /etc/nginx/nginx-rocky9.conf.template
+COPY docker/rocky9-web-entrypoint.sh /app/rocky9-web-entrypoint.sh
+
+RUN chmod 0555 /app/rocky9-web-entrypoint.sh && \
+    chown -R 0:0 /app /usr/share/nginx/html \
+      /tmp/nginx-client-body /tmp/nginx-proxy /tmp/nginx-fastcgi \
+      /tmp/nginx-uwsgi /tmp/nginx-scgi && \
+    chmod -R g=u /app /usr/share/nginx/html \
+      /tmp/nginx-client-body /tmp/nginx-proxy /tmp/nginx-fastcgi \
+      /tmp/nginx-uwsgi /tmp/nginx-scgi && \
+    chmod -R a-w /app /usr/share/nginx/html
+
+ENV API_UPSTREAM=http://worldmonitor-api-rocky9:46123 \
+    HOME=/tmp
+
+USER 10001:0
+EXPOSE 8080
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
+  CMD ["curl", "--fail", "--silent", "--show-error", "--max-time", "4", "http://127.0.0.1:8080/api/sidecar-health"]
+
+ENTRYPOINT ["/app/rocky9-web-entrypoint.sh"]

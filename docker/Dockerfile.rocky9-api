@@ -1,0 +1,70 @@
+# syntax=docker/dockerfile:1.7
+# Parallel Rocky Linux 9 API runtime. The current combined Alpine image remains
+# available until parity, security and Kubernetes gates are complete.
+ARG ROCKY9_IMAGE=quay.io/rockylinux/rockylinux:9.8-minimal@sha256:e1d0a9f5ed99d52e7faf03afe7ee32e48b231c4dd9586808b3d1aedf894dff04
+ARG NODE_BUILDER_IMAGE=node:24-alpine@sha256:a0b9bf06e4e6193cf7a0f58816cc935ff8c2a908f81e6f1a95432d679c54fbfd
+
+FROM node:24-alpine@sha256:a0b9bf06e4e6193cf7a0f58816cc935ff8c2a908f81e6f1a95432d679c54fbfd AS builder
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --ignore-scripts
+COPY . .
+RUN node docker/build-handlers.mjs
+
+FROM quay.io/rockylinux/rockylinux:9.8-minimal@sha256:e1d0a9f5ed99d52e7faf03afe7ee32e48b231c4dd9586808b3d1aedf894dff04 AS runtime-deps
+RUN microdnf -y update && \
+    microdnf -y module enable nodejs:24 && \
+    microdnf -y install nodejs npm ca-certificates && \
+    microdnf clean all && \
+    rm -rf /var/cache/dnf
+WORKDIR /app
+COPY docker/runtime-package.json ./package.json
+COPY docker/runtime-package-lock.json ./package-lock.json
+RUN npm ci --omit=dev --omit=optional --ignore-scripts
+
+FROM quay.io/rockylinux/rockylinux:9.8-minimal@sha256:e1d0a9f5ed99d52e7faf03afe7ee32e48b231c4dd9586808b3d1aedf894dff04 AS final
+ARG ROCKY9_IMAGE
+ARG VCS_REF=unknown
+LABEL org.opencontainers.image.source="https://github.com/benngee85/VISTA" \
+      org.opencontainers.image.revision="${VCS_REF}" \
+      org.opencontainers.image.base.name="${ROCKY9_IMAGE}" \
+      org.opencontainers.image.title="World Monitor Rocky 9 API"
+RUN microdnf -y update && \
+    microdnf -y module enable nodejs:24 && \
+    microdnf -y install nodejs ca-certificates && \
+    microdnf clean all && \
+    rm -rf /var/cache/dnf \
+           /usr/lib/node_modules/npm \
+           /usr/lib/node_modules/corepack \
+           /usr/local/lib/node_modules/npm \
+           /usr/local/lib/node_modules/corepack \
+           /usr/bin/npm /usr/bin/npx /usr/bin/corepack \
+           /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/corepack && \
+    command -v node >/dev/null && \
+    ! command -v npm >/dev/null && \
+    ! command -v npx >/dev/null && \
+    ! command -v corepack >/dev/null
+
+WORKDIR /app
+COPY --from=builder /app/src-tauri/sidecar/local-api-server.mjs ./local-api-server.mjs
+COPY --from=builder /app/src-tauri/sidecar/package.json ./package.json
+COPY --from=runtime-deps /app/node_modules ./node_modules
+COPY --from=builder /app/api ./api
+COPY --from=builder /app/data ./data
+
+RUN chown -R 0:0 /app && \
+    chmod -R g=u /app && \
+    chmod -R a-w /app
+
+ENV LOCAL_API_PORT=46123 \
+    LOCAL_API_MODE=docker \
+    NODE_ENV=production \
+    HOME=/tmp
+
+USER 10001:0
+EXPOSE 46123
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
+  CMD ["node", "-e", "fetch('http://127.0.0.1:46123/api/sidecar-health',{signal:AbortSignal.timeout(4000)}).then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+
+CMD ["node", "/app/local-api-server.mjs"]
