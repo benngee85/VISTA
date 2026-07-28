@@ -28,6 +28,14 @@ services:
       LOCAL_API_CLOUD_FALLBACK: "false"
       WS_RELAY_URL: "http://ais-relay:3004"
       WORLDMONITOR_RELAY_KEY: "${WORLDMONITOR_RELAY_KEY:-}"
+      # Sovereign entitlement-provider boundary. Hosted remains the safe
+      # compatibility default until the local provider is deployed.
+      VISTA_DEPLOYMENT_PROFILE: "${VISTA_DEPLOYMENT_PROFILE:-hosted}"
+      VISTA_ENTITLEMENT_PROVIDER: "${VISTA_ENTITLEMENT_PROVIDER:-hosted}"
+      VISTA_ENTITLEMENT_PROVIDER_URL: "${VISTA_ENTITLEMENT_PROVIDER_URL:-}"
+      VISTA_ENTITLEMENT_PROVIDER_TOKEN: "${VISTA_ENTITLEMENT_PROVIDER_TOKEN:-}"
+      VISTA_ENTITLEMENT_PROVIDER_TIMEOUT_MS: "${VISTA_ENTITLEMENT_PROVIDER_TIMEOUT_MS:-3000}"
+      VISTA_ENTITLEMENT_ALLOW_INSECURE_HTTP: "${VISTA_ENTITLEMENT_ALLOW_INSECURE_HTTP:-false}"
       # Local Anthropic-compatible LLM module. The base URL, model and
       # adapter key are sourced once from .env and shared by every consumer.
       ANTHROPIC_BASE_URL: "${ANTHROPIC_BASE_URL:-}"
