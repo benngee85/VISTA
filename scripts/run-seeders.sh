@@ -1,9 +1,9 @@
 #!/bin/sh
-# Run all seed scripts against the local Redis REST proxy.
+# Run all seed scripts against the sovereign Valkey REST bridge.
 # Usage: ./scripts/run-seeders.sh
 #
 # Requires the worldmonitor stack to be running (uvx podman-compose up -d).
-# The Redis REST proxy listens on localhost:8079 by default.
+# The Valkey REST bridge listens on localhost:8079 by default.
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
@@ -19,24 +19,29 @@ if [ -f "$PROJECT_DIR/.env" ]; then
   set +a
 fi
 
-UPSTASH_REDIS_REST_URL="${UPSTASH_REDIS_REST_URL:-http://localhost:8079}"
-# This script targets the LOCAL Docker REST proxy, so REDIS_TOKEN always
-# wins if set — even when UPSTASH_REDIS_REST_TOKEN also appears in .env
-# (e.g. a contributor who also works on the Vercel/Upstash side and keeps
-# the production token in the same file). Otherwise we'd silently send a
-# Vercel-Upstash bearer to localhost:8079 and the proxy would 401 the
-# request with no hint about why. Reviewer caught this on PR #3829.
-if [ -n "${REDIS_TOKEN:-}" ]; then
-  UPSTASH_REDIS_REST_TOKEN="$REDIS_TOKEN"
+# CACHE_REST_* is authoritative for sovereign deployments.
+# UPSTASH_REDIS_REST_* and REDIS_TOKEN remain compatibility inputs.
+CACHE_REST_URL="${CACHE_REST_URL:-${UPSTASH_REDIS_REST_URL:-http://localhost:8079}}"
+
+if [ -z "${CACHE_REST_TOKEN:-}" ]; then
+  if [ -n "${REDIS_TOKEN:-}" ]; then
+    CACHE_REST_TOKEN="$REDIS_TOKEN"
+  elif [ -n "${UPSTASH_REDIS_REST_TOKEN:-}" ]; then
+    CACHE_REST_TOKEN="$UPSTASH_REDIS_REST_TOKEN"
+  fi
 fi
 
-if [ -z "${UPSTASH_REDIS_REST_TOKEN:-}" ]; then
-  echo "ERROR: REDIS_TOKEN (or UPSTASH_REDIS_REST_TOKEN) is required." >&2
-  echo "       Generate with: openssl rand -hex 32, then add to .env" >&2
-  echo "       See SELF_HOSTING.md → Required Environment Variables." >&2
+if [ -z "${CACHE_REST_TOKEN:-}" ]; then
+  echo "ERROR: CACHE_REST_TOKEN is required." >&2
+  echo "       REDIS_TOKEN and UPSTASH_REDIS_REST_TOKEN remain accepted compatibility inputs." >&2
+  echo "       Generate with: openssl rand -hex 32" >&2
   exit 1
 fi
 
+UPSTASH_REDIS_REST_URL="$CACHE_REST_URL"
+UPSTASH_REDIS_REST_TOKEN="$CACHE_REST_TOKEN"
+
+export CACHE_REST_URL CACHE_REST_TOKEN
 export UPSTASH_REDIS_REST_URL UPSTASH_REDIS_REST_TOKEN
 
 # Source API keys from docker-compose.override.yml if present.
@@ -72,7 +77,7 @@ if [ -z "${LLM_MODEL:-}" ]; then
 fi
 
 printf '%s\n' "Host seeder endpoints:"
-printf '  Redis REST: %s\n' "$UPSTASH_REDIS_REST_URL"
+printf '  Valkey REST: %s\n' "$CACHE_REST_URL"
 printf '  LLM API:    %s\n' "$LLM_API_URL"
 printf '  LLM model:  %s\n' "$LLM_MODEL"
 

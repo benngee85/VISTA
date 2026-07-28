@@ -1,0 +1,19 @@
+FROM rockylinux:9
+
+RUN dnf -y upgrade --refresh \
+    && dnf -y install valkey \
+    && dnf clean all \
+    && rm -rf /var/cache/dnf \
+    && install -d -o valkey -g valkey -m 0700 /data
+
+COPY docker/valkey-entrypoint.sh /usr/local/bin/valkey-entrypoint
+
+RUN chmod 0555 /usr/local/bin/valkey-entrypoint
+
+USER valkey:valkey
+WORKDIR /data
+
+EXPOSE 6379
+VOLUME ["/data"]
+
+ENTRYPOINT ["/usr/local/bin/valkey-entrypoint"]

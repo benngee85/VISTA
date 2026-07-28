@@ -10,7 +10,7 @@
  *   POST /multi-exec                  → JSON body [["CMD1",...], ["CMD2",...]]
  *
  * Env:
- *   REDIS_URL  - Redis connection string (default: redis://redis:6379)
+ *   REDIS_URL  - Redis connection string (default: redis://valkey:6379)
  *   SRH_TOKEN  - Bearer token for auth (default: none)
  *   PORT       - Listen port (default: 80)
  */
@@ -19,7 +19,7 @@ import http from 'node:http';
 import crypto from 'node:crypto';
 import { createClient } from 'redis';
 
-const REDIS_URL = process.env.SRH_CONNECTION_STRING || process.env.REDIS_URL || 'redis://redis:6379';
+const REDIS_URL = process.env.SRH_CONNECTION_STRING || process.env.REDIS_URL || 'redis://valkey:6379';
 const TOKEN = process.env.SRH_TOKEN || '';
 const PORT = parseInt(process.env.PORT || '80', 10);
 
