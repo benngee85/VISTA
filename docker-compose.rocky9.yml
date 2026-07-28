@@ -11,6 +11,40 @@ services:
       start_period: 10s
       retries: 12
 
+  vista-entitlement-service:
+    profiles: ["rocky9-split"]
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.rocky9-entitlements
+      args:
+        VCS_REF: "${VCS_REF:-unknown}"
+    image: vista-entitlement-service:latest
+    container_name: vista-entitlement-service
+    environment:
+      VISTA_ENTITLEMENT_SERVICE_PORT: "46124"
+      VISTA_ENTITLEMENT_SERVICE_TOKEN: "${VISTA_ENTITLEMENT_PROVIDER_TOKEN:-}"
+      VISTA_ENTITLEMENT_KEY_PREFIX: "${VISTA_ENTITLEMENT_KEY_PREFIX:-vista:entitlements:v1}"
+      VISTA_ENTITLEMENT_AUDIT_KEY: "${VISTA_ENTITLEMENT_AUDIT_KEY:-vista:audit:entitlements:v1}"
+      VISTA_ENTITLEMENT_AUDIT_HMAC_KEY: "${VISTA_ENTITLEMENT_AUDIT_HMAC_KEY:-}"
+      UPSTASH_REDIS_REST_URL: "http://redis-rest:8080"
+      UPSTASH_REDIS_REST_TOKEN: "${REDIS_TOKEN:?REDIS_TOKEN required}"
+      UPSTASH_ALLOW_INSECURE_HTTP: "true"
+    depends_on:
+      redis-rest:
+        condition: service_healthy
+    user: "1000710000:0"
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 128
+    mem_reservation: 128m
+    mem_limit: 256m
+    restart: unless-stopped
+
   worldmonitor-api-rocky9:
     profiles: ["rocky9-split"]
     build:
