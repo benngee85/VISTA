@@ -1,6 +1,6 @@
-# 🌍 Self-Hosting World Monitor
+# 🌍 Self-Hosting VISTA
 
-Run the full World Monitor stack locally with Docker/Podman.
+Run the full VISTA stack locally with Docker/Podman.
 
 ## 📋 Prerequisites
 

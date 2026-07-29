@@ -1,3 +1,5 @@
+name: vista
+
 # =============================================================================
 # World Monitor — Docker / Podman Compose
 # =============================================================================
@@ -12,12 +14,12 @@
 
 services:
 
-  worldmonitor:
+  vista:
     build:
       context: .
       dockerfile: Dockerfile
-    image: worldmonitor:latest
-    container_name: worldmonitor
+    image: vista:latest
+    container_name: vista
     ports:
       - "${WM_PORT:-3000}:8080"
     environment:
@@ -32,7 +34,7 @@ services:
       LOCAL_API_CLOUD_FALLBACK: "true"
       LOCAL_API_CLOUD_FALLBACK_ALLOW_DOCKER: "${LOCAL_API_CLOUD_FALLBACK_ALLOW_DOCKER:-false}"
       WORLDMONITOR_API_KEY: "${WM_API_KEY:-}"
-      WS_RELAY_URL: "http://ais-relay:3004"
+      WS_RELAY_URL: "http://vista-relay:3004"
       # Sovereign entitlement-provider boundary. Hosted remains the safe
       # compatibility default until the local provider is deployed.
       VISTA_DEPLOYMENT_PROFILE: "${VISTA_DEPLOYMENT_PROFILE:-hosted}"
@@ -78,20 +80,20 @@ services:
     depends_on:
       valkey-rest:
         condition: service_healthy
-      ais-relay:
+      vista-relay:
         condition: service_started
     restart: unless-stopped
 
-  ais-relay:
+  vista-relay:
     build:
       context: .
       dockerfile: Dockerfile.relay
-    image: worldmonitor-ais-relay:latest
-    container_name: worldmonitor-ais-relay
+    image: vista-relay:latest
+    container_name: vista-relay
     environment:
       WORLDMONITOR_RELAY_KEY: "${WORLDMONITOR_RELAY_KEY:-}"
       RELAY_SHARED_SECRET: "${RELAY_SHARED_SECRET:?RELAY_SHARED_SECRET required}"
-      WORLDMONITOR_API_BASE_URL: "http://worldmonitor:8080"
+      WORLDMONITOR_API_BASE_URL: "http://vista:8080"
       AISSTREAM_API_KEY: "${AISSTREAM_API_KEY:-}"
       FINNHUB_API_KEY: "${FINNHUB_API_KEY:-}"
       MARKET_YAHOO_REFRESH_INTERVAL_MS: "${MARKET_YAHOO_REFRESH_INTERVAL_MS:-900000}"

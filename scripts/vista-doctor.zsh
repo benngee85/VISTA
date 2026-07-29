@@ -76,8 +76,15 @@ for item in sys.argv[1:]:
     inspect(item)
 PY
 
-  if [[ -f .secrets/runtime.env ]] &&
-    [[ "$(stat -f '%Lp' .secrets/runtime.env 2>/dev/null || stat -c '%a' .secrets/runtime.env)" == "600" ]]; then
+  if python3 - .secrets/runtime.env <<'PYMODE'
+from pathlib import Path
+import stat
+import sys
+raise SystemExit(
+    0 if stat.S_IMODE(Path(sys.argv[1]).stat().st_mode) == 0o600 else 1
+)
+PYMODE
+  then
     vista_finding PASS ENV-002 security \
       "Runtime secret file permissions are mode 600"
   else
@@ -336,11 +343,42 @@ NODE
 
   print -r -- "\n=== Portability and hardened OCI posture ==="
   tracked_secret_matches=$(
-    git grep -nE \
-      '(sk_live_|sk_test_|wm_[0-9a-fA-F]{20,}|BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY)' \
-      -- ':!*.lock' ':!tests/**' 2>/dev/null |
-      wc -l |
-      tr -d ' '
+    python3 - .secrets/runtime.env <<'PYSECRET'
+from pathlib import Path
+import subprocess
+import sys
+
+secret_file = Path(sys.argv[1])
+values = []
+for line in secret_file.read_text().splitlines():
+    if not line or line.lstrip().startswith("#") or "=" not in line:
+        continue
+    _, value = line.split("=", 1)
+    if len(value) >= 12:
+        values.append(value.encode())
+
+excluded = (
+    "tests/",
+    ".env.example",
+    "package-lock.json",
+    "npm-shrinkwrap.json",
+)
+matches = 0
+for raw_path in subprocess.check_output(["git", "ls-files", "-z"]).split(b"\0"):
+    if not raw_path:
+        continue
+    relative = raw_path.decode(errors="surrogateescape")
+    if relative == ".env.example" or relative.startswith(excluded):
+        continue
+    try:
+        content = Path(relative).read_bytes()
+    except OSError:
+        continue
+    if any(value in content for value in values):
+        matches += 1
+
+print(matches)
+PYSECRET
   )
 
   if (( tracked_secret_matches == 0 )); then

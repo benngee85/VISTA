@@ -1,7 +1,7 @@
 ---
-title: "Country Risk Due Diligence with WorldMonitor"
+title: "Country Risk Due Diligence with VISTA"
 description: "Use CII, advisory provenance, sanctions, macro indicators, and conflict events to screen country exposure before investments, suppliers, trips, or market entry."
-metaTitle: "Country Risk Monitoring for Due Diligence | WorldMonitor"
+metaTitle: "Country Risk Monitoring for Due Diligence | VISTA"
 keywords: "country risk monitoring, country risk API, geopolitical due diligence, country instability index, sanctions risk screening"
 audience: "Risk teams, investors, security managers, compliance analysts, consultants"
 heroImage: "/blog/images/blog/country-risk-monitoring-due-diligence-worldmonitor.jpg"
@@ -13,7 +13,7 @@ Country risk due diligence is the process of asking: "What could go wrong becaus
 
 Most teams answer that question with a static country report. That is useful once. It is not enough when conflict events, sanctions exposure, travel advisories, cyber activity, market stress, and public-health signals can change every day.
 
-WorldMonitor gives risk teams a more repeatable workflow: combine the Country Instability Index, advisory provenance, sanctions pressure, conflict events, macro indicators, and news intelligence into a living country-risk file. If you are starting from the scoring model itself, read the [Country Instability Index methodology](/blog/posts/country-instability-index-methodology-explained/) first; if you need the same workflow in software, pair this guide with the [developer API overview](/blog/posts/build-on-worldmonitor-developer-api-open-source/).
+VISTA gives risk teams a more repeatable workflow: combine the Country Instability Index, advisory provenance, sanctions pressure, conflict events, macro indicators, and news intelligence into a living country-risk file. If you are starting from the scoring model itself, read the [Country Instability Index methodology](/blog/posts/country-instability-index-methodology-explained/) first; if you need the same workflow in software, pair this guide with the [developer API overview](/blog/posts/build-on-worldmonitor-developer-api-open-source/).
 
 ## When to run a country risk workflow
 
@@ -60,7 +60,7 @@ The score is useful because it is comparable. The component breakdown is useful 
 
 ## Preserve advisory provenance
 
-A country risk workflow should never hide where advisory input came from. WorldMonitor's CII score exposes advisory provenance so downstream users can distinguish:
+A country risk workflow should never hide where advisory input came from. VISTA's CII score exposes advisory provenance so downstream users can distinguish:
 
 | Provenance | Meaning |
 |---|---|
@@ -182,10 +182,10 @@ Corroborate country findings with first-party sources such as [World Bank Data](
 Country risk monitoring is the repeated review of political, security, sanctions, macroeconomic, health, infrastructure, and market signals that could affect an organization's exposure to a country.
 
 **What is the Country Instability Index?**
-The Country Instability Index is WorldMonitor's 0-100 country-level risk score. It combines structural and live signals such as conflict, unrest, security events, information velocity, advisory input, and other risk indicators.
+The Country Instability Index is VISTA's 0-100 country-level risk score. It combines structural and live signals such as conflict, unrest, security events, information velocity, advisory input, and other risk indicators.
 
-**Can WorldMonitor replace a human country analyst?**
-No. WorldMonitor is a data and workflow layer. It helps analysts collect consistent evidence, catch changes faster, and write clearer memos. Human judgment is still needed for decisions.
+**Can VISTA replace a human country analyst?**
+No. VISTA is a data and workflow layer. It helps analysts collect consistent evidence, catch changes faster, and write clearer memos. Human judgment is still needed for decisions.
 
 **What should a due diligence memo include?**
 Include the decision, exposure type, CII state, component drivers, advisory provenance, sanctions exposure, recent conflict or news signals, unknowns, and next checks.

@@ -21,7 +21,7 @@
       "type": "skill-md",
       "description": "Retrieve live disruption status for the 13 monitored maritime chokepoints (Suez, Hormuz, Malacca, Bab el-Mandeb, Panama, and more). Use when the user asks whether a strait or canal is disrupted, congested, or safe for shipping right now.",
       "url": "https://worldmonitor.app/.well-known/agent-skills/check-chokepoint-status/SKILL.md",
-      "digest": "sha256:866d5137700eaa3682e9ae4f1e4c2895cd64bbb95134673f3491f783955c4830"
+      "digest": "sha256:9cf8d25ab8ce51fce4fdd9fdda257e025d1c99270e13fbb701ce784c05efca52"
     },
     {
       "name": "check-country-risk",
@@ -33,9 +33,9 @@
     {
       "name": "check-forecast-signals",
       "type": "skill-md",
-      "description": "Retrieve probabilistic forecasts and their scorecard context. Use when the user asks what World Monitor is forecasting, how probabilities shifted, or how calibrated the forecasts are.",
+      "description": "Retrieve probabilistic forecasts and their scorecard context. Use when the user asks what VISTA is forecasting, how probabilities shifted, or how calibrated the forecasts are.",
       "url": "https://worldmonitor.app/.well-known/agent-skills/check-forecast-signals/SKILL.md",
-      "digest": "sha256:ae0bda921477e8173d1595a4d6673aac669e39b76586ac8061bab013f73f1de5"
+      "digest": "sha256:bf207b3ec6243c0d026be0dcc6eae1c666687d2d3e18561e635add36acc0b5e8"
     },
     {
       "name": "check-sanctions-pressure",
@@ -49,14 +49,14 @@
       "type": "skill-md",
       "description": "Retrieve the current AI-generated strategic intelligence brief for a country, keyed by ISO 3166-1 alpha-2 code. Use when the user asks for a summary of the current geopolitical, economic, or security situation in a specific country.",
       "url": "https://worldmonitor.app/.well-known/agent-skills/fetch-country-brief/SKILL.md",
-      "digest": "sha256:da0911e598596a393f956f84d2903f340565ae9d3b14411d1812fadd1aa2bf4c"
+      "digest": "sha256:5bd1dd055e3eb658bff0676446989e849bfbe0ba8ef598dc7acb34022303c72c"
     },
     {
       "name": "fetch-news-digest",
       "type": "skill-md",
-      "description": "Retrieve the pre-aggregated digest of World Monitor's 500+ curated news feeds, bucketed by category, with per-article threat classification and alert flags. Use when the user asks what's in the news right now, wants headlines by topic, or needs a current-events sweep.",
+      "description": "Retrieve the pre-aggregated digest of VISTA's 500+ curated news feeds, bucketed by category, with per-article threat classification and alert flags. Use when the user asks what's in the news right now, wants headlines by topic, or needs a current-events sweep.",
       "url": "https://worldmonitor.app/.well-known/agent-skills/fetch-news-digest/SKILL.md",
-      "digest": "sha256:13df0b0d38bdefb4cc6258105af2e1a1d2516353571d5bc510b730dcae3c53c4"
+      "digest": "sha256:7941ce55f852b6202a568281b23d21884cbdf4c4c344c849b68744d8870a9e69"
     },
     {
       "name": "fetch-resilience-score",
@@ -70,14 +70,14 @@
       "type": "skill-md",
       "description": "Retrieve real-time equity, index, and ETF quotes with price, change, and sparkline history. Use when the user asks for current market prices, how a ticker is doing, or a quick market snapshot.",
       "url": "https://worldmonitor.app/.well-known/agent-skills/get-market-quotes/SKILL.md",
-      "digest": "sha256:c412b521a3a90a51aee977c917eb705676462581c7f6e57029cd523312514520"
+      "digest": "sha256:1814eeff47476cb7c4e10c9017c9d600a8aa17d56f16a88415dcd26f63f92521"
     },
     {
       "name": "get-prediction-markets",
       "type": "skill-md",
       "description": "Retrieve active prediction-market contracts (Polymarket) with live yes-price probabilities, volume, and close dates, filterable by category or keyword. Use when the user asks what the market odds are on a geopolitical, economic, or election outcome.",
       "url": "https://worldmonitor.app/.well-known/agent-skills/get-prediction-markets/SKILL.md",
-      "digest": "sha256:d971c1d15829f8511cf7f2f5d5f4c8a504ef62f8591420a5d812a5d5680d6dfc"
+      "digest": "sha256:2423bb770e8c84f19804f89b9aedb5a8e983b7cf7efbd977e2adacfd67dc29a6"
     },
     {
       "name": "monitor-energy-disruptions",
@@ -147,7 +147,7 @@
       "type": "skill-md",
       "description": "Retrieve recent earthquakes (USGS) with magnitude, depth, location, and a concern score that flags proximity to nuclear test sites. Use when the user asks about recent seismic activity or whether an earthquake was natural.",
       "url": "https://worldmonitor.app/.well-known/agent-skills/track-earthquakes/SKILL.md",
-      "digest": "sha256:ca33d91ac3fd682febaf2a473be2edfc71088000e9677cfa30d32efa3afa7889"
+      "digest": "sha256:a725306e503980c0f27b6210095a6ebf9c32191eb8dbcb329cb82d9720419612"
     },
     {
       "name": "track-military-flights",
@@ -168,7 +168,7 @@
       "type": "skill-md",
       "description": "Retrieve seeded protest, riot, strike, and civil unrest events. Use when the user asks whether social unrest is occurring in a country or over a recent time window.",
       "url": "https://worldmonitor.app/.well-known/agent-skills/track-unrest-events/SKILL.md",
-      "digest": "sha256:081bb36f52bdfc99463edeb7bfa675d35f87ed6fa220cac1b7dd71dc859a2528"
+      "digest": "sha256:268b30b03896cc2109df7eb088e747037ecf8d96d0b920377a27a63c7d24deb2"
     },
     {
       "name": "track-vessel-traffic",

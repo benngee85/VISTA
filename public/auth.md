@@ -1,6 +1,6 @@
-# WorldMonitor — Agent Authentication (auth.md)
+# VISTA — Agent Authentication (auth.md)
 
-How agents authenticate with the WorldMonitor API and MCP server
+How agents authenticate with the VISTA API and MCP server
 (`https://worldmonitor.app/mcp`), per the WorkOS **auth.md** spec:
 <https://workos.com/auth-md>. Discovery is open; data calls need a bearer token
 or API key.

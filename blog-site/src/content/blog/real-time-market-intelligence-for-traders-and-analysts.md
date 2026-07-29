@@ -1,7 +1,7 @@
 ---
-title: "Real-Time Market Intelligence with World Monitor Finance"
-description: "Monitor 29 stock exchanges, 14 central banks, commodities, and macro signals in one free dashboard. World Monitor Finance gives traders the geopolitical edge."
-metaTitle: "Real-Time Market Intelligence for Traders | World Monitor"
+title: "Real-Time Market Intelligence with VISTA Finance"
+description: "Monitor 29 stock exchanges, 14 central banks, commodities, and macro signals in one free dashboard. VISTA Finance gives traders the geopolitical edge."
+metaTitle: "Real-Time Market Intelligence for Traders | VISTA"
 keywords: "real-time market intelligence, stock market dashboard free, financial intelligence platform, macro trading signals, market monitoring tool"
 audience: "Retail and professional traders, financial analysts, macro investors, fintech enthusiasts"
 heroImage: "/blog/images/blog/real-time-market-intelligence-for-traders-and-analysts.jpg"
@@ -11,11 +11,11 @@ modifiedDate: "2026-07-22"
 
 Markets don't move in isolation. A drone strike in the Persian Gulf moves oil futures. A surprise rate hold from the ECB shifts forex pairs. A GPS jamming spike near the Baltic signals military exercises that rattle European equities.
 
-Traditional financial dashboards show you price. World Monitor shows you context.
+Traditional financial dashboards show you price. VISTA shows you context.
 
 ## Finance Monitor: Markets Meet Geopolitics
 
-World Monitor's Finance variant (finance.worldmonitor.app) combines traditional market data with the geopolitical intelligence that drives price action. It's built for traders who understand that a Reuters headline and a ship position can be more valuable than a moving average.
+VISTA's Finance variant (finance.worldmonitor.app) combines traditional market data with the geopolitical intelligence that drives price action. It's built for traders who understand that a Reuters headline and a ship position can be more valuable than a moving average.
 
 Here's what you get:
 
@@ -32,13 +32,13 @@ See at a glance which markets are open, where volume is concentrated, and how ex
 
 ## 7-Signal Macro Radar
 
-World Monitor's macro radar synthesizes seven independent signals into a composite **BUY or CASH verdict**:
+VISTA's macro radar synthesizes seven independent signals into a composite **BUY or CASH verdict**:
 
 The radar doesn't tell you what to buy. It tells you whether the macro environment favors risk-on or risk-off positioning. Think of it as the weather forecast for markets: you still pick where to go, but you know whether to bring an umbrella.
 
 ## 14 Central Bank and Institution Trackers
 
-Interest rates drive everything. World Monitor tracks policy and systemic indicators from 14 central banks and institutions, including:
+Interest rates drive everything. VISTA tracks policy and systemic indicators from 14 central banks and institutions, including:
 
 - Federal Reserve (Fed)
 - European Central Bank (ECB)
@@ -58,7 +58,7 @@ Each tracker includes BIS data on policy rates, real effective exchange rates (R
 
 ## Commodity Hubs and Energy Markets
 
-For commodity traders, World Monitor maps the **10 major commodity exchanges** (CME, ICE, LME, SHFE, DCE, TOCOM, DGCX, MCX, Rotterdam, Houston) alongside live pricing for:
+For commodity traders, VISTA maps the **10 major commodity exchanges** (CME, ICE, LME, SHFE, DCE, TOCOM, DGCX, MCX, Rotterdam, Houston) alongside live pricing for:
 
 - Crude oil (WTI and Brent)
 - Natural gas
@@ -82,34 +82,34 @@ When USDT depegs by 0.3%, you know before most trading desks.
 
 ## Gulf FDI Investment Tracker
 
-A unique feature for emerging market investors: World Monitor maps **64 Gulf FDI investments** from Saudi Arabia and the UAE, color-coded by status (announced, in progress, completed). This covers the Vision 2030 and beyond, the largest sovereign investment programs in history.
+A unique feature for emerging market investors: VISTA maps **64 Gulf FDI investments** from Saudi Arabia and the UAE, color-coded by status (announced, in progress, completed). This covers the Vision 2030 and beyond, the largest sovereign investment programs in history.
 
 For anyone investing in MENA, this is context that Bloomberg charges premium for.
 
 ## Prediction Markets Integration
 
-World Monitor integrates **[Polymarket](https://polymarket.com/)** data directly into country dossiers and the prediction panel. See what bettors think about upcoming elections, military escalations, trade deals, and policy changes.
+VISTA integrates **[Polymarket](https://polymarket.com/)** data directly into country dossiers and the prediction panel. See what bettors think about upcoming elections, military escalations, trade deals, and policy changes.
 
-Prediction markets are consistently among the best forecasting tools available. Having them alongside news feeds and geopolitical scoring lets you triangulate signal from noise. Explore how [prediction markets and AI forecasting](/blog/posts/prediction-markets-ai-forecasting-geopolitics/) work together in World Monitor.
+Prediction markets are consistently among the best forecasting tools available. Having them alongside news feeds and geopolitical scoring lets you triangulate signal from noise. Explore how [prediction markets and AI forecasting](/blog/posts/prediction-markets-ai-forecasting-geopolitics/) work together in VISTA.
 
 ## The Geopolitical Edge
 
-Here's what makes World Monitor different from every other financial dashboard: the geopolitical layer.
+Here's what makes VISTA different from every other financial dashboard: the geopolitical layer.
 
 When you see oil prices spiking, you can toggle the military layer and check if there's unusual naval activity in the Strait of Hormuz. When a currency drops, you can check if the country's CII (Country Instability Index) has been rising. When equities sell off, you can look at the Strategic Theater Posture to see if a military theater has escalated.
 
-This cross-domain intelligence used to be the province of hedge fund research desks with million-dollar budgets. World Monitor puts it in your browser for free. See how it [compares to traditional intelligence tools](/blog/posts/worldmonitor-vs-traditional-intelligence-tools/).
+This cross-domain intelligence used to be the province of hedge fund research desks with million-dollar budgets. VISTA puts it in your browser for free. See how it [compares to traditional intelligence tools](/blog/posts/worldmonitor-vs-traditional-intelligence-tools/).
 
 ## 19 Financial Centers Ranked
 
-World Monitor maps the world's **19 major financial centers** ranked by the Global Financial Centres Index. Click any center for:
+VISTA maps the world's **19 major financial centers** ranked by the Global Financial Centres Index. Click any center for:
 
 - Current ranking and score
 - Key institutions headquartered there
 - Regulatory environment overview
 - Time zone and trading hours
 
-## How Traders Use World Monitor
+## How Traders Use VISTA
 
 **Morning Routine:**
 
@@ -134,17 +134,17 @@ World Monitor maps the world's **19 major financial centers** ranked by the Glob
 
 ## Free Core Dashboard, Optional Pro Workflows
 
-World Monitor Finance's core dashboard is free with no account required. Optional Pro workflows add analyst chat, scenario analysis, route exploration, AI digests, and MCP access; the public map and core market context remain available without a subscription.
+VISTA Finance's core dashboard is free with no account required. Optional Pro workflows add analyst chat, scenario analysis, route exploration, AI digests, and MCP access; the public map and core market context remain available without a subscription.
 
 The entire platform is open source under AGPL-3.0, meaning the algorithms behind every score and signal are auditable.
 
 ## Frequently Asked Questions
 
-**Is World Monitor Finance free to use?**
+**Is VISTA Finance free to use?**
 The core Finance dashboard is free and requires no account. Optional Pro workflows are available for advanced AI analysis, scenarios, route exploration, digests, and MCP access. The platform is open source under AGPL-3.0.
 
-**How does World Monitor differ from Bloomberg or Reuters terminals?**
-World Monitor uniquely overlays geopolitical intelligence (conflict data, military tracking, instability scores) on top of financial data. Traditional terminals focus on price and fundamentals; World Monitor adds the geopolitical context that drives price action.
+**How does VISTA differ from Bloomberg or Reuters terminals?**
+VISTA uniquely overlays geopolitical intelligence (conflict data, military tracking, instability scores) on top of financial data. Traditional terminals focus on price and fundamentals; VISTA adds the geopolitical context that drives price action.
 
 **How often is market data updated?**
 Market data refreshes in real time during trading hours. Central bank trackers, macro signals, and commodity prices update continuously through server-side aggregation with per-source circuit breakers for reliability.

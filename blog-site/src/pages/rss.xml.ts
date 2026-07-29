@@ -4,7 +4,7 @@ import { existsSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 const PUBLIC_DIR = join(process.cwd(), 'public');
-const DEFAULT_AUTHOR = 'Elie Habib';
+const DEFAULT_AUTHOR = 'MercuryLink Concepts';
 
 function escapeXml(value: string): string {
   return value
@@ -39,7 +39,7 @@ function getEnclosure(heroImage: string | undefined) {
 export async function GET(context: { site: URL }) {
   const posts = await getCollection('blog');
   return rss({
-    title: 'World Monitor Blog',
+    title: 'VISTA Blog',
     description: 'Real-time global intelligence, OSINT, geopolitics, and markets.',
     site: context.site,
     xmlns: {

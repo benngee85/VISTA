@@ -1,8 +1,8 @@
-# Support & Contact - World Monitor
+# Support & Contact - VISTA
 
 Last updated: July 5, 2026
 
-How to reach World Monitor, by concern. Human-readable version: https://www.worldmonitor.app/docs/support
+How to reach VISTA, by concern. Human-readable version: https://www.worldmonitor.app/docs/support
 
 ## Channels
 
@@ -33,7 +33,7 @@ How to reach World Monitor, by concern. Human-readable version: https://www.worl
 
 ```json
 {
-  "product": "World Monitor",
+  "product": "VISTA",
   "support_email": "support@worldmonitor.app",
   "enterprise_email": "enterprise@worldmonitor.app",
   "issues_url": "https://github.com/koala73/worldmonitor/issues",

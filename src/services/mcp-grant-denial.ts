@@ -30,7 +30,7 @@ export interface GrantDenialVerdict {
    * Carried on the verdict rather than left to the page because the page had a
    * single hardcoded heading — "Authorization request expired" — rendered above
    * every terminal body. A caller with no Pro subscription read "expired" above
-   * "a WorldMonitor Pro subscription is required", which points at the wrong
+   * "a VISTA Pro subscription is required", which points at the wrong
    * remedy, and the anti-phishing redirect-host refusal was labelled an expiry
    * too. Deriving both strings together is what keeps them from disagreeing.
    */
@@ -60,7 +60,7 @@ const MESSAGES: Record<string, string> = {
   INVALID_NONCE: 'This authorization request expired or is invalid. Start over from your MCP client.',
   UNKNOWN_CLIENT: 'The OAuth client is no longer registered. Start over from your MCP client.',
   INVALID_REDIRECT_URI: 'The redirect destination is not allowed. Start over from your MCP client.',
-  INSUFFICIENT_TIER: 'A WorldMonitor Pro subscription is required to authorize MCP clients.',
+  INSUFFICIENT_TIER: 'A VISTA Pro subscription is required to authorize MCP clients.',
   NONCE_CLAIMED_BY_OTHER_USER:
     'This authorization request has already been claimed by another account. Start over from your MCP client.',
   CONFIGURATION_ERROR: 'MCP authorization is temporarily unavailable. Please try again later.',

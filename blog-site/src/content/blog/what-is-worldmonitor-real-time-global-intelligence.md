@@ -1,7 +1,7 @@
 ---
-title: "What Is World Monitor? The Free Real-Time Global Intelligence Dashboard"
-description: "World Monitor is a free, open-source intelligence dashboard aggregating news, markets, conflicts, and infrastructure into one real-time view. No login required."
-metaTitle: "What Is World Monitor? Free Global Intelligence Dashboard"
+title: "What Is VISTA? The Free Real-Time Global Intelligence Dashboard"
+description: "VISTA is a free, open-source intelligence dashboard aggregating news, markets, conflicts, and infrastructure into one real-time view. No login required."
+metaTitle: "What Is VISTA? Free Global Intelligence Dashboard"
 keywords: "global intelligence dashboard, real-time intelligence platform, OSINT dashboard, open source intelligence tool, geopolitical monitoring"
 audience: "General tech audience, OSINT researchers, analysts, journalists"
 heroImage: "/blog/images/blog/what-is-worldmonitor-real-time-global-intelligence.jpg"
@@ -11,15 +11,15 @@ modifiedDate: "2026-07-22"
 
 Imagine opening 100 browser tabs every morning: one for Reuters, another for flight tracking, a third for earthquake monitors, a fourth for stock markets, a fifth for military ship positions. Now imagine replacing all of them with a single dashboard.
 
-That's World Monitor.
+That's VISTA.
 
 ## A Bloomberg Terminal for the Rest of Us
 
-World Monitor is a **free, open-source, real-time global intelligence dashboard** that pulls together news, financial markets, military movements, natural disasters, cyber threats, and geopolitical risk scoring into one interactive map.
+VISTA is a **free, open-source, real-time global intelligence dashboard** that pulls together news, financial markets, military movements, natural disasters, cyber threats, and geopolitical risk scoring into one interactive map.
 
 It's the kind of tool that used to be locked behind six-figure enterprise contracts. Now it's available to anyone with a browser. No login. No paywall. No data collection.
 
-## What You See When You Open World Monitor
+## What You See When You Open VISTA
 
 The first thing you notice is the globe. A 3D interactive map powered by [globe.gl](https://globe.gl/) and [Three.js](https://threejs.org/), dotted with live data points: conflict zones pulsing red, military bases marked by operator, undersea cables tracing the ocean floor, and ADS-B aircraft positions updating in real time.
 
@@ -36,11 +36,11 @@ Every data point is sourced from public, verifiable feeds: 500+ RSS sources, gov
 
 ## Five Dashboards, One Codebase
 
-World Monitor isn't one dashboard. It's five:
+VISTA isn't one dashboard. It's five:
 
 | Dashboard | Focus | URL |
 |-----------|-------|-----|
-| **World Monitor** | Geopolitics, conflicts, military, infrastructure | worldmonitor.app |
+| **VISTA** | Geopolitics, conflicts, military, infrastructure | worldmonitor.app |
 | **Tech Monitor** | AI labs, startups, cybersecurity, cloud infrastructure | tech.worldmonitor.app |
 | **Finance Monitor** | Markets, central banks, forex, Gulf FDI | finance.worldmonitor.app |
 | **Commodity Monitor** | Mining, metals, energy, supply chain disruption | commodity.worldmonitor.app |
@@ -50,7 +50,7 @@ Switch between them with a single click. Each variant curates panels and layers 
 
 ## AI That Runs on Your Machine
 
-Here's where World Monitor gets interesting for privacy-conscious users. The platform includes a **4-tier AI fallback chain**:
+Here's where VISTA gets interesting for privacy-conscious users. The platform includes a **4-tier AI fallback chain**:
 
 1. **Local LLMs** (Ollama or LM Studio) for fully offline, private analysis
 2. **Groq** (Llama 3.1 8B) for fast cloud inference
@@ -70,7 +70,7 @@ Click any country on the map and you get a full intelligence dossier:
 - **Prediction markets:** What Polymarket bettors think happens next
 - **Infrastructure exposure:** Pipelines, cables, and datacenters within 600km
 
-## Who Uses World Monitor?
+## Who Uses VISTA?
 
 The dashboard serves a surprisingly wide audience:
 
@@ -83,14 +83,14 @@ The dashboard serves a surprisingly wide audience:
 
 ## Available Everywhere
 
-World Monitor works as:
+VISTA works as:
 
 - A **web app** at worldmonitor.app (no install needed)
 - A **Progressive Web App** you can install on any device with offline map caching
 - A **native desktop app** via Tauri for macOS, Windows, and Linux
 - Fully **mobile-optimized** with touch gestures, pinch-to-zoom, and bottom-sheet panels
 
-It supports **25 languages** including Arabic (with full RTL layout), Japanese, Chinese, and all major European languages. RSS feeds are localized per language, and AI analysis can be generated in your preferred language. See the full language breakdown in [World Monitor in 25 Languages](/blog/posts/worldmonitor-in-21-languages-global-intelligence-for-everyone/).
+It supports **25 languages** including Arabic (with full RTL layout), Japanese, Chinese, and all major European languages. RSS feeds are localized per language, and AI analysis can be generated in your preferred language. See the full language breakdown in [VISTA in 25 Languages](/blog/posts/worldmonitor-in-21-languages-global-intelligence-for-everyone/).
 
 ## Open Source, No Strings
 
@@ -100,15 +100,15 @@ The tech stack is modern and approachable: React + TypeScript + Vite on the fron
 
 ## Frequently Asked Questions
 
-**Do I need to create an account to use World Monitor?**
-No. World Monitor requires no login, no signup, and collects no personal data. Open worldmonitor.app in any browser and start using it immediately.
+**Do I need to create an account to use VISTA?**
+No. VISTA requires no login, no signup, and collects no personal data. Open worldmonitor.app in any browser and start using it immediately.
 
-**Can I run World Monitor completely offline?**
+**Can I run VISTA completely offline?**
 Yes. The Tauri desktop app (macOS, Windows, Linux) includes a local Node.js sidecar and supports local LLMs via Ollama or LM Studio. You can also install the PWA for offline map caching.
 
-**How does World Monitor compare to paid intelligence tools?**
-World Monitor covers geopolitics, markets, military tracking, and infrastructure in a single free dashboard. Paid tools like Bloomberg or Palantir offer deeper coverage in specific domains but cost thousands to millions per year. See the [full comparison](/blog/posts/worldmonitor-vs-traditional-intelligence-tools/).
+**How does VISTA compare to paid intelligence tools?**
+VISTA covers geopolitics, markets, military tracking, and infrastructure in a single free dashboard. Paid tools like Bloomberg or Palantir offer deeper coverage in specific domains but cost thousands to millions per year. See the [full comparison](/blog/posts/worldmonitor-vs-traditional-intelligence-tools/).
 
 ---
 
-**Try World Monitor now at [worldmonitor.app](https://www.worldmonitor.app). No signup required.**
+**Try VISTA now at [worldmonitor.app](https://www.worldmonitor.app). No signup required.**

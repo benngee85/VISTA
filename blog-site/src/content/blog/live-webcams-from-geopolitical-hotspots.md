@@ -1,7 +1,7 @@
 ---
 title: "Watch the World Live: 31 Webcam Streams from Geopolitical Hotspots"
-description: "Stream 31 live webcams from Tehran, Kyiv, Jerusalem, Taipei, and beyond. Get real-time situational awareness from 6 global regions on World Monitor, free."
-metaTitle: "31 Live Webcams from Geopolitical Hotspots | World Monitor"
+description: "Stream 31 live webcams from Tehran, Kyiv, Jerusalem, Taipei, and beyond. Get real-time situational awareness from 6 global regions on VISTA, free."
+metaTitle: "31 Live Webcams from Geopolitical Hotspots | VISTA"
 keywords: "live webcams geopolitical hotspots, real-time city cameras, live stream world capitals, OSINT live video, global situation awareness webcams"
 audience: "OSINT analysts, journalists, security professionals, curious global citizens"
 heroImage: "/blog/images/blog/live-webcams-from-geopolitical-hotspots.jpg"
@@ -11,7 +11,7 @@ modifiedDate: "2026-07-22"
 
 When news breaks in a foreign capital, your first instinct is to look. Not at a headline. Not at a map. You want to see what's happening on the ground, right now.
 
-World Monitor streams **31 live webcams** from geopolitical hotspots across 6 regions, directly inside the intelligence dashboard. No tab switching. No searching for reliable streams. Just click and watch.
+VISTA streams **31 live webcams** from geopolitical hotspots across 6 regions, directly inside the intelligence dashboard. No tab switching. No searching for reliable streams. Just click and watch.
 
 ## Why Live Video Changes Intelligence Analysis
 
@@ -19,7 +19,7 @@ Text reports tell you what someone decided to write. Satellite images tell you w
 
 During the early hours of major events, live webcams have consistently provided situational awareness before official channels. Analysts watching Kyiv webcams in February 2022 saw military vehicles before wire services confirmed movements. Beirut port cameras captured the 2020 explosion from multiple angles before any reporter could file.
 
-World Monitor puts these feeds alongside your intelligence data so you can cross-reference what you're reading with what you're seeing. Learn more about how the platform brings together [real-time conflict tracking](/blog/posts/track-global-conflicts-in-real-time/) with live video.
+VISTA puts these feeds alongside your intelligence data so you can cross-reference what you're reading with what you're seeing. Learn more about how the platform brings together [real-time conflict tracking](/blog/posts/track-global-conflicts-in-real-time/) with live video.
 
 ## 6 Regions, 31 Streams
 
@@ -56,7 +56,7 @@ World Monitor puts these feeds alongside your intelligence data so you can cross
 
 ## Smart Streaming Features
 
-World Monitor doesn't just embed video. The webcam panel includes intelligence-oriented features:
+VISTA doesn't just embed video. The webcam panel includes intelligence-oriented features:
 
 **Region Filtering:** Jump to the region that matters. Monitoring the Middle East? Filter to see only MENA cameras. Tracking the Ukraine conflict? Switch to Eastern Europe.
 
@@ -64,11 +64,11 @@ World Monitor doesn't just embed video. The webcam panel includes intelligence-o
 
 **Eco-Idle Pause:** When you switch to another panel or minimize the browser, streams automatically pause to save bandwidth and CPU. They resume when you return. This matters when you're running 31 video feeds alongside a 3D globe with 56 map layers.
 
-**Fallback Retry Logic:** Streams go down. Governments block them. CDNs throttle them. World Monitor's player automatically retries failed streams with backoff, and the desktop app routes YouTube embeds through a custom relay to bypass origin restrictions.
+**Fallback Retry Logic:** Streams go down. Governments block them. CDNs throttle them. VISTA's player automatically retries failed streams with backoff, and the desktop app routes YouTube embeds through a custom relay to bypass origin restrictions.
 
 ## Cross-Reference Video with Intelligence Layers
 
-The real power isn't the webcams alone. It's combining them with World Monitor's other data:
+The real power isn't the webcams alone. It's combining them with VISTA's other data:
 
 **Scenario: Unrest in Tehran**
 
@@ -93,7 +93,7 @@ The webcam becomes a ground-truth check against the signals.
 
 ## Live Video Streams Beyond Webcams
 
-World Monitor also integrates **30+ live news video streams** from major broadcasters:
+VISTA also integrates **30+ live news video streams** from major broadcasters:
 
 - **[Bloomberg TV](https://www.bloomberg.com/live)** for real-time financial coverage
 - **[Sky News](https://news.sky.com/)** for UK/international breaking news
@@ -111,12 +111,12 @@ The Tauri desktop app handles video differently than the browser:
 - **Custom sidecar relay** for YouTube streams bypasses origin restrictions that block Tauri's local scheme
 - **OS-level performance optimization** keeps video smooth alongside the 3D globe renderer
 
-For analysts who keep World Monitor running as a persistent monitoring station, the desktop app provides the most stable multi-stream experience. The app also supports [satellite imagery and orbital surveillance](/blog/posts/satellite-imagery-orbital-surveillance/) alongside live video feeds.
+For analysts who keep VISTA running as a persistent monitoring station, the desktop app provides the most stable multi-stream experience. The app also supports [satellite imagery and orbital surveillance](/blog/posts/satellite-imagery-orbital-surveillance/) alongside live video feeds.
 
 ## Practical Use Cases
 
 **Newsroom Monitoring Wall:**
-Set up World Monitor on a large display in grid view. Six to nine webcam feeds provide a "control room" view alongside the live news feed and conflict map. When something happens, you're already watching.
+Set up VISTA on a large display in grid view. Six to nine webcam feeds provide a "control room" view alongside the live news feed and conflict map. When something happens, you're already watching.
 
 **Executive Protection:**
 Security teams monitoring principal travel can pull up destination city cameras alongside CII scores and travel advisories to build real-time threat pictures.
@@ -129,14 +129,14 @@ For globally-minded individuals who want to understand the world beyond headline
 
 ## Privacy and Ethics
 
-World Monitor only streams publicly available webcam feeds. These are cameras operated by municipalities, broadcasters, tourism boards, and space agencies that are explicitly intended for public viewing. No private cameras, no surveillance feeds, no content that isn't already freely accessible.
+VISTA only streams publicly available webcam feeds. These are cameras operated by municipalities, broadcasters, tourism boards, and space agencies that are explicitly intended for public viewing. No private cameras, no surveillance feeds, no content that isn't already freely accessible.
 
 The platform doesn't record or archive webcam footage. Streams are live and transient, the same as visiting the source directly.
 
 ## Frequently Asked Questions
 
 **Are the webcam streams available 24/7?**
-Yes, the streams run continuously. However, individual cameras may go offline due to maintenance, government restrictions, or CDN issues. World Monitor's fallback retry logic automatically reconnects when a stream becomes available again.
+Yes, the streams run continuously. However, individual cameras may go offline due to maintenance, government restrictions, or CDN issues. VISTA's fallback retry logic automatically reconnects when a stream becomes available again.
 
 **Can I use the webcams on mobile devices?**
 Yes. On mobile, the webcam panel switches to single-view mode for performance. You can filter by region and swipe between cameras.

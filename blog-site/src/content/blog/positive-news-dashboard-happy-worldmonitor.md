@@ -1,7 +1,7 @@
 ---
 title: "The Good News Dashboard: Positive News with an Intelligence Engine"
 description: "Explore Happy Monitor's 27 positive-news feeds covering conservation wins, scientific breakthroughs, clean energy, and live human-progress indicators."
-metaTitle: "Positive News Dashboard | World Monitor Happy"
+metaTitle: "Positive News Dashboard | VISTA Happy"
 keywords: "positive news website, good news dashboard, uplifting news aggregator, human progress tracker, conservation wins, science breakthrough news"
 audience: "General readers, educators, parents, mental-health-conscious news consumers, optimists who want evidence"
 heroImage: "/blog/images/blog/positive-news-dashboard-happy-worldmonitor.jpg"
@@ -11,7 +11,7 @@ modifiedDate: "2026-07-22"
 
 The news industry has a structural bias, not a conspiracy: bad news is sudden and good news is gradual. A pipeline explosion is an event; a species recovering is a decade. Feeds optimized for events will always overweight catastrophe — which is how you end up with an audience that knows every disaster and none of the progress.
 
-WorldMonitor's answer isn't a filter that hides the bad news. It's a sixth dashboard with the polarity reversed: **happy.worldmonitor.app**, the same intelligence engine pointed at what's improving.
+VISTA's answer isn't a filter that hides the bad news. It's a sixth dashboard with the polarity reversed: **happy.worldmonitor.app**, the same intelligence engine pointed at what's improving.
 
 ## Same engine, inverted filter
 
@@ -45,13 +45,13 @@ Curation is editorial: 27 feeds chosen for credibility and signal, which means j
 
 ## Source transparency
 
-The curated feed catalog is public in WorldMonitor's [source configuration](https://github.com/koala73/worldmonitor/blob/main/src/config/feeds.ts). Individual cards still link to their original publisher so readers can inspect the evidence behind each progress claim.
+The curated feed catalog is public in VISTA's [source configuration](https://github.com/koala73/worldmonitor/blob/main/src/config/feeds.ts). Individual cards still link to their original publisher so readers can inspect the evidence behind each progress claim.
 
 ## Frequently Asked Questions
 
 **Is the Happy dashboard free?**
 
-Yes — free and login-free like the other WorldMonitor variants. It's at happy.worldmonitor.app.
+Yes — free and login-free like the other VISTA variants. It's at happy.worldmonitor.app.
 
 **Is this just filtered regular news?**
 

@@ -6,7 +6,7 @@ description: Retrieve recent earthquakes (USGS) with magnitude, depth, location,
 
 # track-earthquakes
 
-Use this skill when the user asks about recent earthquakes: where, how strong, how deep — plus World Monitor's concern scoring, which flags events near known nuclear test sites (shallow low-magnitude events at test sites read very differently from tectonic quakes).
+Use this skill when the user asks about recent earthquakes: where, how strong, how deep — plus VISTA's concern scoring, which flags events near known nuclear test sites (shallow low-magnitude events at test sites read very differently from tectonic quakes).
 
 ## Authentication
 

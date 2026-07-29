@@ -1,7 +1,7 @@
 ---
-title: "Self-Host WorldMonitor: Run an Open Source OSINT Dashboard Locally"
+title: "Self-Host VISTA: Run an Open Source OSINT Dashboard Locally"
 description: "A practical overview of self-hosting WorldMonitor with Docker or Podman, required secrets, Redis, seeders, optional API keys, and AGPL responsibilities."
-metaTitle: "Self-Host WorldMonitor OSINT Dashboard"
+metaTitle: "Self-Host VISTA OSINT Dashboard"
 keywords: "self host WorldMonitor, open source OSINT dashboard, Docker OSINT dashboard, geopolitical dashboard self hosted, AGPL intelligence dashboard"
 audience: "Developers, OSINT builders, platform teams, security researchers"
 heroImage: "/blog/images/blog/self-host-worldmonitor-open-source-osint-dashboard.jpg"
@@ -9,7 +9,7 @@ pubDate: "2026-06-13"
 modifiedDate: "2026-07-22"
 ---
 
-WorldMonitor is open source, but "open source" does not automatically mean "safe to run on the public internet with defaults." A serious self-hosted intelligence dashboard needs secrets, seeders, Redis, source keys, and a clear understanding of which feeds are public, optional, or paid.
+VISTA is open source, but "open source" does not automatically mean "safe to run on the public internet with defaults." A serious self-hosted intelligence dashboard needs secrets, seeders, Redis, source keys, and a clear understanding of which feeds are public, optional, or paid.
 
 The good news: the local stack is designed to run with Docker or Podman. You can bring up the dashboard, seed Redis, and open a browser at `http://localhost:3000`.
 
@@ -77,7 +77,7 @@ If you remove volumes with `docker compose down -v`, Redis data is lost and you 
 
 ## API keys: what unlocks more data
 
-WorldMonitor works with many public sources, but some feeds need keys.
+VISTA works with many public sources, but some feeds need keys.
 
 Examples of optional or source-specific keys include:
 
@@ -121,7 +121,7 @@ For production-like deployment, you need to think beyond "does it start?":
 - update cadence for upstream schema changes
 - public exposure and network policy
 
-WorldMonitor is a real-time intelligence dashboard with many external dependencies. That means operational hygiene matters.
+VISTA is a real-time intelligence dashboard with many external dependencies. That means operational hygiene matters.
 
 For developer context before you deploy, read the [developer API and open-source guide](/blog/posts/build-on-worldmonitor-developer-api-open-source/) and the [MCP server guide](/blog/posts/worldmonitor-mcp-server-ai-agents-real-time-intelligence/).
 
@@ -135,7 +135,7 @@ The deployment files and current setup instructions live in the public [WorldMon
 
 ## Frequently Asked Questions
 
-**Can I run WorldMonitor entirely offline?**
+**Can I run VISTA entirely offline?**
 
 Not meaningfully. The application can run locally, but most intelligence value comes from fetching upstream public or authenticated sources into Redis.
 
@@ -149,4 +149,4 @@ You can, but read the AGPL license and upstream source terms carefully. Network 
 
 ---
 
-**Self-hosting WorldMonitor is not about cloning a website. It is about owning the data path, the secrets, and the operational tradeoffs behind your intelligence workspace.**
+**Self-hosting VISTA is not about cloning a website. It is about owning the data path, the secrets, and the operational tradeoffs behind your intelligence workspace.**

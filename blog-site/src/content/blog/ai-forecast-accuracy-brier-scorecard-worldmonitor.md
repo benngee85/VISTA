@@ -1,7 +1,7 @@
 ---
 title: "We Grade Our Own Forecasts: Inside the Forecast Scorecard"
-description: "WorldMonitor publishes a Brier-score audit of 32 AI forecasts, including calibration results, overconfidence patterns, and comparison with prediction markets."
-metaTitle: "AI Forecast Accuracy & Brier Scorecard | WorldMonitor"
+description: "VISTA publishes a Brier-score audit of 32 AI forecasts, including calibration results, overconfidence patterns, and comparison with prediction markets."
+metaTitle: "AI Forecast Accuracy & Brier Scorecard | VISTA"
 keywords: "AI forecast accuracy, Brier score forecasting, geopolitical forecast track record, forecast calibration, prediction accountability, forecast verification"
 audience: "Forecasters, superforecasting community, quant researchers, skeptical analysts, AI evaluation researchers"
 heroImage: "/blog/images/blog/ai-forecast-accuracy-brier-scorecard-worldmonitor.jpg"
@@ -11,7 +11,7 @@ modifiedDate: "2026-07-22"
 
 Every AI product now makes predictions. Almost none of them tell you their error rate.
 
-That asymmetry is the oldest trick in forecasting: make many confident calls, showcase the hits, let the misses expire quietly. It works because nobody keeps the ledger. WorldMonitor generates [AI geopolitical and economic forecasts](/blog/posts/prediction-markets-ai-forecasting-geopolitics/) — so we built the ledger, and we publish it.
+That asymmetry is the oldest trick in forecasting: make many confident calls, showcase the hits, let the misses expire quietly. It works because nobody keeps the ledger. VISTA generates [AI geopolitical and economic forecasts](/blog/posts/prediction-markets-ai-forecasting-geopolitics/) — so we built the ledger, and we publish it.
 
 ## How the scorecard works
 
@@ -57,7 +57,7 @@ Thirty-two scored forecasts is a young ledger, not a track record. Publishing it
 
 Three reasons, in ascending order of importance:
 
-1. **It's the standard we hold others to.** WorldMonitor puts [Polymarket and Kalshi probabilities](/blog/posts/prediction-markets-ai-forecasting-geopolitics/) next to its own forecasts. Prediction markets keep score by construction — their prices are public history. Publishing our own Brier scores is the price of sitting in that company.
+1. **It's the standard we hold others to.** VISTA puts [Polymarket and Kalshi probabilities](/blog/posts/prediction-markets-ai-forecasting-geopolitics/) next to its own forecasts. Prediction markets keep score by construction — their prices are public history. Publishing our own Brier scores is the price of sitting in that company.
 2. **It makes the forecasts usable.** A "78% probability" from a black box is decoration. The same number from a system whose calibration you can inspect is an input you can size decisions with.
 3. **It improves the system.** Scored errors are training signal. The domains where calibration drifts are the domains where the pipeline gets fixed next.
 

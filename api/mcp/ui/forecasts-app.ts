@@ -1,5 +1,5 @@
 // MCP Apps (extension `io.modelcontextprotocol/ui`, spec 2026-01-26) — the
-// interactive app shell for the `get_forecast_predictions` tool: WorldMonitor's
+// interactive app shell for the `get_forecast_predictions` tool: VISTA's
 // AI-generated geopolitical/economic forecasts as probability cards (title,
 // domain + region, probability bar). Built on the shared shell foundation.
 //

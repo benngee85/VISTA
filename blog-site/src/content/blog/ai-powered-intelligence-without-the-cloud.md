@@ -1,7 +1,7 @@
 ---
-title: "Private AI Intelligence: World Monitor Without the Cloud"
-description: "Run AI-powered intelligence analysis on your own hardware. World Monitor supports Ollama, LM Studio, and in-browser ML for private geopolitical analysis."
-metaTitle: "Local AI Intelligence Analysis | World Monitor"
+title: "Private AI Intelligence: VISTA Without the Cloud"
+description: "Run AI-powered intelligence analysis on your own hardware. VISTA supports Ollama, LM Studio, and in-browser ML for private geopolitical analysis."
+metaTitle: "Local AI Intelligence Analysis | VISTA"
 keywords: "local LLM intelligence, private AI analysis, offline intelligence tool, Ollama OSINT, privacy-first AI dashboard"
 audience: "Privacy-conscious analysts, security researchers, government users, enterprise security teams, local LLM enthusiasts"
 heroImage: "/blog/images/blog/ai-powered-intelligence-without-the-cloud.jpg"
@@ -10,7 +10,7 @@ pubDate: "2026-03-07"
 
 Every time you paste a sensitive document into ChatGPT, that data touches someone else's servers. For intelligence analysts, security researchers, and anyone handling sensitive geopolitical information, that's not just inconvenient. It's a risk.
 
-World Monitor takes a different approach. Every AI feature in the platform can run entirely on your own hardware, with no data leaving your machine. If you're new to the platform, learn [what World Monitor is and how it works](/blog/posts/what-is-worldmonitor-real-time-global-intelligence/).
+VISTA takes a different approach. Every AI feature in the platform can run entirely on your own hardware, with no data leaving your machine. If you're new to the platform, learn [what VISTA is and how it works](/blog/posts/what-is-worldmonitor-real-time-global-intelligence/).
 
 ## The Problem with Cloud-Based Intelligence Tools
 
@@ -24,13 +24,13 @@ Most AI-powered analysis tools follow the same pattern: your data goes up to a c
 
 Even with enterprise API agreements, the data transits networks you don't control, gets logged in systems you can't audit, and exists on servers in jurisdictions that may not align with your requirements.
 
-## World Monitor's 4-Tier AI Architecture
+## VISTA's 4-Tier AI Architecture
 
-World Monitor solves this with a **4-tier LLM fallback chain** that starts local and only reaches for the cloud if you explicitly allow it:
+VISTA solves this with a **4-tier LLM fallback chain** that starts local and only reaches for the cloud if you explicitly allow it:
 
 ### Tier 1: Local LLMs (Ollama / LM Studio)
 
-Your first and most private option. Install Ollama or LM Studio on your machine, download a model (Llama 3.1, Mistral, Phi, etc.), and point World Monitor at your local instance.
+Your first and most private option. Install Ollama or LM Studio on your machine, download a model (Llama 3.1, Mistral, Phi, etc.), and point VISTA at your local instance.
 
 What runs locally:
 
@@ -39,7 +39,7 @@ What runs locally:
 - **Threat classification:** Categorizing news events by threat type and severity
 - **AI Deduction:** Interactive geopolitical forecasting grounded in live data
 
-The desktop app ([Tauri](https://tauri.app/)) discovers your local [Ollama](https://ollama.com/) instance automatically. No configuration needed. Just install Ollama, pull a model, and open World Monitor.
+The desktop app ([Tauri](https://tauri.app/)) discovers your local [Ollama](https://ollama.com/) instance automatically. No configuration needed. Just install Ollama, pull a model, and open VISTA.
 
 ### Tier 2: Groq (Llama 3.1 8B)
 
@@ -53,11 +53,11 @@ A fallback provider that gives you access to multiple models (Claude, GPT-4, Mix
 
 The ultimate fallback. A T5 model runs entirely in your browser via WebAssembly and Web Workers. No API key, no network request, no server. The model weights are cached locally after first download.
 
-This tier is limited (T5 is smaller than Llama 3.1), but it means World Monitor's AI features always work, even without internet access.
+This tier is limited (T5 is smaller than Llama 3.1), but it means VISTA's AI features always work, even without internet access.
 
 ## In-Browser Machine Learning
 
-Beyond the LLM tiers, World Monitor runs several ML pipelines entirely in your browser:
+Beyond the LLM tiers, VISTA runs several ML pipelines entirely in your browser:
 
 ### Named Entity Recognition (NER)
 
@@ -69,7 +69,7 @@ Classifies headline sentiment to detect shifts in media tone about countries, le
 
 ### Semantic Search (RAG)
 
-World Monitor's **Headline Memory** feature builds a local semantic index of up to 5,000 headlines using ONNX embeddings stored in IndexedDB. When you ask the AI about a topic, it retrieves relevant headlines from your local index for grounded, cited responses.
+VISTA's **Headline Memory** feature builds a local semantic index of up to 5,000 headlines using ONNX embeddings stored in IndexedDB. When you ask the AI about a topic, it retrieves relevant headlines from your local index for grounded, cited responses.
 
 This is a full Retrieval-Augmented Generation pipeline running in your browser. No vector database subscription. No cloud embedding API. Combined with [prediction markets and AI forecasting](/blog/posts/prediction-markets-ai-forecasting-geopolitics/), this local RAG pipeline enables deeply grounded geopolitical analysis.
 
@@ -85,7 +85,7 @@ The first two stages always run locally. The third stage uses whichever LLM tier
 
 ## The Desktop App: Full Offline Operation
 
-World Monitor's Tauri desktop app (available for macOS, Windows, and Linux) takes privacy further:
+VISTA's Tauri desktop app (available for macOS, Windows, and Linux) takes privacy further:
 
 - **OS Keychain Integration:** API keys are stored in your operating system's secure credential store, not in config files or browser storage
 - **Local Node.js Sidecar:** A bundled Node.js process handles data fetching and processing locally, including API calls that can't run in a browser (due to CORS or TLS requirements)
@@ -103,24 +103,24 @@ curl -fsSL https://ollama.ai/install.sh | sh
 ollama pull llama3.1
 ```
 
-### Step 2: Open World Monitor
+### Step 2: Open VISTA
 
 Navigate to worldmonitor.app or install the desktop app from GitHub releases.
 
 ### Step 3: Configure AI
 
-World Monitor auto-detects your local Ollama instance. Open any country dossier or the World Brief panel and the AI analysis generates locally.
+VISTA auto-detects your local Ollama instance. Open any country dossier or the World Brief panel and the AI analysis generates locally.
 
 ### Step 4: Enable Headline Memory (Optional)
 
-Opt in to the RAG feature. World Monitor will build a local vector index of headlines you've seen, giving the AI context for more grounded analysis.
+Opt in to the RAG feature. VISTA will build a local vector index of headlines you've seen, giving the AI context for more grounded analysis.
 
 Total setup time: under 5 minutes. Total data sent to external servers for AI processing: zero.
 
 ## Who Needs Private Intelligence Analysis?
 
 **Government Analysts:**
-Classified environments can't send data to commercial AI APIs. World Monitor with Ollama runs entirely within your network boundary.
+Classified environments can't send data to commercial AI APIs. VISTA with Ollama runs entirely within your network boundary.
 
 **Corporate Security Teams:**
 Analyzing threats to executives, facilities, or supply chains often involves information that shouldn't leave the corporate network.
@@ -142,10 +142,10 @@ The proto-first API architecture (290 proto files, 35 typed services) means even
 
 ## Frequently Asked Questions
 
-**Do I need an internet connection to use World Monitor's AI features?**
+**Do I need an internet connection to use VISTA's AI features?**
 No. With Ollama or LM Studio installed locally, all AI analysis runs on your hardware. The browser-based T5 fallback also works fully offline after the initial model download. You only need internet to fetch fresh data feeds.
 
-**Which local LLM models work best with World Monitor?**
+**Which local LLM models work best with VISTA?**
 Llama 3.1 (8B or 70B) and Mistral offer the best balance of quality and speed for intelligence analysis. Smaller models like Phi work on lower-end hardware but produce less detailed assessments.
 
 **Is the local AI analysis as good as cloud-based alternatives?**

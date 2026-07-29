@@ -521,8 +521,8 @@ describe('api/mcp.ts — /.well-known/mcp dual-role alias', () => {
     assert.ok(cardFetch, 'server card must be loaded through the deployment self-fetch');
     assert.equal(
       new Headers(cardFetch.init?.headers).get('user-agent'),
-      'WorldMonitor-MCP/1.0 (+https://worldmonitor.app)',
-      'server-side fetches must identify WorldMonitor to the deployment edge',
+      'VISTA-MCP/1.0 (+https://worldmonitor.app)',
+      'server-side fetches must identify VISTA to the deployment edge',
     );
     // The manifest is a static, immutable-per-deploy asset — it must stay
     // cacheable (it was `public, max-age=3600` as a static file). The MCP
@@ -547,7 +547,7 @@ describe('api/mcp.ts — /.well-known/mcp dual-role alias', () => {
     assert.equal(res.status, 200, 'a plain GET /mcp must not be the transport 405 (Search Console reads it as "cannot access")');
     assert.match(res.headers.get('content-type') ?? '', /text\/markdown/i);
     const body = await res.text();
-    assert.match(body, /# World Monitor MCP Server/, 'must be the mcp-server.md guide, not the JSON card');
+    assert.match(body, /# VISTA MCP Server/, 'must be the mcp-server.md guide, not the JSON card');
     assert.match(body, /https:\/\/worldmonitor\.app\/mcp/, 'guide must advertise the apex transport URL');
     assert.match(res.headers.get('link') ?? '', /<https:\/\/worldmonitor\.app\/mcp>;\s*rel="canonical"/,
       'discovery representation must declare the apex endpoint canonical');

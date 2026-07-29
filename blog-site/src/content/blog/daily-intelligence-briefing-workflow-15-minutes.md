@@ -1,7 +1,7 @@
 ---
 title: "The 15-Minute Morning Intelligence Briefing: A Repeatable Daily Workflow"
 description: "A minute-by-minute morning briefing routine for analysts: world brief, risk movers, watchlists, regional context, forward indicators, and automation."
-metaTitle: "Daily Intelligence Briefing Workflow | World Monitor"
+metaTitle: "Daily Intelligence Briefing Workflow | VISTA"
 keywords: "daily intelligence briefing, morning intelligence briefing template, geopolitical daily brief, intelligence analyst workflow, situational awareness routine, morning market and risk briefing"
 audience: "Analysts, executives, traders, security professionals, journalists, anyone who needs daily situational awareness"
 heroImage: "/blog/images/blog/daily-intelligence-briefing-workflow-15-minutes.jpg"
@@ -11,7 +11,7 @@ modifiedDate: "2026-07-22"
 
 The difference between a professional intelligence consumer and a doomscroller is not access to information. It is that one of them runs the same sequence every morning and the other opens a feed and hopes.
 
-Presidents get the PDB. Fund managers get the morning note. Everyone else gets an algorithmic timeline optimized for outrage rather than awareness. This post is the fix: a 15-minute briefing routine with a fixed structure, built on [World Monitor](/blog/posts/what-is-worldmonitor-real-time-global-intelligence/), that ends with you knowing what changed, what matters, and what to watch. Then it shows how to automate the whole thing.
+Presidents get the PDB. Fund managers get the morning note. Everyone else gets an algorithmic timeline optimized for outrage rather than awareness. This post is the fix: a 15-minute briefing routine with a fixed structure, built on [VISTA](/blog/posts/what-is-worldmonitor-real-time-global-intelligence/), that ends with you knowing what changed, what matters, and what to watch. Then it shows how to automate the whole thing.
 
 The structure borrows from how watch floors actually brief: **global picture → movers → your portfolio → your region → forward look.** Always in that order, because the order is what makes deviations visible.
 
@@ -57,7 +57,7 @@ You are not trying to predict the future in three minutes. You are recording tod
 
 ## Minutes 14–15: Capture
 
-End with one minute of output: two or three lines covering *what changed, what I am watching, what would change my mind.* Yesterday's note is your baseline for tomorrow; a week of notes is a record of how situations actually evolved versus how they felt day by day. World Monitor's snapshot history keeps seven days of platform state, so you can scrub back when you need to reconstruct a timeline.
+End with one minute of output: two or three lines covering *what changed, what I am watching, what would change my mind.* Yesterday's note is your baseline for tomorrow; a week of notes is a record of how situations actually evolved versus how they felt day by day. VISTA's snapshot history keeps seven days of platform state, so you can scrub back when you need to reconstruct a timeline.
 
 ## Automating the Whole Thing
 

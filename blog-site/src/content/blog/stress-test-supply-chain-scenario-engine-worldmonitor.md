@@ -1,7 +1,7 @@
 ---
-title: "Stress-Test Your Supply Chain with WorldMonitor's Scenario Engine"
+title: "Stress-Test Your Supply Chain with VISTA's Scenario Engine"
 description: "How Scenario Engine turns chokepoint, trade, and HS2 exposure data into async stress tests for Hormuz, Taiwan, Suez, Panama, tariffs, and grain routes."
-metaTitle: "Supply Chain Scenario Engine Stress Test | WorldMonitor"
+metaTitle: "Supply Chain Scenario Engine Stress Test | VISTA"
 keywords: "supply chain scenario engine, geopolitical stress test, chokepoint scenario, supply chain risk simulation, trade exposure analysis"
 audience: "Supply chain teams, commodity desks, risk managers, policy analysts"
 heroImage: "/blog/images/blog/stress-test-supply-chain-scenario-engine-worldmonitor.jpg"
@@ -15,7 +15,7 @@ That is necessary, but it does not answer the planning question:
 
 > What breaks if the next chokepoint closes, tariff shock lands, or weather event cuts capacity?
 
-WorldMonitor's Scenario Engine is built for that what-if layer. It takes named disruption templates, runs them through the supply-chain exposure graph, and returns the affected chokepoints, sectors, and countries so analysts can compare the projected impact against the live baseline.
+VISTA's Scenario Engine is built for that what-if layer. It takes named disruption templates, runs them through the supply-chain exposure graph, and returns the affected chokepoints, sectors, and countries so analysts can compare the projected impact against the live baseline.
 
 This is not a free-form simulator with arbitrary sliders. Version 1 is deliberately constrained: curated templates, fixed assumptions, async jobs, and explicit output fields. The constraint is useful. It makes every run comparable and keeps the conversation anchored to a named scenario instead of a hand-tuned model.
 
@@ -101,7 +101,7 @@ Use the [maritime chokepoint explainer](/blog/posts/what-is-a-maritime-chokepoin
 
 ## Source transparency
 
-Scenario Engine sits on top of WorldMonitor's chokepoint registry, live chokepoint status, HS2 exposure caches, and supply-chain panel state. The template catalog is curated in code. The job queue and worker output are explicit: callers can see pending, processing, done, and failed states rather than receiving an opaque spinner.
+Scenario Engine sits on top of VISTA's chokepoint registry, live chokepoint status, HS2 exposure caches, and supply-chain panel state. The template catalog is curated in code. The job queue and worker output are explicit: callers can see pending, processing, done, and failed states rather than receiving an opaque spinner.
 
 That is the right shape for geopolitical modeling. A useful stress test should show its assumptions, expose its scope, and avoid pretending a relative impact score is a dollar-denominated forecast.
 

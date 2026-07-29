@@ -1,7 +1,7 @@
 ---
 title: "Build a Supply-Chain Early-Warning System in an Afternoon"
-description: "Score your trade lanes for chokepoint exposure, subscribe to disruption webhooks, and pipe alerts to Slack with this World Monitor API tutorial."
-metaTitle: "Supply Chain Risk API: Chokepoint Alerts | World Monitor"
+description: "Score your trade lanes for chokepoint exposure, subscribe to disruption webhooks, and pipe alerts to Slack with this VISTA API tutorial."
+metaTitle: "Supply Chain Risk API: Chokepoint Alerts | VISTA"
 keywords: "supply chain risk API, chokepoint monitoring API, shipping disruption alerts, maritime risk API, trade route risk scoring, supply chain early warning system"
 audience: "Supply chain engineers, logistics developers, procurement analysts, platform teams, risk managers"
 heroImage: "/blog/images/blog/build-supply-chain-early-warning-system-api.jpg"
@@ -11,7 +11,7 @@ modifiedDate: "2026-07-22"
 
 When the Strait of Hormuz shut down this spring, companies found out in one of two ways. Some read about it in the news and started calling freight forwarders. Others had already received a webhook hours earlier, when the disruption score crossed their alert threshold, and were quoting Cape of Good Hope routings before their competitors knew there was a problem.
 
-The second group did not have a $50,000-a-year risk platform. The capability they used, [live chokepoint tracking](/blog/posts/tracking-global-trade-routes-chokepoints-freight-costs/) with programmatic alerts, is part of World Monitor's API. This post builds that early-warning system end to end: score your lanes, subscribe to alerts, verify deliveries, and route them to Slack.
+The second group did not have a $50,000-a-year risk platform. The capability they used, [live chokepoint tracking](/blog/posts/tracking-global-trade-routes-chokepoints-freight-costs/) with programmatic alerts, is part of VISTA's API. This post builds that early-warning system end to end: score your lanes, subscribe to alerts, verify deliveries, and route them to Slack.
 
 You need an API key (`X-WorldMonitor-Key`, issued with [Pro or API plans](https://www.worldmonitor.app/pro)) and about an afternoon.
 
@@ -166,13 +166,13 @@ Total code: one webhook receiver and two cron jobs. If you want to stress-test t
 
 ## Primary Trade Sources
 
-Validate trade signals against primary datasets such as the [WTO API portal](https://apiportal.wto.org/) and [UN Comtrade](https://comtradeplus.un.org/). World Monitor adds normalization and cross-domain context; the originating institution remains the authority for its underlying series.
+Validate trade signals against primary datasets such as the [WTO API portal](https://apiportal.wto.org/) and [UN Comtrade](https://comtradeplus.un.org/). VISTA adds normalization and cross-domain context; the originating institution remains the authority for its underlying series.
 
 ## Frequently Asked Questions
 
 **Which chokepoints can I monitor?**
 
-All 13 strategic waterways World Monitor tracks, including the Strait of Hormuz, Suez Canal, Bab el-Mandeb, Strait of Malacca, Panama Canal, Taiwan Strait, Bosporus, Kerch Strait, and the Cape of Good Hope bypass corridor.
+All 13 strategic waterways VISTA tracks, including the Strait of Hormuz, Suez Canal, Bab el-Mandeb, Strait of Malacca, Panama Canal, Taiwan Strait, Bosporus, Kerch Strait, and the Cape of Good Hope bypass corridor.
 
 **How fresh is the disruption data?**
 

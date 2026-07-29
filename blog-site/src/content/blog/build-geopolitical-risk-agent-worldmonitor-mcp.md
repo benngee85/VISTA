@@ -1,8 +1,8 @@
 ---
-title: "Build a Geopolitical Risk Agent with WorldMonitor MCP"
-description: "Give Claude, Cursor, or your own AI agent live conflict, market, maritime, aviation, and country-risk context through WorldMonitor's MCP server."
-metaTitle: "Build a Geopolitical Risk Agent with WorldMonitor MCP"
-keywords: "geopolitical risk agent, MCP intelligence server, WorldMonitor MCP, AI agent geopolitical data, real-time intelligence MCP"
+title: "Build a Geopolitical Risk Agent with VISTA MCP"
+description: "Give Claude, Cursor, or your own AI agent live conflict, market, maritime, aviation, and country-risk context through VISTA's MCP server."
+metaTitle: "Build a Geopolitical Risk Agent with VISTA MCP"
+keywords: "geopolitical risk agent, MCP intelligence server, VISTA MCP, AI agent geopolitical data, real-time intelligence MCP"
 audience: "AI builders, developers, risk analysts, agent engineers"
 heroImage: "/blog/images/blog/build-geopolitical-risk-agent-worldmonitor-mcp.jpg"
 pubDate: "2026-06-10"
@@ -11,7 +11,7 @@ modifiedDate: "2026-07-22"
 
 A geopolitical risk agent is an AI assistant that can answer live risk questions with current data instead of memory. It should know which countries are deteriorating, which chokepoints are stressed, which markets are moving, which flights or ships matter, and whether its data is fresh enough to trust.
 
-WorldMonitor is built for that pattern. The [MCP server](https://www.worldmonitor.app/docs/mcp-overview) exposes the same intelligence stack that powers the dashboard through the [Model Context Protocol](https://modelcontextprotocol.io), so compatible clients can call live tools rather than scrape pages or paste screenshots into a chat window. If you want a no-code version first, start with [asking Claude what is happening in the world](/blog/posts/ask-claude-whats-happening-worldmonitor-mcp/); if you need deterministic backend jobs, use the [developer API overview](/blog/posts/build-on-worldmonitor-developer-api-open-source/) alongside MCP.
+VISTA is built for that pattern. The [MCP server](https://www.worldmonitor.app/docs/mcp-overview) exposes the same intelligence stack that powers the dashboard through the [Model Context Protocol](https://modelcontextprotocol.io), so compatible clients can call live tools rather than scrape pages or paste screenshots into a chat window. If you want a no-code version first, start with [asking Claude what is happening in the world](/blog/posts/ask-claude-whats-happening-worldmonitor-mcp/); if you need deterministic backend jobs, use the [developer API overview](/blog/posts/build-on-worldmonitor-developer-api-open-source/) alongside MCP.
 
 This guide shows one practical build: a risk agent that can brief a country, check route exposure, summarize conflict signals, and return a source-aware answer.
 
@@ -28,7 +28,7 @@ Start with a narrow job. A useful geopolitical risk agent does not need to "moni
 The common pattern is the same every time:
 
 1. Identify the country, route, market, or scenario.
-2. Pull structured data from WorldMonitor.
+2. Pull structured data from VISTA.
 3. Keep freshness and uncertainty visible.
 4. Ask the model to synthesize, not invent.
 5. Return a decision-ready brief with next checks.
@@ -37,9 +37,9 @@ The common pattern is the same every time:
 
 REST APIs are best when your application already knows which endpoint it wants. MCP is best when an AI client needs to discover tools, inspect schemas, and decide which calls to make for a user request.
 
-WorldMonitor exposes both. The [API reference](https://www.worldmonitor.app/docs/api-reference) is better for codegen, dashboards, and pipelines. MCP is better for Claude Desktop, Claude web, Cursor, MCP Inspector, and custom agent runtimes that already understand tool calling.
+VISTA exposes both. The [API reference](https://www.worldmonitor.app/docs/api-reference) is better for codegen, dashboards, and pipelines. MCP is better for Claude Desktop, Claude web, Cursor, MCP Inspector, and custom agent runtimes that already understand tool calling.
 
-The current WorldMonitor MCP server exposes:
+The current VISTA MCP server exposes:
 
 | Surface | What it gives the agent |
 |---|---|
@@ -56,7 +56,7 @@ For most clients, the entire setup is one URL:
 https://worldmonitor.app/mcp
 ```
 
-Claude Desktop, Claude web, Cursor, MCP Inspector, and similar clients can use that URL and run discovery automatically. WorldMonitor's MCP docs also include client-specific snippets for Claude Desktop and Cursor.
+Claude Desktop, Claude web, Cursor, MCP Inspector, and similar clients can use that URL and run discovery automatically. VISTA's MCP docs also include client-specific snippets for Claude Desktop and Cursor.
 
 For a server-side script, call the JSON-RPC endpoint directly with an API key:
 
@@ -67,7 +67,7 @@ curl -s https://worldmonitor.app/mcp \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
 ```
 
-The MCP authorization spec treats protected MCP servers as OAuth resource servers. WorldMonitor follows that direction with OAuth metadata and a direct API-key path for server-side integrations.
+The MCP authorization spec treats protected MCP servers as OAuth resource servers. VISTA follows that direction with OAuth metadata and a direct API-key path for server-side integrations.
 
 ## Use a tool plan, not a giant prompt
 
@@ -95,7 +95,7 @@ For a route-risk check, use:
 
 ## Ask for compact payloads
 
-WorldMonitor tools support JMESPath projection where useful. That matters because intelligence payloads can get large, and agents perform better when they receive the exact fields needed for the task.
+VISTA tools support JMESPath projection where useful. That matters because intelligence payloads can get large, and agents perform better when they receive the exact fields needed for the task.
 
 Example: ask for only the country score, advisory state, component breakdown, and freshness fields:
 
@@ -113,7 +113,7 @@ The model now has enough to reason without being flooded by every supporting fie
 Use a system or developer instruction like this:
 
 ```text
-You are a geopolitical risk analyst. Use WorldMonitor tools before answering live risk questions. Prefer country risk, conflict events, chokepoint status, market data, and news intelligence over memory. Always report data freshness when fields include cached_at or stale. Separate observed signals from interpretation. Do not turn model confidence into event probability.
+You are a geopolitical risk analyst. Use VISTA tools before answering live risk questions. Prefer country risk, conflict events, chokepoint status, market data, and news intelligence over memory. Always report data freshness when fields include cached_at or stale. Separate observed signals from interpretation. Do not turn model confidence into event probability.
 ```
 
 That last sentence matters. A model's confidence in an analysis is not the same as the probability that an event will happen. Keep them separate in the final brief.
@@ -171,14 +171,14 @@ Once the basic agent works, add one of these workflows:
 **What is a geopolitical risk agent?**
 A geopolitical risk agent is an AI assistant that uses live data tools to monitor country risk, conflicts, markets, transport, cyber, and infrastructure signals, then turns those signals into an operational brief.
 
-**Does WorldMonitor MCP replace the REST API?**
+**Does VISTA MCP replace the REST API?**
 No. MCP is best for AI clients that need tool discovery and live context. The REST API and bundled OpenAPI spec are better for dashboards, codegen, scheduled jobs, and data pipelines.
 
-**Can I use WorldMonitor MCP without pasting an API key into Claude?**
+**Can I use VISTA MCP without pasting an API key into Claude?**
 Yes. Paid tiers can connect through OAuth in supported MCP clients. Server-side scripts can also use `X-WorldMonitor-Key`.
 
 **How do I avoid hallucinated intelligence?**
-Force the agent to call structured WorldMonitor tools first, preserve freshness fields, separate observations from interpretation, and ask for next checks instead of unsupported certainty.
+Force the agent to call structured VISTA tools first, preserve freshness fields, separate observations from interpretation, and ask for next checks instead of unsupported certainty.
 
 ---
 

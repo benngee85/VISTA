@@ -1,7 +1,7 @@
 ---
 title: "Ground-Truth Inflation: Tracking Real Shelf Prices, Not Just CPI"
-description: "WorldMonitor tracks supermarket shelf prices across four UAE retailers and compares them with the Big Mac Index, FAO food prices, fuel prices, and IMF CPI."
-metaTitle: "Real-Time Shelf Price & Inflation Tracking | WorldMonitor"
+description: "VISTA tracks supermarket shelf prices across four UAE retailers and compares them with the Big Mac Index, FAO food prices, fuel prices, and IMF CPI."
+metaTitle: "Real-Time Shelf Price & Inflation Tracking | VISTA"
 keywords: "real time inflation data, grocery price tracker, consumer prices API, shelf price monitoring, cost of living dashboard, food price index"
 audience: "Economists, macro analysts, journalists, expats, cost-of-living researchers"
 heroImage: "/blog/images/blog/ground-truth-inflation-shelf-price-tracking-worldmonitor.jpg"
@@ -11,11 +11,11 @@ modifiedDate: "2026-07-22"
 
 Official inflation is a lagging average of an averaged lag. A national CPI print arrives weeks after the month it measures, blends thousands of items into one number, and tells you nothing about whether *your* basket at *your* store got more expensive on Tuesday.
 
-The interesting question — what do things actually cost, right now, on the shelf? — has a different answer. You collect the prices yourself. That's what WorldMonitor's consumer-prices system does.
+The interesting question — what do things actually cost, right now, on the shelf? — has a different answer. You collect the prices yourself. That's what VISTA's consumer-prices system does.
 
 ## Shelf prices, scraped daily
 
-The pilot market is the **United Arab Emirates**, where WorldMonitor tracks a defined essentials basket across **four major grocery retailers: Carrefour, Spinneys, Lulu, and Noon**. Real product pages, real listed prices — collected continuously and normalized into a comparable basket.
+The pilot market is the **United Arab Emirates**, where VISTA tracks a defined essentials basket across **four major grocery retailers: Carrefour, Spinneys, Lulu, and Noon**. Real product pages, real listed prices — collected continuously and normalized into a comparable basket.
 
 From that raw feed, the Consumer Prices panel serves:
 

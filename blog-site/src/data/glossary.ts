@@ -2,7 +2,7 @@
  * Glossary of global-intelligence / OSINT terms rendered as crawlable
  * DefinedTerm pages under /blog/glossary (#4960 — content corpus).
  *
- * Every definition is sourced from WorldMonitor's own methodology docs or
+ * Every definition is sourced from VISTA's own methodology docs or
  * product surfaces — do NOT invent capabilities here. In particular, no term
  * may claim forecast calibration / Brier scoring, which does not exist yet
  * (see issue #4930). This file is pure TypeScript (no `astro:` imports) so the
@@ -54,9 +54,9 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     abbr: 'CII',
     category: 'Scoring & Indices',
     short:
-      'The Country Instability Index (CII) is a high-frequency instability score that WorldMonitor maintains for 31 Tier-1 countries by blending an editorial baseline with live event pressure.',
+      'The Country Instability Index (CII) is a high-frequency instability score that VISTA maintains for 31 Tier-1 countries by blending an editorial baseline with live event pressure.',
     body: [
-      'The Country Instability Index (CII) is a high-frequency instability score that WorldMonitor maintains for the 31 Tier-1 countries tracked by its Strategic Risk system. Rather than relying on static ratings, CII blends a curated editorial baseline with live event pressure — unrest, conflict, security, and information signals — and publishes a signed 24-hour movement delta so operators can see which direction a country is moving.',
+      'The Country Instability Index (CII) is a high-frequency instability score that VISTA maintains for the 31 Tier-1 countries tracked by its Strategic Risk system. Rather than relying on static ratings, CII blends a curated editorial baseline with live event pressure — unrest, conflict, security, and information signals — and publishes a signed 24-hour movement delta so operators can see which direction a country is moving.',
       'Tier-1 membership is curated rather than algorithmic: a country is included when it has sustained global-risk relevance, active or recent armed conflict, severe domestic instability, or high regional escalation potential. The score is computed server-side and exposed through the GetRiskScores RPC and the get_country_risk MCP tool.',
     ],
     related: ['country-resilience-index', 'strategic-risk', 'focal-point-detection'],
@@ -88,9 +88,9 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     term: 'Strategic Risk',
     category: 'Scoring & Indices',
     short:
-      'Strategic Risk is WorldMonitor’s composite triage layer that synthesizes instability, convergence, infrastructure, theater posture, sanctions, and breaking-news signals into a single headline risk read.',
+      'Strategic Risk is VISTA’s composite triage layer that synthesizes instability, convergence, infrastructure, theater posture, sanctions, and breaking-news signals into a single headline risk read.',
     body: [
-      'Strategic Risk is WorldMonitor’s composite triage layer for global risk. Its server-published headline score is a top-five Country Instability Index roll-up, around which the panel layers additional convergence, infrastructure cascade, theater posture, breaking-news, sanctions, and radiation-watch context.',
+      'Strategic Risk is VISTA’s composite triage layer for global risk. Its server-published headline score is a top-five Country Instability Index roll-up, around which the panel layers additional convergence, infrastructure cascade, theater posture, breaking-news, sanctions, and radiation-watch context.',
       'The purpose is fast triage: rather than reading each intelligence module separately, an operator sees one fused assessment that flags where multiple independent signals are pointing at the same place at the same time.',
     ],
     related: ['country-instability-index', 'geographic-convergence', 'infrastructure-cascade', 'pentagon-pizza-index'],
@@ -121,7 +121,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       'The Pentagon Pizza Index is an open-source-intelligence activity proxy that watches late-night demand signals near key government facilities as a rough tell for unusual operational tempo.',
     body: [
       'The Pentagon Pizza Index is an open-source-intelligence activity proxy — a light-hearted but long-observed heuristic that unusual late-night food-delivery demand near defense and government facilities can correlate with elevated operational tempo before any official signal appears.',
-      'In WorldMonitor it is one of several ambient indicators fused into the Strategic Risk context rather than a standalone forecast. It illustrates the platform’s broader thesis: correlating many weak, independent signals surfaces convergence earlier than any single authoritative source.',
+      'In VISTA it is one of several ambient indicators fused into the Strategic Risk context rather than a standalone forecast. It illustrates the platform’s broader thesis: correlating many weak, independent signals surfaces convergence earlier than any single authoritative source.',
     ],
     related: ['strategic-risk', 'osint'],
   },
@@ -134,7 +134,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     short:
       'Focal point detection is the synthesis layer that correlates news entities with live map signals to identify the "main characters" — the people, places, and organizations driving current events.',
     body: [
-      'Focal point detection is WorldMonitor’s intelligence-synthesis layer. A focal point is an entity — a person, place, or organization — that appears in both news coverage and map signals at the same time. Surfacing those overlaps identifies the "main characters" driving the current situation.',
+      'Focal point detection is VISTA’s intelligence-synthesis layer. A focal point is an entity — a person, place, or organization — that appears in both news coverage and map signals at the same time. Surfacing those overlaps identifies the "main characters" driving the current situation.',
       'The detector enriches AI analysis with this cross-referenced context, so a generated brief reasons about entities that are simultaneously in the headlines and on the map, rather than treating text and geospatial signals as separate worlds.',
     ],
     related: ['geographic-convergence', 'world-brief', 'threat-classification'],
@@ -161,7 +161,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     short:
       'An infrastructure cascade is a modeled chain reaction in which the disruption of one critical node — a cable, pipeline, port, or chokepoint — propagates through its dependency graph to threaten downstream systems.',
     body: [
-      'An infrastructure cascade is a chain reaction across dependent critical systems. WorldMonitor models the dependency graph linking cables, pipelines, ports, and chokepoints so that damage or disruption at one node can be traced to the downstream nodes it puts at risk.',
+      'An infrastructure cascade is a chain reaction across dependent critical systems. VISTA models the dependency graph linking cables, pipelines, ports, and chokepoints so that damage or disruption at one node can be traced to the downstream nodes it puts at risk.',
       'Cascade incidents feed the Strategic Risk score and the alert-fusion pipeline: cascade alerts are merged with convergence alerts, CII spikes, sanctions pressure, and radiation watch when they occur close together in time and space, so a single fused alert captures a multi-domain event.',
     ],
     related: ['geographic-convergence', 'strategic-risk', 'maritime-chokepoint'],
@@ -176,7 +176,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     short:
       'A hotspot is a watched location whose displayed activity level is computed in real time from news correlation, rather than being a fixed, static threat rating.',
     body: [
-      'A hotspot is a location WorldMonitor watches continuously. Crucially, a hotspot’s activity level is not a static threat rating — it is calculated in real time based on how strongly current news correlates with the keywords that define that location.',
+      'A hotspot is a location VISTA watches continuously. Crucially, a hotspot’s activity level is not a static threat rating — it is calculated in real time based on how strongly current news correlates with the keywords that define that location.',
       'This keeps the map honest: a normally quiet location lights up only when live coverage says something is actually happening there, and a chronically tense location can read as calm during a genuine lull.',
     ],
     related: ['geographic-convergence', 'focal-point-detection'],
@@ -191,7 +191,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     short:
       'Threat classification is the hybrid AI step that labels incoming events by type and severity, combining fast rule-based tagging with model-based analysis to keep the live feed structured.',
     body: [
-      'Threat classification is the step that turns raw incoming events into a structured, labelled feed. WorldMonitor uses a hybrid approach: fast rule-based tagging handles the common, unambiguous cases, while model-based classification handles nuance and ambiguity.',
+      'Threat classification is the step that turns raw incoming events into a structured, labelled feed. VISTA uses a hybrid approach: fast rule-based tagging handles the common, unambiguous cases, while model-based classification handles nuance and ambiguity.',
       'Consistent type and severity labels are what make downstream correlation possible — convergence detection, focal-point synthesis, and Strategic Risk all depend on events already being classified into comparable categories.',
     ],
     related: ['focal-point-detection', 'world-brief'],
@@ -206,7 +206,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       'A maritime chokepoint is a narrow passage through which a large share of global trade, energy, food, or military movement must pass, so a disruption there removes optionality from the whole system.',
     body: [
       'A maritime chokepoint is a narrow passage where a large share of global trade, energy, food, or military movement must pass through a small physical space. If ships can choose among several similar routes, a disruption is manageable; when many routes collapse into one narrow passage, the same disruption can become systemic.',
-      'The essential idea is that a chokepoint is where geography removes optionality — the risk is not just today’s traffic, but how little room the system has when that traffic changes. WorldMonitor tracks 13 waterways, of which seven currently publish live flow estimates.',
+      'The essential idea is that a chokepoint is where geography removes optionality — the risk is not just today’s traffic, but how little room the system has when that traffic changes. VISTA tracks 13 waterways, of which seven currently publish live flow estimates.',
     ],
     related: ['strait-of-hormuz', 'strait-of-malacca', 'suez-canal', 'ais', 'chokepoint-congestion'],
     learnMore: [
@@ -222,7 +222,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       'The Strait of Hormuz is the maritime chokepoint between the Persian Gulf and the Gulf of Oman through which a large share of the world’s seaborne crude oil and LNG must transit.',
     body: [
       'The Strait of Hormuz is the narrow waterway connecting the Persian Gulf to the Gulf of Oman and the open ocean. It is the single most closely watched energy chokepoint on Earth because a very large share of seaborne crude oil and liquefied natural gas has no alternative route out of the Gulf.',
-      'In WorldMonitor, Hormuz is one of the chokepoints with live flow estimates: vessel activity, congestion, and disruption signals are correlated against energy markets so an operator can see whether a Gulf tension event has a plausible transmission path into oil and gas prices.',
+      'In VISTA, Hormuz is one of the chokepoints with live flow estimates: vessel activity, congestion, and disruption signals are correlated against energy markets so an operator can see whether a Gulf tension event has a plausible transmission path into oil and gas prices.',
     ],
     related: ['maritime-chokepoint', 'ais', 'chokepoint-congestion'],
     learnMore: [
@@ -249,7 +249,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       'The Suez Canal is the artificial waterway linking the Mediterranean and the Red Sea that lets shipping move between Europe and Asia without rounding Africa.',
     body: [
       'The Suez Canal connects the Mediterranean Sea to the Red Sea, providing the shortest maritime route between Europe and Asia and removing the need to sail around the Cape of Good Hope. Its southern approach runs through the Bab-el-Mandeb strait, so instability in the Red Sea affects both.',
-      'As a chokepoint, Suez concentrates a large share of Europe–Asia trade into a single canal; a blockage or a security threat that reroutes traffic around Africa adds days of transit and materially raises freight costs, which WorldMonitor tracks alongside the physical disruption signals.',
+      'As a chokepoint, Suez concentrates a large share of Europe–Asia trade into a single canal; a blockage or a security threat that reroutes traffic around Africa adds days of transit and materially raises freight costs, which VISTA tracks alongside the physical disruption signals.',
     ],
     related: ['maritime-chokepoint', 'strait-of-malacca', 'chokepoint-congestion'],
     learnMore: [
@@ -265,7 +265,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       'AIS (Automatic Identification System) is the transponder standard that broadcasts a ship’s identity, position, and course, and is the primary data source for tracking vessel traffic through chokepoints.',
     body: [
       'The Automatic Identification System (AIS) is a maritime transponder standard that continuously broadcasts a vessel’s identity, position, speed, and course. It exists for collision avoidance, but it also makes near-real-time ship tracking possible for anyone receiving the signals.',
-      'WorldMonitor uses AIS positions to watch tanker and cargo movement inside chokepoint bounding boxes, detect congestion, and flag disruptions such as coverage gaps. Because AIS can be switched off or spoofed, sudden gaps are themselves treated as a signal worth surfacing.',
+      'VISTA uses AIS positions to watch tanker and cargo movement inside chokepoint bounding boxes, detect congestion, and flag disruptions such as coverage gaps. Because AIS can be switched off or spoofed, sudden gaps are themselves treated as a signal worth surfacing.',
     ],
     related: ['maritime-chokepoint', 'chokepoint-congestion', 'strait-of-hormuz'],
   },
@@ -276,7 +276,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     short:
       'Chokepoint congestion is an above-normal build-up of vessel traffic waiting to transit a strait or canal, detected from AIS activity and used as an early sign of disruption.',
     body: [
-      'Chokepoint congestion is an above-baseline accumulation of ships waiting to transit a strait or canal. WorldMonitor detects it from AIS activity inside each chokepoint’s bounding box and treats a congestion spike as one of its AIS disruption types.',
+      'Chokepoint congestion is an above-baseline accumulation of ships waiting to transit a strait or canal. VISTA detects it from AIS activity inside each chokepoint’s bounding box and treats a congestion spike as one of its AIS disruption types.',
       'Congestion is an early-warning signal: queues often build before a disruption becomes headline news, so a rising congestion reading at Hormuz, Suez, or Malacca can precede the trade and energy-price effects that follow.',
     ],
     related: ['maritime-chokepoint', 'ais', 'strait-of-hormuz'],
@@ -292,7 +292,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       'Open-source intelligence (OSINT) is intelligence produced from publicly available sources — news, social media, satellite imagery, transponder feeds, and public records — rather than from classified collection.',
     body: [
       'Open-source intelligence (OSINT) is intelligence derived entirely from publicly available information: news reporting, social media, satellite and aerial imagery, ship and aircraft transponders, and public records. Its power comes not from secrecy but from correlation — combining many open signals into a picture no single source shows.',
-      'WorldMonitor is an OSINT platform by construction: every layer is sourced from public feeds with documented provenance, which is what lets it publish source-attributed briefs and scores that a reader can trace back to the underlying evidence.',
+      'VISTA is an OSINT platform by construction: every layer is sourced from public feeds with documented provenance, which is what lets it publish source-attributed briefs and scores that a reader can trace back to the underlying evidence.',
     ],
     related: ['provenance', 'world-brief', 'focal-point-detection'],
     learnMore: [
@@ -307,7 +307,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       'Provenance is the documented chain from a published score or brief back to the specific public sources it was built from, so any claim can be traced to its underlying evidence.',
     body: [
       'Provenance, or source attribution, is the discipline of keeping a documented chain from every published output back to the specific public sources behind it. For an OSINT product it is the difference between an assertion and a citation.',
-      'WorldMonitor carries provenance through its briefs, scores, and cached operational data with documented methodology, so a reader — or an AI agent consuming the API — can see not just what the platform concluded but which sources support it.',
+      'VISTA carries provenance through its briefs, scores, and cached operational data with documented methodology, so a reader — or an AI agent consuming the API — can see not just what the platform concluded but which sources support it.',
     ],
     related: ['osint', 'world-brief'],
   },
@@ -316,9 +316,9 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     term: 'World Brief',
     category: 'OSINT & Methodology',
     short:
-      'The World Brief is WorldMonitor’s AI-generated, source-attributed summary of the current global situation, synthesized from correlated live signals rather than a single news feed.',
+      'The World Brief is VISTA’s AI-generated, source-attributed summary of the current global situation, synthesized from correlated live signals rather than a single news feed.',
     body: [
-      'The World Brief is a source-attributed situational summary generated from WorldMonitor’s correlated live signals — news, map events, focal points, and classified threats. It answers "what is happening right now, globally" in a form an operator or an agent can consume directly.',
+      'The World Brief is a source-attributed situational summary generated from VISTA’s correlated live signals — news, map events, focal points, and classified threats. It answers "what is happening right now, globally" in a form an operator or an agent can consume directly.',
       'It is available through the get_world_brief MCP tool and the dashboard, and it draws on the same focal-point and classification layers that power the map, so the narrative and the geospatial view stay consistent.',
     ],
     related: ['focal-point-detection', 'threat-classification', 'provenance', 'osint'],
@@ -331,7 +331,7 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
       'A prediction market is a marketplace where participants trade contracts on the outcome of future events, and the market price acts as a crowd-sourced probability estimate.',
     body: [
       'A prediction market is a marketplace in which participants buy and sell contracts tied to the outcome of a future event. Because a contract pays out based on what actually happens, its trading price behaves as a continuously updated, crowd-sourced probability for that outcome.',
-      'WorldMonitor surfaces prediction-market context — for example via the get_prediction_markets tool — as an external probability signal to sit alongside its own scenario forecasts, giving a market-implied read on geopolitical questions next to the platform’s analysis.',
+      'VISTA surfaces prediction-market context — for example via the get_prediction_markets tool — as an external probability signal to sit alongside its own scenario forecasts, giving a market-implied read on geopolitical questions next to the platform’s analysis.',
     ],
     related: ['world-brief', 'strategic-risk'],
     learnMore: [

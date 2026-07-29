@@ -1,7 +1,7 @@
 ---
 title: "Track Tariffs and Trade Policy Before They Hit Your Costs"
-description: "Track WTO tariff baselines, US customs revenue, food-price indices, and trade news in WorldMonitor to spot policy shifts before they reach invoices."
-metaTitle: "Tariff Tracker & Trade Policy Monitoring | WorldMonitor"
+description: "Track WTO tariff baselines, US customs revenue, food-price indices, and trade news in VISTA to spot policy shifts before they reach invoices."
+metaTitle: "Tariff Tracker & Trade Policy Monitoring | VISTA"
 keywords: "tariff tracker, trade policy monitoring, US tariff trends, customs revenue data, trade war dashboard, tariff data API, import tariffs"
 audience: "Importers and exporters, procurement teams, supply-chain analysts, macro traders, trade researchers"
 heroImage: "/blog/images/blog/tariff-tracker-trade-policy-monitoring-worldmonitor.jpg"
@@ -11,7 +11,7 @@ modifiedDate: "2026-07-22"
 
 Tariffs are the rare geopolitical instrument with a direct line item on your invoice. A new duty schedule doesn't just signal intent like a speech does — it reprices goods on a date certain, and everyone in the affected supply chain either saw it coming or didn't.
 
-WorldMonitor's trade-policy surface is built for seeing it coming.
+VISTA's trade-policy surface is built for seeing it coming.
 
 ## What the Trade Policy tracker shows
 

@@ -63,7 +63,7 @@ const TWO: CountBounds = { min: 2, max: 2 };
 // keywords/subject/classification metas, canonical + English discovery links,
 // og/twitter cards, the WebApplication JSON-LD block, and the visually
 // hidden <h1>. The Organization/WebSite JSON-LD blocks intentionally keep
-// the World Monitor identity (each variant isPartOf World Monitor — same
+// the VISTA identity (each variant isPartOf VISTA — same
 // modelling as the middleware.ts crawler stub).
 export function renderVariantDashboardHtml(fullDashboardHtml: string, variant: string): string {
   const meta: VariantMeta | undefined = VARIANT_META[variant];

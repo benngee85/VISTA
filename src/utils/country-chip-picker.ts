@@ -20,7 +20,7 @@ import { setTrustedHtml, trustedHtml } from '@/utils/dom-utils';
 // Curated short-list of countries that show up on the picker by default.
 // Users can type any 2-letter ISO code into the input to add others; this
 // list just seeds the chip cloud so the user doesn't stare at an empty box.
-// Order ~loosely follows news-traffic frequency on WorldMonitor; not
+// Order ~loosely follows news-traffic frequency on VISTA; not
 // comprehensive, deliberately so — the picker prioritizes "type-to-add" over
 // "scroll a 250-row list."
 const COMMON_COUNTRIES: ReadonlyArray<{ code: string; name: string }> = [

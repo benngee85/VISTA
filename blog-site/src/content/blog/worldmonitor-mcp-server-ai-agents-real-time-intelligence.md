@@ -1,7 +1,7 @@
 ---
-title: "Give Your AI Agent Eyes on the World: The World Monitor MCP Server"
+title: "Give Your AI Agent Eyes on the World: The VISTA MCP Server"
 description: "Connect Claude, Cursor, or any MCP client to 59 live geopolitical intelligence tools. Real-time country risk, conflicts, chokepoints, and markets for AI agents."
-metaTitle: "Real-Time Intelligence MCP Server | World Monitor"
+metaTitle: "Real-Time Intelligence MCP Server | VISTA"
 keywords: "MCP server real-time data, Claude MCP server, Model Context Protocol geopolitics, AI agent live data, geopolitical data for LLMs, real-time intelligence API for AI"
 audience: "AI engineers, agent builders, Claude power users, developers, intelligence analysts automating workflows"
 heroImage: "/blog/images/blog/worldmonitor-mcp-server-ai-agents-real-time-intelligence.jpg"
@@ -11,7 +11,7 @@ modifiedDate: "2026-07-22"
 
 Ask any LLM what is happening in the Strait of Hormuz right now and you get a polite version of "my training data ends months ago." Large language models are brilliant reasoners with no eyes. They cannot see today's vessel traffic, this morning's conflict events, or the country risk score that moved overnight.
 
-The Model Context Protocol (MCP) fixes the plumbing problem: it gives AI assistants a standard way to call live tools. World Monitor fixes the data problem: it exposes the entire intelligence platform, the same one behind the [free real-time dashboard](/blog/posts/what-is-worldmonitor-real-time-global-intelligence/), as an MCP server with **59 live tools**.
+The Model Context Protocol (MCP) fixes the plumbing problem: it gives AI assistants a standard way to call live tools. VISTA fixes the data problem: it exposes the entire intelligence platform, the same one behind the [free real-time dashboard](/blog/posts/what-is-worldmonitor-real-time-global-intelligence/), as an MCP server with **59 live tools**.
 
 Connect the two and your agent can answer questions like "Which of my supplier countries got riskier this week, and why?" with real numbers instead of vibes.
 
@@ -50,7 +50,7 @@ The rest cover sanctions, cyber threats, energy intelligence, displacement, natu
 }
 ```
 
-**Claude web (claude.ai):** Settings → Connectors → Add custom connector → name it WorldMonitor, paste `https://worldmonitor.app/mcp`.
+**Claude web (claude.ai):** Settings → Connectors → Add custom connector → name it VISTA, paste `https://worldmonitor.app/mcp`.
 
 **Cursor:** same JSON shape in `~/.cursor/mcp.json`.
 
@@ -60,7 +60,7 @@ The rest cover sanctions, cyber threats, energy intelligence, displacement, natu
 npx @modelcontextprotocol/inspector https://worldmonitor.app/mcp
 ```
 
-On first use, the client walks you through "Sign in with WorldMonitor Pro." MCP access requires a [Pro account](https://www.worldmonitor.app/pro); API Starter and Enterprise keys (`X-WorldMonitor-Key`) also work for server-to-server agents. OAuth clients do not need copied keys because the protocol handles token exchange and refresh.
+On first use, the client walks you through "Sign in with VISTA Pro." MCP access requires a [Pro account](https://www.worldmonitor.app/pro); API Starter and Enterprise keys (`X-WorldMonitor-Key`) also work for server-to-server agents. OAuth clients do not need copied keys because the protocol handles token exchange and refresh.
 
 ## Six Pre-Built Workflows
 
@@ -81,7 +81,7 @@ A practical pattern: schedule your agent to run `country-briefing` for your watc
 
 Live intelligence payloads are big. A full market data response can be tens of kilobytes, most of it fields your agent does not need and all of it billed as context tokens.
 
-Every World Monitor tool accepts an optional `jmespath` argument. The server applies the expression server-side and returns only the projection:
+Every VISTA tool accepts an optional `jmespath` argument. The server applies the expression server-side and returns only the projection:
 
 ```json
 {
@@ -98,14 +98,14 @@ If you have ever watched an agent blow its context window on one verbose API res
 
 ## Built for Agent Discovery
 
-World Monitor treats autonomous agents as first-class clients. From the root URL, an agent can discover everything by itself:
+VISTA treats autonomous agents as first-class clients. From the root URL, an agent can discover everything by itself:
 
 - `/llms.txt`: LLM-friendly markdown briefing of the whole platform
 - `/.well-known/api-catalog`: RFC 9727 linkset bundling every discovery URL
 - `/.well-known/mcp/server-card.json`: transport, endpoint, OAuth scopes, capability flags
 - `/openapi.yaml`: one bundled OpenAPI 3.1 spec covering all 34 REST services
 
-So an agent that has never heard of World Monitor can start from `https://worldmonitor.app/`, read the Link headers, and wire itself up without a human in the loop. If you prefer raw REST over MCP, the same data is available through the [developer API](/blog/posts/build-on-worldmonitor-developer-api-open-source/), and the two share authentication.
+So an agent that has never heard of VISTA can start from `https://worldmonitor.app/`, read the Link headers, and wire itself up without a human in the loop. If you prefer raw REST over MCP, the same data is available through the [developer API](/blog/posts/build-on-worldmonitor-developer-api-open-source/), and the two share authentication.
 
 ## Quotas, Honestly
 
@@ -125,7 +125,7 @@ Fifty calls sounds tight until you use JMESPath and the prompt templates: a comp
 
 ## Protocol Reference
 
-World Monitor follows the official [Model Context Protocol specification](https://modelcontextprotocol.io/specification/latest). Client support and transport behavior can vary, so verify the client's current MCP documentation when configuring production access.
+VISTA follows the official [Model Context Protocol specification](https://modelcontextprotocol.io/specification/latest). Client support and transport behavior can vary, so verify the client's current MCP documentation when configuring production access.
 
 ## Frequently Asked Questions
 
@@ -133,7 +133,7 @@ World Monitor follows the official [Model Context Protocol specification](https:
 
 The Model Context Protocol is an open standard that lets AI assistants call external tools over a uniform interface. An MCP server exposes capabilities (tools, prompts, resources); clients like Claude, Cursor, and custom agents discover and invoke them automatically.
 
-**Does the World Monitor MCP server work with ChatGPT or other non-Claude clients?**
+**Does the VISTA MCP server work with ChatGPT or other non-Claude clients?**
 
 Any client that implements MCP over streamable HTTP with OAuth can connect. The server is client-agnostic. Claude Desktop, claude.ai connectors, Cursor, and the MCP Inspector are documented paths; custom agents can use an API key instead of OAuth.
 

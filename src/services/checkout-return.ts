@@ -11,7 +11,7 @@
  *      the /pro marketing page when its embedded Dodo overlay
  *      resolves; used when the buyer is redirected from /pro to the
  *      main dashboard and the overlay's manualRedirect means Dodo
- *      itself doesn't write any URL params. The marker is a WorldMonitor-
+ *      itself doesn't write any URL params. The marker is a VISTA-
  *      namespaced param (not `?success=`) to avoid collision with
  *      unrelated query strings and to make the origin intent-explicit.
  *   4. Dashboard full-page return bridge: `?wm_checkout=return` — set

@@ -1,7 +1,7 @@
 ---
 name: check-forecast-signals
 version: 1
-description: Retrieve probabilistic forecasts and their scorecard context. Use when the user asks what World Monitor is forecasting, how probabilities shifted, or how calibrated the forecasts are.
+description: Retrieve probabilistic forecasts and their scorecard context. Use when the user asks what VISTA is forecasting, how probabilities shifted, or how calibrated the forecasts are.
 ---
 
 # check-forecast-signals

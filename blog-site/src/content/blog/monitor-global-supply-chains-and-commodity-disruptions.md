@@ -1,7 +1,7 @@
 ---
 title: "Monitor Global Supply Chains and Commodity Disruptions in Real Time"
-description: "Track commodity prices, port disruptions, pipeline infrastructure, and supply chain risks in real time. Free supply chain monitoring dashboard on World Monitor."
-metaTitle: "Supply Chain Monitoring Dashboard | World Monitor"
+description: "Track commodity prices, port disruptions, pipeline infrastructure, and supply chain risks in real time. Free supply chain monitoring dashboard on VISTA."
+metaTitle: "Supply Chain Monitoring Dashboard | VISTA"
 keywords: "supply chain monitoring tool, commodity price dashboard, supply chain disruption alerts, global shipping tracker, commodity risk monitoring"
 audience: "Supply chain managers, commodity traders, logistics professionals, procurement teams, risk analysts"
 heroImage: "/blog/images/blog/monitor-global-supply-chains-and-commodity-disruptions.jpg"
@@ -13,7 +13,7 @@ In March 2021, the Ever Given blocked the Suez Canal for six days. Global trade 
 
 The companies that recovered fastest were the ones that already had multi-source monitoring in place: ship positions, port congestion data, commodity prices, and alternative route analysis, all visible before the situation hit mainstream news.
 
-World Monitor's Commodity Monitor (commodity.worldmonitor.app) gives every supply chain team that capability.
+VISTA's Commodity Monitor (commodity.worldmonitor.app) gives every supply chain team that capability.
 
 ## The Supply Chain Visibility Gap
 
@@ -27,7 +27,7 @@ Modern supply chains are global, interconnected, and fragile. A single disruptio
 
 Traditional supply chain tools focus on your own logistics: purchase orders, shipment tracking, inventory levels. They don't tell you about the geopolitical, military, and environmental events that create the disruptions in the first place. For a deeper look at how conflicts affect logistics, see [tracking global trade routes and chokepoints](/blog/posts/tracking-global-trade-routes-chokepoints-freight-costs/).
 
-World Monitor fills that gap.
+VISTA fills that gap.
 
 ## Live Commodity Pricing
 
@@ -59,7 +59,7 @@ Prices are sourced from CME, ICE, LME, and other major exchanges. The Commodity 
 
 ## 10 Commodity Exchange Hubs Mapped
 
-World Monitor maps the world's **10 major commodity exchanges**:
+VISTA maps the world's **10 major commodity exchanges**:
 
 1. **CME Group** (Chicago) - Energy, metals, agriculture
 2. **ICE** (Atlanta/London) - Energy, soft commodities
@@ -76,7 +76,7 @@ Click any exchange for trading hours, primary instruments, and current market st
 
 ## 83 Strategic Ports Under Watch
 
-Maritime chokepoints and major ports are the pressure points of global trade. World Monitor maps **83 strategic ports** with:
+Maritime chokepoints and major ports are the pressure points of global trade. VISTA maps **83 strategic ports** with:
 
 - Current operational status
 - Geographic chokepoint proximity (Suez, Strait of Hormuz, Malacca, Panama Canal)
@@ -87,7 +87,7 @@ When you overlay the conflict layer, you immediately see which ports are near ac
 
 ## AIS Maritime Tracking
 
-World Monitor's AIS (Automatic Identification System) layer shows live vessel positions from [AISStream.io](https://aisstream.io/), merged with [USNI](https://news.usni.org/) fleet reports. For supply chain monitoring, this means:
+VISTA's AIS (Automatic Identification System) layer shows live vessel positions from [AISStream.io](https://aisstream.io/), merged with [USNI](https://news.usni.org/) fleet reports. For supply chain monitoring, this means:
 
 - **Track bulk carriers** moving commodities between ports
 - **Detect dark vessels** that have turned off transponders (potential sanctions evasion)
@@ -98,7 +98,7 @@ The USNI merge adds editorial context: which naval task forces are deployed wher
 
 ## Pipeline and Undersea Cable Infrastructure
 
-World Monitor maps the physical infrastructure that global trade depends on:
+VISTA maps the physical infrastructure that global trade depends on:
 
 **Pipelines:**
 
@@ -112,7 +112,7 @@ World Monitor maps the physical infrastructure that global trade depends on:
 - Landing stations and repair zone indicators
 - NGA (National Geospatial-Intelligence Agency) navigational warnings for cable repair operations
 
-For digital supply chains (cloud services, financial transactions, communications), undersea cable disruption is as significant as a port closure. World Monitor shows both in the same view.
+For digital supply chains (cloud services, financial transactions, communications), undersea cable disruption is as significant as a port closure. VISTA shows both in the same view.
 
 ## Mining and Extraction Sites
 
@@ -127,7 +127,7 @@ When a country's CII starts climbing, supply chain teams can proactively assess 
 
 ## The Infrastructure Cascade Panel
 
-This is where World Monitor's multi-domain approach provides unique value. The **Infrastructure Cascade panel** shows second-order effects of disruptions:
+This is where VISTA's multi-domain approach provides unique value. The **Infrastructure Cascade panel** shows second-order effects of disruptions:
 
 A conflict escalation in Region X exposes:
 
@@ -136,7 +136,7 @@ A conflict escalation in Region X exposes:
 - 1 major port with reduced operational capacity
 - 2 mining operations that may suspend activity
 
-These cascade effects are what turn a localized incident into a global supply chain event. Traditional monitoring tools show the incident. World Monitor shows the blast radius.
+These cascade effects are what turn a localized incident into a global supply chain event. Traditional monitoring tools show the incident. VISTA shows the blast radius.
 
 ## Natural Disaster Monitoring
 
@@ -147,17 +147,17 @@ Supply chains don't just face geopolitical risk. Environmental events are equall
 - **NASA EONET:** Volcanic eruptions, floods, and severe storms
 - **Cloudflare Radar:** Internet outages that disrupt digital supply chains
 
-All of these layer onto the same map as your commodity and infrastructure data. For more on these capabilities, see [natural disaster monitoring with World Monitor](/blog/posts/natural-disaster-monitoring-earthquakes-fires-volcanoes/).
+All of these layer onto the same map as your commodity and infrastructure data. For more on these capabilities, see [natural disaster monitoring with VISTA](/blog/posts/natural-disaster-monitoring-earthquakes-fires-volcanoes/).
 
 ## GPS Jamming: The Invisible Shipping Risk
 
-An under-discussed supply chain risk: GPS/GNSS jamming and spoofing. Ships rely on GPS for navigation, and jamming zones (detected by World Monitor from ADS-B anomaly data) can:
+An under-discussed supply chain risk: GPS/GNSS jamming and spoofing. Ships rely on GPS for navigation, and jamming zones (detected by VISTA from ADS-B anomaly data) can:
 
 - Force ships to rely on less precise navigation
 - Trigger automated route changes that add days to voyages
 - Indicate military activity that could escalate to shipping lane closures
 
-World Monitor maps these jamming zones using H3 hexagonal grid classification, updated in real time from aviation transponder anomalies.
+VISTA maps these jamming zones using H3 hexagonal grid classification, updated in real time from aviation transponder anomalies.
 
 ## Practical Workflows for Supply Chain Teams
 
@@ -188,9 +188,9 @@ World Monitor maps these jamming zones using H3 hexagonal grid classification, u
 
 ## Free Beats Expensive When Speed Matters
 
-Enterprise supply chain risk platforms (Resilinc, Everstream Analytics, Interos) charge five to six figures annually and require weeks of onboarding. World Monitor is available now, in your browser, for free.
+Enterprise supply chain risk platforms (Resilinc, Everstream Analytics, Interos) charge five to six figures annually and require weeks of onboarding. VISTA is available now, in your browser, for free.
 
-It's not a replacement for a full supply chain management platform. It's the situational awareness layer that tells you where to look, before your logistics system shows delays. See how World Monitor compares to [traditional intelligence tools](/blog/posts/worldmonitor-vs-traditional-intelligence-tools/).
+It's not a replacement for a full supply chain management platform. It's the situational awareness layer that tells you where to look, before your logistics system shows delays. See how VISTA compares to [traditional intelligence tools](/blog/posts/worldmonitor-vs-traditional-intelligence-tools/).
 
 ## Frequently Asked Questions
 
@@ -198,7 +198,7 @@ It's not a replacement for a full supply chain management platform. It's the sit
 Prices are sourced from CME, ICE, LME, and other major exchanges with near real-time updates throughout trading hours. The dashboard shows current price, daily change, and trend indicators.
 
 **Can I set alerts for specific supply chain disruptions?**
-Yes. World Monitor's Custom Keyword Monitors let you set persistent alerts for terms like "port closure," "pipeline disruption," or specific commodity names. Matching headlines from 500+ curated RSS feeds are highlighted in your chosen color.
+Yes. VISTA's Custom Keyword Monitors let you set persistent alerts for terms like "port closure," "pipeline disruption," or specific commodity names. Matching headlines from 500+ curated RSS feeds are highlighted in your chosen color.
 
 **Does the Commodity Monitor include geopolitical risk context?**
 Yes. The Country Instability Index (CII), conflict layers, and Infrastructure Cascade panel overlay directly onto commodity and shipping data, so you see disruption risks alongside pricing.

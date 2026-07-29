@@ -1,7 +1,7 @@
 ---
 title: "Track Government Tenders Worldwide in One Feed"
-description: "WorldMonitor aggregates public tenders from SAM.gov, TED, Contracts Finder, CanadaBuys, GETS, and the World Bank into one searchable procurement feed."
-metaTitle: "Global Government Tender Tracking | WorldMonitor"
+description: "VISTA aggregates public tenders from SAM.gov, TED, Contracts Finder, CanadaBuys, GETS, and the World Bank into one searchable procurement feed."
+metaTitle: "Global Government Tender Tracking | VISTA"
 keywords: "government tender tracking, global procurement opportunities, SAM.gov TED tenders, government contracts monitoring, procurement intelligence, tender alerts API"
 audience: "Business development teams, government contractors, consultancies, market-entry analysts, procurement researchers"
 heroImage: "/blog/images/blog/government-tenders-procurement-intelligence-worldmonitor.jpg"
@@ -11,7 +11,7 @@ modifiedDate: "2026-07-22"
 
 Governments announce their priorities through procurement before they announce them through policy. A defense ministry tendering for drone-detection systems, a health agency buying cold-chain logistics, a municipality procuring flood barriers — each notice is a documented, budgeted statement of intent, published weeks or months before the contract shows up in any news cycle.
 
-The problem is that this signal is scattered across national portals that share no format, no API conventions, and no common vocabulary. WorldMonitor's Global Procurement panel pulls the major official sources into one searchable feed.
+The problem is that this signal is scattered across national portals that share no format, no API conventions, and no common vocabulary. VISTA's Global Procurement panel pulls the major official sources into one searchable feed.
 
 ## Six official sources, one feed
 
@@ -28,7 +28,7 @@ The procurement pipeline reads only official public interfaces — no scraping o
 
 A seeder refreshes the canonical snapshot hourly. If one source fails, the others keep flowing and the response reports `availability: "partial"` with that source's last-good records retained — a failed adapter is never displayed as "zero tenders."
 
-One deliberate gap: Australia. AusTender publishes no machine-readable feed that includes closing dates, and WorldMonitor never represents an opportunity without a verifiable deadline. Australian coverage stays absent rather than inferred — the reasoning is documented in the [Global Procurement Intelligence docs](https://www.worldmonitor.app/docs/global-procurement-intelligence).
+One deliberate gap: Australia. AusTender publishes no machine-readable feed that includes closing dates, and VISTA never represents an opportunity without a verifiable deadline. Australian coverage stays absent rather than inferred — the reasoning is documented in the [Global Procurement Intelligence docs](https://www.worldmonitor.app/docs/global-procurement-intelligence).
 
 ## What's in the feed right now
 
@@ -49,7 +49,7 @@ Then you don't need this feed for the US — SAM.gov's saved searches and NAICS/
 
 ## Opportunities, not just awards
 
-WorldMonitor separates two different questions:
+VISTA separates two different questions:
 
 - **What has been awarded?** Historical US award data from USASpending remains in the free Economic panel. Awards tell you who won and what a government spent.
 - **What is open right now?** The Global Procurement panel is forward-looking: open tenders you can still act on, with deadlines, buyers, estimated values, and official notice links.
@@ -69,7 +69,7 @@ The same feed is available programmatically:
 - **REST:** `GET /api/economic/v1/list-global-tenders` — paginated up to 100 records per page, with filters for country, region, source, status, buyer, publish and deadline dates, value range, currency, category, and free-text query. See the [API reference](https://www.worldmonitor.app/docs/api-reference).
 - **MCP:** the `get_procurement_opportunities` tool gives AI agents a compact projection (10 records by default, 25 max) so an agent can ask "open cybersecurity tenders in the EU closing in the next 30 days" without flooding its context window.
 
-Both paths are part of WorldMonitor Pro and enforce the subscription server-side. Pair the feed with [country risk screening](/blog/posts/country-risk-monitoring-due-diligence-worldmonitor/) before chasing an opportunity in an unfamiliar market, and with the [tariff and trade-policy trackers](/blog/posts/tariff-tracker-trade-policy-monitoring-worldmonitor/) when the contract involves cross-border delivery.
+Both paths are part of VISTA Pro and enforce the subscription server-side. Pair the feed with [country risk screening](/blog/posts/country-risk-monitoring-due-diligence-worldmonitor/) before chasing an opportunity in an unfamiliar market, and with the [tariff and trade-policy trackers](/blog/posts/tariff-tracker-trade-policy-monitoring-worldmonitor/) when the contract involves cross-border delivery.
 
 ## Procurement as an intelligence signal
 

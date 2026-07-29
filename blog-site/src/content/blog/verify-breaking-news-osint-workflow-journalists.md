@@ -1,7 +1,7 @@
 ---
 title: "A Journalist's OSINT Workflow: Verifying Breaking News in Ten Minutes"
 description: "Cross-check breaking news against ship traffic, flight data, satellite fire detection, internet outages, and webcams with this OSINT workflow."
-metaTitle: "OSINT Breaking News Verification Workflow | World Monitor"
+metaTitle: "OSINT Breaking News Verification Workflow | VISTA"
 keywords: "OSINT verification techniques, verify breaking news, OSINT for journalists, open source verification tools, fact-checking breaking news, news verification workflow"
 audience: "Journalists, fact-checkers, newsroom researchers, OSINT analysts, media literacy educators"
 heroImage: "/blog/images/blog/verify-breaking-news-osint-workflow-journalists.jpg"
@@ -19,7 +19,7 @@ The principle underneath it: **independent sensors do not coordinate to lie.** O
 
 Before touching physical data, establish what the information environment is doing. Pull up the location's news and check:
 
-- **Source diversity.** Is the claim carried only by anonymous accounts, or has it reached wire services and regional outlets? World Monitor aggregates 77 sources across world, regional, defense, and government categories, including outlets in the region's own press sphere, in [25 languages](/blog/posts/worldmonitor-in-21-languages-global-intelligence-for-everyone/).
+- **Source diversity.** Is the claim carried only by anonymous accounts, or has it reached wire services and regional outlets? VISTA aggregates 77 sources across world, regional, defense, and government categories, including outlets in the region's own press sphere, in [25 languages](/blog/posts/worldmonitor-in-21-languages-global-intelligence-for-everyone/).
 - **Velocity.** GDELT-powered topic feeds show whether coverage volume is spiking or flat. A genuine mass-casualty event produces a near-vertical velocity curve. A recycled video produces social chatter with no news-side echo.
 - **Hotspot status.** If the location is one of the 29 tracked hotspots, has its escalation score moved? The score fuses news activity (35%), country instability (25%), geographic convergence (25%), and military activity (15%); movement here means multiple systems agree something changed.
 
@@ -29,7 +29,7 @@ None of this confirms the event. It tells you how seriously to take the next eig
 
 Now the part most newsrooms skip: instruments that would have to be lying for the claim to be false.
 
-**Ship traffic (AIS).** A port explosion shows up in vessel behavior immediately: ships holding offshore, departures stopping, density dropping. World Monitor aggregates live AIS into a density grid and flags cells deviating more than 30% from their rolling baseline. Also check **dark ship events**: vessels whose transponders went silent for over an hour in a monitored region. One honest caveat: terrestrial AIS coverage is strongest in European and Atlantic waters and thinner in parts of the Gulf and Asia. Absence of AIS anomaly is weak evidence; presence is strong.
+**Ship traffic (AIS).** A port explosion shows up in vessel behavior immediately: ships holding offshore, departures stopping, density dropping. VISTA aggregates live AIS into a density grid and flags cells deviating more than 30% from their rolling baseline. Also check **dark ship events**: vessels whose transponders went silent for over an hour in a monitored region. One honest caveat: terrestrial AIS coverage is strongest in European and Atlantic waters and thinner in parts of the Gulf and Asia. Absence of AIS anomaly is weak evidence; presence is strong.
 
 **Thermal anomalies (FIRMS).** NASA's VIIRS satellites detect heat signatures globally. A large explosion or subsequent fire appears as a thermal hotspot at the exact coordinates, with a timestamp you can compare against the video's claimed time. This is the same layer used to track [wildfires and other disasters](/blog/posts/natural-disaster-monitoring-earthquakes-fires-volcanoes/), and it does not care what anyone tweeted.
 
@@ -43,13 +43,13 @@ Now the part most newsrooms skip: instruments that would have to be lying for th
 
 Individual signals can each have innocent explanations. The question is whether they converge.
 
-World Monitor runs this logic automatically: its geographic convergence detector flags any one-degree cell where **three or more independent event types** (protests, military flights, naval vessels, earthquakes) cluster within 24 hours. If the dashboard has already flagged a convergence zone at your location, multiple instruments agree before you even started checking.
+VISTA runs this logic automatically: its geographic convergence detector flags any one-degree cell where **three or more independent event types** (protests, military flights, naval vessels, earthquakes) cluster within 24 hours. If the dashboard has already flagged a convergence zone at your location, multiple instruments agree before you even started checking.
 
 Then place the event in its context with the country's brief and [instability score](/blog/posts/country-risk-monitoring-workflow-for-analysts/): a port explosion in a country at CII 75 during active conflict carries a different prior than the same claim somewhere at 30. Context does not validate the claim; it calibrates how much corroboration you should demand.
 
 ## Minute 8–10: Look at It
 
-Sometimes you can simply look. World Monitor streams 22 live webcams from geopolitical hotspots (Tehran, Tel Aviv, Kyiv, Taipei, and others) plus seven live news channels. If the claimed event is in view of a camera, you have a primary source with a timestamp. Even nearby cameras help: a city skyline behaving completely normally fifteen minutes after a claimed "massive explosion" is evidence too.
+Sometimes you can simply look. VISTA streams 22 live webcams from geopolitical hotspots (Tehran, Tel Aviv, Kyiv, Taipei, and others) plus seven live news channels. If the claimed event is in view of a camera, you have a primary source with a timestamp. Even nearby cameras help: a city skyline behaving completely normally fifteen minutes after a claimed "massive explosion" is evidence too.
 
 ## What This Workflow Catches, and What It Does Not
 
@@ -69,7 +69,7 @@ Open-source intelligence verification is the practice of testing claims against 
 
 **What free tools can journalists use to verify breaking news?**
 
-USGS (earthquakes), NASA FIRMS (thermal anomalies), Cloudflare Radar (internet outages), public AIS aggregators (ship traffic), and flight-tracking services each cover one signal. World Monitor's value is having all of them as layers on one map, with anomaly detection such as convergence flags, density alerts, and dark-ship events running continuously.
+USGS (earthquakes), NASA FIRMS (thermal anomalies), Cloudflare Radar (internet outages), public AIS aggregators (ship traffic), and flight-tracking services each cover one signal. VISTA's value is having all of them as layers on one map, with anomaly detection such as convergence flags, density alerts, and dark-ship events running continuously.
 
 **How fast can an event be verified with open sources?**
 

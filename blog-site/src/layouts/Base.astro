@@ -48,7 +48,7 @@ function stringifyJsonLd(value: Record<string, unknown>): string {
     <meta name="description" content={description} />
     {keywords && <meta name="keywords" content={keywords} />}
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="author" content={author || 'World Monitor'} />
+    <meta name="author" content={author || 'VISTA'} />
     <meta name="theme-color" content="#050505" />
     <link rel="canonical" href={resolvedCanonicalUrl} />
 
@@ -56,7 +56,7 @@ function stringifyJsonLd(value: Record<string, unknown>): string {
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={resolvedCanonicalUrl} />
-    <meta property="og:site_name" content="World Monitor Blog" />
+    <meta property="og:site_name" content="VISTA Blog" />
     <meta property="og:image" content={resolvedOgImage} />
     <meta property="og:image:secure_url" content={resolvedOgImage} />
     <meta property="og:image:type" content={resolvedOgImageType} />
@@ -82,7 +82,7 @@ function stringifyJsonLd(value: Record<string, unknown>): string {
     <link rel="icon" type="image/png" sizes="32x32" href="/favico/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favico/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favico/apple-touch-icon.png" />
-    <link rel="alternate" type="application/rss+xml" title="World Monitor Blog" href="/blog/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="VISTA Blog" href="/blog/rss.xml" />
 
     {jsonLd && (
       <script type="application/ld+json" set:html={stringifyJsonLd(jsonLd)} />
@@ -104,9 +104,9 @@ function stringifyJsonLd(value: Record<string, unknown>): string {
     <header class="site-header">
       <nav>
         <a href="/blog/" class="logo">
-          <img src="/favico/favicon-32x32.png" alt="World Monitor" width="28" height="28" class="logo-icon-img" />
+          <img src="/favico/favicon-32x32.png" alt="VISTA" width="28" height="28" class="logo-icon-img" />
           <div class="logo-text">
-            <span class="logo-name">WORLD MONITOR</span>
+            <span class="logo-name">VISTA</span>
             <span class="logo-sub">by Someone.ceo</span>
           </div>
         </a>
@@ -147,7 +147,7 @@ function stringifyJsonLd(value: Record<string, unknown>): string {
         <div class="footer-brand">
           <img src="/favico/favicon-32x32.png" alt="" width="28" height="28" class="footer-icon-img" />
           <div class="footer-brand-text">
-            <span class="footer-name">WORLD MONITOR</span>
+            <span class="footer-name">VISTA</span>
             <span class="footer-sub">by Someone.ceo</span>
           </div>
         </div>
@@ -166,7 +166,7 @@ function stringifyJsonLd(value: Record<string, unknown>): string {
           <a href="https://x.com/worldmonitorai" target="_blank" rel="noopener noreferrer">X</a>
         </div>
         <div class="footer-copy">
-          &copy; {new Date().getFullYear()} World Monitor
+          &copy; {new Date().getFullYear()} VISTA
         </div>
       </div>
     </footer>

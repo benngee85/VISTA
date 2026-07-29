@@ -172,11 +172,11 @@ describe('push-handler.js — push event', () => {
     assert.equal(box.shown[0].opts.requireInteraction, false);
   });
 
-  it('falls back to "WorldMonitor" title when payload omits it', () => {
+  it('falls back to "VISTA" title when payload omits it', () => {
     const box = makeSwSandbox();
     loadHandlerInto(box);
     box.emit('push', pushEvent({ body: 'body only, no title' }));
-    assert.equal(box.shown[0].title, 'WorldMonitor');
+    assert.equal(box.shown[0].title, 'VISTA');
   });
 
   it('malformed JSON payload renders the raw text as the body', () => {
@@ -192,7 +192,7 @@ describe('push-handler.js — push event', () => {
     };
     box.emit('push', broken);
     assert.equal(box.shown.length, 1);
-    assert.equal(box.shown[0].title, 'WorldMonitor');
+    assert.equal(box.shown[0].title, 'VISTA');
     assert.equal(box.shown[0].opts.body, 'plain raw text');
   });
 
@@ -201,7 +201,7 @@ describe('push-handler.js — push event', () => {
     loadHandlerInto(box);
     box.emit('push', { data: null, waitUntil() {} });
     assert.equal(box.shown.length, 1);
-    assert.equal(box.shown[0].title, 'WorldMonitor');
+    assert.equal(box.shown[0].title, 'VISTA');
   });
 });
 

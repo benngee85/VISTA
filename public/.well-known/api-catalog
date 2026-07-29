@@ -5,19 +5,19 @@
       "item": [
         {
           "href": "https://api.worldmonitor.app/",
-          "title": "World Monitor REST API"
+          "title": "VISTA REST API"
         },
         {
           "href": "https://worldmonitor.app/mcp",
-          "title": "World Monitor MCP server"
+          "title": "VISTA MCP server"
         },
         {
           "href": "https://www.worldmonitor.app/docs/mcp",
-          "title": "World Monitor docs MCP server (documentation search & retrieval)"
+          "title": "VISTA docs MCP server (documentation search & retrieval)"
         },
         {
           "href": "https://worldmonitor.app/",
-          "title": "World Monitor agent skills"
+          "title": "VISTA agent skills"
         }
       ]
     },
@@ -68,22 +68,22 @@
         {
           "href": "https://worldmonitor.app/developers.md",
           "type": "text/markdown",
-          "title": "World Monitor Developer Portal — links every developer resource by name"
+          "title": "VISTA Developer Portal — links every developer resource by name"
         },
         {
           "href": "https://worldmonitor.app/mcp-server.md",
           "type": "text/markdown",
-          "title": "World Monitor MCP Server — endpoint, tools, auth (machine-readable)"
+          "title": "VISTA MCP Server — endpoint, tools, auth (machine-readable)"
         },
         {
           "href": "https://worldmonitor.app/openapi.md",
           "type": "text/markdown",
-          "title": "World Monitor OpenAPI Specification — REST API contract (machine-readable)"
+          "title": "VISTA OpenAPI Specification — REST API contract (machine-readable)"
         },
         {
           "href": "https://worldmonitor.app/sdks.md",
           "type": "text/markdown",
-          "title": "World Monitor SDKs — Python, Ruby, Go, JavaScript (machine-readable)"
+          "title": "VISTA SDKs — Python, Ruby, Go, JavaScript (machine-readable)"
         }
       ],
       "status": [

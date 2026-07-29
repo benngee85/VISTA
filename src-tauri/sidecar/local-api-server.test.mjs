@@ -389,8 +389,8 @@ test('signs desktop register-interest cloud fallback when shared secret is confi
       appVersion: '2.8.0',
     }, {
       'Content-Encoding': 'gzip',
-      'X-WorldMonitor-Desktop-Timestamp': '1',
-      'X-WorldMonitor-Desktop-Signature': 'sha256=bad',
+      'X-VISTA-Desktop-Timestamp': '1',
+      'X-VISTA-Desktop-Signature': 'sha256=bad',
     });
     assert.equal(response.status, 200);
     assert.equal(remote.requests.length, 1);
@@ -561,7 +561,7 @@ test('preserves caller Authorization while hiding the sidecar transport token', 
     const response = await fetch(`http://127.0.0.1:${port}/api/header-check`, {
       headers: {
         Authorization: 'Bearer caller-oauth-token',
-        'X-WorldMonitor-Local-Token': TEST_LOCAL_API_TOKEN,
+        'X-VISTA-Local-Token': TEST_LOCAL_API_TOKEN,
       },
     });
     assert.equal(response.status, 200);
@@ -592,7 +592,7 @@ test('does not forward the sidecar transport token through Docker cloud proxy ro
   const { port } = await app.start();
 
   try {
-    const headers = { 'X-WorldMonitor-Local-Token': TEST_LOCAL_API_TOKEN };
+    const headers = { 'X-VISTA-Local-Token': TEST_LOCAL_API_TOKEN };
     const youtubeResponse = await fetch(`http://127.0.0.1:${port}/api/youtube/live`, { headers });
     assert.equal(youtubeResponse.status, 200);
 

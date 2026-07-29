@@ -29,22 +29,22 @@ test('Rocky relay uses Node 24, direct PID 1 and no runtime package manager', ()
     2,
   );
   assert.doesNotMatch(rocky, /FROM \$\{/);
-  assert.match(rocky, /CMD \["node", "scripts\/ais-relay\.cjs"\]/);
+  assert.match(rocky, /CMD \["node", "scripts\/vista-relay\.cjs"\]/);
   assert.match(rocky, /! command -v npm/);
   assert.match(rocky, /! command -v npx/);
   assert.match(rocky, /! command -v corepack/);
 });
 
 test('Rocky relay carries the validated Kubernetes-oriented controls', () => {
-  assert.match(compose, /worldmonitor-relay-rocky9:/);
+  assert.match(compose, /vista-relay-rocky9:/);
   assert.match(compose, /user: "1000710000:0"/);
   assert.match(compose, /read_only: true/);
   assert.match(compose, /mem_reservation: 384m/);
   assert.match(compose, /mem_limit: 768m/);
-  assert.match(compose, /WORLDMONITOR_API_BASE_URL: "http:\/\/worldmonitor-api-rocky9:46123"/);
+  assert.match(compose, /WORLDMONITOR_API_BASE_URL: "http:\/\/vista-api-rocky9:46123"/);
 });
 
 test('Rocky API resolves the parallel relay without removing Alpine rollback', () => {
-  assert.match(compose, /WS_RELAY_URL: "http:\/\/worldmonitor-relay-rocky9:3004"/);
-  assert.doesNotMatch(compose, /^\s{2}ais-relay:\s*$/m);
+  assert.match(compose, /WS_RELAY_URL: "http:\/\/vista-relay-rocky9:3004"/);
+  assert.doesNotMatch(compose, /^\s{2}vista-relay:\s*$/m);
 });

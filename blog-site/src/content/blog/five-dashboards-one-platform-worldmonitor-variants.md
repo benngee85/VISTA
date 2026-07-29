@@ -1,7 +1,7 @@
 ---
 title: "Six Intelligence Dashboards on One Platform"
-description: "Explore six free World Monitor dashboards for geopolitics, technology, finance, commodities, positive news, and energy, all built on one platform."
-metaTitle: "6 Intelligence Dashboards, One Platform | World Monitor"
+description: "Explore six free VISTA dashboards for geopolitics, technology, finance, commodities, positive news, and energy, all built on one platform."
+metaTitle: "6 Intelligence Dashboards, One Platform | VISTA"
 keywords: "intelligence dashboard variants, tech monitoring dashboard, positive news dashboard, energy security dashboard, multi-purpose intelligence platform, specialized monitoring tools"
 audience: "General tech audience, product managers, developers, knowledge workers, content creators"
 heroImage: "/blog/images/blog/five-dashboards-one-platform-worldmonitor-variants.jpg"
@@ -11,15 +11,15 @@ modifiedDate: "2026-07-22"
 
 Most intelligence platforms force you into a single vertical. A financial terminal. A cybersecurity feed. A conflict tracker. If your work spans multiple domains, you're left juggling subscriptions.
 
-World Monitor runs **six specialized dashboards** from a single codebase. Switch between them with one click. Each variant curates panels, layers, and data feeds for its specific audience while sharing the same underlying intelligence engine, map infrastructure, and AI capabilities.
+VISTA runs **six specialized dashboards** from a single codebase. Switch between them with one click. Each variant curates panels, layers, and data feeds for its specific audience while sharing the same underlying intelligence engine, map infrastructure, and AI capabilities.
 
-## 1. World Monitor: The Geopolitical Command Center
+## 1. VISTA: The Geopolitical Command Center
 
 **URL:** worldmonitor.app
 **Panels:** 102
 **Focus:** Conflicts, military, infrastructure, geopolitical risk
 
-This is the flagship. World Monitor is built for OSINT analysts, defense researchers, journalists, and anyone who needs to [understand global security dynamics](/blog/posts/track-global-conflicts-in-real-time/).
+This is the flagship. VISTA is built for OSINT analysts, defense researchers, journalists, and anyone who needs to [understand global security dynamics](/blog/posts/track-global-conflicts-in-real-time/).
 
 **Key features:**
 
@@ -100,7 +100,7 @@ Commodity Monitor tracks the physical resources that power the global economy: w
 - Pipeline infrastructure mapping
 - Energy production and refinery locations
 - Commodity-focused RSS feeds from specialist sources
-- Integration with World Monitor's conflict and disaster layers
+- Integration with VISTA's conflict and disaster layers
 
 **Who it's for:** Commodity traders, supply chain managers, mining analysts, energy sector professionals, procurement teams, logistics planners.
 
@@ -187,7 +187,7 @@ Install on any device from the browser. Includes offline map caching (500 tiles)
 
 In the web app, switch variants via the header navigation. Your preferences, language settings, and AI configuration carry across variants.
 
-The variants share a single codebase. Every improvement to the core engine benefits all six dashboards simultaneously. A map performance optimization for World Monitor automatically makes Commodity Monitor faster too.
+The variants share a single codebase. Every improvement to the core engine benefits all six dashboards simultaneously. A map performance optimization for VISTA automatically makes Commodity Monitor faster too.
 
 ## Why Six Variants Instead of One?
 
@@ -197,7 +197,7 @@ An OSINT analyst tracking the Taiwan Strait doesn't need stablecoin peg data clu
 
 Each variant curates the information that matters for its audience. The panels are pre-selected. The layers are prioritized. The news feeds are filtered. You get a dashboard that feels purpose-built for your work, without the cognitive load of configuring a general-purpose tool.
 
-But when you need to cross domains (the commodity trader wants to check if a conflict is affecting mining operations), switching to World Monitor is one click away.
+But when you need to cross domains (the commodity trader wants to check if a conflict is affecting mining operations), switching to VISTA is one click away.
 
 ## One Platform, Zero Cost
 

@@ -1,8 +1,8 @@
-# World Monitor SDKs
+# VISTA SDKs
 
 Last updated: July 7, 2026
 
-World Monitor ships official client libraries in four language ecosystems so you can script country briefs, risk scores, market data, and every one of the 59 [MCP tools](https://worldmonitor.app/mcp-server.md) without writing an HTTP integration. All of them are **zero-dependency**, MCP-first mirrors of the [`worldmonitor` npm CLI](https://www.worldmonitor.app/docs/cli), with a small REST escape hatch for host-relative and self-hosted use.
+VISTA ships official client libraries in four language ecosystems so you can script country briefs, risk scores, market data, and every one of the 59 [MCP tools](https://worldmonitor.app/mcp-server.md) without writing an HTTP integration. All of them are **zero-dependency**, MCP-first mirrors of the [`worldmonitor` npm CLI](https://www.worldmonitor.app/docs/cli), with a small REST escape hatch for host-relative and self-hosted use.
 
 ## Official SDKs
 
@@ -45,8 +45,8 @@ Get an API key at https://worldmonitor.app/pro. The full per-language guide — 
 
 ## Important query matches
 
-- World Monitor SDK
-- World Monitor Python / Ruby / Go / JavaScript SDK
-- World Monitor client library
+- VISTA SDK
+- VISTA Python / Ruby / Go / JavaScript SDK
+- VISTA client library
 - pip install worldmonitor-sdk
-- Official World Monitor API client libraries
+- Official VISTA API client libraries

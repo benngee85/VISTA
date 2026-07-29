@@ -1,7 +1,7 @@
 ---
 title: "Monitor Disease Outbreaks and Air Quality on One Map"
-description: "WorldMonitor merges WHO outbreak news, CDC travel notices, and outbreak trackers with OpenAQ and WAQI air-quality sensors into one global health-signals layer."
-metaTitle: "Disease Outbreak & Air Quality Monitoring | WorldMonitor"
+description: "VISTA merges WHO outbreak news, CDC travel notices, and outbreak trackers with OpenAQ and WAQI air-quality sensors into one global health-signals layer."
+metaTitle: "Disease Outbreak & Air Quality Monitoring | VISTA"
 keywords: "disease outbreak map, epidemic monitoring dashboard, WHO outbreak tracker, air quality PM2.5 map, global health surveillance, health signals API"
 audience: "Public-health analysts, NGO and travel-security teams, researchers, journalists, expats and frequent travelers"
 heroImage: "/blog/images/blog/disease-outbreak-air-quality-monitoring-health-signals.jpg"
@@ -11,7 +11,7 @@ modifiedDate: "2026-07-22"
 
 Health signals are geopolitical signals. An outbreak reshapes trade and travel; a smoke or smog crisis empties cities and moves elections; and health infrastructure under strain is one of the most concrete measures of a state losing capacity. Yet health monitoring usually lives in separate tools from the conflict, disaster, and market layers it interacts with.
 
-WorldMonitor folds both halves — outbreaks and air quality — into the same dashboard as everything else.
+VISTA folds both halves — outbreaks and air quality — into the same dashboard as everything else.
 
 ## Outbreak tracking from official and specialist sources
 
@@ -46,7 +46,7 @@ Check health events at [WHO Disease Outbreak News](https://www.who.int/emergenci
 
 ## Frequently Asked Questions
 
-**Which outbreak sources does WorldMonitor track?**
+**Which outbreak sources does VISTA track?**
 
 WHO Disease Outbreak News via WHO's API, CDC travel health notices, Outbreak News Today's specialist reporting, and a structured outbreak-tracker dataset — merged and deduplicated.
 

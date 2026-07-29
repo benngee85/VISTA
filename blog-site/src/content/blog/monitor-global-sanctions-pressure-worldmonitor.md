@@ -1,7 +1,7 @@
 ---
 title: "Sanctions Monitoring: Designations and Country Pressure in Real Time"
-description: "WorldMonitor tracks OFAC SDN and consolidated designations, computes per-country sanctions pressure, and folds exposure into country risk — on the map and via API."
-metaTitle: "Real-Time Sanctions Monitoring | WorldMonitor"
+description: "VISTA tracks OFAC SDN and consolidated designations, computes per-country sanctions pressure, and folds exposure into country risk — on the map and via API."
+metaTitle: "Real-Time Sanctions Monitoring | VISTA"
 keywords: "sanctions tracking tool, OFAC SDN list monitoring, sanctions dashboard, country sanctions exposure, sanctions data API, sanctions pressure score"
 audience: "Compliance analysts, trade and export teams, risk researchers, macro analysts, journalists"
 heroImage: "/blog/images/blog/monitor-global-sanctions-pressure-worldmonitor.jpg"
@@ -11,13 +11,13 @@ modifiedDate: "2026-07-22"
 
 Sanctions move faster than most reference data. A designation published on a Tuesday morning can strand a cargo, freeze a counterparty, or reprice a bond by Tuesday afternoon — and the analysts who noticed early are usually the ones who were watching the source lists, not waiting for coverage.
 
-WorldMonitor treats sanctions as a live intelligence layer rather than a quarterly compliance export.
+VISTA treats sanctions as a live intelligence layer rather than a quarterly compliance export.
 
 ## What gets tracked
 
 The sanctions pipeline reads the US Treasury's official OFAC publication service directly — both the **SDN list** (Specially Designated Nationals) and the **consolidated non-SDN list** — in their full advanced XML form, not a simplified mirror.
 
-From those designations WorldMonitor computes a per-country **sanctions pressure** view: which jurisdictions are accumulating designations, how pressure is distributed, and which countries sit at the top of the list right now. That surfaces in three places:
+From those designations VISTA computes a per-country **sanctions pressure** view: which jurisdictions are accumulating designations, how pressure is distributed, and which countries sit at the top of the list right now. That surfaces in three places:
 
 - The **Sanctions Pressure panel**, available in the geopolitical, finance, commodity, and energy dashboards.
 - The **sanctions map layer**, which puts designation pressure in geographic context next to conflicts, chokepoints, and trade routes.
@@ -37,7 +37,7 @@ If you're watching a specific jurisdiction continuously, pair the sanctions laye
 
 ## Limits
 
-This is OFAC-centric today: US Treasury designations, not a merged EU/UN/UK screening database. It is an intelligence and awareness layer, not a compliance screening service — a positive or negative here doesn't discharge a legal screening obligation, and entity-level matching (aliases, transliterations, ownership chains) belongs in dedicated screening tooling. WorldMonitor tells you where pressure is building and when the ground shifts; your compliance stack tells you whether a specific counterparty is clear.
+This is OFAC-centric today: US Treasury designations, not a merged EU/UN/UK screening database. It is an intelligence and awareness layer, not a compliance screening service — a positive or negative here doesn't discharge a legal screening obligation, and entity-level matching (aliases, transliterations, ownership chains) belongs in dedicated screening tooling. VISTA tells you where pressure is building and when the ground shifts; your compliance stack tells you whether a specific counterparty is clear.
 
 ## Authoritative Sanctions Source
 
@@ -45,7 +45,7 @@ Always verify sanctions exposure against the issuing authority. For US programs,
 
 ## Frequently Asked Questions
 
-**Which sanctions lists does WorldMonitor track?**
+**Which sanctions lists does VISTA track?**
 
 The US OFAC SDN list and OFAC's consolidated non-SDN list, read from the Treasury's official publication service in full advanced XML form.
 
@@ -55,7 +55,7 @@ No. It's a monitoring and intelligence layer — pressure trends, designation co
 
 **How do I get sanctions context into my AI assistant?**
 
-Connect the WorldMonitor MCP server and call `get_sanctions_data`, or use `get_country_risk`, which includes OFAC exposure in its response. The [MCP quickstart](https://www.worldmonitor.app/docs/mcp-quickstart) covers setup in a few minutes.
+Connect the VISTA MCP server and call `get_sanctions_data`, or use `get_country_risk`, which includes OFAC exposure in its response. The [MCP quickstart](https://www.worldmonitor.app/docs/mcp-quickstart) covers setup in a few minutes.
 
 ---
 

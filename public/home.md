@@ -1,6 +1,6 @@
-# World Monitor — By the time it's news, you already knew.
+# VISTA — By the time it's news, you already knew.
 
-Free real-time global intelligence dashboard. World Monitor streams the world's raw signals — ships, jets, sirens, cables, markets — onto one live map, with AI that flags when they converge into something that matters.
+Free real-time global intelligence dashboard. VISTA streams the world's raw signals — ships, jets, sirens, cables, markets — onto one live map, with AI that flags when they converge into something that matters.
 
 Open-source (AGPL-3.0), used by 2M+ people across 190+ countries, as featured in WIRED. Runs as a web app, installable PWA, and native desktop app for macOS, Windows, and Linux. No signup required.
 
@@ -16,7 +16,7 @@ Open-source (AGPL-3.0), used by 2M+ people across 190+ countries, as featured in
 
 ## Live instances
 
-- [World Monitor](https://www.worldmonitor.app/dashboard) — geopolitics, military, conflicts, infrastructure
+- [VISTA](https://www.worldmonitor.app/dashboard) — geopolitics, military, conflicts, infrastructure
 - [Tech Monitor](https://tech.worldmonitor.app/dashboard) — startups, AI/ML, cloud, cybersecurity
 - [Finance Monitor](https://finance.worldmonitor.app/dashboard) — global markets, trading, central banks
 - [Commodity Monitor](https://commodity.worldmonitor.app/dashboard) — mining, metals, energy, supply chains

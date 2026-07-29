@@ -3,7 +3,7 @@
  *
  * Clerk-protected consent screen for the cross-subdomain Pro MCP flow.
  * The user lands here from the api-subdomain consent page (U4 will add
- * a "Sign in with WorldMonitor Pro" CTA on `api/oauth/authorize.js`).
+ * a "Sign in with VISTA Pro" CTA on `api/oauth/authorize.js`).
  *
  * Flow on this page:
  *   1. Boot Clerk; if signed-out, openSignIn(). On sign-in, the modal
@@ -69,7 +69,7 @@ function hide(id: string): void { $(id).hidden = true; }
 /**
  * `title` is REQUIRED, not defaulted. It used to default to "Authorization
  * request expired", which was correct for exactly one of the seven call sites —
- * a caller without Pro read that heading above "a WorldMonitor Pro subscription
+ * a caller without Pro read that heading above "a VISTA Pro subscription
  * is required", and the anti-phishing redirect-host refusal was labelled an
  * expiry too. Making it required means a new error path has to state what it is
  * rather than inheriting the wrong answer.

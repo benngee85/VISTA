@@ -2409,9 +2409,9 @@ describe('agent readiness: registry branding + ARD catalog', () => {
     );
   });
 
-  it('ai-catalog.json declares the World Monitor host identity', () => {
+  it('ai-catalog.json declares the VISTA host identity', () => {
     assert.strictEqual(aiCatalog.specVersion, '1.0');
-    assert.strictEqual(aiCatalog.host?.displayName, 'World Monitor');
+    assert.strictEqual(aiCatalog.host?.displayName, 'VISTA');
     assert.strictEqual(aiCatalog.host?.identifier, 'did:web:worldmonitor.app');
     assert.ok(Array.isArray(aiCatalog.entries) && aiCatalog.entries.length >= 2);
   });
@@ -2614,10 +2614,10 @@ describe('markdown canonical Link headers (#4999)', () => {
 // the discovery chain).
 describe('agent readiness: named developer-resource pages (#4953)', () => {
   const DEV_PAGES = [
-    { file: 'developers.md', path: '/developers.md', h1: '# World Monitor Developer Portal' },
-    { file: 'mcp-server.md', path: '/mcp-server.md', h1: '# World Monitor MCP Server' },
-    { file: 'openapi.md', path: '/openapi.md', h1: '# World Monitor OpenAPI Specification' },
-    { file: 'sdks.md', path: '/sdks.md', h1: '# World Monitor SDKs' },
+    { file: 'developers.md', path: '/developers.md', h1: '# VISTA Developer Portal' },
+    { file: 'mcp-server.md', path: '/mcp-server.md', h1: '# VISTA MCP Server' },
+    { file: 'openapi.md', path: '/openapi.md', h1: '# VISTA OpenAPI Specification' },
+    { file: 'sdks.md', path: '/sdks.md', h1: '# VISTA SDKs' },
   ];
 
   const spaCatchAll = () =>
@@ -2801,7 +2801,7 @@ describe('skeleton brand text extraction (#5541)', () => {
     // Simulate raw textContent: strip all HTML tags
     const rawText = match[1].replace(/<[^>]+>/g, '');
     assert.doesNotMatch(rawText, /WWorld/, 'skeleton-brand raw text must not concatenate as "WWorld Monitor"');
-    assert.match(rawText, /World Monitor/, 'skeleton-brand raw text must contain "World Monitor"');
+    assert.match(rawText, /VISTA/, 'skeleton-brand raw text must contain "VISTA"');
   });
 
   it('.skeleton-brand-mark is aria-hidden and has no text content', () => {

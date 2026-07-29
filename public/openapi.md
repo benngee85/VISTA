@@ -1,8 +1,8 @@
-# World Monitor OpenAPI Specification
+# VISTA OpenAPI Specification
 
 Last updated: July 7, 2026
 
-The World Monitor OpenAPI Specification is the machine-readable contract for the World Monitor REST API — the HTTP surface that exposes the same real-time global-intelligence tools and data as the [MCP server](https://worldmonitor.app/mcp-server.md) via granular REST endpoints, returning source-attributed structured JSON. Point your OpenAPI client, code generator, or agent at the spec to discover every endpoint, parameter, and response shape.
+The VISTA OpenAPI Specification is the machine-readable contract for the VISTA REST API — the HTTP surface that exposes the same real-time global-intelligence tools and data as the [MCP server](https://worldmonitor.app/mcp-server.md) via granular REST endpoints, returning source-attributed structured JSON. Point your OpenAPI client, code generator, or agent at the spec to discover every endpoint, parameter, and response shape.
 
 ## The spec
 
@@ -39,8 +39,8 @@ Or skip codegen entirely and use an [official SDK](https://worldmonitor.app/sdks
 
 ## Important query matches
 
-- World Monitor OpenAPI specification
-- World Monitor OpenAPI 3.1 spec
-- World Monitor REST API OpenAPI YAML / JSON
-- Generate a World Monitor API client from OpenAPI
+- VISTA OpenAPI specification
+- VISTA OpenAPI 3.1 spec
+- VISTA REST API OpenAPI YAML / JSON
+- Generate a VISTA API client from OpenAPI
 - Global intelligence REST API spec

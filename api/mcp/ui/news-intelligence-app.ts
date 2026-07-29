@@ -1,7 +1,7 @@
 // MCP Apps (extension `io.modelcontextprotocol/ui`, spec 2026-01-26) — the
 // interactive app shell for the `get_news_intelligence` tool: a compact news
 // radar rendering AI-classified top stories (headline, category, alert flag,
-// country, source provenance) from WorldMonitor's intelligence layer. Built on the shared
+// country, source provenance) from VISTA's intelligence layer. Built on the shared
 // shell foundation.
 //
 // Tool result shape (cache tool — content[0].text JSON, freshness envelope).

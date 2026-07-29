@@ -6,7 +6,7 @@ description: Retrieve real-time equity, index, and ETF quotes with price, change
 
 # get-market-quotes
 
-Use this skill when the user asks for current market prices — a specific ticker, a set of symbols, or a general "how are markets doing" snapshot. Returns price, change, and a short sparkline series per symbol from World Monitor's curated market cache.
+Use this skill when the user asks for current market prices — a specific ticker, a set of symbols, or a general "how are markets doing" snapshot. Returns price, change, and a short sparkline series per symbol from VISTA's curated market cache.
 
 ## Authentication
 

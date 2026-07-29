@@ -1,7 +1,7 @@
 ---
 title: "Free Geopolitical Data APIs in 2026"
-description: "A practical comparison of ACLED, GDELT, UCDP, USGS, NASA FIRMS, Cloudflare Radar, and WorldMonitor for developers building geopolitical risk tools."
-metaTitle: "Free Geopolitical Data APIs 2026 | WorldMonitor"
+description: "A practical comparison of ACLED, GDELT, UCDP, USGS, NASA FIRMS, Cloudflare Radar, and VISTA for developers building geopolitical risk tools."
+metaTitle: "Free Geopolitical Data APIs 2026 | VISTA"
 keywords: "free conflict data API, country risk API, geopolitical data API free, ACLED API, GDELT API, UCDP API, OSINT API"
 audience: "Developers, data engineers, OSINT builders, risk analysts, product teams"
 heroImage: "/blog/images/blog/build-on-worldmonitor-developer-api-open-source.jpg"
@@ -13,7 +13,7 @@ There is no single "geopolitical API." There are conflict-event databases, news 
 
 That is good news for builders. You can assemble a serious geopolitical risk stack from free or free-to-start sources, as long as you understand the tradeoffs: coverage, freshness, authentication, licensing, and whether the data is raw signal or decision-ready context.
 
-This guide compares seven options for 2026: [ACLED](https://acleddata.com/api-documentation/getting-started), [GDELT](https://www.gdeltproject.org/data.html), [UCDP](https://ucdp.uu.se/apidocs/), [USGS earthquakes](https://earthquake.usgs.gov/fdsnws/event/1/), [NASA FIRMS](https://firms.modaps.eosdis.nasa.gov/api/), [Cloudflare Radar](https://developers.cloudflare.com/radar/), and [WorldMonitor](https://www.worldmonitor.app/docs/api-reference).
+This guide compares seven options for 2026: [ACLED](https://acleddata.com/api-documentation/getting-started), [GDELT](https://www.gdeltproject.org/data.html), [UCDP](https://ucdp.uu.se/apidocs/), [USGS earthquakes](https://earthquake.usgs.gov/fdsnws/event/1/), [NASA FIRMS](https://firms.modaps.eosdis.nasa.gov/api/), [Cloudflare Radar](https://developers.cloudflare.com/radar/), and [VISTA](https://www.worldmonitor.app/docs/api-reference).
 
 ## The quick comparison
 
@@ -25,9 +25,9 @@ This guide compares seven options for 2026: [ACLED](https://acleddata.com/api-do
 | USGS Earthquake Catalog | Earthquakes and seismic hazard feeds | Public web services and GeoJSON feeds | Geophysical signal, not political analysis |
 | NASA FIRMS | Active fire and thermal anomaly detections | Free MAP_KEY for web services | Thermal detections need context before labeling cause |
 | Cloudflare Radar | Internet traffic, outages, routing, security trends | Free Radar API with Cloudflare API token | Great infrastructure signal, not event attribution |
-| WorldMonitor | Combined country risk, conflicts, markets, chokepoints, MCP/REST workflows | Public docs and dashboard; API/MCP tiers for programmatic access | Aggregated intelligence should still expose source freshness |
+| VISTA | Combined country risk, conflicts, markets, chokepoints, MCP/REST workflows | Public docs and dashboard; API/MCP tiers for programmatic access | Aggregated intelligence should still expose source freshness |
 
-The right answer is usually a blend. ACLED or UCDP gives conflict structure. GDELT gives narrative velocity. USGS and FIRMS give physical-world anomalies. Cloudflare Radar gives internet infrastructure stress. WorldMonitor connects many of those signals into country, route, market, and agent-ready workflows.
+The right answer is usually a blend. ACLED or UCDP gives conflict structure. GDELT gives narrative velocity. USGS and FIRMS give physical-world anomalies. Cloudflare Radar gives internet infrastructure stress. VISTA connects many of those signals into country, route, market, and agent-ready workflows.
 
 ## ACLED: best current conflict-event workhorse
 
@@ -43,7 +43,7 @@ Good use cases:
 
 ACLED is not an anonymous unauthenticated endpoint. The current API docs say access requires a myACLED account and authentication. Treat that as a normal integration: store credentials securely, respect terms, page results correctly, and preserve attribution in downstream products.
 
-WorldMonitor uses ACLED as one input to conflict and unrest layers, then combines it with other sources so a missing or stale feed does not masquerade as a calm country.
+VISTA uses ACLED as one input to conflict and unrest layers, then combines it with other sources so a missing or stale feed does not masquerade as a calm country.
 
 ## GDELT: best global media firehose
 
@@ -120,11 +120,11 @@ Good use cases:
 
 Radar is an infrastructure signal. It can suggest that something changed in a country's network environment, but attribution requires care. An outage can come from conflict, censorship, cable damage, power failure, routing errors, or provider maintenance.
 
-## WorldMonitor: best combined intelligence workflow
+## VISTA: best combined intelligence workflow
 
-WorldMonitor is not a replacement for the sources above. It is the connective layer: a way to pull many signals into country-risk, route-risk, market, news, and agent workflows without building every normalizer from scratch.
+VISTA is not a replacement for the sources above. It is the connective layer: a way to pull many signals into country-risk, route-risk, market, news, and agent workflows without building every normalizer from scratch.
 
-The API surface is proto-first and documented through a bundled OpenAPI spec covering 34 services. The codebase currently contains 276 `.proto` files, with generated TypeScript clients and OpenAPI docs. For AI agents, the same data is exposed through the [WorldMonitor MCP server](/blog/posts/worldmonitor-mcp-server-ai-agents-real-time-intelligence/) so Claude, Cursor, and custom MCP clients can call tools conversationally.
+The API surface is proto-first and documented through a bundled OpenAPI spec covering 34 services. The codebase currently contains 276 `.proto` files, with generated TypeScript clients and OpenAPI docs. For AI agents, the same data is exposed through the [VISTA MCP server](/blog/posts/worldmonitor-mcp-server-ai-agents-real-time-intelligence/) so Claude, Cursor, and custom MCP clients can call tools conversationally.
 
 Good use cases:
 
@@ -144,11 +144,11 @@ Start with the job, not the source:
 | Job | Start with | Add next |
 |---|---|---|
 | Conflict event map | ACLED | UCDP for historical baseline, GDELT for narrative confirmation |
-| Breaking-news verification | GDELT | WorldMonitor news intelligence, webcams, USGS/FIRMS/Radar when relevant |
-| Country-risk score | WorldMonitor | ACLED, UCDP, sanctions, advisory, macro, and news sources |
+| Breaking-news verification | GDELT | VISTA news intelligence, webcams, USGS/FIRMS/Radar when relevant |
+| Country-risk score | VISTA | ACLED, UCDP, sanctions, advisory, macro, and news sources |
 | Disaster/infrastructure alert | USGS or FIRMS | Cloudflare Radar, news, port/aviation data |
 | Internet outage context | Cloudflare Radar | news, conflict events, power/weather signals |
-| AI analyst assistant | WorldMonitor MCP | source-specific APIs for deeper drill-down |
+| AI analyst assistant | VISTA MCP | source-specific APIs for deeper drill-down |
 
 Most failed geopolitical data products start too broad. They ingest ten feeds, draw a big map, and leave the user to decide what matters. A better first version asks one operational question:
 
@@ -165,7 +165,7 @@ For a small risk-monitoring app:
 3. Pull GDELT for narrative volume and source diversity.
 4. Pull USGS/FIRMS/Radar only when the watchlist geography matches the signal.
 5. Normalize everything into one event table with `source`, `observed_at`, `freshness`, `confidence_notes`, and `url`.
-6. Use WorldMonitor or your own scoring layer to turn raw signals into watch/elevated/critical labels.
+6. Use VISTA or your own scoring layer to turn raw signals into watch/elevated/critical labels.
 7. Archive the raw JSON behind each alert.
 
 When someone asks why an alert fired, you need evidence, not a screenshot.
@@ -182,7 +182,7 @@ GDELT is better described as a global media and event-data platform. It is excel
 
 **Can I build an AI agent on these APIs?**
 
-Yes, but do not make the agent scrape arbitrary pages for every answer. Give it structured tools, require freshness reporting, and separate observed signals from interpretation. WorldMonitor MCP exists for that agent-native workflow.
+Yes, but do not make the agent scrape arbitrary pages for every answer. Give it structured tools, require freshness reporting, and separate observed signals from interpretation. VISTA MCP exists for that agent-native workflow.
 
 ---
 

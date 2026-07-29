@@ -13,8 +13,8 @@ import { pathToFileURL } from 'node:url';
 
 const brotliCompressAsync = promisify(brotliCompress);
 const DESKTOP_AUTH_SECRET_ENV = 'WM_DESKTOP_SHARED_SECRET';
-const DESKTOP_AUTH_TIMESTAMP_HEADER = 'X-WorldMonitor-Desktop-Timestamp';
-const DESKTOP_AUTH_SIGNATURE_HEADER = 'X-WorldMonitor-Desktop-Signature';
+const DESKTOP_AUTH_TIMESTAMP_HEADER = 'X-VISTA-Desktop-Timestamp';
+const DESKTOP_AUTH_SIGNATURE_HEADER = 'X-VISTA-Desktop-Signature';
 const LOCAL_API_TRANSPORT_HEADER = 'x-worldmonitor-local-token';
 
 // Monkey-patch globalThis.fetch to force IPv4 for HTTPS requests.
@@ -908,7 +908,7 @@ function makeCorsHeaders(req) {
   return {
     'Access-Control-Allow-Origin': getSidecarCorsOrigin(req),
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-WorldMonitor-Desktop-Timestamp, X-WorldMonitor-Desktop-Signature',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-VISTA-Desktop-Timestamp, X-VISTA-Desktop-Signature',
     'Access-Control-Max-Age': '86400',
     'Vary': 'Origin',
   };

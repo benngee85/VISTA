@@ -197,7 +197,7 @@ describe('pro built HTML critical CSS contract', () => {
   it('/pro uses its existing no-JavaScript fallback without a hidden duplicate', () => {
     const html = builtSrc('public/pro/index.html');
     assert.match(html, /<div id="root"><\/div>\s*<noscript>/);
-    assert.match(html, /World Monitor Pro/);
+    assert.match(html, /VISTA Pro/);
     assert.doesNotMatch(html, /id="seo-prerender"/);
     assert.doesNotMatch(html, /html\.js #seo-prerender/);
   });

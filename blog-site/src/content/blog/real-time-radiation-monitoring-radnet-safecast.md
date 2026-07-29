@@ -1,7 +1,7 @@
 ---
 title: "Real-Time Radiation Monitoring: Read the Sensors, Not the Rumors"
-description: "WorldMonitor merges EPA RadNet stations and the Safecast citizen-sensor network into a live radiation layer, with nuclear sites and IAEA irradiators for context."
-metaTitle: "Real-Time Radiation Monitoring Map | WorldMonitor"
+description: "VISTA merges EPA RadNet stations and the Safecast citizen-sensor network into a live radiation layer, with nuclear sites and IAEA irradiators for context."
+metaTitle: "Real-Time Radiation Monitoring Map | VISTA"
 keywords: "real time radiation map, radiation levels live, nuclear radiation monitoring, Safecast radiation data, EPA RadNet, radiation monitoring dashboard"
 audience: "OSINT analysts, journalists, researchers, emergency-preparedness planners, concerned readers during nuclear events"
 heroImage: "/blog/images/blog/real-time-radiation-monitoring-radnet-safecast.jpg"
@@ -11,7 +11,7 @@ modifiedDate: "2026-07-22"
 
 Every nuclear scare follows the same script. An incident at a plant, shelling near a reactor, a test rumor — and within an hour, social media fills with screenshots of dosimeters, decade-old maps, and numbers with no units. Radiation is uniquely suited to panic because it's invisible, poorly understood, and genuinely serious when real.
 
-It's also one of the best-instrumented hazards on Earth. The sane response to a radiation rumor is to read the sensor networks — which is exactly what WorldMonitor's Radiation Watch does.
+It's also one of the best-instrumented hazards on Earth. The sane response to a radiation rumor is to read the sensor networks — which is exactly what VISTA's Radiation Watch does.
 
 ## Two networks, merged
 
@@ -66,11 +66,11 @@ Two merged networks: the US EPA's RadNet fixed monitoring stations and the globa
 
 **Why do some regions show no readings?**
 
-Because no public sensors report there. Coverage follows sensor deployment, not risk. WorldMonitor shows gaps as gaps rather than interpolating reassuring values.
+Because no public sensors report there. Coverage follows sensor deployment, not risk. VISTA shows gaps as gaps rather than interpolating reassuring values.
 
 **What should I do if readings genuinely rise near me?**
 
-Follow official emergency guidance for your area. WorldMonitor is a situational-awareness tool for understanding events; it is not an emergency-alert or civil-defense system.
+Follow official emergency guidance for your area. VISTA is a situational-awareness tool for understanding events; it is not an emergency-alert or civil-defense system.
 
 ---
 

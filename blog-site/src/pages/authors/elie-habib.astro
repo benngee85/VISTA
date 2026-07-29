@@ -2,14 +2,14 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 
-const DEFAULT_AUTHOR = 'Elie Habib';
+const DEFAULT_AUTHOR = 'MercuryLink Concepts';
 const posts = (await getCollection('blog'))
   .filter((post) => (post.data.author || DEFAULT_AUTHOR) === DEFAULT_AUTHOR)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const profileUrl = 'https://www.worldmonitor.app/blog/authors/elie-habib/';
 const personId = `${profileUrl}#person`;
-const description = 'Founder of World Monitor and former co-founder and CEO of Anghami, writing about open-source global intelligence, OSINT, markets, and AI.';
+const description = 'Founder of VISTA and former co-founder and CEO of Anghami, writing about open-source global intelligence, OSINT, markets, and AI.';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -18,21 +18,21 @@ const jsonLd = {
       '@type': 'ProfilePage',
       '@id': `${profileUrl}#profile`,
       url: profileUrl,
-      name: 'Elie Habib — World Monitor',
+      name: 'MercuryLink Concepts — VISTA',
       description,
       mainEntity: { '@id': personId },
     },
     {
       '@type': 'Person',
       '@id': personId,
-      name: 'Elie Habib',
+      name: 'MercuryLink Concepts',
       url: profileUrl,
       image: 'https://unavatar.io/github/koala73',
-      jobTitle: 'Founder of World Monitor',
+      jobTitle: 'Founder of VISTA',
       worksFor: {
         '@type': 'Organization',
         '@id': 'https://www.worldmonitor.app/#organization',
-        name: 'World Monitor',
+        name: 'VISTA',
         url: 'https://www.worldmonitor.app',
       },
       sameAs: [
@@ -52,9 +52,9 @@ const jsonLd = {
 ---
 
 <Base
-  title="Elie Habib"
+  title="MercuryLink Concepts"
   description={description}
-  metaTitle="Elie Habib, Founder of World Monitor"
+  metaTitle="MercuryLink Concepts, Founder of VISTA"
   canonicalUrl={profileUrl}
   ogType="profile"
   jsonLd={jsonLd}
@@ -63,7 +63,7 @@ const jsonLd = {
     <header class="author-page-header">
       <img
         src="https://unavatar.io/github/koala73"
-        alt="Elie Habib"
+        alt="MercuryLink Concepts"
         width="112"
         height="112"
         class="author-page-avatar"
@@ -72,14 +72,14 @@ const jsonLd = {
       />
       <div>
         <p class="author-page-label">Author</p>
-        <h1>Elie Habib</h1>
-        <p class="author-page-role">Founder of World Monitor</p>
+        <h1>MercuryLink Concepts</h1>
+        <p class="author-page-role">Founder of VISTA</p>
       </div>
     </header>
 
     <div class="prose author-page-bio">
       <p>
-        Elie Habib is the founder of World Monitor, an open-source platform for real-time global
+        MercuryLink Concepts is the founder of VISTA, an open-source platform for real-time global
         intelligence. He previously co-founded and led Anghami (NASDAQ: ANGH). His work focuses on
         making geopolitical, market, infrastructure, and
         public-source intelligence accessible to analysts, journalists, developers, and the public.
@@ -91,7 +91,7 @@ const jsonLd = {
     </div>
 
     <section class="author-articles" aria-labelledby="author-articles-title">
-      <h2 id="author-articles-title">Articles by Elie Habib</h2>
+      <h2 id="author-articles-title">Articles by MercuryLink Concepts</h2>
       <div class="author-article-list">
         {posts.map((post) => (
           <a href={`/blog/posts/${post.id}/`} class="author-article">

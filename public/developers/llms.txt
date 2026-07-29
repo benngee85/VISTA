@@ -1,6 +1,6 @@
-# World Monitor Developer Portal
+# VISTA Developer Portal
 
-> Section-scoped llms.txt for the developer surface — the MCP server, REST API, SDKs, CLI, sandbox, and agent skills that expose World Monitor's real-time global-intelligence data as structured JSON. Fetch this file instead of the site-wide briefing when the task is "build against or integrate World Monitor".
+> Section-scoped llms.txt for the developer surface — the MCP server, REST API, SDKs, CLI, sandbox, and agent skills that expose VISTA's real-time global-intelligence data as structured JSON. Fetch this file instead of the site-wide briefing when the task is "build against or integrate VISTA".
 
 All developer surfaces share one auth model (API key `X-WorldMonitor-Key: wm_<40-hex>` or OAuth 2.1 `scope=mcp`) and one tool inventory. Every surface returns source-attributed structured JSON and supports server-side JMESPath projection.
 

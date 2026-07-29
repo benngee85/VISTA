@@ -6,7 +6,7 @@ export async function GET() {
   );
 
   const lines = [
-    '# World Monitor Blog',
+    '# VISTA Blog',
     '',
     '> Analysis, practical guides, and methodology for real-time global intelligence, OSINT, geopolitics, markets, supply chains, and AI agents.',
     '',
@@ -23,7 +23,7 @@ export async function GET() {
     '',
     '## Related machine-readable resources',
     '',
-    '- [World Monitor overview](https://www.worldmonitor.app/llms.txt)',
+    '- [VISTA overview](https://www.worldmonitor.app/llms.txt)',
     '- [Extended platform reference](https://www.worldmonitor.app/llms-full.txt)',
     '- [Developer and API reference](https://www.worldmonitor.app/api/llms.txt)',
     '- [Global intelligence glossary](https://www.worldmonitor.app/blog/glossary/)',

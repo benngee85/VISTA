@@ -38,10 +38,10 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
 });
 const isoDate = pubDate.toISOString();
 const isoModifiedDate = modifiedDate ? modifiedDate.toISOString() : isoDate;
-const DEFAULT_AUTHOR = 'Elie Habib';
+const DEFAULT_AUTHOR = 'MercuryLink Concepts';
 const DEFAULT_AUTHOR_URL = 'https://www.worldmonitor.app/blog/authors/elie-habib/';
 const DEFAULT_AUTHOR_ID = `${DEFAULT_AUTHOR_URL}#person`;
-const DEFAULT_AUTHOR_BIO = 'Founder of World Monitor. Previously co-founder &amp; CEO of Anghami (NASDAQ: ANGH). Building open-source global intelligence infrastructure.';
+const DEFAULT_AUTHOR_BIO = 'Founder of VISTA. Previously co-founder &amp; CEO of Anghami (NASDAQ: ANGH). Building open-source global intelligence infrastructure.';
 const DEFAULT_AUTHOR_GITHUB = 'koala73';
 const DEFAULT_SECTION = 'Global Intelligence';
 const authorName = author || DEFAULT_AUTHOR;
@@ -135,7 +135,7 @@ const jsonLd = {
   "publisher": {
     "@type": "Organization",
     "@id": "https://www.worldmonitor.app/#organization",
-    "name": "World Monitor",
+    "name": "VISTA",
     "url": "https://www.worldmonitor.app",
     "sameAs": [
       "https://github.com/koala73/worldmonitor",
@@ -155,7 +155,7 @@ const jsonLd = {
   "isPartOf": {
     "@type": "Blog",
     "@id": "https://www.worldmonitor.app/blog/#blog",
-    "name": "World Monitor Blog",
+    "name": "VISTA Blog",
     "url": "https://www.worldmonitor.app/blog/"
   },
   ...(citations.length > 0 ? { "citation": citations } : {}),
@@ -198,7 +198,7 @@ const faqLd = extractFaqLd(rawBody);
   keywords={keywords}
   ogType="article"
   ogImage={ogImage}
-  ogImageAlt={`${title} - World Monitor Blog`}
+  ogImageAlt={`${title} - VISTA Blog`}
   canonicalUrl={canonicalUrl}
   publishedTime={isoDate}
   modifiedTime={isoModifiedDate}

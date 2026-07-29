@@ -14356,7 +14356,7 @@ a.prediction-link:hover {
     display: none !important;
   }
 
-  /* Mobile: show "World Monitor" instead of "MONITOR" */
+  /* Mobile: show "VISTA" instead of "MONITOR" */
   .logo {
     display: none;
   }

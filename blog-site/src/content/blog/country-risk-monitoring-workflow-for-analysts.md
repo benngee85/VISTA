@@ -1,7 +1,7 @@
 ---
 title: "Monitor Country Risk Like an Intelligence Agency"
 description: "A four-step country risk workflow: baseline scores, dossier deep-dives, continuous watch, and automated alerts across free and Pro tools."
-metaTitle: "Country Risk Monitoring Workflow | World Monitor"
+metaTitle: "Country Risk Monitoring Workflow | VISTA"
 keywords: "country risk monitoring, geopolitical risk assessment workflow, political risk analysis tools, country risk analysis free, monitor country instability"
 audience: "Risk analysts, corporate security teams, procurement and supply chain managers, investors, NGO security officers"
 heroImage: "/blog/images/blog/country-risk-monitoring-workflow-for-analysts.jpg"
@@ -48,7 +48,7 @@ Write down, per country, the two or three signals that would change your posture
 Continuous does not mean constant. It means the same checks, every day, so deviations stand out:
 
 1. **CII panel, sorted by 24-hour delta.** Ignore the levels; read the movers. A jump from 45 to 53 in one day is more informative than a static 70 you already knew about.
-2. **Hotspot trends.** World Monitor tracks 29 named hotspots with escalation scores built from news velocity, instability, geographic convergence, and military activity, plus a 24-hour trend (escalating / stable / de-escalating) fitted over 48 half-hour snapshots. Escalating hotspots near your countries are your early warning.
+2. **Hotspot trends.** VISTA tracks 29 named hotspots with escalation scores built from news velocity, instability, geographic convergence, and military activity, plus a 24-hour trend (escalating / stable / de-escalating) fitted over 48 half-hour snapshots. Escalating hotspots near your countries are your early warning.
 3. **Custom monitors.** Add your supplier cities, project names, or commodity terms as keyword monitors. Matching items get highlighted across every news panel. This is how "minor news about a minor port" stops slipping past you.
 4. **Convergence alerts.** When three or more independent event types (protests, military flights, naval vessels, earthquakes) cluster in the same one-degree cell within 24 hours, the platform flags it. Convergence of independent signals is the classic indicator that something real is happening, long before a narrative forms.
 
@@ -85,7 +85,7 @@ Use the workflow to prioritize deeper checks in authoritative datasets, includin
 
 Instability (CII) measures short-horizon stress: what is happening now and this week. Country risk in the broad sense also includes structural fragility (resilience), exposure pathways (infrastructure, chokepoints), and persistence (sanctions, advisories). A complete picture needs both clocks.
 
-**How many countries does World Monitor score?**
+**How many countries does VISTA score?**
 
 The Country Instability Index covers 31 Tier-1 countries with full real-time signal fusion; resilience scores cover 196 countries. Country briefs, conflict events, advisories, and news signals are global.
 

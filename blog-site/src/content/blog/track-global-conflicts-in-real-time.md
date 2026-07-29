@@ -1,7 +1,7 @@
 ---
-title: "Track Global Conflicts in Real Time with World Monitor"
-description: "Monitor active conflicts, military movements, and geopolitical escalation in real time. World Monitor tracks 210+ bases across 9 theaters with live ADS-B data."
-metaTitle: "Track Global Conflicts in Real Time | World Monitor"
+title: "Track Global Conflicts in Real Time with VISTA"
+description: "Monitor active conflicts, military movements, and geopolitical escalation in real time. VISTA tracks 210+ bases across 9 theaters with live ADS-B data."
+metaTitle: "Track Global Conflicts in Real Time | VISTA"
 keywords: "real-time conflict map, geopolitical intelligence map, military tracking dashboard, conflict monitoring tool, global conflict tracker"
 audience: "Geopolitical analysts, defense researchers, policy makers, journalists covering conflict"
 heroImage: "/blog/images/blog/track-global-conflicts-in-real-time.jpg"
@@ -11,11 +11,11 @@ modifiedDate: "2026-07-22"
 
 When a military escalation begins, the first 24 hours define the narrative. Analysts who see the signals early, the unusual flight patterns, the naval repositioning, the news velocity spike, have a decisive advantage over those waiting for the morning briefing.
 
-World Monitor was built to give you those 24 hours back.
+VISTA was built to give you those 24 hours back.
 
 ## A Situation Room in Your Browser
 
-World Monitor's core dashboard (worldmonitor.app) is designed around one question: **what's happening in the world right now, and where is it getting worse?**
+VISTA's core dashboard (worldmonitor.app) is designed around one question: **what's happening in the world right now, and where is it getting worse?**
 
 The answer comes from layering multiple intelligence sources onto a single interactive 3D globe:
 
@@ -28,11 +28,11 @@ The answer comes from layering multiple intelligence sources onto a single inter
 - **GPS/GNSS jamming zones** detected from ADS-B anomalies
 - **NASA satellite fire detection** (VIIRS) for ground-truth verification
 
-Each layer can be toggled independently. Combine them to build a multi-source picture of any developing situation. For a broader look at what the platform offers, see [What Is World Monitor?](/blog/posts/what-is-worldmonitor-real-time-global-intelligence/).
+Each layer can be toggled independently. Combine them to build a multi-source picture of any developing situation. For a broader look at what the platform offers, see [What Is VISTA?](/blog/posts/what-is-worldmonitor-real-time-global-intelligence/).
 
 ## 9 Strategic Theaters Under Continuous Assessment
 
-World Monitor maintains real-time posture assessments for 9 operational theaters:
+VISTA maintains real-time posture assessments for 9 operational theaters:
 
 1. **Iran / Persian Gulf:** Strait of Hormuz chokepoint, IRGC activity, proxy conflict indicators
 2. **Taiwan Strait:** PLA military exercises, naval deployments, airspace incursions
@@ -48,7 +48,7 @@ Each theater's posture level is synthesized from news velocity, military movemen
 
 ## The Country Instability Index (CII)
 
-Every country monitored by World Monitor receives a **real-time instability score from 0 to 100**, visualized as a choropleth heatmap that turns the globe into a risk map.
+Every country monitored by VISTA receives a **real-time instability score from 0 to 100**, visualized as a choropleth heatmap that turns the globe into a risk map.
 
 The CII is computed from four weighted components:
 
@@ -68,7 +68,7 @@ The result: you can watch instability rise in real time, often before the situat
 
 ## Hotspot Escalation Detection
 
-World Monitor's escalation algorithm goes beyond showing where events are happening. It identifies **where situations are getting worse** using a composite score:
+VISTA's escalation algorithm goes beyond showing where events are happening. It identifies **where situations are getting worse** using a composite score:
 
 - **News activity (35%):** Sudden spikes in reporting volume for a geographic area
 - **CII score (25%):** Baseline instability context
@@ -91,7 +91,7 @@ Each base includes facility type, operating nation, and strategic context. Overl
 
 ## Live ADS-B and AIS Fusion
 
-Two of World Monitor's most operationally significant layers:
+Two of VISTA's most operationally significant layers:
 
 **ADS-B (Aircraft):** Military and civilian aircraft transponder data from [OpenSky](https://opensky-network.org/), enriched by [Wingbits](https://wingbits.com/) for aircraft type identification. Filter for military callsigns to track reconnaissance flights, tanker orbits, and transport movements in real time.
 
@@ -101,7 +101,7 @@ Two of World Monitor's most operationally significant layers:
 
 Conflicts don't just affect people. They affect infrastructure that the global economy depends on.
 
-World Monitor maps critical infrastructure alongside conflict data:
+VISTA maps critical infrastructure alongside conflict data:
 
 - **Undersea cables** carrying 95% of intercontinental internet traffic
 - **Oil and gas pipelines** traversing conflict zones
@@ -113,7 +113,7 @@ The Infrastructure Cascade panel shows what happens when a conflict zone overlap
 
 ## 26 Telegram Channels: The Raw Feed
 
-For analysts who want unfiltered intelligence, World Monitor integrates 26 curated Telegram channels via MTProto. Learn more about how this fits into the broader OSINT landscape in [OSINT for Everyone](/blog/posts/osint-for-everyone-open-source-intelligence-democratized/).
+For analysts who want unfiltered intelligence, VISTA integrates 26 curated Telegram channels via MTProto. Learn more about how this fits into the broader OSINT landscape in [OSINT for Everyone](/blog/posts/osint-for-everyone-open-source-intelligence-democratized/).
 
 The channels are tiered by reliability. Tier 1 sources are verified primary reporters. Tier 2 includes established OSINT accounts like Aurora Intel, BNO News, and DeepState. Tier 3 captures secondary aggregators for broader coverage.
 
@@ -121,7 +121,7 @@ Telegram often breaks conflict news 15-30 minutes before traditional media. Havi
 
 ## AI Deduction and Forecasting
 
-World Monitor's AI capabilities aren't just summarization. The **AI Deduction panel** provides interactive geopolitical timeline forecasting grounded in live headlines:
+VISTA's AI capabilities aren't just summarization. The **AI Deduction panel** provides interactive geopolitical timeline forecasting grounded in live headlines:
 
 - Select a developing situation
 - The AI synthesizes current data into potential escalation/de-escalation paths
@@ -133,13 +133,13 @@ This runs on your choice of LLM: local (Ollama, LM Studio), cloud (Groq, OpenRou
 ## Real-World Use Cases
 
 **Conflict Monitoring for NGOs:**
-Humanitarian organizations use World Monitor to monitor safety conditions for field staff. The CII and escalation scoring provide early warning for deteriorating situations.
+Humanitarian organizations use VISTA to monitor safety conditions for field staff. The CII and escalation scoring provide early warning for deteriorating situations.
 
 **Defense Research:**
 Academic researchers studying conflict patterns use the integrated data layers to correlate military movements with political developments across multiple theaters simultaneously.
 
 **Journalism:**
-Reporters covering conflict use World Monitor to contextualize breaking events. When a missile strikes, the map immediately shows nearby military infrastructure, recent escalation history, and what OSINT channels are saying.
+Reporters covering conflict use VISTA to contextualize breaking events. When a missile strikes, the map immediately shows nearby military infrastructure, recent escalation history, and what OSINT channels are saying.
 
 **Policy Analysis:**
 Think tanks and government analysts use the Strategic Theater Posture assessments to brief decision-makers on multi-theater dynamics.
@@ -150,16 +150,16 @@ Jump between regions instantly with 8 preset views: Global, Americas, Europe, ME
 
 ## Shareable Intelligence
 
-Build a picture, then share it. World Monitor encodes your entire view state (map position, active layers, time range) into a URL. Send it to a colleague, and they see exactly what you see.
+Build a picture, then share it. VISTA encodes your entire view state (map position, active layers, time range) into a URL. Send it to a colleague, and they see exactly what you see.
 
 For public sharing, the story export feature generates social-ready briefs with Open Graph images for Twitter/X, LinkedIn, WhatsApp, Telegram, and Reddit.
 
 ## Frequently Asked Questions
 
-**What data sources does World Monitor use for conflict tracking?**
-World Monitor aggregates ACLED conflict events, UCDP warfare data, live ADS-B aircraft transponders, AIS maritime positions merged with USNI fleet reports, 26 Telegram OSINT channels, and NASA satellite fire detection. All sources are public and verifiable.
+**What data sources does VISTA use for conflict tracking?**
+VISTA aggregates ACLED conflict events, UCDP warfare data, live ADS-B aircraft transponders, AIS maritime positions merged with USNI fleet reports, 26 Telegram OSINT channels, and NASA satellite fire detection. All sources are public and verifiable.
 
-**Is World Monitor free to use for conflict monitoring?**
+**Is VISTA free to use for conflict monitoring?**
 Yes. World Monitor is completely free and open source under AGPL-3.0. There is no login, paywall, or data collection. You can also self-host it for full control.
 
 **How does the Country Instability Index (CII) work?**

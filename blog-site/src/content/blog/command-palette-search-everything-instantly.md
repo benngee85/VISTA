@@ -1,7 +1,7 @@
 ---
 title: "Cmd+K: Search Everything on the Planet in Under a Second"
-description: "Fuzzy-search 195 countries, 56 map layers, and 150+ commands with World Monitor's Cmd+K palette. Multilingual, keyboard-driven intelligence access."
-metaTitle: "Cmd+K Intelligence Search Palette | World Monitor"
+description: "Fuzzy-search 195 countries, 56 map layers, and 150+ commands with VISTA's Cmd+K palette. Multilingual, keyboard-driven intelligence access."
+metaTitle: "Cmd+K Intelligence Search Palette | VISTA"
 keywords: "intelligence dashboard search, command palette dashboard, OSINT search tool, fast country intelligence lookup, keyboard-driven intelligence"
 audience: "Power users, analysts, developers, keyboard-first professionals"
 heroImage: "/blog/images/blog/command-palette-search-everything-instantly.jpg"
@@ -11,11 +11,11 @@ modifiedDate: "2026-07-22"
 
 You're monitoring a developing situation. News breaks about a military incident in the South China Sea. You need Taiwan's intelligence dossier, the military bases layer, the AIS maritime panel, and the strategic theater posture, right now.
 
-In most dashboards, that's four separate navigation actions. In World Monitor, it's one: **Cmd+K** (or Ctrl+K on Windows/Linux), type what you need, hit Enter. This is one of the key advantages that sets World Monitor apart from [traditional intelligence tools](/blog/posts/worldmonitor-vs-traditional-intelligence-tools/).
+In most dashboards, that's four separate navigation actions. In VISTA, it's one: **Cmd+K** (or Ctrl+K on Windows/Linux), type what you need, hit Enter. This is one of the key advantages that sets VISTA apart from [traditional intelligence tools](/blog/posts/worldmonitor-vs-traditional-intelligence-tools/).
 
 ## The 150+ Command Universe
 
-World Monitor's command palette is a fuzzy-search interface that spans the entire platform. Hit Cmd+K and you can access:
+VISTA's command palette is a fuzzy-search interface that spans the entire platform. Hit Cmd+K and you can access:
 
 ### Countries (195)
 
@@ -86,7 +86,7 @@ The entire palette is keyboard-driven:
 - **Escape**: Close palette
 - **Type**: Refine search in real time
 
-No mouse needed. For analysts who live in the keyboard, this means World Monitor's entire intelligence platform is accessible without touching a pointing device.
+No mouse needed. For analysts who live in the keyboard, this means VISTA's entire intelligence platform is accessible without touching a pointing device.
 
 ## Mobile Search Experience
 
@@ -127,13 +127,13 @@ The command palette is panel-aware. When you have specific panels open, related 
 3. Cmd+K → "prediction" → Enter ([Polymarket](https://polymarket.com/))
 4. Cmd+K → "commodity" → Enter (price panel)
 
-The command palette turns World Monitor from a visual dashboard into a queryable intelligence system. Ask it anything, get there instantly. Explore the [five dashboard variants](/blog/posts/five-dashboards-one-platform-worldmonitor-variants/) to see how the palette adapts to different operational contexts.
+The command palette turns VISTA from a visual dashboard into a queryable intelligence system. Ask it anything, get there instantly. Explore the [five dashboard variants](/blog/posts/five-dashboards-one-platform-worldmonitor-variants/) to see how the palette adapts to different operational contexts.
 
 ## Why It Matters
 
 In intelligence analysis, **time to insight** is the critical metric. Every second spent navigating menus, scrolling sidebars, or clicking through panels is a second you're not analyzing.
 
-World Monitor's Cmd+K reduces the path from question to answer to a single search query. Type what you need, press Enter, and you're looking at it. For professionals who make time-sensitive decisions based on global intelligence, that speed compounds into a significant advantage.
+VISTA's Cmd+K reduces the path from question to answer to a single search query. Type what you need, press Enter, and you're looking at it. For professionals who make time-sensitive decisions based on global intelligence, that speed compounds into a significant advantage.
 
 ## Frequently Asked Questions
 

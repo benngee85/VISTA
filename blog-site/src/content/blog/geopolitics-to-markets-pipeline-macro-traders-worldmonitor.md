@@ -1,7 +1,7 @@
 ---
 title: "The Geopolitics-to-Markets Pipeline for Macro Traders"
 description: "Translate geopolitical events into market watchlists with transmission paths, macro radar, commodities, forecasts, stablecoins, and source-backed context."
-metaTitle: "Geopolitics-to-Markets Pipeline | WorldMonitor"
+metaTitle: "Geopolitics-to-Markets Pipeline | VISTA"
 keywords: "geopolitics to markets, macro trading workflow, geopolitical market risk, market implications, macro radar, commodity risk"
 audience: "Macro traders, portfolio managers, market strategists, risk analysts"
 heroImage: "/blog/images/blog/geopolitics-to-markets-pipeline-macro-traders-worldmonitor.jpg"
@@ -15,7 +15,7 @@ The useful question for a macro trader is not "is this event important?" It is:
 
 > Through which transmission path could this event reach prices, positioning, liquidity, or policy?
 
-This is the geopolitics-to-markets pipeline: event, transmission path, market surface, confirmation, decision. WorldMonitor's finance and intelligence surfaces are designed to support that workflow without turning every headline into a trade signal.
+This is the geopolitics-to-markets pipeline: event, transmission path, market surface, confirmation, decision. VISTA's finance and intelligence surfaces are designed to support that workflow without turning every headline into a trade signal.
 
 This is not investment advice. It is a research workflow for organizing geopolitical context before a trading or risk discussion.
 
@@ -46,7 +46,7 @@ For a tariff shock, it might include affected HS chapters, importers, exporters,
 
 For a cyber infrastructure event, it might include affected country risk, internet-outage context, cyber-threat feeds, exchange operating status, cloud infrastructure, and safe-haven behavior.
 
-WorldMonitor helps because the same workspace contains country risk, supply chain, commodities, finance, forecasts, and news context. The value is not one magic signal. It is that the analyst can move from event to affected surfaces without rebuilding the context every time.
+VISTA helps because the same workspace contains country risk, supply chain, commodities, finance, forecasts, and news context. The value is not one magic signal. It is that the analyst can move from event to affected surfaces without rebuilding the context every time.
 
 ## Step 3: check the macro regime
 
@@ -66,7 +66,7 @@ This is where many workflows improve: before deciding "event X means asset Y," a
 
 ## Step 4: seek confirmation, not certainty
 
-WorldMonitor has several confirmation surfaces that help avoid headline overreaction:
+VISTA has several confirmation surfaces that help avoid headline overreaction:
 
 - commodities and energy panels for price and inventory context
 - supply-chain chokepoints for route and flow stress
@@ -110,7 +110,7 @@ For adjacent market surfaces, see the [real-time market intelligence workflow](/
 
 ## Source transparency
 
-WorldMonitor combines market, commodity, trade, chokepoint, forecast, news, country-risk, and prediction-market context. Some surfaces are public. Some are PRO-gated. Some are daily or hourly. Some are market-hours dependent. A good analyst records source freshness and treats model outputs as structured context, not certainty.
+VISTA combines market, commodity, trade, chokepoint, forecast, news, country-risk, and prediction-market context. Some surfaces are public. Some are PRO-gated. Some are daily or hourly. Some are market-hours dependent. A good analyst records source freshness and treats model outputs as structured context, not certainty.
 
 The point is to reduce unstructured narrative risk. The tool should help you say, "Here is the channel, here is the evidence, here is what would prove me wrong."
 
@@ -120,7 +120,7 @@ For the underlying macro series, use primary releases such as [FRED from the Fed
 
 **Is this a trading signal system?**
 
-No. It is a research and risk workflow. WorldMonitor can surface market implications and macro context, but the analyst still owns suitability, risk, execution, and compliance.
+No. It is a research and risk workflow. VISTA can surface market implications and macro context, but the analyst still owns suitability, risk, execution, and compliance.
 
 **What is the most important step?**
 

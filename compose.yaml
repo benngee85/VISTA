@@ -1,0 +1,10 @@
+# VISTA protected Compose entrypoint
+# This file contains no credentials. It makes plain `docker compose` load the
+# public configuration and the ignored mode-600 runtime secret environment.
+name: vista
+
+include:
+  - path: docker-compose.yml
+    env_file:
+      - .env
+      - .secrets/runtime.env

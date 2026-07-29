@@ -1,7 +1,7 @@
 ---
 title: "Track Refugee and Displacement Flows with UNHCR Data"
-description: "WorldMonitor maps refugee and IDP populations from UNHCR's official API — displacement flows on the map, a dedicated panel, and structured data for agents."
-metaTitle: "Refugee & Displacement Tracking | WorldMonitor"
+description: "VISTA maps refugee and IDP populations from UNHCR's official API — displacement flows on the map, a dedicated panel, and structured data for agents."
+metaTitle: "Refugee & Displacement Tracking | VISTA"
 keywords: "refugee flow data, displacement tracking dashboard, UNHCR data visualization, IDP monitoring, forced displacement statistics, displacement data API"
 audience: "Humanitarian and NGO teams, researchers, journalists, policy analysts, students"
 heroImage: "/blog/images/blog/track-refugee-displacement-flows-unhcr-worldmonitor.jpg"
@@ -11,7 +11,7 @@ modifiedDate: "2026-07-22"
 
 Displacement is the human ledger of every crisis. Conflict, drought, floods, economic collapse — whatever the driver, people moving in numbers is both the consequence that matters most and one of the most reliable indicators that a situation has crossed from tension into emergency.
 
-WorldMonitor builds displacement into the same dashboard as the conflicts, disasters, and risk scores that drive it.
+VISTA builds displacement into the same dashboard as the conflicts, disasters, and risk scores that drive it.
 
 ## What the displacement layer shows
 
@@ -51,7 +51,7 @@ UNHCR's official population API — refugee populations by origin and asylum cou
 
 **Is it real-time?**
 
-No, and no honest tool would claim otherwise. Official displacement statistics follow reporting cycles. WorldMonitor pairs them with real-time layers — conflict events, disasters, news — so you can see the leading edge and the confirmed magnitude side by side.
+No, and no honest tool would claim otherwise. Official displacement statistics follow reporting cycles. VISTA pairs them with real-time layers — conflict events, disasters, news — so you can see the leading edge and the confirmed magnitude side by side.
 
 **Can I use this data in my own analysis or app?**
 

@@ -15,7 +15,7 @@ const posts = (await getCollection('blog')).sort(
 // render at ~340-540px, so the 640w thumb covers 1x displays and the full
 // WebP covers high-DPI ones.
 
-const DEFAULT_AUTHOR = 'Elie Habib';
+const DEFAULT_AUTHOR = 'MercuryLink Concepts';
 const DEFAULT_AUTHOR_URL = 'https://www.worldmonitor.app/blog/authors/elie-habib/';
 const DEFAULT_AUTHOR_ID = `${DEFAULT_AUTHOR_URL}#person`;
 
@@ -23,14 +23,14 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Blog",
   "@id": "https://www.worldmonitor.app/blog/#blog",
-  "name": "World Monitor Blog",
-  "description": "Analysis, guides, and deep dives on real-time intelligence, OSINT, geopolitics, markets, and the open-source tools behind World Monitor.",
+  "name": "VISTA Blog",
+  "description": "Analysis, guides, and deep dives on real-time intelligence, OSINT, geopolitics, markets, and the open-source tools behind VISTA.",
   "url": "https://www.worldmonitor.app/blog/",
   "inLanguage": "en-US",
   "publisher": {
     "@type": "Organization",
     "@id": "https://www.worldmonitor.app/#organization",
-    "name": "World Monitor",
+    "name": "VISTA",
     "url": "https://www.worldmonitor.app",
     "logo": {
       "@type": "ImageObject",
@@ -62,9 +62,9 @@ const jsonLd = {
 ---
 
 <Base
-  title="World Monitor Blog"
+  title="VISTA Blog"
   description="Insights on real-time global intelligence, OSINT, geopolitics, markets, and the open-source tools that power situational awareness."
-  metaTitle="World Monitor Blog | Global Intelligence & OSINT"
+  metaTitle="VISTA Blog | Global Intelligence & OSINT"
   jsonLd={jsonLd}
 >
   <div class="blog-hero">
@@ -74,7 +74,7 @@ const jsonLd = {
     </div>
     <h1>Noise<span class="green">.</span>Signal<span class="green">.</span>Blog</h1>
     <p class="subtitle">
-      Analysis, guides, and deep dives on real-time intelligence, OSINT, geopolitics, markets, and the open-source tools behind World Monitor.
+      Analysis, guides, and deep dives on real-time intelligence, OSINT, geopolitics, markets, and the open-source tools behind VISTA.
     </p>
   </div>
   <div class="blog-list">

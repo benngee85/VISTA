@@ -39,9 +39,9 @@ test('built welcome page ships the real hero in #root before JavaScript', () => 
   assert.match(rootContent, /Launch the dashboard/);
   assert.match(rootContent, /Open source · AGPL-3\.0/);
   assert.match(rootContent, /href="\/blog\/posts\/worldmonitor-is-not-palantir\/"/);
-  assert.match(rootContent, /WorldMonitor is not an open-source Palantir/);
-  assert.match(rootContent, /Which World Monitor license do I need\?/);
-  assert.match(rootContent, /API Business lets that organization embed World Monitor data/);
+  assert.match(rootContent, /VISTA is not an open-source Palantir/);
+  assert.match(rootContent, /Which VISTA license do I need\?/);
+  assert.match(rootContent, /API Business lets that organization embed VISTA data/);
   assert.match(rootContent, /href="\/docs\/terms"[^>]*>worldmonitor\.app\/docs\/terms<\/a>/);
   assert.match(rootContent, /Map layers/);
   const navContent = rootContent.slice(

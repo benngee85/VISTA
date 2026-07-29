@@ -1,6 +1,6 @@
 ---
-title: "OSINT for Everyone: Open Source Intelligence with World Monitor"
-description: "World Monitor brings professional-grade OSINT to everyone. 500+ feeds, live tracking, AI threat analysis, and 56 map layers in one free open source dashboard."
+title: "OSINT for Everyone: Open Source Intelligence with VISTA"
+description: "VISTA brings professional-grade OSINT to everyone. 500+ feeds, live tracking, AI threat analysis, and 56 map layers in one free open source dashboard."
 metaTitle: "OSINT for Everyone: Free Intelligence Dashboard"
 keywords: "OSINT tools free, open source intelligence software, OSINT dashboard, intelligence gathering tools, OSINT for beginners"
 audience: "OSINT researchers, security analysts, journalists, hobbyist investigators"
@@ -11,7 +11,7 @@ modifiedDate: "2026-07-22"
 
 Open source intelligence used to require a dozen subscriptions, custom scrapers, and years of domain expertise. A professional OSINT analyst's browser might have 50+ tabs open at any given time: flight trackers, ship trackers, earthquake monitors, conflict databases, Telegram channels, RSS readers, and satellite imagery viewers.
 
-World Monitor collapses that entire workflow into a single interactive dashboard.
+VISTA collapses that entire workflow into a single interactive dashboard.
 
 ## The Tab Sprawl Problem
 
@@ -30,11 +30,11 @@ If you've ever tried to monitor a developing situation, whether it's a military 
 
 Each tool has its own interface, its own refresh cycle, its own learning curve. Cross-referencing between them is manual and slow. By the time you've built a picture, the situation has moved.
 
-World Monitor integrates all of these data sources (and many more) into a single, layered map with real-time updates. Learn more about [what World Monitor is and how it works](/blog/posts/what-is-worldmonitor-real-time-global-intelligence/).
+VISTA integrates all of these data sources (and many more) into a single, layered map with real-time updates. Learn more about [what VISTA is and how it works](/blog/posts/what-is-worldmonitor-real-time-global-intelligence/).
 
 ## 500+ Intelligence Feeds, Zero Configuration
 
-World Monitor aggregates **500+ curated RSS feeds** organized across 15 categories:
+VISTA aggregates **500+ curated RSS feeds** organized across 15 categories:
 
 - Geopolitics and defense
 - Middle East and North Africa
@@ -49,7 +49,7 @@ Each feed is classified by a **4-tier credibility system**, so you always know w
 
 ## Live Tracking: Ships, Planes, and Signals
 
-Three of World Monitor's most powerful layers bring live tracking to your screen:
+Three of VISTA's most powerful layers bring live tracking to your screen:
 
 ### ADS-B Aircraft Tracking
 
@@ -61,11 +61,11 @@ Ship positions from AISStream.io are merged with **USNI Fleet Reports**, giving 
 
 ### GPS/GNSS Jamming Detection
 
-ADS-B anomaly data is processed through an H3 hexagonal grid to identify zones where GPS signals are being jammed or spoofed. This is a critical indicator of electronic warfare activity, and World Monitor maps it automatically.
+ADS-B anomaly data is processed through an H3 hexagonal grid to identify zones where GPS signals are being jammed or spoofed. This is a critical indicator of electronic warfare activity, and VISTA maps it automatically.
 
 ## 26 Telegram OSINT Channels
 
-World Monitor integrates **26 curated Telegram channels** via MTProto, organized by reliability tier:
+VISTA integrates **26 curated Telegram channels** via MTProto, organized by reliability tier:
 
 - **Tier 1:** Verified primary sources
 - **Tier 2:** Established OSINT accounts (Aurora Intel, BNO News, DeepState, OSINT Defender, LiveUAMap)
@@ -75,7 +75,7 @@ These channels often break news 15-30 minutes before traditional media. Having t
 
 ## AI-Powered Threat Classification
 
-Raw intelligence is only useful if you can process it. World Monitor runs a **3-stage threat classification pipeline**:
+Raw intelligence is only useful if you can process it. VISTA runs a **3-stage threat classification pipeline**:
 
 1. **Keyword matching** for immediate categorization
 2. **Browser-based ML** (Transformers.js running in Web Workers) for sentiment and entity extraction
@@ -85,7 +85,7 @@ This runs locally in your browser. No data leaves your machine unless you explic
 
 ## The Country Instability Index
 
-One of World Monitor's original contributions to OSINT is the **Country Instability Index (CII)**, a real-time 0-100 score computed for every monitored nation:
+One of VISTA's original contributions to OSINT is the **Country Instability Index (CII)**, a real-time 0-100 score computed for every monitored nation:
 
 - **Baseline risk (40%):** Historical conflict data, governance indicators
 - **Unrest indicators (20%):** Protests, strikes, civil disorder events
@@ -96,7 +96,7 @@ The CII is boosted by real-time signals: proximity to active hotspots, OREF rock
 
 ## Hotspot Escalation Scoring
 
-World Monitor doesn't just show you where things are happening. It tells you where they're getting worse. The **Hotspot Escalation Score** combines:
+VISTA doesn't just show you where things are happening. It tells you where they're getting worse. The **Hotspot Escalation Score** combines:
 
 - News activity (35%)
 - CII score (25%)
@@ -107,11 +107,11 @@ When a region's escalation score spikes, it surfaces in the Strategic Risk panel
 
 ## Sharing Intelligence
 
-Found something significant? World Monitor's story sharing lets you export intelligence briefs to Twitter/X, LinkedIn, WhatsApp, Telegram, and Reddit, complete with auto-generated Open Graph images for social previews.
+Found something significant? VISTA's story sharing lets you export intelligence briefs to Twitter/X, LinkedIn, WhatsApp, Telegram, and Reddit, complete with auto-generated Open Graph images for social previews.
 
 You can also share map states via URL: the map position, active layers, time range, and selected data points are all encoded in a shareable link. Send a colleague a URL and they see exactly what you see.
 
-## Getting Started with World Monitor for OSINT
+## Getting Started with VISTA for OSINT
 
 1. **Open worldmonitor.app** in any modern browser
 2. **Toggle layers** using the left sidebar: start with "Conflicts" and "Military Bases"
@@ -120,7 +120,7 @@ You can also share map states via URL: the map position, active layers, time ran
 5. **Click any country** for its full intelligence dossier with CII score
 6. **Set up keyword monitors** for topics you want to track persistently
 
-No account needed. No API keys required for the web version. For local AI analysis, install Ollama and point World Monitor at your local instance. You can also explore [AI-powered intelligence without the cloud](/blog/posts/ai-powered-intelligence-without-the-cloud/).
+No account needed. No API keys required for the web version. For local AI analysis, install Ollama and point VISTA at your local instance. You can also explore [AI-powered intelligence without the cloud](/blog/posts/ai-powered-intelligence-without-the-cloud/).
 
 ## Why Open Source Matters for OSINT
 
@@ -130,14 +130,14 @@ World Monitor's AGPL-3.0 license means every scoring algorithm, every data pipel
 
 ## Frequently Asked Questions
 
-**Is World Monitor really free for OSINT research?**
+**Is VISTA really free for OSINT research?**
 Yes. Every feature, data source, and AI capability is available at no cost with no account required. The platform is open source under AGPL-3.0, so you can also self-host it.
 
-**Do I need technical skills to use World Monitor for OSINT?**
+**Do I need technical skills to use VISTA for OSINT?**
 No. The interface is designed for analysts of all skill levels. Toggle layers on the sidebar, click data points for details, and use the Command Palette (Cmd+K) to search across all intelligence sources instantly.
 
-**How does World Monitor compare to traditional OSINT tools?**
-World Monitor consolidates 500+ feeds, live tracking, AI analysis, and 56 map layers into one dashboard. Traditional tools require juggling dozens of separate platforms. See our [detailed comparison with traditional intelligence tools](/blog/posts/worldmonitor-vs-traditional-intelligence-tools/).
+**How does VISTA compare to traditional OSINT tools?**
+VISTA consolidates 500+ feeds, live tracking, AI analysis, and 56 map layers into one dashboard. Traditional tools require juggling dozens of separate platforms. See our [detailed comparison with traditional intelligence tools](/blog/posts/worldmonitor-vs-traditional-intelligence-tools/).
 
 ---
 

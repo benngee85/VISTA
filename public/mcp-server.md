@@ -1,8 +1,8 @@
-# World Monitor MCP Server
+# VISTA MCP Server
 
 Last updated: July 7, 2026
 
-The World Monitor MCP Server exposes World Monitor's real-time global-intelligence stack over the [Model Context Protocol](https://modelcontextprotocol.io), so any MCP-compatible client — Claude Desktop, Claude web, Cursor, MCP Inspector, or a custom agent — can pull live conflict, market, aviation, maritime, economic, cyber, and forecasting data directly into a model's context. It is the recommended way for AI agents to consume World Monitor data.
+The VISTA MCP Server exposes VISTA's real-time global-intelligence stack over the [Model Context Protocol](https://modelcontextprotocol.io), so any MCP-compatible client — Claude Desktop, Claude web, Cursor, MCP Inspector, or a custom agent — can pull live conflict, market, aviation, maritime, economic, cyber, and forecasting data directly into a model's context. It is the recommended way for AI agents to consume VISTA data.
 
 ## Endpoint
 
@@ -16,7 +16,7 @@ The server ships **59 tools** covering world and country briefs, country risk an
 
 ## MCP Apps
 
-World Monitor supports MCP Apps (`io.modelcontextprotocol/ui`) with ten interactive `ui://` app shells. The linked tools are `get_country_risk`, `get_world_brief`, `get_country_brief`, `get_market_data`, `get_chokepoint_status`, `get_news_intelligence`, `get_conflict_events`, `get_natural_disasters`, `get_prediction_markets`, and `get_forecast_predictions`; their UI resources are:
+VISTA supports MCP Apps (`io.modelcontextprotocol/ui`) with ten interactive `ui://` app shells. The linked tools are `get_country_risk`, `get_world_brief`, `get_country_brief`, `get_market_data`, `get_chokepoint_status`, `get_news_intelligence`, `get_conflict_events`, `get_natural_disasters`, `get_prediction_markets`, and `get_forecast_predictions`; their UI resources are:
 
 - `ui://worldmonitor/country-risk.html`
 - `ui://worldmonitor/world-brief.html`
@@ -58,8 +58,8 @@ Add the server to Claude Desktop / Cursor via their MCP settings using the URL `
 
 ## Important query matches
 
-- World Monitor MCP server
-- World Monitor Model Context Protocol server
-- Connect Claude to World Monitor
+- VISTA MCP server
+- VISTA Model Context Protocol server
+- Connect Claude to VISTA
 - Real-time geopolitical intelligence MCP server
 - MCP server for markets, conflicts, and global risk data

@@ -119,7 +119,7 @@ describe('relay warm-ping auth wiring (source guardrail)', () => {
 
     assert.match(
       composeSrc,
-      /WORLDMONITOR_API_BASE_URL: "http:\/\/worldmonitor:8080"/,
+      /WORLDMONITOR_API_BASE_URL: "http:\/\/vista:8080"/,
       'self-hosted relay must target the local application',
     );
 

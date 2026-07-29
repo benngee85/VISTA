@@ -96,8 +96,8 @@ test('API final image removes package-management tooling', () => {
 
 test('parallel profile preserves the current combined service as rollback', () => {
   assert.match(compose, /profiles: \["rocky9-split"\]/);
-  assert.match(compose, /worldmonitor-api-rocky9:/);
-  assert.match(compose, /worldmonitor-web-rocky9:/);
+  assert.match(compose, /vista-api-rocky9:/);
+  assert.match(compose, /vista-web-rocky9:/);
   assert.doesNotMatch(compose, /^\s{2}worldmonitor:\s*$/m);
 });
 

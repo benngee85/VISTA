@@ -1,7 +1,7 @@
 ---
 title: "Aviation Intelligence: Airports, Airspace, and Flight Prices as Signals"
-description: "WorldMonitor tracks 115 airports, FAA delays, NOTAM closures, military aircraft, GPS jamming, and live Google Flights prices — because aviation reacts to risk first."
-metaTitle: "Aviation Intelligence Dashboard | WorldMonitor"
+description: "VISTA tracks 115 airports, FAA delays, NOTAM closures, military aircraft, GPS jamming, and live Google Flights prices — because aviation reacts to risk first."
+metaTitle: "Aviation Intelligence Dashboard | VISTA"
 keywords: "aviation intelligence dashboard, airport delay monitoring, NOTAM airspace closures, military aircraft tracking, flight prices API, GPS jamming map"
 audience: "Airline and ops teams, travel security managers, OSINT analysts, journalists, frequent travelers"
 heroImage: "/blog/images/blog/aviation-intelligence-airports-airspace-flight-prices.jpg"
@@ -11,7 +11,7 @@ modifiedDate: "2026-07-22"
 
 Aviation is the most reactive layer in the global system. Airlines reroute around risk hours before governments issue statements; insurers reprice overflight before analysts publish; evacuation demand hits booking engines before it hits the news. If you can read the aviation layer, you often get the earliest civilian-visible signal that something changed.
 
-WorldMonitor gives that layer a dedicated panel — and wires it into the same map as conflicts, chokepoints, and infrastructure.
+VISTA gives that layer a dedicated panel — and wires it into the same map as conflicts, chokepoints, and infrastructure.
 
 ## The six-tab Aviation Intelligence panel
 
@@ -21,7 +21,7 @@ The **Aviation Intelligence panel** covers 115 monitored airports worldwide acro
 - **Flights** — flight activity for the airports you care about.
 - **Airlines** — carrier-level news and operational signals.
 - **Track** — aircraft tracking, including military aircraft identified from live ADS-B data.
-- **News** — aviation-sector news, classified and deduplicated like every other WorldMonitor feed.
+- **News** — aviation-sector news, classified and deduplicated like every other VISTA feed.
 - **Prices** — live flight-price search backed by Google Flights data.
 
 Around the panel, the map adds the **flights layer** for delay conditions, the **GPS jamming layer** for GNSS interference zones — one of the strongest passive indicators of electronic warfare activity — and live military tracking that feeds the [conflict monitoring workflow](/blog/posts/track-global-conflicts-in-real-time/).
@@ -34,7 +34,7 @@ That combination matters because absence is a signal too. Civilian traffic thinn
 
 ## Flight prices are a sensor
 
-WorldMonitor can search real-time flight options and prices between any two airports (`search_flights`), and scan a whole date range for the cheapest fare per day (`search_flight_prices_by_date`) — live Google Flights data, exposed to both the Prices tab and MCP agents.
+VISTA can search real-time flight options and prices between any two airports (`search_flights`), and scan a whole date range for the cheapest fare per day (`search_flight_prices_by_date`) — live Google Flights data, exposed to both the Prices tab and MCP agents.
 
 The obvious use is practical: an AI travel assistant with real fares. The less obvious use is analytical. Prices out of a stressed city spiking while inbound fares collapse is demand-side evidence of departure pressure. Routes quietly disappearing from results tell you about airspace and slot decisions before they're announced. When you need to know whether "people are leaving" is a rumor or a fact, the booking engine is a witness.
 
@@ -54,7 +54,7 @@ Operational context is cross-checked against sources such as the [FAA National A
 
 **Can I track a specific flight?**
 
-The panel is built around airports, airspace, and patterns rather than individual flight following. For a single tail number, dedicated flight trackers are the right tool; WorldMonitor tells you what the pattern around it means.
+The panel is built around airports, airspace, and patterns rather than individual flight following. For a single tail number, dedicated flight trackers are the right tool; VISTA tells you what the pattern around it means.
 
 **Where does the flight-price data come from?**
 

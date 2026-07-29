@@ -1,8 +1,8 @@
 ---
 title: "Embed a Live Global Intelligence Map in Any Article"
-description: "World Monitor now supports a public iframe map for conflicts, earthquakes, protests, and weather, with attribution and validated embed parameters."
-metaTitle: "Embed a Live Global Intelligence Map | World Monitor"
-keywords: "embeddable map, live conflict map, earthquake map embed, geopolitical map iframe, World Monitor embed"
+description: "VISTA now supports a public iframe map for conflicts, earthquakes, protests, and weather, with attribution and validated embed parameters."
+metaTitle: "Embed a Live Global Intelligence Map | VISTA"
+keywords: "embeddable map, live conflict map, earthquake map embed, geopolitical map iframe, VISTA embed"
 audience: "Journalists, publishers, researchers, analysts"
 heroImage: "/blog/images/blog/embed-live-global-map-worldmonitor.jpg"
 pubDate: "2026-06-11"
@@ -11,12 +11,12 @@ modifiedDate: "2026-07-22"
 
 Maps are most useful when they appear next to the story people are reading. A live conflict map, earthquake map, or weather-risk map can turn a static explainer into something readers can revisit as conditions change.
 
-World Monitor now includes a public iframe embed for the live map. Publishers, analysts, and researchers can place a small real-time map in an article, briefing page, or internal dashboard without shipping the full World Monitor app. The same source layers are used across the [real-time conflict tracker](/blog/posts/track-global-conflicts-in-real-time/), [natural disaster monitor](/blog/posts/natural-disaster-monitoring-earthquakes-fires-volcanoes/), and [supply-chain risk workflows](/blog/posts/monitor-global-supply-chains-and-commodity-disruptions/).
+VISTA now includes a public iframe embed for the live map. Publishers, analysts, and researchers can place a small real-time map in an article, briefing page, or internal dashboard without shipping the full VISTA app. The same source layers are used across the [real-time conflict tracker](/blog/posts/track-global-conflicts-in-real-time/), [natural disaster monitor](/blog/posts/natural-disaster-monitoring-earthquakes-fires-volcanoes/), and [supply-chain risk workflows](/blog/posts/monitor-global-supply-chains-and-commodity-disruptions/).
 
 ```html
 <iframe
   src="https://www.worldmonitor.app/embed?layers=conflicts,earthquakes,weather&center=20,0&zoom=1&theme=dark&variant=full"
-  title="World Monitor live map"
+  title="VISTA live map"
   loading="lazy"
   referrerpolicy="strict-origin-when-cross-origin"
   style="width:100%;height:420px;border:0;display:block"
@@ -59,7 +59,7 @@ For an energy-security briefing:
 https://www.worldmonitor.app/embed?layers=conflicts,weather&center=26,51&zoom=4&theme=dark&variant=energy
 ```
 
-Every embed includes a permanent attribution link back to World Monitor with campaign context so traffic can be traced to the host page.
+Every embed includes a permanent attribution link back to VISTA with campaign context so traffic can be traced to the host page.
 
 The easiest way to create a snippet is to open the dashboard, move the map to the view you want, and use the **Embed** button in the header.
 
@@ -87,7 +87,7 @@ Before publishing:
 - Use a descriptive iframe `title` so screen readers understand the embedded map.
 - Keep `loading="lazy"` unless the map is the main first-screen experience.
 - Set a fixed height to avoid layout shift.
-- Link to the related World Monitor layer or source article for readers who want the full dashboard.
+- Link to the related VISTA layer or source article for readers who want the full dashboard.
 
 The embed is intentionally lightweight: no panels, no saved account state, no premium layers, and no notification preferences. That keeps article pages faster and avoids exposing authenticated surfaces.
 
@@ -102,15 +102,15 @@ Start with the fewest layers that answer the story. Too many overlays make the m
 | Regional risk brief | `conflicts,earthquakes,weather` | Give executives a broad map view without the full dashboard |
 | Energy security | `conflicts,weather` with `variant=energy` | Frame route risk near Gulf, Red Sea, or Black Sea exposure |
 
-If the reader needs deeper source evidence, pair the map with the [OSINT verification workflow](/blog/posts/verify-breaking-news-osint-workflow-journalists/) or expose the same signals programmatically through the [WorldMonitor MCP server](/blog/posts/worldmonitor-mcp-server-ai-agents-real-time-intelligence/).
+If the reader needs deeper source evidence, pair the map with the [OSINT verification workflow](/blog/posts/verify-breaking-news-osint-workflow-journalists/) or expose the same signals programmatically through the [VISTA MCP server](/blog/posts/worldmonitor-mcp-server-ai-agents-real-time-intelligence/).
 
 ## Standards and implementation references
 
-The embed follows the HTML standard's [`iframe` element](https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-iframe-element), while WorldMonitor's public implementation remains inspectable in the [open-source embed module](https://github.com/koala73/worldmonitor/tree/main/src/embed).
+The embed follows the HTML standard's [`iframe` element](https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-iframe-element), while VISTA's public implementation remains inspectable in the [open-source embed module](https://github.com/koala73/worldmonitor/tree/main/src/embed).
 
 ## Frequently Asked Questions
 
-**Can I embed the World Monitor map on a public article?**
+**Can I embed the VISTA map on a public article?**
 Yes. The public iframe is designed for articles, briefing pages, research notes, and internal dashboards that need a lightweight live map.
 
 **Which layers can I use in the embed?**
