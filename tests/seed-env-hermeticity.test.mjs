@@ -159,22 +159,38 @@ function findHomeDirReferences(source) {
 // sweeps cost nothing to extend.
 const SCANNED_TREES = ['scripts', 'api', 'server', 'cli', 'middleware.ts'];
 
+/**
+ * Yields `[entry, source]` for every scannable file.
+ *
+ * The read lives HERE, not at the call sites, for two reasons. It is the same
+ * read four sweeps below would otherwise each spell out, and — the reason it
+ * moved — a file can be unlinked between the glob yield and the read. Sibling
+ * tests spawn fixtures inside these very trees, and under
+ * `--test-concurrency=16` one of those disappearing mid-sweep used to fail an
+ * unrelated sweep with a bare `ENOENT ... scripts/_sigterm-fixture-<ts>.mjs`.
+ * A file that is not on disk when we read it cannot be a committed source, so
+ * skipping it is correct rather than merely convenient — but ONLY for ENOENT;
+ * any other read error is a real problem and still throws.
+ *
+ * The polluter this was diagnosed against (tests/seed-utils-sigterm-cleanup.test.mjs)
+ * now writes to a temp dir, so this is defense in depth against the next one.
+ * The `scanned > 100` floor below is what keeps the skip from silently
+ * degrading into "scanned nothing, found nothing".
+ */
 async function* scanSources() {
   for (const tree of SCANNED_TREES) {
     const pattern = tree.includes('.') ? tree : `${tree}/**/*.{mjs,cjs,js,mts,ts}`;
     for await (const entry of glob(pattern, { cwd: REPO_ROOT })) {
       if (entry.includes('node_modules')) continue;
-      yield entry;
+      let source;
+      try {
+        source = readFileSync(join(REPO_ROOT, entry), 'utf8');
+      } catch (err) {
+        if (err?.code === 'ENOENT') continue;
+        throw err;
+      }
+      yield [entry, source];
     }
-  }
-}
-
-function readScannedSource(entry) {
-  try {
-    return readFileSync(join(REPO_ROOT, entry), 'utf8');
-  } catch (error) {
-    if (error?.code === 'ENOENT') return '';
-    throw error;
   }
 }
 
@@ -451,9 +467,9 @@ describe('seeder env hermeticity (#5767)', () => {
     it('no source bakes a home path into the repo', async () => {
       const offenders = [];
       let scanned = 0;
-      for await (const entry of scanSources()) {
+      for await (const [entry, source] of scanSources()) {
         scanned += 1;
-        const found = findCheckoutEscapingEnvPaths(readScannedSource(entry));
+        const found = findCheckoutEscapingEnvPaths(source);
         if (found.length > 0) offenders.push(`${entry}: ${found.join(', ')}`);
       }
       assert.ok(scanned > 100, `expected to scan the seeder fleet, scanned ${scanned}`);
@@ -468,8 +484,7 @@ describe('seeder env hermeticity (#5767)', () => {
       // read-half gate has no such bypass: naming a `.env` file (or a loader)
       // is unavoidable, so anything reaching for $HOME to find one lands here.
       const offenders = [];
-      for await (const entry of scanSources()) {
-        const source = readScannedSource(entry);
+      for await (const [entry, source] of scanSources()) {
         if (!accessesEnvFileItself(source)) continue;
         const found = findHomeDirReferences(stripJsComments(source));
         if (found.length > 0) offenders.push(`${entry}: ${found.join(', ')}`);
@@ -523,9 +538,9 @@ describe('seeder env hermeticity (#5767)', () => {
 
     it('no source outside the allowlist reads a .env file', async () => {
       const offenders = [];
-      for await (const entry of scanSources()) {
+      for await (const [entry, source] of scanSources()) {
         if (ENV_PARSER_ALLOWLIST.has(entry)) continue;
-        if (accessesEnvFileItself(readScannedSource(entry))) offenders.push(entry);
+        if (accessesEnvFileItself(source)) offenders.push(entry);
       }
       assert.deepEqual(
         offenders,
@@ -538,7 +553,7 @@ describe('seeder env hermeticity (#5767)', () => {
     it('the allowlist has no stale entries', async () => {
       for (const entry of ENV_PARSER_ALLOWLIST) {
         assert.ok(
-          accessesEnvFileItself(readScannedSource(entry)),
+          accessesEnvFileItself(readFileSync(join(REPO_ROOT, entry), 'utf8')),
           `${entry} no longer reads .env itself — drop it from ENV_PARSER_ALLOWLIST`,
         );
       }
