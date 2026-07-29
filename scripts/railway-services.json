@@ -318,6 +318,7 @@
       "scripts/china-decision-alerts.mjs",
       "scripts/cross-strait-activity/adapters.mjs",
       "scripts/lib/_upstash-pipeline.mjs",
+      "scripts/lib/anthropic-messages.cjs",
       "scripts/lib/brief-dedup-consts.mjs",
       "scripts/lib/brief-dedup-jaccard.mjs",
       "scripts/lib/brief-embedding.mjs",

@@ -5,6 +5,7 @@ import test from 'node:test';
 const api = readFileSync('docker/Dockerfile.rocky9-api', 'utf8');
 const web = readFileSync('docker/Dockerfile.rocky9-web', 'utf8');
 const relay = readFileSync('docker/Dockerfile.rocky9-relay', 'utf8');
+const entitlements = readFileSync('docker/Dockerfile.rocky9-entitlements', 'utf8');
 const nginx = readFileSync('docker/nginx-rocky9.conf.template', 'utf8');
 const entrypoint = readFileSync('docker/rocky9-web-entrypoint.sh', 'utf8');
 const compose = readFileSync('docker-compose.rocky9.yml', 'utf8');
@@ -17,6 +18,8 @@ const pinnedRocky =
 test('Rocky runtime images use the reviewed multi-arch 9.8 manifest', () => {
   assert.match(api, pinnedRocky);
   assert.match(web, pinnedRocky);
+  assert.match(relay, pinnedRocky);
+  assert.match(entitlements, pinnedRocky);
   assert.match(api, /microdnf -y update/);
   assert.match(web, /microdnf -y update/);
 });
@@ -25,9 +28,10 @@ test('images receive the build revision externally and retain the sitemap contra
   assert.match(api, /ARG VCS_REF=unknown/);
   assert.match(web, /ARG VCS_REF=unknown/);
   assert.match(relay, /ARG VCS_REF=unknown/);
+  assert.match(entitlements, /ARG VCS_REF=unknown/);
   assert.equal(
     (compose.match(/VCS_REF: "\$\{VCS_REF:-unknown\}"/g) || []).length,
-    3,
+    4,
   );
   assert.match(web, /npm run build:sitemap/);
   assert.doesNotMatch(web, /npm run build:content-corpus/);
@@ -69,16 +73,17 @@ test('runtime images support Kubernetes arbitrary UID and read-only roots', () =
   assert.match(api, /USER 10001:0/);
   assert.match(web, /USER 10001:0/);
   assert.match(relay, /USER 10001:0/);
+  assert.match(entitlements, /USER 10001:0/);
   assert.equal(
     (compose.match(/user: "1000710000:0"/g) || []).length,
-    3,
+    4,
   );
-  assert.equal((compose.match(/read_only: true/g) || []).length, 3);
-  assert.equal((compose.match(/no-new-privileges:true/g) || []).length, 3);
-  assert.equal((compose.match(/- ALL/g) || []).length, 3);
+  assert.equal((compose.match(/read_only: true/g) || []).length, 4);
+  assert.equal((compose.match(/no-new-privileges:true/g) || []).length, 4);
+  assert.equal((compose.match(/- ALL/g) || []).length, 4);
   assert.equal(
     (compose.match(/\/tmp:rw,noexec,nosuid,nodev,mode=1777/g) || []).length,
-    3,
+    4,
   );
 });
 
@@ -96,13 +101,13 @@ test('parallel profile preserves the current combined service as rollback', () =
   assert.doesNotMatch(compose, /^\s{2}worldmonitor:\s*$/m);
 });
 
-test('shared Redis REST dependency has an authenticated readiness contract', () => {
-  assert.match(compose, /^\s{2}redis-rest:\s*$/m);
+test('shared Valkey REST dependency has an authenticated readiness contract', () => {
+  assert.match(compose, /^\s{2}valkey-rest:\s*$/m);
   assert.match(compose, /http:\/\/127\.0\.0\.1:8080\/ping/);
   assert.match(compose, /process\.env\.SRH_TOKEN/);
   assert.match(
     compose,
-    /depends_on:[\s\S]*redis-rest:\n\s+condition: service_healthy/,
+    /depends_on:[\s\S]*valkey-rest:\n\s+condition: service_healthy/,
   );
 });
 

@@ -51,77 +51,79 @@ const SHIPPED_DEFAULT_PATTERNS: RegExp[] = [
 ];
 
 describe('docker self-hosting — no default credentials (#3804)', () => {
-  it('docker-compose.yml does not default REDIS_TOKEN or UPSTASH_REDIS_REST_TOKEN to a literal', async () => {
+  it('docker-compose.yml does not default CACHE_REST_TOKEN or UPSTASH_REDIS_REST_TOKEN to a literal', async () => {
     const compose = await read('docker-compose.yml');
+    const entrypoint = await read('docker/valkey-entrypoint.sh');
     assert.ok(
       !WM_LOCAL_TOKEN.test(compose),
       'docker-compose.yml must not contain the literal wm-local-token — see #3804',
     );
     // Belt-and-braces: any future "default" of any shape on either token name fails the test.
     assert.ok(
-      !/\$\{REDIS_TOKEN:-/.test(compose),
-      'docker-compose.yml must not provide a default for ${REDIS_TOKEN}; require fail-closed via ${REDIS_TOKEN:?...}',
+      !/\$\{CACHE_REST_TOKEN:-/.test(compose),
+      'docker-compose.yml must not provide a default for ${CACHE_REST_TOKEN}; require fail-closed via ${CACHE_REST_TOKEN:?...}',
     );
     assert.ok(
-      !/\$\{REDIS_PASSWORD:-/.test(compose),
-      'docker-compose.yml must not provide a default for ${REDIS_PASSWORD}; require fail-closed via ${REDIS_PASSWORD:?...}',
+      !/\$\{VALKEY_PASSWORD:-/.test(compose),
+      'docker-compose.yml must not provide a default for ${VALKEY_PASSWORD}; require fail-closed via ${VALKEY_PASSWORD:?...}',
     );
     // The fail-closed assertion: EVERY expansion of either var must use
     // the ${VAR:?...} form. A bare ${VAR} silently expands to empty if
     // the upstream guard ever moves or gets deleted (PR #3829 reviewer
-    // P2 — SRH_CONNECTION_STRING used a bare ${REDIS_PASSWORD} before fix).
-    const bareTokenExpansions = compose.match(/\$\{REDIS_TOKEN(?![:?])/g) ?? [];
+    // P2 — SRH_CONNECTION_STRING used a bare ${VALKEY_PASSWORD} before fix).
+    const bareTokenExpansions = compose.match(/\$\{CACHE_REST_TOKEN(?![:?])/g) ?? [];
     assert.equal(
       bareTokenExpansions.length,
       0,
-      `docker-compose.yml must use \${REDIS_TOKEN:?...} at every expansion (found ${bareTokenExpansions.length} bare \${REDIS_TOKEN})`,
+      `docker-compose.yml must use \${CACHE_REST_TOKEN:?...} at every expansion (found ${bareTokenExpansions.length} bare \${CACHE_REST_TOKEN})`,
     );
-    const barePasswordExpansions = compose.match(/\$\{REDIS_PASSWORD(?![:?])/g) ?? [];
+    const barePasswordExpansions = compose.match(/\$\{VALKEY_PASSWORD(?![:?])/g) ?? [];
     assert.equal(
       barePasswordExpansions.length,
       0,
-      `docker-compose.yml must use \${REDIS_PASSWORD:?...} at every expansion (found ${barePasswordExpansions.length} bare \${REDIS_PASSWORD})`,
+      `docker-compose.yml must use \${VALKEY_PASSWORD:?...} at every expansion (found ${barePasswordExpansions.length} bare \${VALKEY_PASSWORD})`,
     );
     // Both vars must appear in at least one fail-closed expansion (i.e. the
     // file actually requires them somewhere, not just by total absence).
     assert.ok(
-      /\$\{REDIS_TOKEN:\?/.test(compose),
-      'docker-compose.yml must require REDIS_TOKEN via ${REDIS_TOKEN:?...} fail-closed syntax',
+      /\$\{CACHE_REST_TOKEN:\?/.test(compose),
+      'docker-compose.yml must require CACHE_REST_TOKEN via ${CACHE_REST_TOKEN:?...} fail-closed syntax',
     );
     assert.ok(
-      /\$\{REDIS_PASSWORD:\?/.test(compose),
-      'docker-compose.yml must require REDIS_PASSWORD via ${REDIS_PASSWORD:?...} fail-closed syntax',
+      /\$\{VALKEY_PASSWORD:\?/.test(compose),
+      'docker-compose.yml must require VALKEY_PASSWORD via ${VALKEY_PASSWORD:?...} fail-closed syntax',
     );
-    // Redis itself must be authenticated.
-    assert.ok(
-      /--requirepass\s+"\$\{REDIS_PASSWORD/.test(compose),
-      'docker-compose.yml redis service must pass --requirepass using REDIS_PASSWORD',
+    // Valkey itself must be authenticated.
+    assert.match(
+      entrypoint,
+      /--requirepass\s+"\$VALKEY_PASSWORD"/,
+      'Valkey entrypoint must apply --requirepass using VALKEY_PASSWORD',
     );
   });
 
-  it('docker-compose.yml wires redis-rest into the ais-relay seed loops', async () => {
+  it('docker-compose.yml wires valkey-rest into the ais-relay seed loops', async () => {
     const compose = await read('docker-compose.yml');
     const relay = serviceBlock(compose, 'ais-relay');
 
     assert.match(
       relay,
-      /UPSTASH_REDIS_REST_URL:\s*"http:\/\/redis-rest:8080"/,
-      'ais-relay must point UPSTASH_REDIS_REST_URL at the in-network redis-rest proxy',
+      /UPSTASH_REDIS_REST_URL:\s*"http:\/\/valkey-rest:8080"/,
+      'ais-relay must point UPSTASH_REDIS_REST_URL at the in-network valkey-rest proxy',
     );
     assert.match(
       relay,
-      /UPSTASH_REDIS_REST_TOKEN:\s*"\$\{REDIS_TOKEN:\?/,
-      'ais-relay must pass the fail-closed REDIS_TOKEN to redis-rest',
+      /UPSTASH_REDIS_REST_TOKEN:\s*"\$\{CACHE_REST_TOKEN:\?/,
+      'ais-relay must pass the fail-closed CACHE_REST_TOKEN to valkey-rest',
     );
     assert.match(
       relay,
       /UPSTASH_ALLOW_INSECURE_HTTP:\s*"true"/,
-      'ais-relay must explicitly opt into the plain-http redis-rest proxy inside the compose network',
+      'ais-relay must explicitly opt into the plain-http valkey-rest proxy inside the compose network',
     );
     assert.match(
       relay,
-      /depends_on:\s*\n\s+redis-rest:\s*\n\s+condition:\s*service_started/,
-      'ais-relay must wait for redis-rest so Redis-backed seed loops can start in the bundled stack',
+      /depends_on:\s*\n\s+valkey-rest:\s*\n\s+condition:\s*service_healthy/,
+      'ais-relay must wait for valkey-rest so Valkey-backed seed loops can start in the bundled stack',
     );
   });
 
