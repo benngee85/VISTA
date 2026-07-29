@@ -588,6 +588,10 @@ function toHeaders(nodeHeaders, options = {}) {
   return headers;
 }
 
+function readConfiguredWorldMonitorApiKey() {
+  return String(process.env.WORLDMONITOR_API_KEY || '').trim();
+}
+
 async function proxyToCloud(requestUrl, req, remoteBase) {
   const target = `${remoteBase}${requestUrl.pathname}${requestUrl.search}`;
   const body = ['GET', 'HEAD'].includes(req.method) ? undefined : await readBody(req);
@@ -608,7 +612,7 @@ async function proxyToCloud(requestUrl, req, remoteBase) {
   // supplied X-WorldMonitor-Key (e.g. a wm_ user key from runtime config) wins
   // — don't clobber it.
   if (!headers.has('X-WorldMonitor-Key')) {
-    const wmKey = process.env.WORLDMONITOR_API_KEY;
+    const wmKey = readConfiguredWorldMonitorApiKey();
     if (wmKey) headers.set('X-WorldMonitor-Key', wmKey);
   }
   return fetch(target, {
@@ -784,7 +788,17 @@ function resolveConfig(options = {}) {
   const dataDir = String(options.dataDir ?? process.env.LOCAL_API_DATA_DIR ?? resourceDir);
   const mode = String(options.mode ?? process.env.LOCAL_API_MODE ?? 'desktop-sidecar');
   const requestedFallback = String(options.cloudFallback ?? process.env.LOCAL_API_CLOUD_FALLBACK ?? '') === 'true';
-  const cloudFallback = mode === 'docker' ? false : requestedFallback;
+  const allowDockerCloudFallback = String(
+    options.allowDockerCloudFallback
+      ?? process.env.LOCAL_API_CLOUD_FALLBACK_ALLOW_DOCKER
+      ?? ''
+  ) === 'true';
+  const hasWorldMonitorApiKey = readConfiguredWorldMonitorApiKey().length >= 16;
+  const cloudFallback = requestedFallback && (
+    mode === 'docker'
+      ? allowDockerCloudFallback && hasWorldMonitorApiKey
+      : true
+  );
   // Programmatic dev/test escape hatch only; CLI/env startup keeps private remoteBase blocked.
   const allowPrivateRemoteBase = options.allowPrivateRemoteBase === true;
   // Programmatic-only test escape hatch for adding extra origins to the
