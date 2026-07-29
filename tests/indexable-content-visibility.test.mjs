@@ -60,7 +60,7 @@ test('apex HTML exposes one visible SSR content hierarchy and all primary refere
     '/blog/',
     '/docs',
     '/pro#pricing',
-    'https://github.com/koala73/worldmonitor',
+    'https://github.com/benngee85/VISTA',
   ]) {
     assert.ok(root.includes(href), `visible welcome content should link to ${href}`);
   }
@@ -93,7 +93,7 @@ test('dashboard retains a legitimate no-JavaScript fallback and visible referenc
     '/blog/',
     '/docs',
     '/pro#pricing',
-    'https://github.com/koala73/worldmonitor',
+    'https://github.com/benngee85/VISTA',
   ]) {
     assert.ok(noScript.includes(`href="${href}`), `no-JavaScript fallback should link to ${href}`);
   }

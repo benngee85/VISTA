@@ -16,48 +16,8 @@ const STATIC_SCRIPT_NONCE = 'wm-static-bootstrap';
 // structured data, injected into BOTH pro pages (see PAGES) so the homepage and
 // /pro can't drift. Nonce'd to match the static-bootstrap CSP trust (otherwise
 // deploy-config.test.mjs would demand a script-src sha256 hash for it).
-const WM_SAMEAS = [
-  'https://github.com/koala73/worldmonitor',
-  'https://www.npmjs.com/package/worldmonitor',
-  'https://x.com/worldmonitorai',
-  'https://x.com/eliehabib',
-  'https://discord.gg/re63kWKxaz',
-  'https://www.wired.com/story/world-monitor-elie-habib/',
-];
-const ORGANIZATION_JSONLD = `    <script type="application/ld+json" nonce="${STATIC_SCRIPT_NONCE}">${JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'World Monitor',
-  alternateName: 'WorldMonitor',
-  url: 'https://www.worldmonitor.app/',
-  logo: 'https://www.worldmonitor.app/favico/apple-touch-icon.png',
-  description: 'Open-source real-time global intelligence platform aggregating conflicts, military movements, markets, infrastructure, and geopolitical data. Used by 2M+ people across 190+ countries.',
-  founder: {
-    '@type': 'Person',
-    name: 'Elie Habib',
-    url: 'https://x.com/eliehabib',
-    sameAs: [
-      'https://x.com/eliehabib',
-      'https://github.com/koala73',
-      'https://www.linkedin.com/in/elie-habib-7047b931',
-      'https://www.wikidata.org/wiki/Q121365724',
-      'https://www.crunchbase.com/person/elie-habib-2',
-    ],
-  },
-  sameAs: WM_SAMEAS,
-  contactPoint: {
-    '@type': 'ContactPoint',
-    contactType: 'customer support',
-    email: 'support@worldmonitor.app',
-    url: 'https://www.worldmonitor.app/pro',
-    availableLanguage: 'English',
-  },
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Dubai',
-    addressCountry: 'AE',
-  },
-})}</script>`;
+const WM_SAMEAS = ["https://github.com/benngee85/VISTA"];
+const ORGANIZATION_JSONLD = `    <script type="application/ld+json" nonce="${STATIC_SCRIPT_NONCE}">${JSON.stringify({"@context": "https://schema.org", "@type": "Organization", "name": "MercuryLink Concepts", "alternateName": "VISTA", "url": "http://localhost:3000", "description": "VISTA operator and deployment authority.", "sameAs": ["https://github.com/benngee85/VISTA"]})}</script>`;
 const DASHBOARD_SCREENSHOT_BASENAME = 'worldmonitor-7-mar-2026';
 const DASHBOARD_SCREENSHOT_ASSETS = [
   { filenamePrefix: DASHBOARD_SCREENSHOT_BASENAME, extension: '.jpg' },

@@ -125,7 +125,34 @@ async function isValidWidgetKey(key) {
 }
 
 async function isValidProKey(key) {
-  return (await matchesEnvSecret(key, 'PRO_WIDGET_KEY')) || await isValidEnterpriseKey(key);
+  if ((await matchesEnvSecret(key, 'PRO_WIDGET_KEY')) || await isValidEnterpriseKey(key)) {
+    return true;
+  }
+  if (!/^wm_[a-f0-9]{40}$/.test(key)) return false;
+  const rawUrl = process.env.VISTA_API_PLAN_VALIDATION_URL
+    || 'https://api.worldmonitor.app/api/economic/v1/list-global-tenders';
+  let url;
+  try {
+    url = new URL(rawUrl);
+  } catch {
+    return false;
+  }
+  if (url.protocol !== 'https:') return false;
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-WorldMonitor-Key': key,
+      },
+      body: '{}',
+      signal: AbortSignal.timeout(10_000),
+    });
+    return response.ok || response.status === 400 || response.status === 422
+      || response.status === 429;
+  } catch {
+    return false;
+  }
 }
 
 const BODY_READ_TIMEOUT_MS = Number(process.env.WM_SESSION_BODY_TIMEOUT_MS) || 5_000;
@@ -208,13 +235,28 @@ export default async function handler(req, ctx) {
 
   const body = await readBody(req);
   const widgetKey = normalizeLegacyKey(body.widgetKey);
-  const proKey = normalizeLegacyKey(body.proKey);
+  const submittedProKey = normalizeLegacyKey(body.proKey);
+  const existingProKey = normalizeLegacyKey(readCookie(req, PRO_KEY_COOKIE));
+  const selfHostedProKey = process.env.VISTA_SELF_HOSTED_API_PLAN_ACCESS === 'true'
+    ? normalizeLegacyKey(process.env.WORLDMONITOR_API_KEY)
+    : '';
+  const proKey = submittedProKey || existingProKey || selfHostedProKey;
 
   if (
     (submittedLegacyKey(body.widgetKey) && !(await isValidWidgetKey(widgetKey))) ||
-    (submittedLegacyKey(body.proKey) && !(await isValidProKey(proKey)))
+    (submittedLegacyKey(body.proKey) && !(await isValidProKey(submittedProKey)))
   ) {
     return respond({ error: 'Invalid session key' }, 401, cors, 'auth_401');
+  }
+
+  const premium = proKey ? await isValidProKey(proKey) : false;
+  if (selfHostedProKey && !premium) {
+    return respond(
+      { error: 'Configured API-plan entitlement could not be verified' },
+      503,
+      cors,
+      'auth_unavailable',
+    );
   }
 
   let headers = appendHeader(cors, 'Set-Cookie', sessionCookie(req, SESSION_COOKIE, issued.token));
@@ -225,7 +267,7 @@ export default async function handler(req, ctx) {
     headers = appendHeader(headers, 'Set-Cookie', clearReadableCookie(WIDGET_KEY_COOKIE));
     headers = appendHeader(headers, 'Set-Cookie', sessionCookie(req, WIDGET_KEY_COOKIE, widgetKey));
   }
-  if (proKey) {
+  if (premium) {
     headers = appendHeader(headers, 'Set-Cookie', clearReadableCookie(PRO_KEY_COOKIE));
     headers = appendHeader(headers, 'Set-Cookie', sessionCookie(req, PRO_KEY_COOKIE, proKey));
   }
@@ -240,5 +282,6 @@ export default async function handler(req, ctx) {
     exp: issued.exp,
     hadSession,
     token: issued.token,
+    premium,
   }, 200, headers, 'ok');
 }

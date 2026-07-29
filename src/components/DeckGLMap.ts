@@ -10,6 +10,7 @@ import maplibregl from 'maplibre-gl';
 import type { StyleSpecification } from 'maplibre-gl';
 import { FALLBACK_DARK_STYLE, FALLBACK_LIGHT_STYLE, getMapProvider, getMapTheme, isLightMapTheme } from '@/config/basemap';
 import { getStyleForProvider } from '@/config/basemap-styles';
+import { VISTA_PRODUCT_IDENTITY } from '@/config/vista-identity';
 import Supercluster from 'supercluster';
 import type {
   MapLayers,
@@ -5472,7 +5473,7 @@ export class DeckGLMap {
 
     const authorBadge = document.createElement('div');
     authorBadge.className = 'map-author-badge';
-    authorBadge.textContent = '© MercuryLink Concepts · Someone™';
+    authorBadge.textContent = `${VISTA_PRODUCT_IDENTITY.vendor}`;
     toggles.appendChild(authorBadge);
 
     this.container.appendChild(toggles);

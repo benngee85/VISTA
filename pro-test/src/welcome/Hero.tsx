@@ -148,7 +148,7 @@ export const Hero = () => (
         <span>{t('welcome.hero.trustUsers')}</span>
         <span aria-hidden="true" className="text-wm-border">|</span>
         <a
-          href="https://github.com/koala73/worldmonitor"
+          href="https://github.com/benngee85/VISTA"
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center gap-1.5 hover:text-wm-text transition-colors"

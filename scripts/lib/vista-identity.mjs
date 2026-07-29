@@ -28,6 +28,13 @@ export const VISTA_PRODUCT_IDENTITY = Object.freeze({
   shortName: value('VITE_PRODUCT_SHORT_NAME', 'VISTA'),
   vendor: value('VISTA_PRODUCT_VENDOR', value('VITE_PRODUCT_VENDOR', 'MercuryLink Concepts')),
   vendorShort: value('VITE_PRODUCT_VENDOR_SHORT', 'MercuryLink'),
+  repositoryUrl: value(
+    'VITE_PRODUCT_REPOSITORY_URL',
+    'https://github.com/benngee85/VISTA',
+  ),
+  xUrl: value('VITE_PRODUCT_X_URL', ''),
+  xHandle: value('VITE_PRODUCT_X_HANDLE', ''),
+  websiteUrl: value('VITE_PRODUCT_WEBSITE_URL', 'http://localhost:3000'),
 });
 
 export const VISTA_NODE_IDENTITY = Object.freeze({

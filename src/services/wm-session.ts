@@ -19,7 +19,8 @@ import { isPublicSharedRpcRequest } from '@/shared/public-rpc-cache';
 import { enqueueSentryCall } from '@/bootstrap/sentry-defer';
 import { PUBLIC_WEATHER_BOOTSTRAP_KEY, bootstrapTierKeyNames } from '../../shared/bootstrap-tier-keys.js';
 
-const STORAGE_KEY = 'wm-session-exp';
+const STORAGE_KEY = 'wm-session-exp-v2';
+const PREMIUM_STORAGE_KEY = 'vista-premium-session-exp';
 // Refresh well before expiry so a half-loaded page doesn't fail mid-flight.
 const REFRESH_MARGIN_MS = 5 * 60 * 1000;
 // Abort a session mint that stalls. Without this, a hung /api/wm-session response
@@ -85,6 +86,17 @@ let cookiePersistenceBroken = false;
 // after the server proves a prior cookie did not make the round trip.
 let anonymousSessionHeaderToken: string | null = null;
 let useAnonymousSessionHeader = false;
+let premiumSessionExp = 0;
+
+try {
+  premiumSessionExp = Number(localStorage.getItem(PREMIUM_STORAGE_KEY) ?? 0);
+} catch {
+  premiumSessionExp = 0;
+}
+
+export function hasWmPremiumSession(): boolean {
+  return Number.isFinite(premiumSessionExp) && premiumSessionExp > Date.now();
+}
 
 interface StoredSession {
   exp: number;
@@ -451,8 +463,20 @@ async function fetchNewSession(body?: { widgetKey?: string; proKey?: string }): 
       signal: timeoutController.signal,
     });
     if (!resp.ok) return null;
-    const data = await resp.json() as { exp?: unknown; hadSession?: unknown; token?: unknown };
+    const data = await resp.json() as {
+      exp?: unknown;
+      hadSession?: unknown;
+      token?: unknown;
+      premium?: unknown;
+    };
     if (typeof data?.exp !== 'number') return null;
+    if (data.premium === true) {
+      premiumSessionExp = data.exp;
+      try { localStorage.setItem(PREMIUM_STORAGE_KEY, String(data.exp)); } catch { /* ignore */ }
+    } else if (data.premium === false) {
+      premiumSessionExp = 0;
+      try { localStorage.removeItem(PREMIUM_STORAGE_KEY); } catch { /* ignore */ }
+    }
     if (
       sessionIdentityGeneration === identityGenerationWhenSent &&
       typeof data.token === 'string' &&

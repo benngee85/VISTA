@@ -7,6 +7,7 @@ import {
   migrateLegacyKeysToHttpOnlySession,
   readLegacySessionKey,
 } from '@/services/browser-key-session';
+import { hasWmPremiumSession } from '@/services/wm-session';
 
 const STORAGE_KEY = 'wm-custom-widgets';
 const MAX_WIDGETS = 10;
@@ -224,6 +225,7 @@ export function isProUser(): boolean {
   return (
     isWidgetFeatureEnabled() ||
     isProWidgetEnabled() ||
+    hasWmPremiumSession() ||
     getAuthState().user?.role === 'pro' ||
     isEntitled()
   );
