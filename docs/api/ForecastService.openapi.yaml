@@ -82,7 +82,7 @@ paths:
                                                 "projectedProbability": 1.5
                                                 "rounds":
                                                     - {}
-                                                "summary": "Example WorldMonitor observation."
+                                                "summary": "Example VISTA observation."
                                           "changeItems":
                                               - "example"
                                       "confidence": 0.82

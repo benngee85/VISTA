@@ -20,7 +20,7 @@
  * in PRODUCT_CATALOG; only deliberately public facts belong here.
  */
 export const PUBLIC_PRODUCT_METADATA = {
-  name: "World Monitor",
+  name: "VISTA",
   lifecycle: "launched",
   canonicalUrl: "https://www.worldmonitor.app/",
   pricingUrl: "https://www.worldmonitor.app/pro#pricing",

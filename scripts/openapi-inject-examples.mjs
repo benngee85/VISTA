@@ -561,7 +561,7 @@ function stringExample(name, schema = {}, context = {}) {
   }
   if (key.includes('name')) return constrainedString('VISTA Analyst', schema);
   if (key.includes('message') || key.includes('summary') || key.includes('description')) {
-    return constrainedString('Example WorldMonitor observation.', schema);
+    return constrainedString('Example VISTA observation.', schema);
   }
   if (key === 'id' || key.endsWith('id') || key.includes('identifier')) return constrainedString('example-id', schema);
   return constrainedString('example', schema);

@@ -5,7 +5,7 @@
 export const PUBLIC_PRODUCT_FACTS = {
   "_generated": "scripts/generate-public-product-facts.mjs — do not edit by hand; run `npm run product:facts`",
   "product": {
-    "name": "World Monitor",
+    "name": "VISTA",
     "lifecycle": "launched",
     "canonicalUrl": "https://www.worldmonitor.app/",
     "pricingUrl": "https://www.worldmonitor.app/pro#pricing",

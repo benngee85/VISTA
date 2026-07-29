@@ -73,7 +73,7 @@ paths:
                                           - "example"
                                       "id": "example-id"
                                       "publishedAt": 1717200000000
-                                      "summary": "Example WorldMonitor observation."
+                                      "summary": "Example VISTA observation."
                                       "title": "example"
                                       "url": "https://example.com/worldmonitor"
                             schema:
@@ -186,7 +186,7 @@ paths:
                                     "nextCursor": "next-page-token"
                                     "totalCount": 1
                                 "repos":
-                                    - "description": "Example WorldMonitor observation."
+                                    - "description": "Example VISTA observation."
                                       "forks": 1
                                       "fullName": "koala73/worldmonitor"
                                       "language": "typescript"
@@ -435,7 +435,7 @@ paths:
                                         "lng": -74.006
                                         "original": "example"
                                         "virtual": true
-                                      "description": "Example WorldMonitor observation."
+                                      "description": "Example VISTA observation."
                                       "endDate": "2026-01-15"
                                       "id": "example-id"
                                       "location": "example"

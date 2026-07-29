@@ -55,7 +55,7 @@ paths:
                                 "fetchedAt": "2026-01-15T12:00:00Z"
                                 "restrictions":
                                     - "affectedCountry": "US"
-                                      "description": "Example WorldMonitor observation."
+                                      "description": "Example VISTA observation."
                                       "id": "example-id"
                                       "measureType": "all"
                                       "notifiedAt": "2026-01-15T12:00:00Z"

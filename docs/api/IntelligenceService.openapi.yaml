@@ -231,7 +231,7 @@ paths:
                   in: query
                   description: Event description or body text.
                   required: false
-                  example: "Example WorldMonitor observation."
+                  example: "Example VISTA observation."
                   schema:
                     type: string
                 - name: source
@@ -2672,7 +2672,7 @@ paths:
                                         "allianceCohesion": 1.5
                                         "buffers":
                                             - "axis": "example"
-                                              "description": "Example WorldMonitor observation."
+                                              "description": "Example VISTA observation."
                                               "evidenceIds":
                                                   - "example"
                                               "magnitude": 1.5

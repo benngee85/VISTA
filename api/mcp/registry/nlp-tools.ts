@@ -164,7 +164,7 @@ export const NLP_TOOLS: ToolDef[] = [
   {
     name: 'classify_event',
     _outputBudgetBytes: 4096,
-    description: 'Classify a supplied news headline or short text into a threat category and severity via the enum-validated WorldMonitor event classifier (temperature-0, 24h-cached per title, never free-form LLM output). Input is capped at 500 characters. classification is null when the classifier cannot produce an enum-valid result.',
+    description: 'Classify a supplied news headline or short text into a threat category and severity via the enum-validated VISTA event classifier (temperature-0, 24h-cached per title, never free-form LLM output). Input is capped at 500 characters. classification is null when the classifier cannot produce an enum-valid result.',
     inputSchema: {
       type: 'object',
       properties: {

@@ -147,6 +147,15 @@ for f in "$SCRIPT_DIR"/seed-*.mjs; do
   name="$(basename "$f")"
   printf "→ %s ... " "$name"
   output=$(run_seed "$f")
+
+  # VISTA_SEED_LOG_DIR
+  # Preserve complete output so aggregation cannot hide the actual exception.
+  if [ -n "${VISTA_SEED_LOG_DIR:-}" ]; then
+    umask 077
+    mkdir -p "$VISTA_SEED_LOG_DIR"
+    seed_log_name=$(basename "$f" .mjs)
+    printf '%s\n' "$output" >"$VISTA_SEED_LOG_DIR/${seed_log_name}.log"
+  fi
   rc=$?
   last=$(echo "$output" | tail -1)
 

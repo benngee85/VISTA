@@ -2074,7 +2074,7 @@ paths:
                                     - "id": "example-id"
                                       "publishedAt": 1717200000000
                                       "sourceName": "VISTA Analyst"
-                                      "summary": "Example WorldMonitor observation."
+                                      "summary": "Example VISTA observation."
                                       "title": "example"
                             schema:
                                 $ref: '#/components/schemas/worldmonitor_climate_v1_ListClimateNewsResponse'
@@ -7072,7 +7072,7 @@ paths:
                                                 "projectedProbability": 1.5
                                                 "rounds":
                                                     - {}
-                                                "summary": "Example WorldMonitor observation."
+                                                "summary": "Example VISTA observation."
                                           "changeItems":
                                               - "example"
                                       "confidence": 0.82
@@ -8356,7 +8356,7 @@ paths:
                                         - "example"
                                       "cause": "example"
                                       "country": "US"
-                                      "description": "Example WorldMonitor observation."
+                                      "description": "Example VISTA observation."
                                       "detectedAt": 1717200000000
                                       "id": "example-id"
                                 "pagination":
@@ -8454,7 +8454,7 @@ paths:
                             example:
                                 "statuses":
                                     - "checkedAt": 1717200000000
-                                      "description": "Example WorldMonitor observation."
+                                      "description": "Example VISTA observation."
                                       "id": "example-id"
                                       "latencyMs": 1
                                       "name": "VISTA Analyst"
@@ -9086,7 +9086,7 @@ paths:
                                         "confidence": 0.82
                                         "evidence":
                                             - "source": "example"
-                                              "summary": "Example WorldMonitor observation."
+                                              "summary": "Example VISTA observation."
                                               "ts": 1
                                         "lastUpdated": 1
                                         "score": 42.5
@@ -9172,7 +9172,7 @@ paths:
                                 "anomalies":
                                     - "currentCount": 1
                                       "expectedCount": 1
-                                      "message": "Example WorldMonitor observation."
+                                      "message": "Example VISTA observation."
                                       "multiplier": 1.5
                                       "region": "example"
                                 "computedAt": "2026-01-15T12:00:00Z"
@@ -9638,7 +9638,7 @@ paths:
                   in: query
                   description: Event description or body text.
                   required: false
-                  example: "Example WorldMonitor observation."
+                  example: "Example VISTA observation."
                   schema:
                     type: string
                 - name: source
@@ -12079,7 +12079,7 @@ paths:
                                         "allianceCohesion": 1.5
                                         "buffers":
                                             - "axis": "example"
-                                              "description": "Example WorldMonitor observation."
+                                              "description": "Example VISTA observation."
                                               "evidenceIds":
                                                   - "example"
                                               "magnitude": 1.5
@@ -12866,7 +12866,7 @@ paths:
                     application/json:
                         example:
                             "email": "analyst@example.com"
-                            "message": "Example WorldMonitor observation."
+                            "message": "Example VISTA observation."
                             "name": "VISTA Analyst"
                             "organization": "example"
                             "phone": "example"
@@ -13243,7 +13243,7 @@ paths:
                                     "disruptions":
                                         - "changePct": 1.5
                                           "darkShips": 1
-                                          "description": "Example WorldMonitor observation."
+                                          "description": "Example VISTA observation."
                                           "id": "example-id"
                                           "location":
                                               "latitude": 40.7128
@@ -17577,7 +17577,7 @@ paths:
                                           - "example"
                                       "id": "example-id"
                                       "publishedAt": 1717200000000
-                                      "summary": "Example WorldMonitor observation."
+                                      "summary": "Example VISTA observation."
                                       "title": "example"
                                       "url": "https://example.com/worldmonitor"
                             schema:
@@ -17690,7 +17690,7 @@ paths:
                                     "nextCursor": "next-page-token"
                                     "totalCount": 1
                                 "repos":
-                                    - "description": "Example WorldMonitor observation."
+                                    - "description": "Example VISTA observation."
                                       "forks": 1
                                       "fullName": "koala73/worldmonitor"
                                       "language": "typescript"
@@ -17939,7 +17939,7 @@ paths:
                                         "lng": -74.006
                                         "original": "example"
                                         "virtual": true
-                                      "description": "Example WorldMonitor observation."
+                                      "description": "Example VISTA observation."
                                       "endDate": "2026-01-15"
                                       "id": "example-id"
                                       "location": "example"
@@ -19474,7 +19474,7 @@ paths:
                                           - "example"
                                       "aisDisruptions": 1
                                       "congestionLevel": "example"
-                                      "description": "Example WorldMonitor observation."
+                                      "description": "Example VISTA observation."
                                 "fetchedAt": "2026-01-15T12:00:00Z"
                                 "upstreamUnavailable": false
                             schema:
@@ -20168,7 +20168,7 @@ paths:
                                 "fetchedAt": "2026-01-15T12:00:00Z"
                                 "iso2": "US"
                                 "products":
-                                    - "description": "Example WorldMonitor observation."
+                                    - "description": "Example VISTA observation."
                                       "hs4": "example"
                                       "topExporters":
                                           - "partnerCode": 1
@@ -21693,7 +21693,7 @@ paths:
                                 "fetchedAt": "2026-01-15T12:00:00Z"
                                 "restrictions":
                                     - "affectedCountry": "US"
-                                      "description": "Example WorldMonitor observation."
+                                      "description": "Example VISTA observation."
                                       "id": "example-id"
                                       "measureType": "all"
                                       "notifiedAt": "2026-01-15T12:00:00Z"

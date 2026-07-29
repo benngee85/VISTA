@@ -108,7 +108,7 @@ paths:
                                     "disruptions":
                                         - "changePct": 1.5
                                           "darkShips": 1
-                                          "description": "Example WorldMonitor observation."
+                                          "description": "Example VISTA observation."
                                           "id": "example-id"
                                           "location":
                                               "latitude": 40.7128

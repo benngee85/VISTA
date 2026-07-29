@@ -515,7 +515,7 @@ paths:
                                     - "id": "example-id"
                                       "publishedAt": 1717200000000
                                       "sourceName": "VISTA Analyst"
-                                      "summary": "Example WorldMonitor observation."
+                                      "summary": "Example VISTA observation."
                                       "title": "example"
                             schema:
                                 $ref: '#/components/schemas/ListClimateNewsResponse'

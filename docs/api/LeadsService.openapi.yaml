@@ -32,7 +32,7 @@ paths:
                     application/json:
                         example:
                             "email": "analyst@example.com"
-                            "message": "Example WorldMonitor observation."
+                            "message": "Example VISTA observation."
                             "name": "VISTA Analyst"
                             "organization": "example"
                             "phone": "example"

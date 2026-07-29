@@ -101,7 +101,7 @@ describe('agent readiness: agent-skills index', () => {
 
     assert.match(page, /^title: "Agent Skills Catalog"$/m);
     assert.ok(
-      page.includes(`${index.skills.length} World Monitor agent skills`),
+      page.includes(`${index.skills.length} VISTA agent skills`),
       'docs page must state the current catalog size',
     );
     assert.ok(
