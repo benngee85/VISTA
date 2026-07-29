@@ -92,7 +92,8 @@ export function getProviderCredentials(
   if (provider === 'anthropic') {
     const baseUrl = process.env.ANTHROPIC_BASE_URL;
     const apiKey = process.env.ANTHROPIC_API_KEY;
-    if (!baseUrl || !apiKey) return null;
+    const model = overrides.model || process.env.ANTHROPIC_MODEL;
+    if (!baseUrl || !apiKey || !model) return null;
 
     // Private/local Anthropic-compatible endpoints are an explicit
     // self-hosted deployment feature. They must never become an
@@ -115,7 +116,7 @@ export function getProviderCredentials(
 
     return {
       apiUrl,
-      model: overrides.model || process.env.ANTHROPIC_MODEL,
+      model,
       protocol: 'anthropic',
       headers: {
         'x-api-key': apiKey,
