@@ -170,3 +170,10 @@ done
 
 echo ""
 echo "Done: $ok ok, $skip skipped, $fail failed, $timedout timed out"
+
+# VISTA_AGGREGATE_EXIT
+# A complete run must not report success when one or more seeders failed or
+# exceeded their execution budget.
+if [ "$fail" -gt 0 ] || [ "$timedout" -gt 0 ]; then
+  exit 1
+fi
