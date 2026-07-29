@@ -90,6 +90,15 @@ RUN chown -R appuser:appgroup /app /usr/share/nginx/html /tmp/nginx-client-body 
     /var/lib/nginx /var/log/nginx && \
     chown appuser:appgroup /etc/nginx/nginx.conf.template /etc/supervisor/conf.d/worldmonitor.conf
 
+# VISTA non-root runtime readability contract
+RUN chown -R appuser:appgroup /etc/nginx /etc/supervisor/conf.d /usr/share/nginx/html && \
+    chmod 0755 /etc/nginx /etc/supervisor /etc/supervisor/conf.d \
+               /usr/share /usr/share/nginx /usr/share/nginx/html && \
+    find /usr/share/nginx/html -type d -exec chmod 0755 {} + && \
+    find /usr/share/nginx/html -type f -exec chmod 0644 {} + && \
+    chmod 0444 /etc/nginx/nginx.conf.template /etc/supervisor/conf.d/worldmonitor.conf && \
+    chmod 0555 /app/entrypoint.sh
+
 USER appuser
 
 EXPOSE 8080
