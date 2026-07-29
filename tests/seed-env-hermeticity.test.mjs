@@ -169,6 +169,15 @@ async function* scanSources() {
   }
 }
 
+function readScannedSource(entry) {
+  try {
+    return readFileSync(join(REPO_ROOT, entry), 'utf8');
+  } catch (error) {
+    if (error?.code === 'ENOENT') return '';
+    throw error;
+  }
+}
+
 // Files allowed to name a `.env` path directly. Everything else must route
 // through the shared `loadEnvFile`, which is where the test-runtime and
 // checkout-scoping rules live — a private copy of the loader silently opts out
@@ -444,7 +453,7 @@ describe('seeder env hermeticity (#5767)', () => {
       let scanned = 0;
       for await (const entry of scanSources()) {
         scanned += 1;
-        const found = findCheckoutEscapingEnvPaths(readFileSync(join(REPO_ROOT, entry), 'utf8'));
+        const found = findCheckoutEscapingEnvPaths(readScannedSource(entry));
         if (found.length > 0) offenders.push(`${entry}: ${found.join(', ')}`);
       }
       assert.ok(scanned > 100, `expected to scan the seeder fleet, scanned ${scanned}`);
@@ -460,7 +469,7 @@ describe('seeder env hermeticity (#5767)', () => {
       // is unavoidable, so anything reaching for $HOME to find one lands here.
       const offenders = [];
       for await (const entry of scanSources()) {
-        const source = readFileSync(join(REPO_ROOT, entry), 'utf8');
+        const source = readScannedSource(entry);
         if (!accessesEnvFileItself(source)) continue;
         const found = findHomeDirReferences(stripJsComments(source));
         if (found.length > 0) offenders.push(`${entry}: ${found.join(', ')}`);
@@ -516,7 +525,7 @@ describe('seeder env hermeticity (#5767)', () => {
       const offenders = [];
       for await (const entry of scanSources()) {
         if (ENV_PARSER_ALLOWLIST.has(entry)) continue;
-        if (accessesEnvFileItself(readFileSync(join(REPO_ROOT, entry), 'utf8'))) offenders.push(entry);
+        if (accessesEnvFileItself(readScannedSource(entry))) offenders.push(entry);
       }
       assert.deepEqual(
         offenders,
@@ -529,7 +538,7 @@ describe('seeder env hermeticity (#5767)', () => {
     it('the allowlist has no stale entries', async () => {
       for (const entry of ENV_PARSER_ALLOWLIST) {
         assert.ok(
-          accessesEnvFileItself(readFileSync(join(REPO_ROOT, entry), 'utf8')),
+          accessesEnvFileItself(readScannedSource(entry)),
           `${entry} no longer reads .env itself — drop it from ENV_PARSER_ALLOWLIST`,
         );
       }

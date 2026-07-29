@@ -29,7 +29,7 @@ test('primary cache service is Rocky 9 Valkey', () => {
   assert.match(compose, /image: vista-valkey:latest/);
   assert.match(compose, /container_name: vista-valkey/);
   assert.match(compose, /valkey-data:\/data/);
-  assert.match(valkeyDockerfile, /^FROM rockylinux:9$/m);
+  assert.match(valkeyDockerfile, /^FROM rockylinux:9@sha256:[0-9a-f]{64}$/m);
   assert.match(valkeyDockerfile, /dnf -y install valkey/);
 });
 
