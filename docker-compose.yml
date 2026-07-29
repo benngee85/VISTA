@@ -29,9 +29,9 @@ services:
       UPSTASH_REDIS_REST_TOKEN: "${CACHE_REST_TOKEN:?CACHE_REST_TOKEN required — generate with: openssl rand -hex 32}"
       LOCAL_API_PORT: "46123"
       LOCAL_API_MODE: "docker"
-      LOCAL_API_CLOUD_FALLBACK: "${LOCAL_API_CLOUD_FALLBACK:-false}"
+      LOCAL_API_CLOUD_FALLBACK: "true"
       LOCAL_API_CLOUD_FALLBACK_ALLOW_DOCKER: "${LOCAL_API_CLOUD_FALLBACK_ALLOW_DOCKER:-false}"
-      WORLDMONITOR_API_KEY: "${WORLDMONITOR_API_KEY:-}"
+      WORLDMONITOR_API_KEY: "${WM_API_KEY:-}"
       WS_RELAY_URL: "http://ais-relay:3004"
       # Sovereign entitlement-provider boundary. Hosted remains the safe
       # compatibility default until the local provider is deployed.

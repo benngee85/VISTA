@@ -31,12 +31,21 @@ if [ -z "${CACHE_REST_TOKEN:-}" ]; then
   fi
 fi
 
+# VISTA_RUNTIME_SECRETS_PRECHECK
+if [ -f "$PROJECT_DIR/.secrets/runtime.env" ]; then
+  set -a
+  # shellcheck disable=SC1091
+  . "$PROJECT_DIR/.secrets/runtime.env"
+  set +a
+fi
+
 if [ -z "${CACHE_REST_TOKEN:-}" ]; then
   echo "ERROR: CACHE_REST_TOKEN is required." >&2
   echo "       REDIS_TOKEN and UPSTASH_REDIS_REST_TOKEN remain accepted compatibility inputs." >&2
   echo "       Generate with: openssl rand -hex 32" >&2
   exit 1
 fi
+
 
 UPSTASH_REDIS_REST_URL="$CACHE_REST_URL"
 UPSTASH_REDIS_REST_TOKEN="$CACHE_REST_TOKEN"
@@ -66,12 +75,16 @@ fi
 LLM_API_URL="${LLM_API_URL_HOST:-http://localhost:1234/v1/chat/completions}"
 export LLM_API_URL
 
-if [ -z "${LLM_API_KEY:-}" ]; then
+if [ -z "${LLM_API_KEY:-}" ] && {
+  [ -z "${ANTHROPIC_BASE_URL:-}" ] ||
+  [ -z "${ANTHROPIC_API_KEY:-}" ]
+}; then
   echo "ERROR: LLM_API_KEY is required for host-side LLM seeders." >&2
   exit 1
 fi
 
-if [ -z "${LLM_MODEL:-}" ]; then
+if [ -z "${LLM_MODEL:-}" ] &&
+  [ -z "${ANTHROPIC_MODEL:-}" ]; then
   echo "ERROR: LLM_MODEL is required for host-side LLM seeders." >&2
   exit 1
 fi
