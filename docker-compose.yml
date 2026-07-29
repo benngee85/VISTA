@@ -21,6 +21,8 @@ services:
     ports:
       - "${WM_PORT:-3000}:8080"
     environment:
+      WORLDMONITOR_RELAY_KEY: "${WORLDMONITOR_RELAY_KEY:-}"
+      RELAY_SHARED_SECRET: "${RELAY_SHARED_SECRET:?RELAY_SHARED_SECRET required}"
       CACHE_REST_URL: "http://valkey-rest:8080"
       UPSTASH_REDIS_REST_URL: "http://valkey-rest:8080"
       CACHE_REST_TOKEN: "${CACHE_REST_TOKEN:?CACHE_REST_TOKEN required — generate with: openssl rand -hex 32}"
@@ -31,7 +33,6 @@ services:
       LOCAL_API_CLOUD_FALLBACK_ALLOW_DOCKER: "${LOCAL_API_CLOUD_FALLBACK_ALLOW_DOCKER:-false}"
       WORLDMONITOR_API_KEY: "${WORLDMONITOR_API_KEY:-}"
       WS_RELAY_URL: "http://ais-relay:3004"
-      WORLDMONITOR_RELAY_KEY: "${WORLDMONITOR_RELAY_KEY:-}"
       # Sovereign entitlement-provider boundary. Hosted remains the safe
       # compatibility default until the local provider is deployed.
       VISTA_DEPLOYMENT_PROFILE: "${VISTA_DEPLOYMENT_PROFILE:-hosted}"
@@ -88,9 +89,9 @@ services:
     image: worldmonitor-ais-relay:latest
     container_name: worldmonitor-ais-relay
     environment:
-      WORLDMONITOR_API_BASE_URL: "http://worldmonitor:8080"
       WORLDMONITOR_RELAY_KEY: "${WORLDMONITOR_RELAY_KEY:-}"
-      RELAY_SHARED_SECRET: ${RELAY_SHARED_SECRET:?RELAY_SHARED_SECRET is required}
+      RELAY_SHARED_SECRET: "${RELAY_SHARED_SECRET:?RELAY_SHARED_SECRET required}"
+      WORLDMONITOR_API_BASE_URL: "http://worldmonitor:8080"
       AISSTREAM_API_KEY: "${AISSTREAM_API_KEY:-}"
       FINNHUB_API_KEY: "${FINNHUB_API_KEY:-}"
       MARKET_YAHOO_REFRESH_INTERVAL_MS: "${MARKET_YAHOO_REFRESH_INTERVAL_MS:-900000}"
