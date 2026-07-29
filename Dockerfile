@@ -75,7 +75,9 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY docker/nginx.conf /etc/nginx/nginx.conf.template
 COPY docker/supervisord.conf /etc/supervisor/conf.d/worldmonitor.conf
 COPY docker/entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh && \
+RUN chmod 0555 /app/entrypoint.sh && \
+    chmod 0444 /etc/nginx/nginx.conf.template \
+               /etc/supervisor/conf.d/worldmonitor.conf && \
     rm -rf /usr/local/lib/node_modules/npm \
            /usr/local/lib/node_modules/corepack \
            /usr/local/bin/npm \
@@ -83,9 +85,10 @@ RUN chmod +x /app/entrypoint.sh && \
            /usr/local/bin/corepack
 
 # Ensure writable dirs for non-root
-RUN chown -R appuser:appgroup /app /tmp/nginx-client-body /tmp/nginx-proxy \
+RUN chown -R appuser:appgroup /app /usr/share/nginx/html /tmp/nginx-client-body /tmp/nginx-proxy \
     /tmp/nginx-fastcgi /tmp/nginx-uwsgi /tmp/nginx-scgi /var/log/supervisor \
-    /var/lib/nginx /var/log/nginx
+    /var/lib/nginx /var/log/nginx && \
+    chown appuser:appgroup /etc/nginx/nginx.conf.template /etc/supervisor/conf.d/worldmonitor.conf
 
 USER appuser
 

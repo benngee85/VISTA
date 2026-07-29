@@ -92,7 +92,9 @@ COPY data/ ./data/
 
 # The service starts directly with node; package-management tooling is not
 # required in the runtime image.
-RUN rm -rf /usr/local/lib/node_modules/npm \
+RUN chown -R node:node /app/scripts /app/shared /app/data && \
+    chmod 0644 /app/scripts/ais-relay.cjs && \
+    rm -rf /usr/local/lib/node_modules/npm \
            /usr/local/lib/node_modules/corepack \
            /usr/local/bin/npm \
            /usr/local/bin/npx \
