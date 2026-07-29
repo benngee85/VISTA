@@ -616,7 +616,7 @@ paths:
                                     - "category": "cs.AI"
                                       "id": "example-id"
                                       "latitude": 40.7128
-                                      "locationName": "WorldMonitor Analyst"
+                                      "locationName": "VISTA Analyst"
                                       "longitude": -74.006
                                 "scrapedAt": "1717200000000"
                             schema:

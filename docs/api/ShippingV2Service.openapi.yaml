@@ -79,11 +79,11 @@ paths:
                                       "addedCostMultiplier": 75.25
                                       "addedTransitDays": 7
                                       "id": "example-id"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                 "cargoType": "container"
                                 "chokepointExposures":
                                     - "chokepointId": "suez"
-                                      "chokepointName": "WorldMonitor Analyst"
+                                      "chokepointName": "VISTA Analyst"
                                       "exposurePct": 1
                                 "disruptionScore": 42
                                 "fetchedAt": "2026-01-15T12:00:00Z"

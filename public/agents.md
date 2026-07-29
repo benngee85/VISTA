@@ -44,31 +44,31 @@ VISTA is a real-time global intelligence dashboard: 500+ news feeds, 56 map laye
 - Source (AGPL-3.0): https://github.com/koala73/worldmonitor
 
 <!-- VISTA-SKILL-DESCRIPTIONS:START -->
-<div hidden aria-hidden="true" data-vista-generated="skill-descriptions">
-<span>Model oil or gas supply shock exposure for a country and chokepoint. Use when the user asks how an energy disruption could affect fuel supply, strategic cover, or product deficits.</span>
-<span>Retrieve current airport delay and cancellation alerts worldwide — delay type, severity, average delay minutes, and affected-flight percentages per airport. Use when the user asks whether an airport is delayed, disrupted, or experiencing cancellations.</span>
-<span>Retrieve live disruption status for the 13 monitored maritime chokepoints (Suez, Hormuz, Malacca, Bab el-Mandeb, Panama, and more). Use when the user asks whether a strait or canal is disrupted, congested, or safe for shipping right now.</span>
-<span>Retrieve composite country risk intelligence — Country Instability Index (CII), travel advisory level, and active sanctions exposure — for one country by ISO code. Use when the user asks how risky or unstable a country is right now.</span>
-<span>Retrieve probabilistic forecasts and their scorecard context. Use when the user asks what VISTA is forecasting, how probabilities shifted, or how calibrated the forecasts are.</span>
-<span>Retrieve normalized OFAC sanctions pressure — designation summaries, recent additions, and per-country/per-program aggregates including sanctioned vessels and aircraft. Use when the user asks which countries or programs face sanctions pressure, or what was recently designated.</span>
-<span>Retrieve the current AI-generated strategic intelligence brief for a country, keyed by ISO 3166-1 alpha-2 code. Use when the user asks for a summary of the current geopolitical, economic, or security situation in a specific country.</span>
-<span>Retrieve the pre-aggregated digest of VISTA's 500+ curated news feeds, bucketed by category, with per-article threat classification and alert flags. Use when the user asks what's in the news right now, wants headlines by topic, or needs a current-events sweep.</span>
-<span>Retrieve the composite country resilience score (0-100) and its domain/pillar breakdown for a single country. Use when the user asks how resilient a country is, or wants its numeric resilience score, trend, or per-domain breakdown.</span>
-<span>Retrieve real-time equity, index, and ETF quotes with price, change, and sparkline history. Use when the user asks for current market prices, how a ticker is doing, or a quick market snapshot.</span>
-<span>Retrieve active prediction-market contracts (Polymarket) with live yes-price probabilities, volume, and close dates, filterable by category or keyword. Use when the user asks what the market odds are on a geopolitical, economic, or election outcome.</span>
-<span>Retrieve the curated energy disruption event log for pipelines and storage facilities. Use when the user asks what energy assets are disrupted, sanctioned, offline, or under watch.</span>
-<span>Retrieve disease outbreak alerts and PM2.5 air-quality health warnings. Use when the user asks about current public-health risks in a country, city, or region.</span>
-<span>Retrieve detected internet outages (Cloudflare Radar) with country, cause, severity, and time bounds. Use when the user asks whether a country's internet is down, throttled, or experiencing a shutdown.</span>
-<span>Retrieve current shipping market stress from carrier and freight indicators. Use when the user asks whether supply chains or container shipping are under pressure right now.</span>
-<span>Discover live webcams in a map viewport and resolve thumbnails or player URLs. Use when the user asks for visual context near a location, route, border, port, or city.</span>
-<span>Retrieve active cyber-threat intelligence — malware IOCs, C2 infrastructure, and CISA known-exploited vulnerabilities — filterable by type, source, and severity. Use when the user asks about current cyber threats, IOCs, or actively exploited CVEs.</span>
-<span>Retrieve strategic UN Comtrade commodity flows with anomaly flags. Use when the user asks who trades a critical commodity, which flows changed sharply, or how trade exposure is shifting.</span>
-<span>Retrieve climate-relevant disaster events, anomalies, and climate news. Use when the user asks about floods, cyclones, droughts, heatwaves, wildfires, or climate disruption.</span>
-<span>Retrieve geolocated armed-conflict events (UCDP) with parties, fatality estimates, and violence type, filterable by country and date range. Use when the user asks about recent fighting, attacks, or conflict activity in a country or region.</span>
-<span>Retrieve recent earthquakes (USGS) with magnitude, depth, location, and a concern score that flags proximity to nuclear test sites. Use when the user asks about recent seismic activity or whether an earthquake was natural.</span>
-<span>Retrieve tracked military aircraft positions (OpenSky + Wingbits) with callsign, type, operator, altitude, and activity clusters, filterable by bounding box, operator, and aircraft type. Use when the user asks about military air activity in a region.</span>
-<span>Retrieve tariff-rate timeseries for a country pair — applied vs bound rates by product sector and year, plus the current effective tariff rate. Use when the user asks how tariffs between two countries have changed or what rate applies to a sector.</span>
-<span>Retrieve seeded protest, riot, strike, and civil unrest events. Use when the user asks whether social unrest is occurring in a country or over a recent time window.</span>
-<span>Retrieve a point-in-time AIS vessel-traffic snapshot with disruption candidates and optional tanker overlay, filterable by bounding box. Use when the user asks what ships are in an area, or whether maritime traffic is disrupted.</span>
-</div>
+```text
+Model oil or gas supply shock exposure for a country and chokepoint. Use when the user asks how an energy disruption could affect fuel supply, strategic cover, or product deficits.
+Retrieve current airport delay and cancellation alerts worldwide — delay type, severity, average delay minutes, and affected-flight percentages per airport. Use when the user asks whether an airport is delayed, disrupted, or experiencing cancellations.
+Retrieve live disruption status for the 13 monitored maritime chokepoints (Suez, Hormuz, Malacca, Bab el-Mandeb, Panama, and more). Use when the user asks whether a strait or canal is disrupted, congested, or safe for shipping right now.
+Retrieve composite country risk intelligence — Country Instability Index (CII), travel advisory level, and active sanctions exposure — for one country by ISO code. Use when the user asks how risky or unstable a country is right now.
+Retrieve probabilistic forecasts and their scorecard context. Use when the user asks what VISTA is forecasting, how probabilities shifted, or how calibrated the forecasts are.
+Retrieve normalized OFAC sanctions pressure — designation summaries, recent additions, and per-country/per-program aggregates including sanctioned vessels and aircraft. Use when the user asks which countries or programs face sanctions pressure, or what was recently designated.
+Retrieve the current AI-generated strategic intelligence brief for a country, keyed by ISO 3166-1 alpha-2 code. Use when the user asks for a summary of the current geopolitical, economic, or security situation in a specific country.
+Retrieve the pre-aggregated digest of VISTA's 500+ curated news feeds, bucketed by category, with per-article threat classification and alert flags. Use when the user asks what's in the news right now, wants headlines by topic, or needs a current-events sweep.
+Retrieve the composite country resilience score (0-100) and its domain/pillar breakdown for a single country. Use when the user asks how resilient a country is, or wants its numeric resilience score, trend, or per-domain breakdown.
+Retrieve real-time equity, index, and ETF quotes with price, change, and sparkline history. Use when the user asks for current market prices, how a ticker is doing, or a quick market snapshot.
+Retrieve active prediction-market contracts (Polymarket) with live yes-price probabilities, volume, and close dates, filterable by category or keyword. Use when the user asks what the market odds are on a geopolitical, economic, or election outcome.
+Retrieve the curated energy disruption event log for pipelines and storage facilities. Use when the user asks what energy assets are disrupted, sanctioned, offline, or under watch.
+Retrieve disease outbreak alerts and PM2.5 air-quality health warnings. Use when the user asks about current public-health risks in a country, city, or region.
+Retrieve detected internet outages (Cloudflare Radar) with country, cause, severity, and time bounds. Use when the user asks whether a country's internet is down, throttled, or experiencing a shutdown.
+Retrieve current shipping market stress from carrier and freight indicators. Use when the user asks whether supply chains or container shipping are under pressure right now.
+Discover live webcams in a map viewport and resolve thumbnails or player URLs. Use when the user asks for visual context near a location, route, border, port, or city.
+Retrieve active cyber-threat intelligence — malware IOCs, C2 infrastructure, and CISA known-exploited vulnerabilities — filterable by type, source, and severity. Use when the user asks about current cyber threats, IOCs, or actively exploited CVEs.
+Retrieve strategic UN Comtrade commodity flows with anomaly flags. Use when the user asks who trades a critical commodity, which flows changed sharply, or how trade exposure is shifting.
+Retrieve climate-relevant disaster events, anomalies, and climate news. Use when the user asks about floods, cyclones, droughts, heatwaves, wildfires, or climate disruption.
+Retrieve geolocated armed-conflict events (UCDP) with parties, fatality estimates, and violence type, filterable by country and date range. Use when the user asks about recent fighting, attacks, or conflict activity in a country or region.
+Retrieve recent earthquakes (USGS) with magnitude, depth, location, and a concern score that flags proximity to nuclear test sites. Use when the user asks about recent seismic activity or whether an earthquake was natural.
+Retrieve tracked military aircraft positions (OpenSky + Wingbits) with callsign, type, operator, altitude, and activity clusters, filterable by bounding box, operator, and aircraft type. Use when the user asks about military air activity in a region.
+Retrieve tariff-rate timeseries for a country pair — applied vs bound rates by product sector and year, plus the current effective tariff rate. Use when the user asks how tariffs between two countries have changed or what rate applies to a sector.
+Retrieve seeded protest, riot, strike, and civil unrest events. Use when the user asks whether social unrest is occurring in a country or over a recent time window.
+Retrieve a point-in-time AIS vessel-traffic snapshot with disruption candidates and optional tanker overlay, filterable by bounding box. Use when the user asks what ships are in an area, or whether maritime traffic is disrupted.
+```
 <!-- VISTA-SKILL-DESCRIPTIONS:END -->

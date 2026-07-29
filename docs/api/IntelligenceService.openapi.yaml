@@ -1153,7 +1153,7 @@ paths:
                                 "error": "example"
                                 "messages":
                                     - "channelId": "example-id"
-                                      "channelName": "WorldMonitor Analyst"
+                                      "channelName": "VISTA Analyst"
                                       "id": "example-id"
                                       "mediaUrls":
                                           - "https://example.com/worldmonitor"
@@ -1238,7 +1238,7 @@ paths:
                   in: query
                   description: Company name, such as "Apple Inc".
                   required: false
-                  example: "WorldMonitor Analyst"
+                  example: "VISTA Analyst"
                   schema:
                     type: string
                 - name: ticker
@@ -2103,7 +2103,7 @@ paths:
                                     - "confidence": "example"
                                       "direction": "example"
                                       "driver": "example"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "narrative": "example"
                                 "degraded": true
                                 "emptyReason": "example"

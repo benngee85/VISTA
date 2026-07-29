@@ -103,7 +103,7 @@ paths:
                                           "location":
                                               "latitude": 40.7128
                                               "longitude": -74.006
-                                          "name": "WorldMonitor Analyst"
+                                          "name": "VISTA Analyst"
                                           "note": "example"
                                     "disruptions":
                                         - "changePct": 1.5
@@ -113,7 +113,7 @@ paths:
                                           "location":
                                               "latitude": 40.7128
                                               "longitude": -74.006
-                                          "name": "WorldMonitor Analyst"
+                                          "name": "VISTA Analyst"
                                     "sequence": 1
                                     "snapshotAt": 1717200000000
                             schema:

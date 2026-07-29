@@ -407,7 +407,7 @@ paths:
                                       "carrier":
                                           "iataCode": "JFK"
                                           "icaoCode": "example"
-                                          "name": "WorldMonitor Analyst"
+                                          "name": "VISTA Analyst"
                                 "source": "example"
                                 "updatedAt": 1717200000000
                             schema:
@@ -739,7 +739,7 @@ paths:
                         application/json:
                             example:
                                 "channelExists": true
-                                "channelName": "WorldMonitor Analyst"
+                                "channelName": "VISTA Analyst"
                                 "error": "example"
                                 "hlsUrl": "https://example.com/worldmonitor"
                                 "isLive": true
@@ -2073,7 +2073,7 @@ paths:
                                 "items":
                                     - "id": "example-id"
                                       "publishedAt": 1717200000000
-                                      "sourceName": "WorldMonitor Analyst"
+                                      "sourceName": "VISTA Analyst"
                                       "summary": "Example WorldMonitor observation."
                                       "title": "example"
                             schema:
@@ -2739,7 +2739,7 @@ paths:
                                     - "category": "cs.AI"
                                       "id": "example-id"
                                       "latitude": 40.7128
-                                      "locationName": "WorldMonitor Analyst"
+                                      "locationName": "VISTA Analyst"
                                       "longitude": -74.006
                                 "scrapedAt": "1717200000000"
                             schema:
@@ -3204,7 +3204,7 @@ paths:
                                       "currentIndex": 1.5
                                       "itemCount": 1
                                       "momPct": 1.5
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                 "marketCode": "US"
                                 "range": "7d"
                                 "upstreamUnavailable": false
@@ -3520,7 +3520,7 @@ paths:
                                 "retailers":
                                     - "freshnessMin": 1
                                       "lastRunAt": "1717200000000"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "parseSuccessRate": 75.25
                                       "slug": "example"
                                 "stalledCount": 1
@@ -3808,12 +3808,12 @@ paths:
                                           "asylumLocation":
                                               "latitude": 40.7128
                                               "longitude": -74.006
-                                          "asylumName": "WorldMonitor Analyst"
+                                          "asylumName": "VISTA Analyst"
                                           "originCode": "US"
                                           "originLocation":
                                               "latitude": 40.7128
                                               "longitude": -74.006
-                                          "originName": "WorldMonitor Analyst"
+                                          "originName": "VISTA Analyst"
                                           "refugees": 1
                                     "year": 1
                             schema:
@@ -3927,7 +3927,7 @@ paths:
                                 "countries":
                                     - "code": "US"
                                       "densityPerKm2": 1
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "population": 1
                                 "exposure":
                                     "densityPerKm2": 1
@@ -4157,7 +4157,7 @@ paths:
                                     - "countryCode": "US"
                                       "countryName": "US"
                                       "indicatorCode": "NY.GDP.MKTP.CD"
-                                      "indicatorName": "WorldMonitor Analyst"
+                                      "indicatorName": "VISTA Analyst"
                                       "value": 1.5
                                       "year": 1
                                 "pagination":
@@ -4255,7 +4255,7 @@ paths:
                                 "prices":
                                     - "change": 1.5
                                       "commodity": "example"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "price": 75.25
                                       "priceAt": 1717200000000
                                       "unit": "example"
@@ -4644,7 +4644,7 @@ paths:
                                         - "capacityMw": 1.5
                                           "year": 1
                                       "energySource": "example"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                             schema:
                                 $ref: '#/components/schemas/worldmonitor_economic_v1_GetEnergyCapacityResponse'
                 "400":
@@ -5141,7 +5141,7 @@ paths:
                                           - "available": true
                                             "currency": "USD"
                                             "itemId": "example-id"
-                                            "itemName": "WorldMonitor Analyst"
+                                            "itemName": "VISTA Analyst"
                                             "localPrice": 75.25
                                 "fetchedAt": "2026-01-15T12:00:00Z"
                                 "mostExpensiveCountry": "US"
@@ -8457,7 +8457,7 @@ paths:
                                       "description": "Example WorldMonitor observation."
                                       "id": "example-id"
                                       "latencyMs": 1
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                             schema:
                                 $ref: '#/components/schemas/worldmonitor_infrastructure_v1_ListServiceStatusesResponse'
                 "400":
@@ -8750,7 +8750,7 @@ paths:
                             example:
                                 "code": "example"
                                 "country": "US"
-                                "displayName": "WorldMonitor Analyst"
+                                "displayName": "VISTA Analyst"
                                 "error": "example"
                             schema:
                                 $ref: '#/components/schemas/worldmonitor_infrastructure_v1_ReverseGeocodeResponse'
@@ -9355,7 +9355,7 @@ paths:
                             example:
                                 "anomalies":
                                     - "asn": "example"
-                                      "asnName": "WorldMonitor Analyst"
+                                      "asnName": "VISTA Analyst"
                                       "endDate": 1
                                       "latitude": 40.7128
                                       "locationCode": "US"
@@ -10560,7 +10560,7 @@ paths:
                                 "error": "example"
                                 "messages":
                                     - "channelId": "example-id"
-                                      "channelName": "WorldMonitor Analyst"
+                                      "channelName": "VISTA Analyst"
                                       "id": "example-id"
                                       "mediaUrls":
                                           - "https://example.com/worldmonitor"
@@ -10645,7 +10645,7 @@ paths:
                   in: query
                   description: Company name, such as "Apple Inc".
                   required: false
-                  example: "WorldMonitor Analyst"
+                  example: "VISTA Analyst"
                   schema:
                     type: string
                 - name: ticker
@@ -11510,7 +11510,7 @@ paths:
                                     - "confidence": "example"
                                       "direction": "example"
                                       "driver": "example"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "narrative": "example"
                                 "degraded": true
                                 "emptyReason": "example"
@@ -12867,7 +12867,7 @@ paths:
                         example:
                             "email": "analyst@example.com"
                             "message": "Example WorldMonitor observation."
-                            "name": "WorldMonitor Analyst"
+                            "name": "VISTA Analyst"
                             "organization": "example"
                             "phone": "example"
                             "source": "example"
@@ -13238,7 +13238,7 @@ paths:
                                           "location":
                                               "latitude": 40.7128
                                               "longitude": -74.006
-                                          "name": "WorldMonitor Analyst"
+                                          "name": "VISTA Analyst"
                                           "note": "example"
                                     "disruptions":
                                         - "changePct": 1.5
@@ -13248,7 +13248,7 @@ paths:
                                           "location":
                                               "latitude": 40.7128
                                               "longitude": -74.006
-                                          "name": "WorldMonitor Analyst"
+                                          "name": "VISTA Analyst"
                                     "sequence": 1
                                     "snapshotAt": 1717200000000
                             schema:
@@ -13456,7 +13456,7 @@ paths:
                                 "quotes":
                                     - "change": 1.5
                                       "display": "example"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "price": 75.25
                                       "sparkline":
                                           - 1.5
@@ -13555,7 +13555,7 @@ paths:
                                 "quotes":
                                     - "change": 1.5
                                       "change7d": 1.5
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "price": 75.25
                                       "sparkline":
                                           - 1.5
@@ -13652,7 +13652,7 @@ paths:
                                 "quotes":
                                     - "change": 1.5
                                       "display": "example"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "price": 75.25
                                       "sparkline":
                                           - 1.5
@@ -13745,7 +13745,7 @@ paths:
                             example:
                                 "sectors":
                                     - "change": 1.5
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "symbol": "AAPL"
                             schema:
                                 $ref: '#/components/schemas/worldmonitor_market_v1_GetSectorSummaryResponse'
@@ -14077,7 +14077,7 @@ paths:
                                 "code": "US"
                                 "currency": "USD"
                                 "fetchedAt": "2026-01-15T12:00:00Z"
-                                "indexName": "WorldMonitor Analyst"
+                                "indexName": "VISTA Analyst"
                             schema:
                                 $ref: '#/components/schemas/worldmonitor_market_v1_GetCountryStockIndexResponse'
                 "400":
@@ -14159,7 +14159,7 @@ paths:
                                     - "change": 1.5
                                       "country": "US"
                                       "flag": "example"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "price": 75.25
                                 "rateLimited": true
                             schema:
@@ -14240,7 +14240,7 @@ paths:
                   in: query
                   description: Optional company display name used to disambiguate the symbol.
                   required: false
-                  example: "WorldMonitor Analyst"
+                  example: "VISTA Analyst"
                   schema:
                     type: string
                 - name: include_news
@@ -14473,7 +14473,7 @@ paths:
                   in: query
                   description: Optional company display name used to disambiguate the symbol.
                   required: false
-                  example: "WorldMonitor Analyst"
+                  example: "VISTA Analyst"
                   schema:
                     type: string
                 - name: eval_window_days
@@ -14690,7 +14690,7 @@ paths:
                                 "sectors":
                                     - "change": 1.5
                                       "id": "example-id"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                             schema:
                                 $ref: '#/components/schemas/worldmonitor_market_v1_ListCryptoSectorsResponse'
                 "400":
@@ -14771,7 +14771,7 @@ paths:
                                 "tokens":
                                     - "change": 1.5
                                       "change7d": 1.5
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "price": 75.25
                                       "sparkline":
                                           - 1.5
@@ -14856,7 +14856,7 @@ paths:
                                 "tokens":
                                     - "change": 1.5
                                       "change7d": 1.5
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "price": 75.25
                                       "sparkline":
                                           - 1.5
@@ -14941,7 +14941,7 @@ paths:
                                 "tokens":
                                     - "change": 1.5
                                       "change7d": 1.5
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "price": 75.25
                                       "sparkline":
                                           - 1.5
@@ -15476,16 +15476,16 @@ paths:
                                     "topBuyers12m":
                                         - "deltaTonnes12m": 1.5
                                           "iso3": "USA"
-                                          "name": "WorldMonitor Analyst"
+                                          "name": "VISTA Analyst"
                                     "topHolders":
                                         - "iso3": "USA"
-                                          "name": "WorldMonitor Analyst"
+                                          "name": "VISTA Analyst"
                                           "pctOfReserves": 1.5
                                           "tonnes": 1.5
                                     "topSellers12m":
                                         - "deltaTonnes12m": 1.5
                                           "iso3": "USA"
-                                          "name": "WorldMonitor Analyst"
+                                          "name": "VISTA Analyst"
                                     "totalTonnes": 1
                                 "cot":
                                     "managedMoney":
@@ -16585,7 +16585,7 @@ paths:
                         application/json:
                             example:
                                 "flight":
-                                    "airlineName": "WorldMonitor Analyst"
+                                    "airlineName": "VISTA Analyst"
                                     "altitude": 1.5
                                     "arrDelayedMin": 1
                                     "arrEstimatedUtc": "example"
@@ -17225,7 +17225,7 @@ paths:
                                       "count": 1
                                       "latitude": 40.7128
                                       "longitude": -74.006
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                 "fetchedAt": 1717200000000
                                 "stale": true
                             schema:
@@ -18234,7 +18234,7 @@ paths:
                                 "deployedCommitSha": "example"
                                 "flags":
                                     - "enabled": true
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                             schema:
                                 $ref: '#/components/schemas/worldmonitor_resilience_v1_GetResilienceRuntimeManifestResponse'
                 "400":
@@ -18426,7 +18426,7 @@ paths:
                                         - "US"
                                       "entityType": "all"
                                       "id": "example-id"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "programs":
                                           - "example"
                                 "source": "example"
@@ -19044,11 +19044,11 @@ paths:
                                       "addedCostMultiplier": 75.25
                                       "addedTransitDays": 7
                                       "id": "example-id"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                 "cargoType": "container"
                                 "chokepointExposures":
                                     - "chokepointId": "suez"
-                                      "chokepointName": "WorldMonitor Analyst"
+                                      "chokepointName": "VISTA Analyst"
                                       "exposurePct": 1
                                 "disruptionScore": 42
                                 "fetchedAt": "2026-01-15T12:00:00Z"
@@ -19386,7 +19386,7 @@ paths:
                                           - "date": "2026-01-15"
                                             "value": 1.5
                                       "indexId": "example-id"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                 "upstreamUnavailable": false
                             schema:
                                 $ref: '#/components/schemas/worldmonitor_supply_chain_v1_GetShippingRatesResponse'
@@ -19741,7 +19741,7 @@ paths:
                                 "carriers":
                                     - "carrierType": "all"
                                       "changePct": 1.5
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "price": 75.25
                                       "sparkline":
                                           - 1.5
@@ -19847,7 +19847,7 @@ paths:
                             example:
                                 "exposures":
                                     - "chokepointId": "suez"
-                                      "chokepointName": "WorldMonitor Analyst"
+                                      "chokepointName": "VISTA Analyst"
                                       "coastSide": "example"
                                       "exposureScore": 42.5
                                       "shockSupported": true
@@ -20518,11 +20518,11 @@ paths:
                                           "lat": 40.7128
                                           "lon": -74.006
                                       "id": "example-id"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                 "cargoType": "container"
                                 "chokepointExposures":
                                     - "chokepointId": "suez"
-                                      "chokepointName": "WorldMonitor Analyst"
+                                      "chokepointName": "VISTA Analyst"
                                       "exposurePct": 1
                                 "disruptionScore": 42.5
                                 "estFreightUsdPerTeuRange":
@@ -21816,7 +21816,7 @@ paths:
                                       "reportingCountry": "840"
                                 "effectiveTariffRate":
                                     "observationPeriod": "daily"
-                                    "sourceName": "WorldMonitor Analyst"
+                                    "sourceName": "VISTA Analyst"
                                     "sourceUrl": "https://example.com/worldmonitor"
                                     "tariffRate": 75.25
                                     "updatedAt": "2026-01-15"

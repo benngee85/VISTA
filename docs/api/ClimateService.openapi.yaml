@@ -514,7 +514,7 @@ paths:
                                 "items":
                                     - "id": "example-id"
                                       "publishedAt": 1717200000000
-                                      "sourceName": "WorldMonitor Analyst"
+                                      "sourceName": "VISTA Analyst"
                                       "summary": "Example WorldMonitor observation."
                                       "title": "example"
                             schema:

@@ -403,7 +403,7 @@ paths:
                                       "carrier":
                                           "iataCode": "JFK"
                                           "icaoCode": "example"
-                                          "name": "WorldMonitor Analyst"
+                                          "name": "VISTA Analyst"
                                 "source": "example"
                                 "updatedAt": 1717200000000
                             schema:
@@ -735,7 +735,7 @@ paths:
                         application/json:
                             example:
                                 "channelExists": true
-                                "channelName": "WorldMonitor Analyst"
+                                "channelName": "VISTA Analyst"
                                 "error": "example"
                                 "hlsUrl": "https://example.com/worldmonitor"
                                 "isLive": true

@@ -178,7 +178,7 @@ paths:
                                       "reportingCountry": "840"
                                 "effectiveTariffRate":
                                     "observationPeriod": "daily"
-                                    "sourceName": "WorldMonitor Analyst"
+                                    "sourceName": "VISTA Analyst"
                                     "sourceUrl": "https://example.com/worldmonitor"
                                     "tariffRate": 75.25
                                     "updatedAt": "2026-01-15"

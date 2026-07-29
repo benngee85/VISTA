@@ -78,12 +78,12 @@ paths:
                                           "asylumLocation":
                                               "latitude": 40.7128
                                               "longitude": -74.006
-                                          "asylumName": "WorldMonitor Analyst"
+                                          "asylumName": "VISTA Analyst"
                                           "originCode": "US"
                                           "originLocation":
                                               "latitude": 40.7128
                                               "longitude": -74.006
-                                          "originName": "WorldMonitor Analyst"
+                                          "originName": "VISTA Analyst"
                                           "refugees": 1
                                     "year": 1
                             schema:
@@ -197,7 +197,7 @@ paths:
                                 "countries":
                                     - "code": "US"
                                       "densityPerKm2": 1
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "population": 1
                                 "exposure":
                                     "densityPerKm2": 1

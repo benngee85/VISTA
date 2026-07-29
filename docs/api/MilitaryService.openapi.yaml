@@ -931,7 +931,7 @@ paths:
                         application/json:
                             example:
                                 "flight":
-                                    "airlineName": "WorldMonitor Analyst"
+                                    "airlineName": "VISTA Analyst"
                                     "altitude": 1.5
                                     "arrDelayedMin": 1
                                     "arrEstimatedUtc": "example"

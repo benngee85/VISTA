@@ -33,7 +33,7 @@ paths:
                         example:
                             "email": "analyst@example.com"
                             "message": "Example WorldMonitor observation."
-                            "name": "WorldMonitor Analyst"
+                            "name": "VISTA Analyst"
                             "organization": "example"
                             "phone": "example"
                             "source": "example"

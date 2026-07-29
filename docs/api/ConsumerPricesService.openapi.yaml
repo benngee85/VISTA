@@ -258,7 +258,7 @@ paths:
                                       "currentIndex": 1.5
                                       "itemCount": 1
                                       "momPct": 1.5
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                 "marketCode": "US"
                                 "range": "7d"
                                 "upstreamUnavailable": false
@@ -574,7 +574,7 @@ paths:
                                 "retailers":
                                     - "freshnessMin": 1
                                       "lastRunAt": "1717200000000"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "parseSuccessRate": 75.25
                                       "slug": "example"
                                 "stalledCount": 1

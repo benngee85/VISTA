@@ -291,7 +291,7 @@
     "alternative_methods": [
       {
         "type": "api_key",
-        "header": "X-VISTA-Key",
+        "header": "X-WorldMonitor-Key",
         "description": "API-tier subscribers may pass a wm_<40 lowercase hex> key directly instead of completing the OAuth flow."
       }
     ]

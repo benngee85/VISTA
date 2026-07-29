@@ -156,7 +156,7 @@ paths:
                                         - "US"
                                       "entityType": "all"
                                       "id": "example-id"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "programs":
                                           - "example"
                                 "source": "example"

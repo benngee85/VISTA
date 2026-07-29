@@ -29,7 +29,7 @@ test('Rocky relay uses Node 24, direct PID 1 and no runtime package manager', ()
     2,
   );
   assert.doesNotMatch(rocky, /FROM \$\{/);
-  assert.match(rocky, /CMD \["node", "scripts\/vista-relay\.cjs"\]/);
+  assert.match(rocky, /CMD \["node", "scripts\/ais-relay\.cjs"\]/);
   assert.match(rocky, /! command -v npm/);
   assert.match(rocky, /! command -v npx/);
   assert.match(rocky, /! command -v corepack/);

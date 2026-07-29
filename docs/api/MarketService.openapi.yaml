@@ -46,7 +46,7 @@ paths:
                                 "quotes":
                                     - "change": 1.5
                                       "display": "example"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "price": 75.25
                                       "sparkline":
                                           - 1.5
@@ -145,7 +145,7 @@ paths:
                                 "quotes":
                                     - "change": 1.5
                                       "change7d": 1.5
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "price": 75.25
                                       "sparkline":
                                           - 1.5
@@ -242,7 +242,7 @@ paths:
                                 "quotes":
                                     - "change": 1.5
                                       "display": "example"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "price": 75.25
                                       "sparkline":
                                           - 1.5
@@ -335,7 +335,7 @@ paths:
                             example:
                                 "sectors":
                                     - "change": 1.5
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "symbol": "AAPL"
                             schema:
                                 $ref: '#/components/schemas/GetSectorSummaryResponse'
@@ -667,7 +667,7 @@ paths:
                                 "code": "US"
                                 "currency": "USD"
                                 "fetchedAt": "2026-01-15T12:00:00Z"
-                                "indexName": "WorldMonitor Analyst"
+                                "indexName": "VISTA Analyst"
                             schema:
                                 $ref: '#/components/schemas/GetCountryStockIndexResponse'
                 "400":
@@ -749,7 +749,7 @@ paths:
                                     - "change": 1.5
                                       "country": "US"
                                       "flag": "example"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "price": 75.25
                                 "rateLimited": true
                             schema:
@@ -830,7 +830,7 @@ paths:
                   in: query
                   description: Optional company display name used to disambiguate the symbol.
                   required: false
-                  example: "WorldMonitor Analyst"
+                  example: "VISTA Analyst"
                   schema:
                     type: string
                 - name: include_news
@@ -1063,7 +1063,7 @@ paths:
                   in: query
                   description: Optional company display name used to disambiguate the symbol.
                   required: false
-                  example: "WorldMonitor Analyst"
+                  example: "VISTA Analyst"
                   schema:
                     type: string
                 - name: eval_window_days
@@ -1280,7 +1280,7 @@ paths:
                                 "sectors":
                                     - "change": 1.5
                                       "id": "example-id"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                             schema:
                                 $ref: '#/components/schemas/ListCryptoSectorsResponse'
                 "400":
@@ -1361,7 +1361,7 @@ paths:
                                 "tokens":
                                     - "change": 1.5
                                       "change7d": 1.5
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "price": 75.25
                                       "sparkline":
                                           - 1.5
@@ -1446,7 +1446,7 @@ paths:
                                 "tokens":
                                     - "change": 1.5
                                       "change7d": 1.5
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "price": 75.25
                                       "sparkline":
                                           - 1.5
@@ -1531,7 +1531,7 @@ paths:
                                 "tokens":
                                     - "change": 1.5
                                       "change7d": 1.5
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "price": 75.25
                                       "sparkline":
                                           - 1.5
@@ -2066,16 +2066,16 @@ paths:
                                     "topBuyers12m":
                                         - "deltaTonnes12m": 1.5
                                           "iso3": "USA"
-                                          "name": "WorldMonitor Analyst"
+                                          "name": "VISTA Analyst"
                                     "topHolders":
                                         - "iso3": "USA"
-                                          "name": "WorldMonitor Analyst"
+                                          "name": "VISTA Analyst"
                                           "pctOfReserves": 1.5
                                           "tonnes": 1.5
                                     "topSellers12m":
                                         - "deltaTonnes12m": 1.5
                                           "iso3": "USA"
-                                          "name": "WorldMonitor Analyst"
+                                          "name": "VISTA Analyst"
                                     "totalTonnes": 1
                                 "cot":
                                     "managedMoney":

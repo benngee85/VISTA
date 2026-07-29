@@ -559,7 +559,7 @@ function stringExample(name, schema = {}, context = {}) {
     if (description.includes('pipeline')) return constrainedString('pipeline', schema);
     return constrainedString('all', schema);
   }
-  if (key.includes('name')) return constrainedString('WorldMonitor Analyst', schema);
+  if (key.includes('name')) return constrainedString('VISTA Analyst', schema);
   if (key.includes('message') || key.includes('summary') || key.includes('description')) {
     return constrainedString('Example WorldMonitor observation.', schema);
   }

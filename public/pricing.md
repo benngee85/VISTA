@@ -14,7 +14,7 @@ Live tier/price/product-ID data (JSON): `GET https://www.worldmonitor.app/api/pr
 - **API Business — Commercial license for your customers:** the subscribing organization may display, embed or deliver API outputs as part of its own customer-facing product or service. It does not permit raw-data resale, shared API access or a standalone substitute for VISTA.
 - **Enterprise — Custom agreement:** required for higher-volume redistribution, additional seats, white-labeling, standalone data feeds and custom deployments.
 
-Attribution to VISTA is optional in reports, presentations and derived analysis permitted by your plan. If you choose to credit the hosted service, "Source: VISTA" or "via VISTA" is sufficient. Source-specific notices supplied with an output still apply.
+Attribution to World Monitor is optional in reports, presentations and derived analysis permitted by your plan. If you choose to credit the hosted service, "Source: World Monitor" or "via World Monitor" is sufficient. Source-specific notices supplied with an output still apply.
 
 These subscription licenses cover the hosted Service and its outputs. They are separate from the AGPL-3.0-only platform source-code license and the MIT licenses on the official thin clients. Full scope, examples and restrictions: https://worldmonitor.app/docs/terms#subscription-license-scope
 

@@ -175,7 +175,7 @@ paths:
                                     - "countryCode": "US"
                                       "countryName": "US"
                                       "indicatorCode": "NY.GDP.MKTP.CD"
-                                      "indicatorName": "WorldMonitor Analyst"
+                                      "indicatorName": "VISTA Analyst"
                                       "value": 1.5
                                       "year": 1
                                 "pagination":
@@ -273,7 +273,7 @@ paths:
                                 "prices":
                                     - "change": 1.5
                                       "commodity": "example"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "price": 75.25
                                       "priceAt": 1717200000000
                                       "unit": "example"
@@ -662,7 +662,7 @@ paths:
                                         - "capacityMw": 1.5
                                           "year": 1
                                       "energySource": "example"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                             schema:
                                 $ref: '#/components/schemas/GetEnergyCapacityResponse'
                 "400":
@@ -1159,7 +1159,7 @@ paths:
                                           - "available": true
                                             "currency": "USD"
                                             "itemId": "example-id"
-                                            "itemName": "WorldMonitor Analyst"
+                                            "itemName": "VISTA Analyst"
                                             "localPrice": 75.25
                                 "fetchedAt": "2026-01-15T12:00:00Z"
                                 "mostExpensiveCountry": "US"

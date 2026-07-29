@@ -178,7 +178,7 @@ paths:
                                       "description": "Example WorldMonitor observation."
                                       "id": "example-id"
                                       "latencyMs": 1
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                             schema:
                                 $ref: '#/components/schemas/ListServiceStatusesResponse'
                 "400":
@@ -471,7 +471,7 @@ paths:
                             example:
                                 "code": "example"
                                 "country": "US"
-                                "displayName": "WorldMonitor Analyst"
+                                "displayName": "VISTA Analyst"
                                 "error": "example"
                             schema:
                                 $ref: '#/components/schemas/ReverseGeocodeResponse'
@@ -1076,7 +1076,7 @@ paths:
                             example:
                                 "anomalies":
                                     - "asn": "example"
-                                      "asnName": "WorldMonitor Analyst"
+                                      "asnName": "VISTA Analyst"
                                       "endDate": 1
                                       "latitude": 40.7128
                                       "locationCode": "US"

@@ -38,7 +38,7 @@ paths:
                                           - "date": "2026-01-15"
                                             "value": 1.5
                                       "indexId": "example-id"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                 "upstreamUnavailable": false
                             schema:
                                 $ref: '#/components/schemas/GetShippingRatesResponse'
@@ -393,7 +393,7 @@ paths:
                                 "carriers":
                                     - "carrierType": "all"
                                       "changePct": 1.5
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                       "price": 75.25
                                       "sparkline":
                                           - 1.5
@@ -499,7 +499,7 @@ paths:
                             example:
                                 "exposures":
                                     - "chokepointId": "suez"
-                                      "chokepointName": "WorldMonitor Analyst"
+                                      "chokepointName": "VISTA Analyst"
                                       "coastSide": "example"
                                       "exposureScore": 42.5
                                       "shockSupported": true
@@ -1170,11 +1170,11 @@ paths:
                                           "lat": 40.7128
                                           "lon": -74.006
                                       "id": "example-id"
-                                      "name": "WorldMonitor Analyst"
+                                      "name": "VISTA Analyst"
                                 "cargoType": "container"
                                 "chokepointExposures":
                                     - "chokepointId": "suez"
-                                      "chokepointName": "WorldMonitor Analyst"
+                                      "chokepointName": "VISTA Analyst"
                                       "exposurePct": 1
                                 "disruptionScore": 42.5
                                 "estFreightUsdPerTeuRange":
