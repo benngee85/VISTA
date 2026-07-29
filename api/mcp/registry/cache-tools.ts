@@ -223,7 +223,7 @@ export const CACHE_TOOLS: ToolDef[] = [
   {
     name: 'get_market_data',
     _outputBudgetBytes: 131072,
-    description: 'Real-time equity quotes, commodity prices (including gold futures GC=F), crypto prices, forex FX rates (USD/EUR, USD/JPY etc.), sector performance, ETF flows, and Gulf market quotes from WorldMonitor\'s curated bootstrap cache.',
+    description: 'Real-time equity quotes, commodity prices (including gold futures GC=F), crypto prices, forex FX rates (USD/EUR, USD/JPY etc.), sector performance, ETF flows, and Gulf market quotes from VISTA\'s curated bootstrap cache.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -526,7 +526,7 @@ export const CACHE_TOOLS: ToolDef[] = [
     name: 'get_news_intelligence',
     _uiResourceUri: NEWS_INTELLIGENCE_UI_URI,
     _outputBudgetBytes: 131072,
-    description: 'AI-classified geopolitical threat news summaries, GDELT intelligence signals, cross-source signals, and security advisories from WorldMonitor\'s intelligence layer.',
+    description: 'AI-classified geopolitical threat news summaries, GDELT intelligence signals, cross-source signals, and security advisories from VISTA\'s intelligence layer.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -2052,7 +2052,7 @@ export const CACHE_TOOLS: ToolDef[] = [
     name: 'get_forecast_predictions',
     _uiResourceUri: FORECASTS_UI_URI,
     _outputBudgetBytes: 131072,
-    description: 'AI-generated geopolitical and economic forecasts from WorldMonitor\'s predictive models. Covers upcoming risk events and probability assessments.',
+    description: 'AI-generated geopolitical and economic forecasts from VISTA\'s predictive models. Covers upcoming risk events and probability assessments.',
     inputSchema: {
       type: 'object',
       properties: {

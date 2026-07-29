@@ -34,7 +34,7 @@
   "tools": [
     {
       "name": "get_market_data",
-      "description": "Real-time equity quotes, commodity prices (including gold futures GC=F), crypto prices, forex FX rates (USD/EUR, USD/JPY etc.), sector performance, ETF flows, and Gulf market quotes from WorldMonitor's curated bootstrap cache."
+      "description": "Real-time equity quotes, commodity prices (including gold futures GC=F), crypto prices, forex FX rates (USD/EUR, USD/JPY etc.), sector performance, ETF flows, and Gulf market quotes from VISTA's curated bootstrap cache."
     },
     {
       "name": "get_conflict_events",
@@ -46,7 +46,7 @@
     },
     {
       "name": "get_news_intelligence",
-      "description": "AI-classified geopolitical threat news summaries, GDELT intelligence signals, cross-source signals, and security advisories from WorldMonitor's intelligence layer."
+      "description": "AI-classified geopolitical threat news summaries, GDELT intelligence signals, cross-source signals, and security advisories from VISTA's intelligence layer."
     },
     {
       "name": "get_natural_disasters",
@@ -134,7 +134,7 @@
     },
     {
       "name": "get_forecast_predictions",
-      "description": "AI-generated geopolitical and economic forecasts from WorldMonitor's predictive models. Covers upcoming risk events and probability assessments."
+      "description": "AI-generated geopolitical and economic forecasts from VISTA's predictive models. Covers upcoming risk events and probability assessments."
     },
     {
       "name": "get_forecast_scorecard",
