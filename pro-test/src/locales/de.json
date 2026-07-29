@@ -22,19 +22,19 @@
     "asFeaturedIn": "Berichtet in"
   },
   "twoPath": {
-    "proTitle": "World Monitor Pro",
+    "proTitle": "VISTA Pro",
     "proDesc": "Ihr KI-Analyst. Ein persönlicher Intelligence-Desk. Eine Plattform, auf der Sie aufbauen können. Ein Schlüssel für 30+ Live-Dienste.",
     "proF1": "WM Analyst Chat — alle 30+ Dienste im Dialog abfragen",
     "proF2": "KI-Digest — täglich, zweimal täglich oder wöchentlich — an Slack, Discord, Telegram, E-Mail oder Webhook",
     "proF3": "Custom Widget Builder — HTML/CSS/JS mit KI-unterstützter Anpassung",
-    "proF4": "MCP-Konnektoren — verbinden Sie WorldMonitor mit Claude, GPT, eigenen LLMs",
+    "proF4": "MCP-Konnektoren — verbinden Sie VISTA mit Claude, GPT, eigenen LLMs",
     "proF5": "Aktienanalyse, Equity Research und Backtesting",
     "proF6": "Flugsuche und Preisvergleich",
     "proF7": "Alert-Regel-Engine — eigene Trigger, Ruhezeiten, AES-256-verschlüsselte Kanäle",
     "proF8": "Market-Watchlist, Makro- und Zentralbank-Tracking",
     "proF9": "AI Market Implications und Regional Intelligence (Bald: orbitale Überwachung, Premium-Kartenebenen, längere Historie)",
     "choosePlan": "Tarif wählen",
-    "entTitle": "World Monitor Enterprise",
+    "entTitle": "VISTA Enterprise",
     "entDesc": "Für Teams, die gemeinsames Monitoring, API-Zugang, Deployment-Optionen, TV-Apps und direkten Support brauchen.",
     "entF1": "Alles aus Pro, plus:",
     "entF2": "Live-Edge Satellitenbilder und SAR",
@@ -80,7 +80,7 @@
     "windowTitle": "worldmonitor.app — Live-Dashboard",
     "openFullScreen": "Vollbild öffnen",
     "tryLiveDashboard": "Live-Dashboard testen",
-    "iframeTitle": "World Monitor — Live Intelligence Dashboard",
+    "iframeTitle": "VISTA — Live Intelligence Dashboard",
     "description": "3D WebGL-Globe · 50+ interaktive Kartenebenen · Echtzeitdaten zu Märkten, Makroökonomie, Geopolitik, Energie und Infrastruktur"
   },
   "socialProof": {
@@ -108,7 +108,7 @@
     "teamsDesc": "Von individueller Nutzung zu geteilten Workflows, API-Zugang, TV-Apps und gemanagten Deployments."
   },
   "dataCoverage": {
-    "title": "Was World Monitor verfolgt",
+    "title": "Was VISTA verfolgt",
     "subtitle": "30+ Dienstdomänen parallel erfasst. Märkte, Makro, Geopolitik, Energie, Infrastruktur — alles normalisiert und auf einem WebGL-Globus gerendert.",
     "markets": "Finanzmärkte & Aktien",
     "marketsDesc": "Globale Aktienanalyse, Rohstoffe, Krypto, ETF-Flüsse, Analystenziele und FRED-Makrodaten",
@@ -195,7 +195,7 @@
     "security": "Regierungs-Level-Sicherheit",
     "securityDesc": "Air-Gapped-Deployment, On-Premises Docker, dedizierter Cloud-Tenant, SOC 2 Type II-Pfad, SSO/MFA und vollständiges Audit-Trail.",
     "aiAgents": "KI-Agenten & MCP",
-    "aiAgentsDesc": "Autonome Intelligence-Agenten mit Investor-Personas. Binden Sie World Monitor als Tool an Claude, GPT oder eigene LLMs via MCP an.",
+    "aiAgentsDesc": "Autonome Intelligence-Agenten mit Investor-Personas. Binden Sie VISTA als Tool an Claude, GPT oder eigene LLMs via MCP an.",
     "dataLayers": "Erweiterte Datenebenen",
     "dataLayersDesc": "Zehntausende Infrastruktur-Assets global kartiert. Satellitenbild-Integration mit Change Detection und SAR.",
     "connectors": "100+ Daten-Konnektoren",
@@ -275,7 +275,7 @@
   },
   "faq": {
     "title": "Häufig gestellte Fragen",
-    "q1": "Ist World Monitor weiterhin kostenlos?",
+    "q1": "Ist VISTA weiterhin kostenlos?",
     "a1": "Ja. Die Kernplattform bleibt kostenlos. Pro bietet Aktienforschung, Makro-Analysen und KI-Briefings. Pro Business fügt die kommerzielle Lizenz und Datenexport hinzu. Enterprise bietet Team-Deployments und TV-Apps.",
     "q2": "Warum für Pro bezahlen?",
     "a2": "Pro ist für Investoren, Analysten und Profis, die Aktien-Monitoring, geopolitische Analyse, Wirtschaftsanalytik und KI-gestützte tägliche Briefings wollen — alles unter einem Schlüssel.",
@@ -284,17 +284,17 @@
     "q4": "Kann ich mit Pro starten und später upgraden?",
     "a4": "Ja. Pro ist für persönliche Nutzung. Pro Business (49,99 €/Monat) fügt die kommerzielle Lizenz, Datenexport, 25 Dashboards und 250 MCP-Aufrufe/Tag hinzu. API-Pläne decken programmgesteuerten Zugriff ab, und Enterprise deckt benutzerdefinierte Deployments ab. Upgrades laufen über das Abrechnungsportal – die App führt Sie durch die Schritte.",
     "q5": "Ist das nur für Konflikt-Monitoring?",
-    "a5": "Nein. World Monitor ist vor allem eine globale Intelligence-Plattform für Aktienmärkte, Makroökonomie, geopolitische Analyse, Energie, Infrastruktur und mehr. Konflikt-Tracking ist eine von vielen Fähigkeiten — nicht der Fokus.",
+    "a5": "Nein. VISTA ist vor allem eine globale Intelligence-Plattform für Aktienmärkte, Makroökonomie, geopolitische Analyse, Energie, Infrastruktur und mehr. Konflikt-Tracking ist eine von vielen Fähigkeiten — nicht der Fokus.",
     "q6": "Warum bleibt die Kernplattform kostenlos?",
     "a6": "Weil öffentlicher Zugang wichtig ist. Bezahlpläne finanzieren tiefere Workflows für ernsthafte Nutzer und Organisationen.",
     "q7": "Kann ich weiterhin meine eigenen API-Schlüssel nutzen?",
     "a7": "Ja. Bring-your-own-keys funktioniert immer. Pro heißt einfach, dass Sie sich nicht bei 20+ separaten Diensten registrieren müssen.",
     "q8": "Was ist MCP?",
-    "a8": "MCP ermöglicht KI-Agenten — Claude, GPT, eigenen LLMs — WorldMonitor als Tool zu nutzen und alle 30+ Dienste abzufragen. In Pro enthalten. Enterprise ergänzt private MCP-Server und eigene Deployments.",
+    "a8": "MCP ermöglicht KI-Agenten — Claude, GPT, eigenen LLMs — VISTA als Tool zu nutzen und alle 30+ Dienste abzufragen. In Pro enthalten. Enterprise ergänzt private MCP-Server und eigene Deployments.",
     "q9": "Kann ich eigene Panels bauen?",
     "a9": "Ja. Pro beinhaltet den Custom Widget Builder — bauen Sie Panels aus HTML, CSS und JavaScript, mit KI-unterstützter Modifikation.",
-    "q10": "Kann ich Claude oder GPT an WorldMonitor anbinden?",
-    "a10": "Ja. MCP ist in Pro enthalten — verbinden Sie WorldMonitor mit Claude, GPT oder jedem MCP-kompatiblen LLM als Live-Tool.",
+    "q10": "Kann ich Claude oder GPT an VISTA anbinden?",
+    "a10": "Ja. MCP ist in Pro enthalten — verbinden Sie VISTA mit Claude, GPT oder jedem MCP-kompatiblen LLM als Live-Tool.",
     "q11": "Wie personalisiert ist der Digest?",
     "a11": "Wählen Sie Ihren Takt: täglich, zweimal täglich oder wöchentlich. Wir bewerten jede verfolgte Story gegen Ihre Alert-Regeln und Watchlist neu, deduplizieren über 400+ Quellen und senden bis zu 30 gerankte Items mit KI-Assessment und Signals to watch, geschrieben für Ihren Kontext. Echtzeit-Alerts sind ebenfalls für kritische Ereignisse verfügbar.",
     "q12": "Wie hoch ist die Refresh-Rate?",
@@ -304,7 +304,7 @@
   },
   "finalCta": {
     "title": "Starten mit Pro. Skalieren zu Enterprise.",
-    "subtitle": "Nutzen Sie World Monitor weiter kostenlos oder upgraden Sie für Equity Research, Makroanalytik und KI-Briefings. Wenn Ihre Organisation Team-Zugang, TV-Apps oder API-Support braucht, sprechen Sie mit uns.",
+    "subtitle": "Nutzen Sie VISTA weiter kostenlos oder upgraden Sie für Equity Research, Makroanalytik und KI-Briefings. Wenn Ihre Organisation Team-Zugang, TV-Apps oder API-Support braucht, sprechen Sie mit uns.",
     "talkToSales": "Vertrieb kontaktieren"
   },
   "footer": {
@@ -314,9 +314,9 @@
   },
   "soonBadge": "Bald",
   "meta": {
-    "title": "World Monitor Pro — AI-Analyst, Personal Intelligence Desk, MCP für Claude & GPT",
+    "title": "VISTA Pro — AI-Analyst, Personal Intelligence Desk, MCP für Claude & GPT",
     "description": "Die geopolitische AI-Schicht. Frag sie ab, abonniere sie, baue darauf auf. WM Analyst Chat über 30+ Live-Services, ein täglich, zweimal täglich oder wöchentlich an Slack, Discord, Telegram, E-Mail oder Webhook gelieferter AI-Digest, ein Custom-Widget-Builder (HTML/CSS/JS + AI) und MCP-Konnektoren für Claude, GPT und Custom-LLMs.",
-    "ogTitle": "World Monitor Pro — Die geopolitische AI-Schicht",
+    "ogTitle": "VISTA Pro — Die geopolitische AI-Schicht",
     "ogDescription": "Frag sie ab, abonniere sie, baue darauf auf. WM Analyst Chat, ein AI-Digest nach deinem Zeitplan (täglich, zweimal täglich oder wöchentlich), Custom-Widget-Builder und MCP für Claude/GPT — über 30+ Live-Services unter einem Key."
   },
   "pricing": {
@@ -388,7 +388,7 @@
         "cta": "Kontakt zum Vertrieb"
       },
       "apiBusiness": {
-        "description": "Starten Sie Ihr eigenes Produkt mit WorldMonitor-Daten",
+        "description": "Starten Sie Ihr eigenes Produkt mit VISTA-Daten",
         "features": [
           "Alles aus API Starter",
           "Weitergaberechte – integrieren Sie unsere Daten in Ihre Produkte",
@@ -427,9 +427,9 @@
   },
   "welcome": {
     "meta": {
-      "title": "World Monitor — Kostenloses Live-Dashboard für globale Informationen in Echtzeit",
+      "title": "VISTA — Kostenloses Live-Dashboard für globale Informationen in Echtzeit",
       "description": "Bevor es Nachrichten sind, wussten Sie es bereits. Konflikte, Schifffahrtsengpässe, Militärflüge, Märkte und Cyber auf einer kostenlosen Live-Weltkarte mit KI-Analyse. Keine Anmeldung erforderlich.",
-      "ogTitle": "World Monitor — Bevor es Nachrichten sind, wussten Sie es bereits.",
+      "ogTitle": "VISTA — Bevor es Nachrichten sind, wussten Sie es bereits.",
       "ogDescription": "Die Rohsignale der Welt — Schiffe, Jets, Sirenen, Kabel, Märkte — auf einer kostenlosen Live-Intelligenz-Karte mit KI, die kennzeichnet, wenn sie zusammenlaufen. Kostenlos, keine Anmeldung."
     },
     "nav": {
@@ -447,21 +447,21 @@
       "eyebrow": "Kostenloses globales Informations-Dashboard · live jetzt",
       "headline1": "Bevor es Nachrichten sind,",
       "headline2": "wussten Sie es bereits.",
-      "sub": "Nachrichten sind die Verzögerung. World Monitor streamt die Rohsignale der Welt — Schiffe, Jets, Sirenen, Kabel, Märkte — auf eine Live-Karte mit KI, die kennzeichnet, wenn sie sich zu etwas Wichtigem verbinden.",
+      "sub": "Nachrichten sind die Verzögerung. VISTA streamt die Rohsignale der Welt — Schiffe, Jets, Sirenen, Kabel, Märkte — auf eine Live-Karte mit KI, die kennzeichnet, wenn sie sich zu etwas Wichtigem verbinden.",
       "ctaPrimary": "Dashboard starten",
       "ctaFree": "Kostenlos · Keine Anmeldung · Lädt in Sekunden",
       "ctaSecondary": "Sehen Sie, wie Leute es nutzen ↓",
       "trustUsers": "2M+ Nutzer",
       "trustOpenSource": "Open Source · AGPL-3.0",
-      "screenshotAlt": "World Monitor Live-Intelligenz-Dashboard — globale Karte mit Konflikt-, Schifffahrts- und Markt-Ebenen",
+      "screenshotAlt": "VISTA Live-Intelligenz-Dashboard — globale Karte mit Konflikt-, Schifffahrts- und Markt-Ebenen",
       "plateNote": "Erfasst von der Live-Karte — klicken Sie zum Öffnen",
       "trustBuild": "Darauf aufbauen:",
-      "positioningLink": "WorldMonitor ist kein Open-Source-Palantir"
+      "positioningLink": "VISTA ist kein Open-Source-Palantir"
     },
     "live": {
       "eyebrow": "Live jetzt",
       "title": "Diese Seite ist mit denselben APIs wie das Dashboard verbunden.",
-      "subtitle": "Vier der hundert-plus Signale, die World Monitor rund um die Uhr beobachtet.",
+      "subtitle": "Vier der hundert-plus Signale, die VISTA rund um die Uhr beobachtet.",
       "liveBadge": "Live",
       "sampleBadge": "Beispiel",
       "cardHeadlines": "Top-Signale",
@@ -646,28 +646,28 @@
     "faq": {
       "eyebrow": "Kein Haken",
       "title": "Berechtigte Fragen.",
-      "q1": "Ist World Monitor wirklich kostenlos?",
+      "q1": "Ist VISTA wirklich kostenlos?",
       "a1": "Ja. Die vollständige Live-Karte – alle Schichten, 500+ Feeds, Länderberichte, Breaking Alerts, alle sechs Monitore – ist kostenlos ohne Anmeldung und ohne Trial-Beschränkung. Pro zahlt sich durch die Feeds aus: Es bietet WM Analyst, die Szenario-Engine, Route Explorer, geplante Zusammenfassungen und MCP-Zugriff für KI-Clients. Keine Anzeigen, und kein Konto bedeutet, dass keine Benutzerdaten verkauft werden.",
       "q2": "Was ist ein globales Intelligence-Dashboard?",
-      "a2": "Eine einzige Live-Ansicht, die Signale zusammenführt, die die meisten Tools separat halten: Konfliktereignisse, Schiffs- und Flugzeugverfolgung, Versandengpässe, Satelliten, Unterseekabel, Pipelines, Märkte und Cyber-Bedrohungen — auf einer Echtzeit-Weltkarte mit KI-Bewertung und Zusammenfassungen. World Monitor ist eine kostenlose Version davon.",
+      "a2": "Eine einzige Live-Ansicht, die Signale zusammenführt, die die meisten Tools separat halten: Konfliktereignisse, Schiffs- und Flugzeugverfolgung, Versandengpässe, Satelliten, Unterseekabel, Pipelines, Märkte und Cyber-Bedrohungen — auf einer Echtzeit-Weltkarte mit KI-Bewertung und Zusammenfassungen. VISTA ist eine kostenlose Version davon.",
       "q3": "Woher stammen die Daten?",
       "a3": "Von 65+ Anbietern, benannt: ACLED und UCDP für Konflikte, AISStream für Live-Schiffe, OpenSky für Flugzeuge, NASA FIRMS für Brände, USGS für Erdbeben, IMF, BIS, FRED und Finnhub für Märkte und Makroökonomie — plus 500+ kuratierte Nachrichtenfeeds. Jedes Panel zitiert seine Quellen und Zeitstempel inline.",
       "q4": "Kann ich Engpässe wie Hormuz oder Bab el-Mandeb in Echtzeit beobachten?",
       "a4": "Ja. 13 Engpässe werden mit Live-AIS-Schiffszählungen, Woche-über-Woche-Transitveränderung und Störungsbewertung verfolgt — und Dichteanomалien werden gegen die rollende Basislinie jeder Meerenge gekennzeichnet.",
       "q5": "Wie unterscheidet sich dies von einer Konfliktkarte wie Liveuamap?",
-      "a5": "Konflikt ist eine von 56 Ebenen. World Monitor kombiniert Konflikte mit Versand, Militärflügen, Infrastruktur, Märkten und Cyber — dann bewertet KI die Konvergenz: Instabilitätsindizes, Hotspot-Eskalation, bestätigte Breaking Alerts und tägliche Briefs.",
+      "a5": "Konflikt ist eine von 56 Ebenen. VISTA kombiniert Konflikte mit Versand, Militärflügen, Infrastruktur, Märkten und Cyber — dann bewertet KI die Konvergenz: Instabilitätsindizes, Hotspot-Eskalation, bestätigte Breaking Alerts und tägliche Briefs.",
       "q6": "Warum sollte ich einem Alert vertrauen?",
       "a6": "Ein Breaking-Banner wird nur angezeigt, wenn unabhängige Ursprungstypen bestätigt werden — Nachrichtenklassifizierung, Keyword-Geschwindigkeit, Hotspot-Eskalation, Militärsurgen, offizielle Sirenen — dedupliziert und drosselungsbegrenzt. Weniger Alerts, echte Alerts.",
       "q7": "Können KI-Agenten wie Claude oder GPT es verwenden?",
-      "a7": "Ja. World Monitor bietet einen 59-Tool-MCP-Server, sodass Claude, GPT oder jeder MCP-kompatible Agent Live-Risikobewertungen, Engpassstatus, Konflikte, Märkte und Briefings abfragen kann – mit JMESPath-Projektion, damit Agenten genau das abrufen, was sie benötigen.",
+      "a7": "Ja. VISTA bietet einen 59-Tool-MCP-Server, sodass Claude, GPT oder jeder MCP-kompatible Agent Live-Risikobewertungen, Engpassstatus, Konflikte, Märkte und Briefings abfragen kann – mit JMESPath-Projektion, damit Agenten genau das abrufen, was sie benötigen.",
       "q8": "Benötige ich ein Konto?",
       "a8": "Nein. Das Dashboard funktioniert sofort ohne Anmeldung. Ein Konto ist nur wichtig, wenn Sie auf Pro upgraden oder Einstellungen geräteübergreifend synchronisieren möchten.",
       "q9": "Ist es Open Source?",
       "a9": "Ja — Open Source unter AGPL-3.0 auf GitHub: Code lesen, selbst hosten oder erweitern. Native Desktop-Apps für Windows, macOS und Linux sind ebenfalls verfügbar, plus eine Android-TV-App für Wanddisplays.",
-      "q10": "Warum ist World Monitor nicht Palantir?",
-      "a10": "Palantir macht die eigenen Daten einer Institution innerhalb dieser Institution einsatzfähig. World Monitor startet von der anderen Seite: Es sammelt, normalisiert, korreliert und überwacht öffentliche Daten, veröffentlicht dann diese Intelligenzschicht über ein kostenloses Dashboard und Open-Source-Code. Andere Aufgabe, anderes Produkt.",
-      "q11": "Which World Monitor license do I need?",
-      "a11": "Choose based on who will use the output. Pro's Personal license is for one person using World Monitor for their own research and decisions. Pro Business lets one licensed user use it for company or client work, internal tools, and reports. API Starter covers API use inside one organization, with no customer redistribution. API Business lets that organization embed World Monitor data in products and services for its customers. Enterprise covers custom seats, white-labeling, and deployments. These subscription licenses are separate from the AGPL/MIT source-code licenses. Full terms: worldmonitor.app/docs/terms."
+      "q10": "Warum ist VISTA nicht Palantir?",
+      "a10": "Palantir macht die eigenen Daten einer Institution innerhalb dieser Institution einsatzfähig. VISTA startet von der anderen Seite: Es sammelt, normalisiert, korreliert und überwacht öffentliche Daten, veröffentlicht dann diese Intelligenzschicht über ein kostenloses Dashboard und Open-Source-Code. Andere Aufgabe, anderes Produkt.",
+      "q11": "Which VISTA license do I need?",
+      "a11": "Choose based on who will use the output. Pro's Personal license is for one person using VISTA for their own research and decisions. Pro Business lets one licensed user use it for company or client work, internal tools, and reports. API Starter covers API use inside one organization, with no customer redistribution. API Business lets that organization embed VISTA data in products and services for its customers. Enterprise covers custom seats, white-labeling, and deployments. These subscription licenses are separate from the AGPL/MIT source-code licenses. Full terms: worldmonitor.app/docs/terms."
     },
     "cta": {
       "title": "Die Weltkarte wartet nicht auf Sie.",

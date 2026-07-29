@@ -22,19 +22,19 @@
     "asFeaturedIn": "Yer aldığı yerler"
   },
   "twoPath": {
-    "proTitle": "World Monitor Pro",
+    "proTitle": "VISTA Pro",
     "proDesc": "Yapay zekâ analistiniz. Kişisel istihbarat masası. Üzerine inşa edebileceğiniz bir platform. 30+ canlı hizmet için tek anahtar.",
     "proF1": "WM Analyst sohbet — 30+ hizmeti sohbet ederek sorgulayın",
     "proF2": "AI özeti — günlük, günde iki kez veya haftalık — Slack, Discord, Telegram, E-posta veya webhook'a",
     "proF3": "Custom Widget Builder — HTML/CSS/JS ile AI destekli düzenleme",
-    "proF4": "MCP konnektörleri — WorldMonitor'u Claude, GPT veya kendi LLM'lerinize bağlayın",
+    "proF4": "MCP konnektörleri — VISTA'u Claude, GPT veya kendi LLM'lerinize bağlayın",
     "proF5": "Equity research, hisse analizi ve backtesting",
     "proF6": "Uçuş arama ve fiyat karşılaştırma",
     "proF7": "Uyarı kuralı motoru — özel tetikleyiciler, sessiz saatler, AES-256 şifreli kanallar",
     "proF8": "Pazar watchlist'i, makro ve merkez bankası takibi",
     "proF9": "AI Market Implications ve Regional Intelligence (Yakında: yörünge gözetimi, premium harita katmanları, uzatılmış geçmiş)",
     "choosePlan": "Planınızı seçin",
-    "entTitle": "World Monitor Enterprise",
+    "entTitle": "VISTA Enterprise",
     "entDesc": "Paylaşılan izleme, API erişimi, deployment seçenekleri, TV uygulamaları ve doğrudan desteğe ihtiyaç duyan ekipler için.",
     "entF1": "Pro'daki her şey, ayrıca:",
     "entF2": "Canlı uydu görüntüleri ve SAR",
@@ -80,7 +80,7 @@
     "windowTitle": "worldmonitor.app — Canlı kontrol paneli",
     "openFullScreen": "Tam ekran aç",
     "tryLiveDashboard": "Canlı kontrol panelini deneyin",
-    "iframeTitle": "World Monitor — Canlı istihbarat kontrol paneli",
+    "iframeTitle": "VISTA — Canlı istihbarat kontrol paneli",
     "description": "3D WebGL küre · 50+ etkileşimli harita katmanı · Gerçek zamanlı pazar, makro, jeopolitik, enerji ve altyapı verileri"
   },
   "socialProof": {
@@ -108,7 +108,7 @@
     "teamsDesc": "Bireysel kullanımdan paylaşılan iş akışlarına, API erişimine, TV uygulamalarına ve yönetilen deployment'lara geçin."
   },
   "dataCoverage": {
-    "title": "World Monitor'un izlediği şeyler",
+    "title": "VISTA'un izlediği şeyler",
     "subtitle": "30+ hizmet alanı aynı anda işlenir. Piyasalar, makro, jeopolitik, enerji, altyapı — hepsi normalize edilir ve WebGL küre üzerinde işlenir.",
     "markets": "Finansal piyasalar ve hisseler",
     "marketsDesc": "Küresel hisse analizi, emtia, kripto, ETF akışları, analist hedefleri ve FRED makro verileri",
@@ -175,7 +175,7 @@
   "apiSection": {
     "apiTier": "API SEVİYESİ",
     "title": "Programatik istihbarat",
-    "subtitle": "World Monitor verileri üzerine inşa eden geliştiriciler, analistler ve ekipler için. Pro'dan ayrı — ikisini veya birini kullanın.",
+    "subtitle": "VISTA verileri üzerine inşa eden geliştiriciler, analistler ve ekipler için. Pro'dan ayrı — ikisini veya birini kullanın.",
     "restApi": "30+ hizmet alanı için REST API — JavaScript, Python, Ruby ve Go için resmî SDK'lar",
     "authenticated": "Anahtar başına kimlik doğrulamalı, seviye başına rate-limited",
     "structured": "Cache header'ları ve OpenAPI 3.1 dökümantasyonu ile yapılandırılmış JSON",
@@ -195,7 +195,7 @@
     "security": "Hükümet düzeyinde güvenlik",
     "securityDesc": "Air-gapped deployment, on-premises Docker, özel bulut tenant'ı, SOC 2 Type II yolu, SSO/MFA ve tam denetim izi.",
     "aiAgents": "AI ajanları ve MCP",
-    "aiAgentsDesc": "Yatırımcı persona'ları olan özerk istihbarat ajanları. World Monitor'u Claude, GPT veya kendi LLM'lerinize MCP üzerinden araç olarak bağlayın.",
+    "aiAgentsDesc": "Yatırımcı persona'ları olan özerk istihbarat ajanları. VISTA'u Claude, GPT veya kendi LLM'lerinize MCP üzerinden araç olarak bağlayın.",
     "dataLayers": "Genişletilmiş veri katmanları",
     "dataLayersDesc": "Dünya genelinde haritalanmış on binlerce altyapı varlığı. Değişiklik tespiti ve SAR ile uydu görüntü entegrasyonu.",
     "connectors": "100+ veri konnektörü",
@@ -275,7 +275,7 @@
   },
   "faq": {
     "title": "Sık sorulan sorular",
-    "q1": "World Monitor hâlâ ücretsiz mi?",
+    "q1": "VISTA hâlâ ücretsiz mi?",
     "a1": "Evet. Temel platform ücretsizdir. Pro, öz sermaye araştırması, makro analitiği ve AI brifinglerini ekler. Pro Business, ticari lisans ve veri dışa aktarımı ekler. Enterprise, ekip dağıtımlarını ve TV uygulamalarını ekler.",
     "q2": "Neden Pro için ödeme yapalım?",
     "a2": "Pro, hisse izleme, jeopolitik analiz, ekonomik analitik ve AI destekli günlük briflere — hepsini tek anahtar altında — isteyen yatırımcılar, analistler ve profesyoneller içindir.",
@@ -284,17 +284,17 @@
     "q4": "Pro ile başlayıp daha sonra yükseltebilir miyim?",
     "a4": "Evet. Pro kişisel kullanım içindir. Pro Business (49,99 $/ay) ticari lisans, veri dışa aktarımı, 25 pano ve günde 250 MCP çağrısı ekler. API planları programlı erişim kapsamına alır ve Enterprise özel dağıtımları kapsamına alır. Yükseltmeler faturalandırma portalı üzerinden yapılır — uygulama adımları size kılavuzluk eder.",
     "q5": "Bu sadece çatışma izleme için mi?",
-    "a5": "Hayır. World Monitor öncelikle hisse piyasaları, makroekonomi, jeopolitik analiz, enerji, altyapı ve daha fazlasını kapsayan küresel bir istihbarat platformudur. Çatışma takibi birçok yetenekten biridir — odak noktası değil.",
+    "a5": "Hayır. VISTA öncelikle hisse piyasaları, makroekonomi, jeopolitik analiz, enerji, altyapı ve daha fazlasını kapsayan küresel bir istihbarat platformudur. Çatışma takibi birçok yetenekten biridir — odak noktası değil.",
     "q6": "Neden temel platform ücretsiz?",
     "a6": "Çünkü halka açık erişim önemli. Ücretli planlar ciddi kullanıcılar ve organizasyonlar için daha derin iş akışlarını finanse eder.",
     "q7": "Hâlâ kendi API anahtarlarımı kullanabilir miyim?",
     "a7": "Evet. Bring-your-own-keys her zaman çalışır. Pro sadece 20+ ayrı hizmete kaydolmanıza gerek olmadığı anlamına gelir.",
     "q8": "MCP nedir?",
-    "a8": "MCP, AI ajanlarının — Claude, GPT, özel LLM'ler — WorldMonitor'u bir araç olarak kullanmasına ve 30+ hizmetin tümünü sorgulamasına olanak tanır. Pro'ya dahildir. Enterprise özel MCP sunucuları ve özel deployment'lar ekler.",
+    "a8": "MCP, AI ajanlarının — Claude, GPT, özel LLM'ler — VISTA'u bir araç olarak kullanmasına ve 30+ hizmetin tümünü sorgulamasına olanak tanır. Pro'ya dahildir. Enterprise özel MCP sunucuları ve özel deployment'lar ekler.",
     "q9": "Kendi panellerimi oluşturabilir miyim?",
     "a9": "Evet. Pro, Custom Widget Builder içerir — HTML, CSS ve JavaScript'ten paneller oluşturun, AI destekli düzenleme ile.",
-    "q10": "Claude veya GPT'yi WorldMonitor'a bağlayabilir miyim?",
-    "a10": "Evet. MCP Pro'ya dahildir — WorldMonitor'u canlı bir araç olarak Claude, GPT veya MCP uyumlu herhangi bir LLM'ye bağlayın.",
+    "q10": "Claude veya GPT'yi VISTA'a bağlayabilir miyim?",
+    "a10": "Evet. MCP Pro'ya dahildir — VISTA'u canlı bir araç olarak Claude, GPT veya MCP uyumlu herhangi bir LLM'ye bağlayın.",
     "q11": "Özet ne kadar kişiselleştirilmiş?",
     "a11": "Temponuzu seçin: günlük, günde iki kez veya haftalık. İzlenen her hikâyeyi uyarı kurallarınıza ve watchlist'inize karşı yeniden puanlar, 400+ kaynak arasında tekrarsızlaştırır ve bağlamınız için yazılmış AI Assessment ve Signals to watch ile 30'a kadar sıralı öğe göndeririz. Kritik olaylar için gerçek zamanlı uyarılar da mevcuttur.",
     "q12": "Yenileme hızı nedir?",
@@ -304,7 +304,7 @@
   },
   "finalCta": {
     "title": "Pro ile başlayın. Enterprise'a ölçeklendirin.",
-    "subtitle": "World Monitor'u ücretsiz kullanmaya devam edin veya equity research, makro analitik ve AI brifleri için yükseltin. Organizasyonunuzun ekip erişimine, TV uygulamalarına veya API desteğine ihtiyacı varsa, bizimle konuşun.",
+    "subtitle": "VISTA'u ücretsiz kullanmaya devam edin veya equity research, makro analitik ve AI brifleri için yükseltin. Organizasyonunuzun ekip erişimine, TV uygulamalarına veya API desteğine ihtiyacı varsa, bizimle konuşun.",
     "talkToSales": "Satışla konuşun"
   },
   "footer": {
@@ -314,9 +314,9 @@
   },
   "soonBadge": "Yakında",
   "meta": {
-    "title": "World Monitor Pro — AI Analisti, Kişisel İstihbarat Masası, Claude & GPT için MCP",
+    "title": "VISTA Pro — AI Analisti, Kişisel İstihbarat Masası, Claude & GPT için MCP",
     "description": "Jeopolitik AI katmanı. Sor, abone ol, geliştir. WM Analyst sohbeti 30+ canlı hizmet arasında, günlük, haftada iki kez veya haftalık olarak Slack, Discord, Telegram, E-posta veya webhook'a teslim edilen AI özeti, özel widget oluşturucu (HTML/CSS/JS + AI) ve Claude, GPT ve özel LLM'ler için MCP bağlantıları.",
-    "ogTitle": "World Monitor Pro — Jeopolitik AI Katmanı",
+    "ogTitle": "VISTA Pro — Jeopolitik AI Katmanı",
     "ogDescription": "Sor, abone ol, geliştir. WM Analyst sohbeti, planlandığı şekilde AI özeti (günlük, haftada iki kez veya haftalık), özel widget oluşturucu ve Claude/GPT için MCP — 30+ canlı hizmet arasında tek bir anahtar altında."
   },
   "pricing": {
@@ -388,7 +388,7 @@
         "cta": "Satışla İletişime Geçin"
       },
       "apiBusiness": {
-        "description": "WorldMonitor verileri üzerinde kendi ürününüzü başlatın",
+        "description": "VISTA verileri üzerinde kendi ürününüzü başlatın",
         "features": [
           "API Starter'daki her şey",
           "Yeniden dağıtım hakları — verilerimizi sattığınız şeye yerleştirin",
@@ -427,9 +427,9 @@
   },
   "welcome": {
     "meta": {
-      "title": "World Monitor — Ücretsiz Gerçek Zamanlı Global İstihbarat Panosu",
+      "title": "VISTA — Ücretsiz Gerçek Zamanlı Global İstihbarat Panosu",
       "description": "Haber olduğunda zaten biliyordun. Çatışmalar, nakliye darboğazları, askeri uçuşlar, piyasalar ve siber olaylar AI analizi ile tek bir ücretsiz canlı dünya haritasında. Kayıt yok.",
-      "ogTitle": "World Monitor — Haber olduğunda zaten biliyordun.",
+      "ogTitle": "VISTA — Haber olduğunda zaten biliyordun.",
       "ogDescription": "Dünyanın ham sinyalleri — gemiler, jetler, sirenler, kablolar, piyasalar — AI ile birlikte tek bir ücretsiz canlı istihbarat haritasında ve bunlar bir şeye dönüştüğünde flaglenir. Ücretsiz, kayıt yok."
     },
     "nav": {
@@ -447,21 +447,21 @@
       "eyebrow": "Ücretsiz global istihbarat panosu · şimdi canlı",
       "headline1": "Haber olduğunda,",
       "headline2": "zaten biliyordun.",
-      "sub": "Başlıklar gecikme. World Monitor, dünyanın ham sinyallerini — gemiler, jetler, sirenler, kablolar, piyasalar — tek bir canlı haritaya akıtır ve bunlar önemli bir şeye dönüştüğünde flaglemeyi yapan AI ile.",
+      "sub": "Başlıklar gecikme. VISTA, dünyanın ham sinyallerini — gemiler, jetler, sirenler, kablolar, piyasalar — tek bir canlı haritaya akıtır ve bunlar önemli bir şeye dönüştüğünde flaglemeyi yapan AI ile.",
       "ctaPrimary": "Panoyu başlat",
       "ctaFree": "Ücretsiz · Kayıt yok · Saniyeler içinde yüklenir",
       "ctaSecondary": "İnsanlar bunu nasıl kullanıyor ↓",
       "trustUsers": "2M+ kullanıcı",
       "trustOpenSource": "Açık kaynak · AGPL-3.0",
-      "screenshotAlt": "World Monitor canlı istihbarat panosu — çatışma, nakliye ve pazar katmanları olan global harita",
+      "screenshotAlt": "VISTA canlı istihbarat panosu — çatışma, nakliye ve pazar katmanları olan global harita",
       "plateNote": "Canlı haritadan yakalandı — açmak için tıkla",
       "trustBuild": "Buna katkıda bulun:",
-      "positioningLink": "WorldMonitor açık kaynaklı bir Palantir değil"
+      "positioningLink": "VISTA açık kaynaklı bir Palantir değil"
     },
     "live": {
       "eyebrow": "Şu anda canlı",
       "title": "Bu sayfa pano ile aynı API'lere bağlı.",
-      "subtitle": "World Monitor'un gece gündüz izlediği yüz artı sinyal arasından dört tanesi.",
+      "subtitle": "VISTA'un gece gündüz izlediği yüz artı sinyal arasından dört tanesi.",
       "liveBadge": "Canlı",
       "sampleBadge": "Örnek",
       "cardHeadlines": "Üst sinyaller",
@@ -646,28 +646,28 @@
     "faq": {
       "eyebrow": "Ek koşul yok",
       "title": "Adil sorular.",
-      "q1": "World Monitor gerçekten ücretsiz mi?",
+      "q1": "VISTA gerçekten ücretsiz mi?",
       "a1": "Evet. Tam canlı harita — her katman, 500+ beslemesi, ülke özetleri, acil uyarılar, altı monitörün tümü — hiçbir kayıt olmadan ve deneme saati olmadan ücretsizdir. Pro beslemeleri finanse eder: WM Analyst, senaryo motoru, Route Explorer, zamanlanan özet ve AI istemcileri için MCP erişimini ekler. Reklamlar yok ve hesap yok demek satılacak kullanıcı verisi yok demektir.",
       "q2": "Global istihbarat panosu nedir?",
-      "a2": "Çoğu aracın ayrı tuttuğu sinyalleri birleştiren tek bir canlı görünüm: çatışma olayları, gemi ve uçak takibi, nakliye darboğazları, uyduları, denizaltı kabloları, boru hatları, pazarlar ve siber tehditleri — tek bir gerçek zamanlı dünya haritasında, AI puanlandırması ve özetleriyle. World Monitor ücretsiz olanıdır.",
+      "a2": "Çoğu aracın ayrı tuttuğu sinyalleri birleştiren tek bir canlı görünüm: çatışma olayları, gemi ve uçak takibi, nakliye darboğazları, uyduları, denizaltı kabloları, boru hatları, pazarlar ve siber tehditleri — tek bir gerçek zamanlı dünya haritasında, AI puanlandırması ve özetleriyle. VISTA ücretsiz olanıdır.",
       "q3": "Veriler nereden geliyor?",
       "a3": "65+ sağlayıcı, adlandırılmış: çatışma için ACLED ve UCDP, canlı gemiler için AISStream, uçaklar için OpenSky, yangınlar için NASA FIRMS, depremler için USGS, pazarlar ve makro için IMF, BIS, FRED ve Finnhub — artı 500+ seçilmiş haber beslemesi. Her panel kaynaklarını ve zaman damgalarını satır içinde alıntılar.",
       "q4": "Hormuz veya Bab el-Mandeb gibi darboğazları gerçek zamanlı olarak izleyebilir miyim?",
       "a4": "Evet. 13 darboğaz canlı AIS gemi sayıları, haftadan haftaya transit değişimi ve aksamalarını puanlandırması ile takip edilir — ve yoğunluk anomalileri her boğazın yuvarlanan tabanına karşı işaretlenir.",
       "q5": "Bu, Liveuamap gibi bir çatışma haritasından nasıl farklı?",
-      "a5": "Çatışma 56 katmandan biridir. World Monitor çatışmaları nakliye, askeri uçuşlar, altyapı, pazarlar ve siber ile birleştirir — sonra AI yakınsamayı puanlandırır: istikrarsızlık endeksleri, sıcak nokta yoğunlaşması, doğrulanmış son haberler ve günlük özetler.",
+      "a5": "Çatışma 56 katmandan biridir. VISTA çatışmaları nakliye, askeri uçuşlar, altyapı, pazarlar ve siber ile birleştirir — sonra AI yakınsamayı puanlandırır: istikrarsızlık endeksleri, sıcak nokta yoğunlaşması, doğrulanmış son haberler ve günlük özetler.",
       "q6": "Uyarıya neden güvenmeliyim?",
       "a6": "Bölünmüş bir afiş yalnızca bağımsız kaynak türleri doğrulandığında harekete geçer — haber sınıflandırması, anahtar kelime hızı, sıcak nokta yoğunlaşması, askeri artışlar, resmi sirenler — deduplicated ve hız sınırlı. Daha az uyarı, gerçek olanlar.",
       "q7": "Claude veya GPT gibi AI ajanlar bunu kullanabilir mi?",
-      "a7": "Evet. World Monitor, 59 araçlı bir MCP sunucusu ile gelir, böylece Claude, GPT veya herhangi bir MCP uyumlu ajan canlı risk skorlarını, darboğaz durumunu, çatışmaları, pazarları ve özetleri sorgulayabilir — JMESPath projeksiyonu sayesinde ajanlar tam olarak ihtiyaç duydukları verileri alır.",
+      "a7": "Evet. VISTA, 59 araçlı bir MCP sunucusu ile gelir, böylece Claude, GPT veya herhangi bir MCP uyumlu ajan canlı risk skorlarını, darboğaz durumunu, çatışmaları, pazarları ve özetleri sorgulayabilir — JMESPath projeksiyonu sayesinde ajanlar tam olarak ihtiyaç duydukları verileri alır.",
       "q8": "Hesaba ihtiyacım var mı?",
       "a8": "Hayır. Pano kaydolmadan anında çalışır. Bir hesap yalnızca Pro'ya yükselttikten sonra veya cihazlar arasında ayarları senkronize etmek istediğinizde önemlidir.",
       "q9": "Açık kaynaklı mı?",
       "a9": "Evet — GitHub'da AGPL-3.0 altında açık kaynaklı: kodu okuyun, kendi sunucunuzda barındırın veya üzerine kurun. Windows, macOS ve Linux için yerel masaüstü uygulamaları ve duvar ekranları için Android TV uygulaması da mevcuttur.",
-      "q10": "World Monitor neden Palantir değil?",
-      "a10": "Palantir, bir kurumun kendi verilerini o kurum içinde operasyonel hale getirir. World Monitor ise ters yönden başlar: halka açık verileri toplar, normalleştirir, ilişkilendirir ve izler, ardından bu istihbarat katmanını ücretsiz bir pano ve açık kaynak kod aracılığıyla yayınlar. Farklı görev, farklı ürün.",
-      "q11": "Which World Monitor license do I need?",
-      "a11": "Choose based on who will use the output. Pro's Personal license is for one person using World Monitor for their own research and decisions. Pro Business lets one licensed user use it for company or client work, internal tools, and reports. API Starter covers API use inside one organization, with no customer redistribution. API Business lets that organization embed World Monitor data in products and services for its customers. Enterprise covers custom seats, white-labeling, and deployments. These subscription licenses are separate from the AGPL/MIT source-code licenses. Full terms: worldmonitor.app/docs/terms."
+      "q10": "VISTA neden Palantir değil?",
+      "a10": "Palantir, bir kurumun kendi verilerini o kurum içinde operasyonel hale getirir. VISTA ise ters yönden başlar: halka açık verileri toplar, normalleştirir, ilişkilendirir ve izler, ardından bu istihbarat katmanını ücretsiz bir pano ve açık kaynak kod aracılığıyla yayınlar. Farklı görev, farklı ürün.",
+      "q11": "Which VISTA license do I need?",
+      "a11": "Choose based on who will use the output. Pro's Personal license is for one person using VISTA for their own research and decisions. Pro Business lets one licensed user use it for company or client work, internal tools, and reports. API Starter covers API use inside one organization, with no customer redistribution. API Business lets that organization embed VISTA data in products and services for its customers. Enterprise covers custom seats, white-labeling, and deployments. These subscription licenses are separate from the AGPL/MIT source-code licenses. Full terms: worldmonitor.app/docs/terms."
     },
     "cta": {
       "title": "Dünya haritası sizi beklemez.",

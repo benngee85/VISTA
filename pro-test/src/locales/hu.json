@@ -22,19 +22,19 @@
     "asFeaturedIn": "Megjelent itt"
   },
   "twoPath": {
-    "proTitle": "World Monitor Pro",
+    "proTitle": "VISTA Pro",
     "proDesc": "Az Ön AI-elemzője. Személyes hírszerzési desk. Platform, amelyre építhet. Egy kulcs több mint 30 élő szolgáltatáshoz.",
     "proF1": "WM Analyst chat — kérdezzen társalgási formában mind a 30+ szolgáltatástól",
     "proF2": "AI digest — naponta, naponta kétszer vagy hetente — Slackre, Discordra, Telegramra, e-mailre vagy webhookra",
     "proF3": "Custom Widget Builder — HTML/CSS/JS AI-asszisztált módosítással",
-    "proF4": "MCP-csatlakozók — kösse a WorldMonitort Claude-hoz, GPT-hez vagy saját LLM-ekhez",
+    "proF4": "MCP-csatlakozók — kösse a VISTAt Claude-hoz, GPT-hez vagy saját LLM-ekhez",
     "proF5": "Részvénykutatás, részvényelemzés és backtesting",
     "proF6": "Repülőjárat-keresés és ár-összehasonlítás",
     "proF7": "Riasztási szabálymotor — egyéni triggerek, csendes órák, AES-256-tal titkosított csatornák",
     "proF8": "Piaci watchlist, makró és jegybanki követés",
     "proF9": "AI Market Implications és Regional Intelligence (hamarosan: orbitális megfigyelés, prémium térképrétegek, hosszabb előzmények)",
     "choosePlan": "Válasszon csomagot",
-    "entTitle": "World Monitor Enterprise",
+    "entTitle": "VISTA Enterprise",
     "entDesc": "Csapatoknak, amelyeknek közös monitoring, API-hozzáférés, telepítési opciók, TV-alkalmazások és közvetlen támogatás kell.",
     "entF1": "Minden a Pro csomagban, plusz:",
     "entF2": "Live-edge + műholdképek és SAR",
@@ -80,7 +80,7 @@
     "windowTitle": "worldmonitor.app — Élő irányítópult",
     "openFullScreen": "Megnyitás teljes képernyőn",
     "tryLiveDashboard": "Próbálja ki az élő irányítópultot",
-    "iframeTitle": "World Monitor — Élő hírszerzési irányítópult",
+    "iframeTitle": "VISTA — Élő hírszerzési irányítópult",
     "description": "3D WebGL földgömb · 50+ interaktív térképréteg · Valós idejű piaci, makró, geopolitikai, energia- és infrastruktúraadatok"
   },
   "socialProof": {
@@ -108,7 +108,7 @@
     "teamsDesc": "Lépjen túl az egyéni használaton: közös munkafolyamatok, API-hozzáférés, TV-appok és menedzselt telepítések."
   },
   "dataCoverage": {
-    "title": "Mit követ a World Monitor",
+    "title": "Mit követ a VISTA",
     "subtitle": "30+ szolgáltatási domén párhuzamos feldolgozása. Piacok, makró, geopolitika, energia, infrastruktúra — minden normalizálva és WebGL földgömbön megjelenítve.",
     "markets": "Pénzügyi piacok és részvények",
     "marketsDesc": "Globális részvényelemzés, árupiacok, kripto, ETF-áramlások, elemzői célárak és FRED makróadatok",
@@ -175,7 +175,7 @@
   "apiSection": {
     "apiTier": "API SZINT",
     "title": "Programozható intelligencia",
-    "subtitle": "Fejlesztőknek, elemzőknek és csapatoknak, akik World Monitor adatokra építenek. Különálló a Pro csomagtól — használhatja mindkettőt vagy bármelyiket.",
+    "subtitle": "Fejlesztőknek, elemzőknek és csapatoknak, akik VISTA adatokra építenek. Különálló a Pro csomagtól — használhatja mindkettőt vagy bármelyiket.",
     "restApi": "REST API mind a 30+ szolgáltatási doménen át — hivatalos SDK-k: JavaScript, Python, Ruby, Go",
     "authenticated": "Kulcsonként hitelesített, csomagonként rate-limitált",
     "structured": "Strukturált JSON cache fejlécekkel és OpenAPI 3.1 dokumentációval",
@@ -195,7 +195,7 @@
     "security": "Kormányzati szintű biztonság",
     "securityDesc": "Air-gapped telepítés, on-premises Docker, dedikált cloud tenant, SOC 2 Type II útvonal, SSO/MFA és teljes audit trail.",
     "aiAgents": "AI-ügynökök és MCP",
-    "aiAgentsDesc": "Autonóm hírszerzési ügynökök befektetői personákkal. Csatlakoztassa a World Monitort eszközként Claude-hoz, GPT-hez vagy saját LLM-ekhez MCP-n keresztül.",
+    "aiAgentsDesc": "Autonóm hírszerzési ügynökök befektetői personákkal. Csatlakoztassa a VISTAt eszközként Claude-hoz, GPT-hez vagy saját LLM-ekhez MCP-n keresztül.",
     "dataLayers": "Bővített adatrétegek",
     "dataLayersDesc": "Tízezernyi infrastrukturális eszköz globálisan feltérképezve. Műholdkép-integráció változásdetektálással és SAR-ral.",
     "connectors": "100+ adatcsatlakozó",
@@ -275,7 +275,7 @@
   },
   "faq": {
     "title": "Gyakori kérdések",
-    "q1": "A World Monitor továbbra is ingyenes?",
+    "q1": "A VISTA továbbra is ingyenes?",
     "a1": "Igen. Az alapplatform ingyenes marad. A Pro kiegészíti az értékpapír-kutatást, makroökonómiai elemzéseket és AI-összefoglalókat. A Pro Business hozzáadja a kereskedelmi licencet és adatexportálást. Az Enterprise csapatos telepítéseket és TV-alkalmazásokat biztosít.",
     "q2": "Miért érdemes a Pro csomagért fizetni?",
     "a2": "A Pro befektetőknek, elemzőknek és szakembereknek készült, akik részvényfigyelést, geopolitikai elemzést, gazdasági analitikát és AI-alapú napi briefeket szeretnének — mindezt egy kulcs alatt.",
@@ -284,17 +284,17 @@
     "q4": "Kezdhetek Pro csomaggal, és később frissíthetek?",
     "a4": "Igen. A Pro személyes használatra való. A Pro Business (49,99 USD/hó) hozzáadja a kereskedelmi licencet, adatexportálást, 25 irányítópultot és 250 MCP hívást/nap. Az API-csomagok programozási hozzáférésre, az Enterprise pedig egyéni telepítésekre vonatkoznak. A frissítések a számlázási portálon keresztül történnek — az alkalmazás végigvezeti Önt a lépéseken.",
     "q5": "Ez csak konfliktusmonitoringra való?",
-    "a5": "Nem. A World Monitor elsősorban globális hírszerzési platform, amely részvénypiacokat, makrogazdaságot, geopolitikai elemzést, energiát, infrastruktúrát és még sok mást fed le. A konfliktuskövetés csak egy a sok képesség közül — nem ez a fókusz.",
+    "a5": "Nem. A VISTA elsősorban globális hírszerzési platform, amely részvénypiacokat, makrogazdaságot, geopolitikai elemzést, energiát, infrastruktúrát és még sok mást fed le. A konfliktuskövetés csak egy a sok képesség közül — nem ez a fókusz.",
     "q6": "Miért marad ingyenes az alapplatform?",
     "a6": "Mert a nyilvános hozzáférés számít. A fizetős csomagok mélyebb munkafolyamatokat finanszíroznak komoly felhasználóknak és szervezeteknek.",
     "q7": "Továbbra is használhatom a saját API-kulcsaimat?",
     "a7": "Igen. A bring-your-own-keys mindig működik. A Pro csak azt jelenti, hogy nem kell 20+ külön szolgáltatásra regisztrálnia.",
     "q8": "Mi az MCP?",
-    "a8": "Az MCP lehetővé teszi, hogy AI-ügynökök — Claude, GPT, saját LLM-ek — eszközként használják a WorldMonitort, és lekérdezzék mind a 30+ szolgáltatást. A Pro része. Az Enterprise privát MCP-szervereket és egyedi telepítéseket ad.",
+    "a8": "Az MCP lehetővé teszi, hogy AI-ügynökök — Claude, GPT, saját LLM-ek — eszközként használják a VISTAt, és lekérdezzék mind a 30+ szolgáltatást. A Pro része. Az Enterprise privát MCP-szervereket és egyedi telepítéseket ad.",
     "q9": "Építhetek saját paneleket?",
     "a9": "Igen. A Pro tartalmazza a Custom Widget Buildert — építsen paneleket HTML-ből, CSS-ből és JavaScriptből, AI-asszisztált módosítással.",
-    "q10": "Csatlakoztathatom Claude-ot vagy GPT-t a WorldMonitorhoz?",
-    "a10": "Igen. Az MCP benne van a Pro csomagban — kösse a WorldMonitort Claude-hoz, GPT-hez vagy bármely MCP-kompatibilis LLM-hez élő eszközként.",
+    "q10": "Csatlakoztathatom Claude-ot vagy GPT-t a VISTAhoz?",
+    "a10": "Igen. Az MCP benne van a Pro csomagban — kösse a VISTAt Claude-hoz, GPT-hez vagy bármely MCP-kompatibilis LLM-hez élő eszközként.",
     "q11": "Mennyire személyre szabott a digest?",
     "a11": "Válasszon ütemezést — napi, napi kétszeri vagy heti. Minden követett történetet újrapontozunk az Ön riasztási szabályai és watchlistje alapján, 500+ forrásból deduplikáljuk, és legfeljebb 30 rangsorolt elemet küldünk AI Assessmenttel és az Ön kontextusához írt Signals to watch résszel. Kritikus eseményekhez valós idejű riasztások is elérhetők.",
     "q12": "Milyen gyakori a frissítés?",
@@ -304,7 +304,7 @@
   },
   "finalCta": {
     "title": "Kezdje a Pro csomaggal. Skálázzon Enterprise-ra.",
-    "subtitle": "Használja tovább ingyen a World Monitort, vagy frissítsen részvénykutatásért, makróanalitikáért és AI-briefekért. Ha szervezetének csapathozzáférésre, TV-appokra vagy API-támogatásra van szüksége, beszéljen velünk.",
+    "subtitle": "Használja tovább ingyen a VISTAt, vagy frissítsen részvénykutatásért, makróanalitikáért és AI-briefekért. Ha szervezetének csapathozzáférésre, TV-appokra vagy API-támogatásra van szüksége, beszéljen velünk.",
     "talkToSales": "Beszéljen az értékesítéssel"
   },
   "footer": {
@@ -314,9 +314,9 @@
   },
   "soonBadge": "Hamarosan",
   "meta": {
-    "title": "World Monitor Pro — AI-elemző, személyes hírszerzési desk, MCP Claude-hoz és GPT-hez",
+    "title": "VISTA Pro — AI-elemző, személyes hírszerzési desk, MCP Claude-hoz és GPT-hez",
     "description": "A geopolitikai AI-réteg. Kérdezze, iratkozzon fel rá, építsen rá. WM Analyst chat 30+ élő szolgáltatáson át, AI digest napi, napi kétszeri vagy heti kézbesítéssel Slackre, Discordra, Telegramra, e-mailre vagy webhookra, custom widget builder (HTML/CSS/JS + AI) és MCP-csatlakozók Claude-hoz, GPT-hez és saját LLM-ekhez.",
-    "ogTitle": "World Monitor Pro — A geopolitikai AI-réteg",
+    "ogTitle": "VISTA Pro — A geopolitikai AI-réteg",
     "ogDescription": "Kérdezze, iratkozzon fel rá, építsen rá. WM Analyst chat, AI digest az Ön ütemezése szerint (napi, napi kétszeri vagy heti), custom widget builder és MCP Claude/GPT-hez — 30+ élő szolgáltatáson át, egy kulcs alatt."
   },
   "pricing": {
@@ -388,7 +388,7 @@
         "cta": "Kapcsolat az értékesítéssel"
       },
       "apiBusiness": {
-        "description": "Saját termék indítása WorldMonitor adatokkal",
+        "description": "Saját termék indítása VISTA adatokkal",
         "features": [
           "Minden az API Starter csomagból",
           "Terjesztési jogok — ágyazza be adatainkat az Ön termékeibe",
@@ -427,9 +427,9 @@
   },
   "welcome": {
     "meta": {
-      "title": "World Monitor — Ingyenes valós idejű globális hírszerzési irányítópult",
+      "title": "VISTA — Ingyenes valós idejű globális hírszerzési irányítópult",
       "description": "Amíg hír lesz, már tudtad. Konfliktusok, szállítási szűk keresztmetszetek, katonai járatok, piacok és kiberbiztonsági fenyegetések egy ingyenes élő világtérképen, AI-elemzéssel. Nincs regisztráció szükséges.",
-      "ogTitle": "World Monitor — Amíg hír lesz, már tudtad.",
+      "ogTitle": "VISTA — Amíg hír lesz, már tudtad.",
       "ogDescription": "A világ nyers jelei — hajók, repülőgépek, szirénák, kábelek, piacok — egy ingyenes élő hírszerzési térképen, AI-val, amely akkor jelöl meg, amikor összefolynak. Ingyenes, nincs regisztráció."
     },
     "nav": {
@@ -447,21 +447,21 @@
       "eyebrow": "Ingyenes globális hírszerzési irányítópult · most élő",
       "headline1": "Amíg hír lesz,",
       "headline2": "már tudtad.",
-      "sub": "A hírek csak a késés. A World Monitor a világ nyers jeleit streameli — hajók, repülőgépek, szirénák, kábelek, piacok — egy élő térképre, AI-val, amely jelöli, amikor összefolynak valamivé, ami számít.",
+      "sub": "A hírek csak a késés. A VISTA a világ nyers jeleit streameli — hajók, repülőgépek, szirénák, kábelek, piacok — egy élő térképre, AI-val, amely jelöli, amikor összefolynak valamivé, ami számít.",
       "ctaPrimary": "Irányítópult indítása",
       "ctaFree": "Ingyenes · Nincs regisztráció · Másodpercek alatt betölt",
       "ctaSecondary": "Nézd meg, hogyan használják az emberek ↓",
       "trustUsers": "2M+ felhasználó",
       "trustOpenSource": "Nyílt forrás · AGPL-3.0",
-      "screenshotAlt": "World Monitor élő hírszerzési irányítópult — globális térkép konfliktus, szállítás és piaci rétegekkel",
+      "screenshotAlt": "VISTA élő hírszerzési irányítópult — globális térkép konfliktus, szállítás és piaci rétegekkel",
       "plateNote": "Az élő térképről rögzítve — kattints a megnyitásához",
       "trustBuild": "Építs rá:",
-      "positioningLink": "A WorldMonitor nem nyílt forráskódú Palantir"
+      "positioningLink": "A VISTA nem nyílt forráskódú Palantir"
     },
     "live": {
       "eyebrow": "Most élő",
       "title": "Ez az oldal ugyanazokkal az API-kkal csatlakozik, mint az irányítópult.",
-      "subtitle": "A száz feletti jelzések közül négy, amelyet a World Monitor folyamatosan figyel.",
+      "subtitle": "A száz feletti jelzések közül négy, amelyet a VISTA folyamatosan figyel.",
       "liveBadge": "Élő",
       "sampleBadge": "Minta",
       "cardHeadlines": "Legfontosabb jelzések",
@@ -646,28 +646,28 @@
     "faq": {
       "eyebrow": "Nincs másodszándék",
       "title": "Jogos kérdések.",
-      "q1": "Tényleg ingyenes a World Monitor?",
+      "q1": "Tényleg ingyenes a VISTA?",
       "a1": "Igen. A teljes élő térkép — minden réteg, 500+ forrás, országjelentések, feltörekvő riasztások, mind a hat monitor — ingyenes, regisztráció és próbaidő nélkül. A Pro a forrásokat finanszírozza: hozzáadja a WM Analyticsot, a forgatókönyv-motort, a Route Explorert, az ütemezett kivonatokat és az MCP-hozzáférést AI-kliensek számára. Nincs hirdetés, és mivel nincs fiók, nincs felhasználói adat, amelyet eladni lehetne.",
       "q2": "Mi az a globális hírszerzési irányítópult?",
-      "a2": "Egy egyetlen élő nézet, amely olyan jeleket egyesít, amelyeket a legtöbb eszköz külön tárol: konfliktusesemények, hajó- és légiforgalom-követés, szállítási szűk keresztmetszetek, műholdak, tengeralatti kábelek, vezetékek, piacok és kiberfenyegetések — egy valós idejű világtérképen, AI-pontozással és összefoglalókkal. A World Monitor egy ingyenes ilyen.",
+      "a2": "Egy egyetlen élő nézet, amely olyan jeleket egyesít, amelyeket a legtöbb eszköz külön tárol: konfliktusesemények, hajó- és légiforgalom-követés, szállítási szűk keresztmetszetek, műholdak, tengeralatti kábelek, vezetékek, piacok és kiberfenyegetések — egy valós idejű világtérképen, AI-pontozással és összefoglalókkal. A VISTA egy ingyenes ilyen.",
       "q3": "Honnan származnak az adatok?",
       "a3": "65+ szolgáltatótól, név szerint: ACLED és UCDP a konfliktusokhoz, AISStream az élő hajókhoz, OpenSky a repülőgépekhez, NASA FIRMS a tüzekhez, USGS a földrengésekhez, IMF, BIS, FRED és Finnhub a piacokhoz és makrogazdasághoz — plusz 500+ válogatott hírhírforrás. Minden panel bemutatja forrásait és időbélyegeit.",
       "q4": "Valós időben tudom követni a szűk keresztmetszetek, például Hormuz vagy Bab el-Mandeb?",
       "a4": "Igen. 13 szűk keresztmetszetetet követünk élő AIS-hajószámokkal, heti változásokkal és zavaradási pontszámokkal — és a sűrűségi anomáliákat az egyes szorosok gördülő alapértékéhez képest jelezzük.",
       "q5": "Miben különbözik ez egy konfliktustérképtől, mint a Liveuamap?",
-      "a5": "A konfliktus 56 rétegből csak egy. A World Monitor a konfliktusokat a szállítással, a katonai repülésekkel, az infrastruktúrával, a piacokkal és a kiberfenyegetésekkel egyesíti — majd az AI kipontozza a konvergenciát: instabilitási indexek, kritikus pontok eszkalációja, megerősített fontos riasztások és napi összefoglalók.",
+      "a5": "A konfliktus 56 rétegből csak egy. A VISTA a konfliktusokat a szállítással, a katonai repülésekkel, az infrastruktúrával, a piacokkal és a kiberfenyegetésekkel egyesíti — majd az AI kipontozza a konvergenciát: instabilitási indexek, kritikus pontok eszkalációja, megerősített fontos riasztások és napi összefoglalók.",
       "q6": "Miért bízzak egy riasztásban?",
       "a6": "Egy fontos szalagcím csak akkor jelenik meg, ha független forrásfajták megerősítik — hírosztályozás, kulcsszósebesség, kritikus pont eskalációja, katonai ugrások, hivatalos szirénák — deduplikálva és sebességkorláttal. Kevesebb riasztás, valódi riasztások.",
       "q7": "Használhatják azt AI-ügynökök, mint a Claude vagy a GPT?",
-      "a7": "Igen. A World Monitor egy 59 eszközből álló MCP-szervert szállít, így a Claude, a GPT vagy bármilyen MCP-kompatibilis ügynök lekérdezheti az élő kockázati pontszámokat, szűk keresztmetszet-státuszt, konfliktusokat, piacokat és összefoglalókat — JMESPath-vetítéssel, hogy az ügynökök pontosan azt kapják meg, amire szükségük van.",
+      "a7": "Igen. A VISTA egy 59 eszközből álló MCP-szervert szállít, így a Claude, a GPT vagy bármilyen MCP-kompatibilis ügynök lekérdezheti az élő kockázati pontszámokat, szűk keresztmetszet-státuszt, konfliktusokat, piacokat és összefoglalókat — JMESPath-vetítéssel, hogy az ügynökök pontosan azt kapják meg, amire szükségük van.",
       "q8": "Szükségem van fiókra?",
       "a8": "Nem. Az irányítópult azonnal működik regisztráció nélkül. A fiók csak akkor számít, ha a Pro verzióra frissítesz vagy beállításokat szeretnél szinkronizálni az eszközök között.",
       "q9": "Nyílt forráskódú?",
       "a9": "Igen — nyílt forráskód az AGPL-3.0 alatt a GitHubon: olvasd el a kódot, hostold saját magad, vagy építs rá. Natív asztali alkalmazások Windows, macOS és Linux rendszerre érhetők el, valamint Android TV-alkalmazás falra szerelt kijelzőkhöz.",
-      "q10": "Miért nem a World Monitor a Palantir?",
-      "a10": "A Palantir egy intézmény saját adatait működteti az adott intézményen belül. A World Monitor az ellenkező végről indul: összegyűjt, normalizál, korrelál és nyomon követ nyilvános adatokat, majd ezt az intelligencia réteget egy ingyenes irányítópulton és nyílt forráskódú kódok révén közzéteszi. Más feladat, más termék.",
-      "q11": "Which World Monitor license do I need?",
-      "a11": "Choose based on who will use the output. Pro's Personal license is for one person using World Monitor for their own research and decisions. Pro Business lets one licensed user use it for company or client work, internal tools, and reports. API Starter covers API use inside one organization, with no customer redistribution. API Business lets that organization embed World Monitor data in products and services for its customers. Enterprise covers custom seats, white-labeling, and deployments. These subscription licenses are separate from the AGPL/MIT source-code licenses. Full terms: worldmonitor.app/docs/terms."
+      "q10": "Miért nem a VISTA a Palantir?",
+      "a10": "A Palantir egy intézmény saját adatait működteti az adott intézményen belül. A VISTA az ellenkező végről indul: összegyűjt, normalizál, korrelál és nyomon követ nyilvános adatokat, majd ezt az intelligencia réteget egy ingyenes irányítópulton és nyílt forráskódú kódok révén közzéteszi. Más feladat, más termék.",
+      "q11": "Which VISTA license do I need?",
+      "a11": "Choose based on who will use the output. Pro's Personal license is for one person using VISTA for their own research and decisions. Pro Business lets one licensed user use it for company or client work, internal tools, and reports. API Starter covers API use inside one organization, with no customer redistribution. API Business lets that organization embed VISTA data in products and services for its customers. Enterprise covers custom seats, white-labeling, and deployments. These subscription licenses are separate from the AGPL/MIT source-code licenses. Full terms: worldmonitor.app/docs/terms."
     },
     "cta": {
       "title": "A világtérkép nem vár rád.",

@@ -22,19 +22,19 @@
     "asFeaturedIn": "被报道于"
   },
   "twoPath": {
-    "proTitle": "World Monitor Pro",
+    "proTitle": "VISTA Pro",
     "proDesc": "您的 AI 分析师。个人情报工作台。一个可以在其之上构建的平台。一把密钥通向 30+ 个实时服务。",
     "proF1": "WM Analyst 对话 — 以对话方式查询 30+ 个服务",
     "proF2": "AI 摘要 — 每日、每日两次或每周 — 至 Slack、Discord、Telegram、邮件或 webhook",
     "proF3": "自定义小组件构建器 — HTML/CSS/JS,AI 辅助修改",
-    "proF4": "MCP 连接器 — 将 WorldMonitor 接入 Claude、GPT 或自定义 LLM",
+    "proF4": "MCP 连接器 — 将 VISTA 接入 Claude、GPT 或自定义 LLM",
     "proF5": "股票研究、股票分析与回测",
     "proF6": "航班搜索与价格比较",
     "proF7": "告警规则引擎 — 自定义触发器、静音时段、AES-256 加密通道",
     "proF8": "市场观察列表、宏观与央行追踪",
     "proF9": "AI Market Implications 与 Regional Intelligence(即将推出:轨道监视、高级地图图层、更长历史)",
     "choosePlan": "选择方案",
-    "entTitle": "World Monitor Enterprise",
+    "entTitle": "VISTA Enterprise",
     "entDesc": "面向需要共享监测、API 访问、部署选项、TV 应用和直接支持的团队。",
     "entF1": "Pro 的全部,另加:",
     "entF2": "实时卫星图像与 SAR",
@@ -80,7 +80,7 @@
     "windowTitle": "worldmonitor.app — 实时仪表板",
     "openFullScreen": "全屏打开",
     "tryLiveDashboard": "试用实时仪表板",
-    "iframeTitle": "World Monitor — 实时情报仪表板",
+    "iframeTitle": "VISTA — 实时情报仪表板",
     "description": "3D WebGL 地球仪 · 50+ 个交互式地图图层 · 实时市场、宏观、地缘政治、能源和基础设施数据"
   },
   "socialProof": {
@@ -108,7 +108,7 @@
     "teamsDesc": "从个人使用迈向共享工作流、API 访问、TV 应用与托管部署。"
   },
   "dataCoverage": {
-    "title": "World Monitor 追踪什么",
+    "title": "VISTA 追踪什么",
     "subtitle": "30+ 个服务域同步接入。市场、宏观、地缘政治、能源、基础设施 — 全部归一化并在 WebGL 地球上呈现。",
     "markets": "金融市场与股票",
     "marketsDesc": "全球股票分析、大宗商品、加密货币、ETF 资金流、分析师目标与 FRED 宏观数据",
@@ -175,7 +175,7 @@
   "apiSection": {
     "apiTier": "API 等级",
     "title": "程序化情报",
-    "subtitle": "面向基于 World Monitor 数据构建的开发者、分析师与团队。独立于 Pro — 可同时使用或单独使用。",
+    "subtitle": "面向基于 VISTA 数据构建的开发者、分析师与团队。独立于 Pro — 可同时使用或单独使用。",
     "restApi": "覆盖 30+ 个服务域的 REST API——JavaScript、Python、Ruby、Go 官方 SDK",
     "authenticated": "按密钥鉴权、按等级限速",
     "structured": "具 cache header 和 OpenAPI 3.1 文档的结构化 JSON",
@@ -195,7 +195,7 @@
     "security": "政府级安全",
     "securityDesc": "气隙部署、本地 Docker、专属云租户、SOC 2 Type II 路径、SSO/MFA 与完整审计轨迹。",
     "aiAgents": "AI 代理与 MCP",
-    "aiAgentsDesc": "具投资者人设的自主情报代理。通过 MCP 将 World Monitor 作为工具接入 Claude、GPT 或自定义 LLM。",
+    "aiAgentsDesc": "具投资者人设的自主情报代理。通过 MCP 将 VISTA 作为工具接入 Claude、GPT 或自定义 LLM。",
     "dataLayers": "扩展的数据层",
     "dataLayersDesc": "全球数万项已绘制基础设施资产。卫星图像集成,含变化检测与 SAR。",
     "connectors": "100+ 数据连接器",
@@ -275,7 +275,7 @@
   },
   "faq": {
     "title": "常见问题",
-    "q1": "World Monitor 仍然免费吗?",
+    "q1": "VISTA 仍然免费吗?",
     "a1": "是的。核心平台保持免费。Pro 版本增加了股票研究、宏观分析和 AI 简报。Pro Business 版本增加了商业许可证和数据导出。Enterprise 版本增加了团队部署和 TV 应用。",
     "q2": "为什么要付费使用 Pro?",
     "a2": "Pro 面向希望获得股票监测、地缘政治分析、经济分析与 AI 每日简报的投资者、分析师与专业人士 — 全部在一把密钥下。",
@@ -284,17 +284,17 @@
     "q4": "我可以先用 Pro 之后再升级吗?",
     "a4": "是的。Pro 版本供个人使用。Pro Business（49.99 美元/月）增加了商业许可证、数据导出、25 个仪表板和 250 次 MCP 调用/天。API 计划涵盖编程访问，Enterprise 计划涵盖自定义部署。升级通过计费门户进行 — 应用会指导您完成相应步骤。",
     "q5": "这只用于冲突监测吗?",
-    "a5": "不是。World Monitor 主要是一个覆盖股票市场、宏观经济、地缘政治分析、能源、基础设施等的全球情报平台。冲突追踪是众多能力之一 — 不是重点。",
+    "a5": "不是。VISTA 主要是一个覆盖股票市场、宏观经济、地缘政治分析、能源、基础设施等的全球情报平台。冲突追踪是众多能力之一 — 不是重点。",
     "q6": "为何保持核心平台免费?",
     "a6": "因为公共访问很重要。付费方案资助面向重度用户与组织的更深入工作流。",
     "q7": "我仍能使用自己的 API 密钥吗?",
     "a7": "可以。Bring-your-own-keys 始终有效。Pro 只是意味着您无需注册 20+ 个独立服务。",
     "q8": "什么是 MCP?",
-    "a8": "MCP 允许 AI 代理 — Claude、GPT、自定义 LLM — 把 WorldMonitor 作为工具来调用,查询全部 30+ 个服务。Pro 已包含。Enterprise 额外提供私有 MCP 服务器与定制部署。",
+    "a8": "MCP 允许 AI 代理 — Claude、GPT、自定义 LLM — 把 VISTA 作为工具来调用,查询全部 30+ 个服务。Pro 已包含。Enterprise 额外提供私有 MCP 服务器与定制部署。",
     "q9": "我可以自建面板吗?",
     "a9": "可以。Pro 包含自定义小组件构建器 — 从 HTML、CSS 与 JavaScript 构建面板,并支持 AI 辅助修改。",
-    "q10": "我可以把 Claude 或 GPT 接入 WorldMonitor 吗?",
-    "a10": "可以。MCP 已包含在 Pro 中 — 将 WorldMonitor 作为实时工具接入 Claude、GPT 或任何兼容 MCP 的 LLM。",
+    "q10": "我可以把 Claude 或 GPT 接入 VISTA 吗?",
+    "a10": "可以。MCP 已包含在 Pro 中 — 将 VISTA 作为实时工具接入 Claude、GPT 或任何兼容 MCP 的 LLM。",
     "q11": "摘要的个性化程度如何?",
     "a11": "选择您的频率: 每日、每日两次或每周。我们根据您的告警规则与观察列表为每个被追踪事件重新打分,在 400+ 来源间去重,并发送最多 30 条按级别排序的条目,附带为您上下文撰写的 AI Assessment 与 Signals to watch。关键事件还可启用实时告警。",
     "q12": "刷新率是多少?",
@@ -304,7 +304,7 @@
   },
   "finalCta": {
     "title": "从 Pro 开始。扩展到 Enterprise。",
-    "subtitle": "继续免费使用 World Monitor,或升级以获取股票研究、宏观分析和 AI 简报。若您的组织需要团队访问、TV 应用或 API 支持,请与我们联系。",
+    "subtitle": "继续免费使用 VISTA,或升级以获取股票研究、宏观分析和 AI 简报。若您的组织需要团队访问、TV 应用或 API 支持,请与我们联系。",
     "talkToSales": "联系销售"
   },
   "footer": {
@@ -314,9 +314,9 @@
   },
   "soonBadge": "即将推出",
   "meta": {
-    "title": "World Monitor Pro — AI 分析师、个人智能助手、Claude & GPT 的 MCP",
+    "title": "VISTA Pro — AI 分析师、个人智能助手、Claude & GPT 的 MCP",
     "description": "地缘政治 AI 层。提问、订阅、构建。WM Analyst 聊天支持 30+ 个实时服务，AI 摘要按日、两次日或周频率投送至 Slack、Discord、Telegram、Email 或 webhook，自定义小部件构建器（HTML/CSS/JS + AI），以及 Claude、GPT 和自定义 LLM 的 MCP 连接器。",
-    "ogTitle": "World Monitor Pro — 地缘政治 AI 层",
+    "ogTitle": "VISTA Pro — 地缘政治 AI 层",
     "ogDescription": "提问、订阅、构建。WM Analyst 聊天、按您的时间表（日、两次日或周）投送的 AI 摘要、自定义小部件构建器，以及 Claude/GPT 的 MCP — 跨 30+ 个实时服务，一个密钥管理。"
   },
   "pricing": {
@@ -388,7 +388,7 @@
         "cta": "联系销售"
       },
       "apiBusiness": {
-        "description": "在 WorldMonitor 数据基础上推出您自己的产品",
+        "description": "在 VISTA 数据基础上推出您自己的产品",
         "features": [
           "涵盖 API Starter 的全部内容",
           "再分发权限 — 将我们的数据嵌入到您的销售产品中",
@@ -427,9 +427,9 @@
   },
   "welcome": {
     "meta": {
-      "title": "World Monitor — 免费实时全球情报仪表板\t",
+      "title": "VISTA — 免费实时全球情报仪表板\t",
       "description": "新闻报道之前，您已经了解。冲突、海运枢纽、军事航班、市场和网络安全信息都在一张免费实时世界地图上，并配有 AI 分析。无需注册。\t",
-      "ogTitle": "World Monitor — 新闻报道之前，您已经了解。\t",
+      "ogTitle": "VISTA — 新闻报道之前，您已经了解。\t",
       "ogDescription": "世界原始信号 — 船舶、飞机、警报、电缆、市场 — 汇聚在一张免费实时情报地图上，AI 会在它们汇聚成重要信息时发出标记。免费、无需注册。\t"
     },
     "nav": {
@@ -447,21 +447,21 @@
       "eyebrow": "免费全球情报仪表板 · 实时在线\t",
       "headline1": "新闻报道之前，\t",
       "headline2": "您已经了解。\t",
-      "sub": "新闻报道滞后。World Monitor 将世界的原始信号 — 船舶、飞机、警报、电缆、市场 — 流式传输到一张实时地图上，配有 AI 技术，可在它们汇聚成重要信息时发出标记。\t",
+      "sub": "新闻报道滞后。VISTA 将世界的原始信号 — 船舶、飞机、警报、电缆、市场 — 流式传输到一张实时地图上，配有 AI 技术，可在它们汇聚成重要信息时发出标记。\t",
       "ctaPrimary": "启动仪表板\t",
       "ctaFree": "免费 · 无需注册 · 秒速加载\t",
       "ctaSecondary": "查看人们如何使用它 ↓\t",
       "trustUsers": "200 万+ 用户\t",
       "trustOpenSource": "开源 · AGPL-3.0\t",
-      "screenshotAlt": "World Monitor 实时情报仪表板 — 包含冲突、海运和市场图层的全球地图\t",
+      "screenshotAlt": "VISTA 实时情报仪表板 — 包含冲突、海运和市场图层的全球地图\t",
       "plateNote": "从实时地图捕获 — 点击打开\t",
       "trustBuild": "构建应用：\t",
-      "positioningLink": "WorldMonitor 不是开源的 Palantir\t"
+      "positioningLink": "VISTA 不是开源的 Palantir\t"
     },
     "live": {
       "eyebrow": "实时在线\t",
       "title": "此页面连接到与仪表板相同的 API。\t",
-      "subtitle": "World Monitor 全天候监控的百余个信号中的四个。\t",
+      "subtitle": "VISTA 全天候监控的百余个信号中的四个。\t",
       "liveBadge": "实时\t",
       "sampleBadge": "示例\t",
       "cardHeadlines": "顶部信号\t",
@@ -646,28 +646,28 @@
     "faq": {
       "eyebrow": "无隐藏条件",
       "title": "合理的问题。",
-      "q1": "World Monitor 真的免费吗？",
+      "q1": "VISTA 真的免费吗？",
       "a1": "是的。完整的实时地图 — 每个图层、500+ 个数据源、国家简报、突发警报、全部六个监视器 — 免费提供，无需注册，无试用期限制。Pro 版本用于数据源：它增加了 WM Analyst、场景引擎、Route Explorer、定时摘要和 AI 客户端的 MCP 访问权限。没有广告，没有账户意味着没有用户数据可出售。",
       "q2": "什么是全球智能仪表板？",
-      "a2": "一个单一的实时视图，融合大多数工具分开保存的信号：冲突事件、船舶和飞机追踪、航运枢纽、卫星、海底电缆、管道、市场和网络威胁 — 在一个实时世界地图上，带有 AI 评分和摘要。World Monitor 是一个免费的。",
+      "a2": "一个单一的实时视图，融合大多数工具分开保存的信号：冲突事件、船舶和飞机追踪、航运枢纽、卫星、海底电缆、管道、市场和网络威胁 — 在一个实时世界地图上，带有 AI 评分和摘要。VISTA 是一个免费的。",
       "q3": "数据来自哪里？",
       "a3": "65+ 个提供商，具名：冲突数据来自 ACLED 和 UCDP，实时船舶来自 AISStream，飞机来自 OpenSky，火灾来自 NASA FIRMS，地震来自 USGS，市场和宏观数据来自 IMF、BIS、FRED 和 Finnhub — 加上 500+ 个精选新闻源。每个面板都内联引用其来源和时间戳。",
       "q4": "我可以实时监视霍尔木兹海峡或曼德海峡等枢纽吗？",
       "a4": "可以。13 个枢纽通过实时 AIS 船舶数数、周度过境变化和中断评分进行追踪 — 密度异常会与每条海峡的滚动基线进行标记比较。",
       "q5": "这与 Liveuamap 之类的冲突地图有何不同？",
-      "a5": "冲突只是 56 层中的一层。World Monitor 融合冲突、航运、军事飞行、基础设施、市场和网络 — 然后 AI 评估汇聚：不稳定指数、热点升级、证实的突发警报和每日摘要。",
+      "a5": "冲突只是 56 层中的一层。VISTA 融合冲突、航运、军事飞行、基础设施、市场和网络 — 然后 AI 评估汇聚：不稳定指数、热点升级、证实的突发警报和每日摘要。",
       "q6": "为什么要相信警报？",
       "a6": "突发横幅仅在独立来源类型相互印证时触发 — 新闻分类、关键词速率、热点升级、军事激增、官方警报器 — 去重和速率限制。更少的警报，真实的警报。",
       "q7": "Claude 或 GPT 等 AI 代理可以使用它吗？",
-      "a7": "可以。World Monitor 提供了 59 个工具的 MCP 服务器，因此 Claude、GPT 或任何兼容 MCP 的代理都可以查询实时风险评分、关键节点状态、冲突、市场和简报 — 通过 JMESPath 投影，代理可以精确获取所需的数据。",
+      "a7": "可以。VISTA 提供了 59 个工具的 MCP 服务器，因此 Claude、GPT 或任何兼容 MCP 的代理都可以查询实时风险评分、关键节点状态、冲突、市场和简报 — 通过 JMESPath 投影，代理可以精确获取所需的数据。",
       "q8": "我需要账户吗？",
       "a8": "不需要。仪表板无需注册立即工作。只有在升级到 Pro 或想在设备间同步设置时才需要账户。",
       "q9": "这是开源的吗？",
       "a9": "是的 — 在 GitHub 上以 AGPL-3.0 许可证开源：阅读代码、自托管或基于其进行构建。还提供 Windows、macOS 和 Linux 的原生桌面应用，以及用于墙面显示的 Android TV 应用。",
-      "q10": "为什么 World Monitor 不是 Palantir？",
-      "a10": "Palantir 使机构能够在其内部运营自有数据。World Monitor 从另一个角度出发：它汇集、规范化、关联和监控公开数据，然后通过免费仪表板和开源代码发布该情报层。工作不同，产品也不同。",
-      "q11": "Which World Monitor license do I need?",
-      "a11": "Choose based on who will use the output. Pro's Personal license is for one person using World Monitor for their own research and decisions. Pro Business lets one licensed user use it for company or client work, internal tools, and reports. API Starter covers API use inside one organization, with no customer redistribution. API Business lets that organization embed World Monitor data in products and services for its customers. Enterprise covers custom seats, white-labeling, and deployments. These subscription licenses are separate from the AGPL/MIT source-code licenses. Full terms: worldmonitor.app/docs/terms."
+      "q10": "为什么 VISTA 不是 Palantir？",
+      "a10": "Palantir 使机构能够在其内部运营自有数据。VISTA 从另一个角度出发：它汇集、规范化、关联和监控公开数据，然后通过免费仪表板和开源代码发布该情报层。工作不同，产品也不同。",
+      "q11": "Which VISTA license do I need?",
+      "a11": "Choose based on who will use the output. Pro's Personal license is for one person using VISTA for their own research and decisions. Pro Business lets one licensed user use it for company or client work, internal tools, and reports. API Starter covers API use inside one organization, with no customer redistribution. API Business lets that organization embed VISTA data in products and services for its customers. Enterprise covers custom seats, white-labeling, and deployments. These subscription licenses are separate from the AGPL/MIT source-code licenses. Full terms: worldmonitor.app/docs/terms."
     },
     "cta": {
       "title": "世界地图不会等你。",

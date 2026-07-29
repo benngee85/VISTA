@@ -22,19 +22,19 @@
     "asFeaturedIn": "Te zien in"
   },
   "twoPath": {
-    "proTitle": "World Monitor Pro",
+    "proTitle": "VISTA Pro",
     "proDesc": "Jouw AI-analist. Een persoonlijk intelligence desk. Een platform om op te bouwen. Eén sleutel voor 30+ live diensten.",
     "proF1": "WM Analyst chat — bevraag alle 30+ diensten conversationeel",
     "proF2": "AI digest — dagelijks, tweemaal daags of wekelijks — naar Slack, Discord, Telegram, E-mail of webhook",
     "proF3": "Custom Widget Builder — HTML/CSS/JS met AI-ondersteunde aanpassing",
-    "proF4": "MCP-connectoren — koppel WorldMonitor aan Claude, GPT of eigen LLM's",
+    "proF4": "MCP-connectoren — koppel VISTA aan Claude, GPT of eigen LLM's",
     "proF5": "Equity research, aandelenanalyse en backtesting",
     "proF6": "Vluchten zoeken en prijsvergelijking",
     "proF7": "Alert rules engine — eigen triggers, stille uren, AES-256 versleutelde kanalen",
     "proF8": "Market watchlist, macro- en centralebank-tracking",
     "proF9": "AI Market Implications en Regional Intelligence (Binnenkort: orbitale surveillance, premium kaartlagen, langere historiek)",
     "choosePlan": "Kies je plan",
-    "entTitle": "World Monitor Enterprise",
+    "entTitle": "VISTA Enterprise",
     "entDesc": "Voor teams die gedeelde monitoring, API-toegang, deployment-opties, TV-apps en directe support nodig hebben.",
     "entF1": "Alles van Pro, plus:",
     "entF2": "Live-edge satellietbeelden en SAR",
@@ -80,7 +80,7 @@
     "windowTitle": "worldmonitor.app — Live dashboard",
     "openFullScreen": "Open volledig scherm",
     "tryLiveDashboard": "Probeer het live dashboard",
-    "iframeTitle": "World Monitor — Live Intelligence Dashboard",
+    "iframeTitle": "VISTA — Live Intelligence Dashboard",
     "description": "3D WebGL-globe · 50+ interactieve kaartlagen · Real-time markt-, macro-, geopolitieke, energie- en infrastructuurgegevens"
   },
   "socialProof": {
@@ -108,7 +108,7 @@
     "teamsDesc": "Ga van individueel gebruik naar gedeelde workflows, API-toegang, TV-apps en beheerde deployments."
   },
   "dataCoverage": {
-    "title": "Wat World Monitor volgt",
+    "title": "Wat VISTA volgt",
     "subtitle": "30+ dienstdomeinen parallel ingenomen. Markten, macro, geopolitiek, energie, infrastructuur — alles genormaliseerd en gerenderd op een WebGL-globe.",
     "markets": "Financiële markten en aandelen",
     "marketsDesc": "Wereldwijde aandelenanalyse, grondstoffen, crypto, ETF-stromen, analistenkoersen en FRED macro-data",
@@ -175,7 +175,7 @@
   "apiSection": {
     "apiTier": "API-NIVEAU",
     "title": "Programmatische intelligence",
-    "subtitle": "Voor ontwikkelaars, analisten en teams die bouwen op World Monitor-data. Apart van Pro — gebruik beide of één.",
+    "subtitle": "Voor ontwikkelaars, analisten en teams die bouwen op VISTA-data. Apart van Pro — gebruik beide of één.",
     "restApi": "REST API over alle 30+ dienstdomeinen — officiële SDK's voor JavaScript, Python, Ruby, Go",
     "authenticated": "Per sleutel geauthenticeerd, rate-limited per niveau",
     "structured": "Gestructureerde JSON met cache-headers en OpenAPI 3.1 docs",
@@ -195,7 +195,7 @@
     "security": "Beveiliging op overheidsniveau",
     "securityDesc": "Air-gapped deployment, on-premises Docker, dedicated cloud-tenant, SOC 2 Type II-traject, SSO/MFA en volledig audit trail.",
     "aiAgents": "AI-agents en MCP",
-    "aiAgentsDesc": "Autonome intelligence-agents met investor-personas. Koppel World Monitor als tool aan Claude, GPT of eigen LLM's via MCP.",
+    "aiAgentsDesc": "Autonome intelligence-agents met investor-personas. Koppel VISTA als tool aan Claude, GPT of eigen LLM's via MCP.",
     "dataLayers": "Uitgebreide datalagen",
     "dataLayersDesc": "Tienduizenden infrastructuurobjecten wereldwijd in kaart. Satellietbeeld-integratie met change detection en SAR.",
     "connectors": "100+ dataconnectoren",
@@ -275,7 +275,7 @@
   },
   "faq": {
     "title": "Veelgestelde vragen",
-    "q1": "Is World Monitor nog steeds gratis?",
+    "q1": "Is VISTA nog steeds gratis?",
     "a1": "Ja. Het kernplatform blijft gratis. Pro voegt aandelenonderzoek, macro-analyse en AI-briefs toe. Pro Business voegt de commerciële licentie en gegevensexport toe. Enterprise voegt teamdeployments en TV-apps toe.",
     "q2": "Waarom betalen voor Pro?",
     "a2": "Pro is voor beleggers, analisten en professionals die aandelen-monitoring, geopolitieke analyse, economische analytics en dagelijkse AI-briefings willen — alles onder één sleutel.",
@@ -284,17 +284,17 @@
     "q4": "Kan ik met Pro starten en later upgraden?",
     "a4": "Ja. Pro is voor persoonlijk gebruik. Pro Business (€49,99/mnd) voegt de commerciële licentie, gegevensexport, 25 dashboards en 250 MCP-oproepen/dag toe. API-plannen dekken programmatische toegang en Enterprise dekt aangepaste implementaties. Upgrades lopen via de factureringsportal — de app begeleidt u door de stappen.",
     "q5": "Is dit alleen voor conflict-monitoring?",
-    "a5": "Nee. World Monitor is vooral een wereldwijd intelligence platform dat aandelenmarkten, macro-economie, geopolitieke analyse, energie, infrastructuur en meer omvat. Conflict-tracking is één van vele capaciteiten — niet de focus.",
+    "a5": "Nee. VISTA is vooral een wereldwijd intelligence platform dat aandelenmarkten, macro-economie, geopolitieke analyse, energie, infrastructuur en meer omvat. Conflict-tracking is één van vele capaciteiten — niet de focus.",
     "q6": "Waarom blijft het kernplatform gratis?",
     "a6": "Omdat publieke toegang telt. Betaalde plannen financieren diepere workflows voor serieuze gebruikers en organisaties.",
     "q7": "Kan ik nog steeds mijn eigen API-sleutels gebruiken?",
     "a7": "Ja. Bring-your-own-keys werkt altijd. Pro betekent gewoon dat je je niet bij 20+ aparte diensten hoeft te registreren.",
     "q8": "Wat is MCP?",
-    "a8": "MCP laat AI-agents — Claude, GPT, eigen LLM's — WorldMonitor als tool gebruiken en alle 30+ diensten bevragen. Inbegrepen in Pro. Enterprise voegt private MCP-servers en eigen deployments toe.",
+    "a8": "MCP laat AI-agents — Claude, GPT, eigen LLM's — VISTA als tool gebruiken en alle 30+ diensten bevragen. Inbegrepen in Pro. Enterprise voegt private MCP-servers en eigen deployments toe.",
     "q9": "Kan ik eigen panels bouwen?",
     "a9": "Ja. Pro bevat de Custom Widget Builder — bouw panels vanuit HTML, CSS en JavaScript, met AI-ondersteunde wijziging.",
-    "q10": "Kan ik Claude of GPT aan WorldMonitor koppelen?",
-    "a10": "Ja. MCP is inbegrepen in Pro — koppel WorldMonitor aan Claude, GPT of elke MCP-compatibele LLM als live tool.",
+    "q10": "Kan ik Claude of GPT aan VISTA koppelen?",
+    "a10": "Ja. MCP is inbegrepen in Pro — koppel VISTA aan Claude, GPT of elke MCP-compatibele LLM als live tool.",
     "q11": "Hoe gepersonaliseerd is de digest?",
     "a11": "Kies je cadans: dagelijks, tweemaal daags of wekelijks. We hernieuwen de score van elk gevolgd verhaal tegen jouw alert rules en watchlist, dedupliceren over 400+ bronnen en sturen tot 30 gerankte items met een AI Assessment en Signals to watch geschreven voor jouw context. Realtime alerts zijn ook beschikbaar voor kritieke gebeurtenissen.",
     "q12": "Wat is de refresh-snelheid?",
@@ -304,7 +304,7 @@
   },
   "finalCta": {
     "title": "Start met Pro. Schaal naar Enterprise.",
-    "subtitle": "Gebruik World Monitor gratis, of upgrade voor equity research, macro-analytics en AI-briefings. Als je organisatie teamtoegang, TV-apps of API-support nodig heeft, praat met ons.",
+    "subtitle": "Gebruik VISTA gratis, of upgrade voor equity research, macro-analytics en AI-briefings. Als je organisatie teamtoegang, TV-apps of API-support nodig heeft, praat met ons.",
     "talkToSales": "Praat met sales"
   },
   "footer": {
@@ -314,10 +314,10 @@
   },
   "soonBadge": "Binnenkort",
   "meta": {
-    "title": "World Monitor Pro — AI Analyst, Personal Intelligence Desk, MCP voor Claude & GPT",
+    "title": "VISTA Pro — AI Analyst, Personal Intelligence Desk, MCP voor Claude & GPT",
     "description": "De geopolitieke AI-laag. Stel er vragen aan, abonneer je erop, bouw erop voort. WM Analyst chat over 30+ live services, een AI-digest dagelijks, twee keer per dag of wekelijks naar Slack, Discord, Telegram, Email of webhook, een custom widget builder (HTML/CSS/JS + AI), en MCP connectors voor Claude, GPT en aangepaste LLM's.",
     "ogDescription": "Stel er vragen aan, abonneer je erop, bouw erop voort. WM Analyst chat, een AI-digest volgens je schema (dagelijks, twee keer per dag of wekelijks), custom widget builder en MCP voor Claude/GPT — over 30+ live services onder één sleutel.",
-    "ogTitle": "World Monitor Pro — The Geopolitical AI Layer"
+    "ogTitle": "VISTA Pro — The Geopolitical AI Layer"
   },
   "pricing": {
     "suffixForever": "altijd",
@@ -388,7 +388,7 @@
         "cta": "Contact Verkoop"
       },
       "apiBusiness": {
-        "description": "Lanceer uw eigen product op WorldMonitor-gegevens",
+        "description": "Lanceer uw eigen product op VISTA-gegevens",
         "features": [
           "Alles in API Starter",
           "Herverdelingsrechten — integreer onze gegevens in wat u verkoopt",
@@ -427,9 +427,9 @@
   },
   "welcome": {
     "meta": {
-      "title": "World Monitor — Gratis realtime dashboard voor wereldwijd inlichtingen",
+      "title": "VISTA — Gratis realtime dashboard voor wereldwijd inlichtingen",
       "description": "Tegen de tijd dat het nieuws is, wist je het al. Conflicten, scheepvaartknelpunten, militaire vluchten, markten en cyber op één gratis live wereldkaart, met AI-analyse. Geen registratie.",
-      "ogTitle": "World Monitor — Tegen de tijd dat het nieuws is, wist je het al.",
+      "ogTitle": "VISTA — Tegen de tijd dat het nieuws is, wist je het al.",
       "ogDescription": "De onbewerkte signalen van de wereld — schepen, vliegtuigen, sirenes, kabels, markten — op één gratis live inlichtingenkaart, met AI die aangeeft wanneer ze samenkomen. Gratis, geen registratie."
     },
     "nav": {
@@ -447,21 +447,21 @@
       "eyebrow": "Gratis dashboard voor wereldwijd inlichtingen · nu live",
       "headline1": "Tegen de tijd dat het nieuws is,",
       "headline2": "wist je het al.",
-      "sub": "Koppen zijn de vertraging. World Monitor streamt de onbewerkte signalen van de wereld — schepen, vliegtuigen, sirenes, kabels, markten — op één live kaart, met AI die aangeeft wanneer ze samenkomen tot iets wat ertoe doet.",
+      "sub": "Koppen zijn de vertraging. VISTA streamt de onbewerkte signalen van de wereld — schepen, vliegtuigen, sirenes, kabels, markten — op één live kaart, met AI die aangeeft wanneer ze samenkomen tot iets wat ertoe doet.",
       "ctaPrimary": "Dashboard starten",
       "ctaFree": "Gratis · Geen registratie · Laadt in seconden",
       "ctaSecondary": "Zie hoe mensen het gebruiken ↓",
       "trustUsers": "2M+ gebruikers",
       "trustOpenSource": "Open source · AGPL-3.0",
-      "screenshotAlt": "World Monitor live inlichtingendashboard — wereldkaart met conflicten, scheepvaart- en marktlagen",
+      "screenshotAlt": "VISTA live inlichtingendashboard — wereldkaart met conflicten, scheepvaart- en marktlagen",
       "plateNote": "Vastgelegd van de live kaart — klik om deze te openen",
       "trustBuild": "Bouw erop:",
-      "positioningLink": "WorldMonitor is geen open-source Palantir"
+      "positioningLink": "VISTA is geen open-source Palantir"
     },
     "live": {
       "eyebrow": "Nu live",
       "title": "Deze pagina is aangesloten op dezelfde API's als het dashboard.",
-      "subtitle": "Vier van de meer dan honderd signalen die World Monitor rond de klok in de gaten houdt.",
+      "subtitle": "Vier van de meer dan honderd signalen die VISTA rond de klok in de gaten houdt.",
       "liveBadge": "Live",
       "sampleBadge": "Voorbeeld",
       "cardHeadlines": "Topsignalen",
@@ -646,28 +646,28 @@
     "faq": {
       "eyebrow": "Geen addertje onder het gras",
       "title": "Eerlijke vragen.",
-      "q1": "Is World Monitor echt gratis?",
+      "q1": "Is VISTA echt gratis?",
       "a1": "Ja. De volledige live-kaart — elke laag, 500+ feeds, landenprofielen, breaking alerts, alle zes monitoren — is gratis zonder aanmelding en zonder proefperiode. Pro betaalt voor de feeds: het voegt WM Analyst, de scenarioengine, Route Explorer, geplande samenvattingen en MCP-toegang voor AI-clients toe. Geen advertenties en geen account betekent dat er geen gebruikersgegevens te verkopen zijn.",
       "q2": "Wat is een global intelligence dashboard?",
-      "a2": "Een enkele live weergave die signalen samenvoegt die de meeste tools gescheiden houden: conflictgebeurtenissen, schip- en vliegtuigtracking, scheepvaartknelpunten, satellieten, onderzeese kabels, pijpleidingen, markten en cyberbedreigingen — op één realtime wereldkaart, met AI-scoring en samenvattingen erbovenop. World Monitor is een gratis versie.",
+      "a2": "Een enkele live weergave die signalen samenvoegt die de meeste tools gescheiden houden: conflictgebeurtenissen, schip- en vliegtuigtracking, scheepvaartknelpunten, satellieten, onderzeese kabels, pijpleidingen, markten en cyberbedreigingen — op één realtime wereldkaart, met AI-scoring en samenvattingen erbovenop. VISTA is een gratis versie.",
       "q3": "Waar komen de gegevens vandaan?",
       "a3": "65+ providers, benoemd: ACLED en UCDP voor conflicten, AISStream voor live schepen, OpenSky voor vliegtuigen, NASA FIRMS voor branden, USGS voor aardbevingen, IMF, BIS, FRED en Finnhub voor markten en macro — plus 500+ gecureerde nieuwsfeeds. Elk paneel vermeldt zijn bronnen en tijdstempels inline.",
       "q4": "Kan ik knelpunten zoals Hormuz of Bab el-Mandeb in real time volgen?",
       "a4": "Ja. 13 knelpunten worden gevolgd met live AIS-scheepstellingen, week-over-week transitieverandering en verstoringsscore — en dichtheidsafwijkingen worden gemarkeerd tegen de rolling baseline van elke zeestraat.",
       "q5": "Hoe verschilt dit van een conflictkaart zoals Liveuamap?",
-      "a5": "Conflict is één laag van 56. World Monitor voegt conflicten samen met scheepvaart, militaire vluchten, infrastructuur, markten en cyber — en AI beoordeelt de convergentie: instabiliteitsindexen, hotspot-escalatie, bevestigde brekende berichten en dagelijkse samenvattingen.",
+      "a5": "Conflict is één laag van 56. VISTA voegt conflicten samen met scheepvaart, militaire vluchten, infrastructuur, markten en cyber — en AI beoordeelt de convergentie: instabiliteitsindexen, hotspot-escalatie, bevestigde brekende berichten en dagelijkse samenvattingen.",
       "q6": "Waarom moet ik een waarschuwing vertrouwen?",
       "a6": "Een breaking banner verschijnt alleen wanneer onafhankelijke brontypen dit bevestigen — nieuwsclassificatie, trefwoord-snelheid, hotspot-escalatie, militaire pieken, officiële sirenes — gededupliceerd en frequentielimited. Minder waarschuwingen, echte.",
       "q7": "Kunnen AI-agenten zoals Claude of GPT het gebruiken?",
-      "a7": "Ja. World Monitor beschikt over een MCP-server met 59 tools, dus Claude, GPT of een willekeurige MCP-compatibele agent kan live risicobeoordelingen, knelpuntstatus, conflicten, markten en samenvattingen opvragen — met JMESPath-projectie zodat agents precies krijgen wat ze nodig hebben.",
+      "a7": "Ja. VISTA beschikt over een MCP-server met 59 tools, dus Claude, GPT of een willekeurige MCP-compatibele agent kan live risicobeoordelingen, knelpuntstatus, conflicten, markten en samenvattingen opvragen — met JMESPath-projectie zodat agents precies krijgen wat ze nodig hebben.",
       "q8": "Heb ik een account nodig?",
       "a8": "Nee. Het dashboard werkt direct zonder registratie. Een account is alleen belangrijk wanneer je upgradet naar Pro of instellingen wilt synchroniseren op meerdere apparaten.",
       "q9": "Is het open source?",
       "a9": "Ja — open source onder AGPL-3.0 op GitHub: lees de code, host het zelf, of bouw erop voort. Native desktop-apps voor Windows, macOS en Linux zijn ook beschikbaar, plus een Android TV-app voor wanddisplays.",
-      "q10": "Waarom is World Monitor niet Palantir?",
-      "a10": "Palantir maakt de eigen data van een organisatie operationeel binnen die organisatie. World Monitor begint vanaf het andere uiteinde: het verzamelt, normaliseert, correleert en monitort openbare data, en publiceert die intelligentielaag via een gratis dashboard en open-source code. Ander doel, ander product.",
-      "q11": "Which World Monitor license do I need?",
-      "a11": "Choose based on who will use the output. Pro's Personal license is for one person using World Monitor for their own research and decisions. Pro Business lets one licensed user use it for company or client work, internal tools, and reports. API Starter covers API use inside one organization, with no customer redistribution. API Business lets that organization embed World Monitor data in products and services for its customers. Enterprise covers custom seats, white-labeling, and deployments. These subscription licenses are separate from the AGPL/MIT source-code licenses. Full terms: worldmonitor.app/docs/terms."
+      "q10": "Waarom is VISTA niet Palantir?",
+      "a10": "Palantir maakt de eigen data van een organisatie operationeel binnen die organisatie. VISTA begint vanaf het andere uiteinde: het verzamelt, normaliseert, correleert en monitort openbare data, en publiceert die intelligentielaag via een gratis dashboard en open-source code. Ander doel, ander product.",
+      "q11": "Which VISTA license do I need?",
+      "a11": "Choose based on who will use the output. Pro's Personal license is for one person using VISTA for their own research and decisions. Pro Business lets one licensed user use it for company or client work, internal tools, and reports. API Starter covers API use inside one organization, with no customer redistribution. API Business lets that organization embed VISTA data in products and services for its customers. Enterprise covers custom seats, white-labeling, and deployments. These subscription licenses are separate from the AGPL/MIT source-code licenses. Full terms: worldmonitor.app/docs/terms."
     },
     "cta": {
       "title": "De wereldkaart wacht niet op je.",
