@@ -231,7 +231,12 @@ async function fetchIeaOilStocks() {
 const COUNTRY_EXTRA_KEYS = Object.values(COUNTRY_MAP).map(iso2 => ({
   key: `energy:iea-oil-stocks:v1:${iso2}`,
   ttl: TTL_SECONDS,
-  transform: (data) => data.members?.find(m => m.iso2 === iso2) ?? null,
+  transform: (data) => {
+    const member = data.members?.find(m => m.iso2 === iso2);
+    if (!member) return null;
+    const { seededAt: _seededAt, ...publishedMember } = member;
+    return publishedMember;
+  },
 }));
 
 // Analysis key included in extraKeys so runSeed extends its TTL on fetch

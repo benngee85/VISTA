@@ -78,20 +78,64 @@ async function runCommand(args) {
   return client.sendCommand([cmd, ...cmdArgs.map(String)]);
 }
 
-const MAX_BODY_BYTES = 1024 * 1024; // 1 MB
+const DEFAULT_MAX_BODY_BYTES = 16 * 1024 * 1024;
+const HARD_MAX_BODY_BYTES = 64 * 1024 * 1024;
+const configuredMaxBodyBytes = Number.parseInt(
+  process.env.SRH_MAX_BODY_BYTES || String(DEFAULT_MAX_BODY_BYTES),
+  10,
+);
+const MAX_BODY_BYTES = Number.isSafeInteger(configuredMaxBodyBytes)
+  && configuredMaxBodyBytes > 0
+  ? Math.min(configuredMaxBodyBytes, HARD_MAX_BODY_BYTES)
+  : DEFAULT_MAX_BODY_BYTES;
 
-async function readBody(req) {
-  const chunks = [];
-  let totalLength = 0;
-  for await (const chunk of req) {
-    totalLength += chunk.length;
-    if (totalLength > MAX_BODY_BYTES) {
-      req.destroy();
-      throw new Error('Request body too large');
-    }
-    chunks.push(chunk);
+class HttpError extends Error {
+  constructor(statusCode, message) {
+    super(message);
+    this.statusCode = statusCode;
   }
-  return Buffer.concat(chunks).toString();
+}
+
+function readBody(req) {
+  const declaredLength = Number.parseInt(req.headers['content-length'] || '0', 10);
+  if (Number.isFinite(declaredLength) && declaredLength > MAX_BODY_BYTES) {
+    req.resume();
+    throw new HttpError(413, `Request body exceeds ${MAX_BODY_BYTES} byte limit`);
+  }
+
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    let totalLength = 0;
+    let settled = false;
+
+    const fail = (error) => {
+      if (settled) return;
+      settled = true;
+      req.removeListener('data', onData);
+      req.removeListener('end', onEnd);
+      req.removeListener('error', onError);
+      req.resume();
+      reject(error);
+    };
+    const onData = (chunk) => {
+      totalLength += chunk.length;
+      if (totalLength > MAX_BODY_BYTES) {
+        fail(new HttpError(413, `Request body exceeds ${MAX_BODY_BYTES} byte limit`));
+        return;
+      }
+      chunks.push(chunk);
+    };
+    const onEnd = () => {
+      if (settled) return;
+      settled = true;
+      resolve(Buffer.concat(chunks).toString());
+    };
+    const onError = (error) => fail(error);
+
+    req.on('data', onData);
+    req.on('end', onEnd);
+    req.on('error', onError);
+  });
 }
 
 const server = http.createServer(async (req, res) => {
@@ -197,8 +241,11 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(404);
     res.end(JSON.stringify({ error: 'Not found' }));
   } catch (err) {
-    res.writeHead(500);
-    res.end(JSON.stringify({ error: err.message }));
+    const statusCode = Number.isInteger(err?.statusCode) ? err.statusCode : 500;
+    if (!res.headersSent && !res.destroyed) {
+      res.writeHead(statusCode);
+      res.end(JSON.stringify({ error: err.message }));
+    }
   }
 });
 

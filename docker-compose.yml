@@ -153,6 +153,7 @@ services:
       - "127.0.0.1:8079:8080"
     environment:
       SRH_TOKEN: "${CACHE_REST_TOKEN:?CACHE_REST_TOKEN required — generate with: openssl rand -hex 32}"
+      SRH_MAX_BODY_BYTES: "${VISTA_VALKEY_REST_MAX_BODY_BYTES:-16777216}"
       # Defense-in-depth: the Valkey service's --requirepass already fails
       # Compose validation if VALKEY_PASSWORD is unset, but the explicit
       # :? here protects against a future PR removing --requirepass or
