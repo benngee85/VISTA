@@ -13,7 +13,7 @@ export interface VariantMeta {
 
 export const VARIANT_META: { full: VariantMeta; [k: string]: VariantMeta } = {
   full: {
-    title: 'VISTA - Real-Time Global Intelligence Dashboard',
+    title: 'MLC-VISTA',
     description: 'Real-time global intelligence platform. Featured in WIRED. Used by 2M+ people across 190 countries. Conflicts, markets, military, OSINT in one view.',
     keywords: 'AI intelligence, AI-powered dashboard, global intelligence, geopolitical dashboard, world news, market data, military bases, nuclear facilities, undersea cables, conflict zones, real-time monitoring, situation awareness, OSINT, flight tracking, AIS ships, earthquake monitor, protest tracker, power outages, oil prices, government spending, polymarket predictions',
     url: 'https://www.worldmonitor.app/dashboard',
