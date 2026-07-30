@@ -164,11 +164,19 @@ caps_seed() {
 run_seed_to_file() {
   seed_file="$1"
   seed_output="$2"
+  node_file="$seed_file"
+
+  # Native Windows Node does not understand MSYS paths such as
+  # /c/Users/... . Convert whenever cygpath is available; normal
+  # macOS/Linux hosts do not provide that command.
+  if command -v cygpath >/dev/null 2>&1; then
+    node_file="$(cygpath -w "$node_file")"
+  fi
 
   if caps_seed "$seed_file"; then
-    timeout -k 30 "$SEED_TIMEOUT" node "$seed_file" >"$seed_output" 2>&1 &
+    timeout -k 30 "$SEED_TIMEOUT" node "$node_file" >"$seed_output" 2>&1 &
   else
-    node "$seed_file" >"$seed_output" 2>&1 &
+    node "$node_file" >"$seed_output" 2>&1 &
   fi
 
   seed_pid=$!
