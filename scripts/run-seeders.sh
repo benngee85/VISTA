@@ -200,8 +200,8 @@ timedout=0
 # Build an ordered, duplicate-free baseline. Bundle scripts are scheduler
 # wrappers around these same seeders and must not be run a second time.
 set --
-for candidate in "$SCRIPT_DIR"/seed-*.mjs; do
-  candidate_name="$(basename "$candidate")"
+for f in "$SCRIPT_DIR"/seed-*.mjs; do
+  candidate_name="$(basename "$f")"
   case "$candidate_name" in
     seed-bundle-*.mjs)
       printf "POLICY SKIP: %s (deployment scheduler wrapper)\n" "$candidate_name"
@@ -220,7 +220,7 @@ for candidate in "$SCRIPT_DIR"/seed-*.mjs; do
       # Appended after primary sources below.
       ;;
     *)
-      set -- "$@" "$candidate"
+      set -- "$@" "$f"
       ;;
   esac
 done

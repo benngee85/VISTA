@@ -19,7 +19,7 @@ import { isPublicSharedRpcRequest } from '@/shared/public-rpc-cache';
 import { enqueueSentryCall } from '@/bootstrap/sentry-defer';
 import { PUBLIC_WEATHER_BOOTSTRAP_KEY, bootstrapTierKeyNames } from '../../shared/bootstrap-tier-keys.js';
 
-const STORAGE_KEY = 'wm-session-exp-v2';
+const STORAGE_KEY = 'wm-session-exp';
 const PREMIUM_STORAGE_KEY = 'vista-premium-session-exp';
 // Refresh well before expiry so a half-loaded page doesn't fail mid-flight.
 const REFRESH_MARGIN_MS = 5 * 60 * 1000;
