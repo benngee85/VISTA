@@ -70,6 +70,8 @@ COPY --from=builder /app/data ./data
 
 # Built frontend static files
 COPY --from=builder /app/dist /usr/share/nginx/html
+# Premium output is generated separately from the main Vite dist tree.
+COPY --from=builder /app/public/pro /usr/share/nginx/html/pro
 
 # Nginx + supervisord configs
 COPY docker/nginx.conf /etc/nginx/nginx.conf.template
