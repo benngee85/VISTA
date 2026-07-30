@@ -1,0 +1,10 @@
+# VISTA protected runtime credential overlay.
+services:
+  vista:
+    secrets:
+      - source: vista_runtime_env
+        target: vista_runtime_env
+
+secrets:
+  vista_runtime_env:
+    file: ./.secrets/runtime.env

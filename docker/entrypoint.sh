@@ -1,6 +1,30 @@
 #!/bin/sh
 set -e
 
+
+
+
+# VISTA_API_PLAN_RUNTIME_ALIAS
+# Read only the API-plan credential from the Compose-managed secret.
+VISTA_RUNTIME_SECRET="/run/secrets/vista_runtime_env"
+
+if [ -r "$VISTA_RUNTIME_SECRET" ]; then
+  VISTA_SECRET_API_KEY=$(
+    sed -n 's/^[[:space:]]*WM_API_KEY=//p' "$VISTA_RUNTIME_SECRET" |
+      tail -n 1
+  )
+
+  case "$VISTA_SECRET_API_KEY" in
+    wm_*)
+      export WM_API_KEY="$VISTA_SECRET_API_KEY"
+      export WORLDMONITOR_API_KEY="$VISTA_SECRET_API_KEY"
+      ;;
+  esac
+
+  unset VISTA_SECRET_API_KEY
+fi
+# VISTA_API_PLAN_RUNTIME_ALIAS_END
+
 # Docker secrets → env var bridge
 # Reads /run/secrets/KEYNAME files and exports as env vars.
 # Secrets take priority over env vars set via docker-compose environment block.
