@@ -1,10 +1,81 @@
-# VISTA protected runtime credential overlay.
 services:
-  vista:
+  vista-entitlement-service:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.rocky9-entitlements
+    image: vista-entitlement-service:latest
+    container_name: vista-entitlement-service
+    env_file:
+      - ./.secrets/entitlement/runtime.env
+    environment:
+      VISTA_ENTITLEMENT_SERVICE_PORT: "46124"
+      VISTA_ENTITLEMENT_TLS_CERT_PATH: "/run/secrets/vista_entitlement_cert"
+      VISTA_ENTITLEMENT_TLS_KEY_PATH: "/run/secrets/vista_entitlement_key"
+      UPSTASH_REDIS_REST_URL: "http://valkey-rest:8080"
+      # Restricted to the private Compose network; no host port is published.
+      UPSTASH_ALLOW_INSECURE_HTTP: "true"
+      VISTA_ENTITLEMENT_KEY_PREFIX: "vista:entitlements:v1"
+      VISTA_ENTITLEMENT_AUDIT_KEY: "vista:audit:entitlements:v1"
     secrets:
-      - source: vista_runtime_env
-        target: vista_runtime_env
+      - vista_entitlement_cert
+      - vista_entitlement_key
+    depends_on:
+      valkey-rest:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "process.env.NODE_TLS_REJECT_UNAUTHORIZED='0';fetch('https://127.0.0.1:46124/health/ready').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+    restart: unless-stopped
+
+  vista:
+    environment:
+      LOCAL_API_CLOUD_FALLBACK: "false"
+      LOCAL_API_CLOUD_FALLBACK_ALLOW_DOCKER: "false"
+      VISTA_DEPLOYMENT_PROFILE: "sovereign"
+      VISTA_ENTITLEMENT_PROVIDER: "sovereign-http"
+      VISTA_ENTITLEMENT_PROVIDER_URL: "https://vista-entitlement-service:46124"
+      VISTA_ENTITLEMENT_SUBJECT_ID: "${VISTA_ENTITLEMENT_SUBJECT_ID:?missing stable node subject}"
+      VISTA_ENTITLEMENT_ALLOW_INSECURE_HTTP: "false"
+      NODE_EXTRA_CA_CERTS: "/run/secrets/vista_entitlement_ca"
+      VISTA_SELF_HOSTED_API_PLAN_ACCESS: "false"
+      VISTA_SOVEREIGN_AUTO_SESSION: "true"
+    secrets:
+      - source: vista_session_secret
+        target: WM_SESSION_SECRET
+      - source: vista_entitlement_provider_token
+        target: VISTA_ENTITLEMENT_PROVIDER_TOKEN
+      - source: vista_api_key
+        target: WORLDMONITOR_API_KEY
+      - source: vista_cache_token
+        target: UPSTASH_REDIS_REST_TOKEN
+      - vista_runtime_env
+      - vista_entitlement_ca
+    depends_on:
+      vista-entitlement-service:
+        condition: service_healthy
 
 secrets:
+  vista_session_secret:
+    file: ./.secrets/runtime/WM_SESSION_SECRET
+  vista_entitlement_provider_token:
+    file: ./.secrets/runtime/VISTA_ENTITLEMENT_PROVIDER_TOKEN
+  vista_api_key:
+    file: ./.secrets/runtime/WORLDMONITOR_API_KEY
+  vista_cache_token:
+    file: ./.secrets/runtime/UPSTASH_REDIS_REST_TOKEN
+
   vista_runtime_env:
     file: ./.secrets/runtime.env
+  vista_entitlement_ca:
+    file: ./.secrets/entitlement/ca.crt
+  vista_entitlement_cert:
+    file: ./.secrets/entitlement/server.crt
+  vista_entitlement_key:
+    file: ./.secrets/entitlement/server.key

@@ -5,6 +5,8 @@ import {
   timingSafeEqual,
 } from 'node:crypto';
 import { createServer } from 'node:http';
+import { createServer as createHttpsServer } from 'node:https';
+import { readFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 
 const MAX_REQUEST_BYTES = 16_384;
@@ -54,6 +56,8 @@ export function readServiceConfig(environment = process.env) {
 
   const config = {
     port: parsePort(environment.VISTA_ENTITLEMENT_SERVICE_PORT),
+    tlsCertPath: environment.VISTA_ENTITLEMENT_TLS_CERT_PATH || '',
+    tlsKeyPath: environment.VISTA_ENTITLEMENT_TLS_KEY_PATH || '',
     serviceToken:
       environment.VISTA_ENTITLEMENT_SERVICE_TOKEN?.trim() ?? '',
     redisUrl,
@@ -325,7 +329,14 @@ export function createEntitlementServer(options = {}) {
 
   const now = options.now ?? (() => Date.now());
 
-  return createServer(async (request, response) => {
+  const serverFactory = config.tlsCertPath && config.tlsKeyPath
+    ? (handler) => createHttpsServer({
+        cert: readFileSync(config.tlsCertPath),
+        key: readFileSync(config.tlsKeyPath),
+      }, handler)
+    : createServer;
+
+  return serverFactory(async (request, response) => {
     const requestId = randomUUID();
     const pathname = new URL(
       request.url ?? '/',

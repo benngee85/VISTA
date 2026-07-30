@@ -124,35 +124,73 @@ async function isValidWidgetKey(key) {
   return (await matchesEnvSecret(key, 'WIDGET_AGENT_KEY')) || await isValidEnterpriseKey(key);
 }
 
+let resolvedSovereignCapabilities = [];
+
+async function resolveSovereignNodeEntitlement() {
+  const providerUrl = String(
+    process.env.VISTA_ENTITLEMENT_PROVIDER_URL || '',
+  ).replace(/\/+$/, '');
+  const providerToken = String(
+    process.env.VISTA_ENTITLEMENT_PROVIDER_TOKEN || '',
+  ).trim();
+  const subjectId = String(
+    process.env.VISTA_ENTITLEMENT_SUBJECT_ID || '',
+  ).trim();
+  if (!providerUrl || !providerToken || !subjectId) return false;
+
+  try {
+    const response = await fetch(
+      `${providerUrl}/v1/entitlements/resolve`,
+      {
+        method: 'POST',
+        headers: {
+          authorization: `Bearer ${providerToken}`,
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({ subjectId, requestedAt: Date.now() }),
+        signal: AbortSignal.timeout(5000),
+      },
+    );
+    if (!response.ok) return false;
+
+    const payload = await response.json();
+    const entitlement = payload?.entitlements ?? payload;
+    const features = entitlement?.features || {};
+    const authorised =
+      entitlement?.planKey === 'sovereign-baseline'
+      && Number(entitlement?.validUntil) > Date.now()
+      && features.apiAccess === true;
+
+    resolvedSovereignCapabilities = authorised
+      ? [
+          'premium-widgets',
+          'advanced-layers',
+          'workspace-persistence',
+          'data-export',
+          'mcp-access',
+        ]
+      : [];
+    return authorised;
+  } catch {
+    return false;
+  }
+}
+
 async function isValidProKey(key) {
-  if ((await matchesEnvSecret(key, 'PRO_WIDGET_KEY')) || await isValidEnterpriseKey(key)) {
+  if (
+    (await matchesEnvSecret(key, 'PRO_WIDGET_KEY'))
+    || await isValidEnterpriseKey(key)
+  ) {
+    resolvedSovereignCapabilities = ['premium-widgets'];
     return true;
   }
-  if (!/^wm_[a-f0-9]{40}$/.test(key)) return false;
-  const rawUrl = process.env.VISTA_API_PLAN_VALIDATION_URL
-    || 'https://api.worldmonitor.app/api/economic/v1/get-fred-series-batch';
-  let url;
-  try {
-    url = new URL(rawUrl);
-  } catch {
-    return false;
-  }
-  if (url.protocol !== 'https:') return false;
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-WorldMonitor-Key': key,
-      },
-      body: '{}',
-      signal: AbortSignal.timeout(10_000),
-    });
-    return response.ok || response.status === 400 || response.status === 422
-      || response.status === 429;
-  } catch {
-    return false;
-  }
+
+  const matchesApiKey =
+    (await matchesEnvSecret(key, 'WM_API_KEY'))
+    || (await matchesEnvSecret(key, 'WORLDMONITOR_API_KEY'));
+  if (!matchesApiKey) return false;
+
+  return resolveSovereignNodeEntitlement();
 }
 
 const BODY_READ_TIMEOUT_MS = Number(process.env.WM_SESSION_BODY_TIMEOUT_MS) || 5_000;
@@ -237,9 +275,11 @@ export default async function handler(req, ctx) {
   const widgetKey = normalizeLegacyKey(body.widgetKey);
   const submittedProKey = normalizeLegacyKey(body.proKey);
   const existingProKey = normalizeLegacyKey(readCookie(req, PRO_KEY_COOKIE));
-  const selfHostedProKey = process.env.VISTA_SELF_HOSTED_API_PLAN_ACCESS === 'true'
-    ? normalizeLegacyKey(process.env.WORLDMONITOR_API_KEY)
-    : '';
+  const selfHostedProKey =
+    process.env.VISTA_SELF_HOSTED_API_PLAN_ACCESS === 'true'
+    && process.env.VISTA_SOVEREIGN_AUTO_SESSION !== 'true'
+      ? normalizeLegacyKey(process.env.WORLDMONITOR_API_KEY)
+      : '';
   const proKey = submittedProKey || existingProKey || selfHostedProKey;
 
   if (
@@ -277,11 +317,18 @@ export default async function handler(req, ctx) {
   // cookie can use the existing X-WorldMonitor-Key validation path. This does
   // not expose user or premium authority: wms_ tokens are freely mintable,
   // anonymous-only, and forceKey routes reject them.
+  const sovereignNodePremium =
+    process.env.VISTA_SOVEREIGN_AUTO_SESSION === 'true'
+    && await resolveSovereignNodeEntitlement();
+  const effectivePremium = premium || sovereignNodePremium;
+
   return respond({
     ok: true,
     exp: issued.exp,
     hadSession,
     token: issued.token,
-    premium,
+    premium: effectivePremium,
+    capabilities: effectivePremium ? resolvedSovereignCapabilities : [],
+    entitlementSource: effectivePremium ? 'sovereign-local' : 'none',
   }, 200, headers, 'ok');
 }

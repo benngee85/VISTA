@@ -1,6 +1,6 @@
 [package]
 name = "world-monitor"
-version = "2.10.0"
+version = "1.0.0"
 description = "VISTA desktop application"
 authors = ["VISTA"]
 edition = "2021"

@@ -6,6 +6,22 @@ set -e
 
 # VISTA_API_PLAN_RUNTIME_ALIAS
 # Read only the API-plan credential from the Compose-managed secret.
+# MLC-VISTA sovereign entitlement credential
+# MLC-VISTA sovereign session authority
+if [ -r /run/secrets/vista_runtime_env ]; then
+  WM_SESSION_SECRET=$(awk -F= '$1 == "WM_SESSION_SECRET" {sub(/^[^=]*=/, ""); value=$0} END {print value}' /run/secrets/vista_runtime_env)
+  WORLDMONITOR_API_KEY=$(awk -F= '$1 == "WM_API_KEY" {sub(/^[^=]*=/, ""); value=$0} END {print value}' /run/secrets/vista_runtime_env)
+  [ -n "$WM_SESSION_SECRET" ] || { echo "FAIL: WM_SESSION_SECRET is missing" >&2; exit 1; }
+  [ -n "$WORLDMONITOR_API_KEY" ] || { echo "FAIL: WM_API_KEY is missing" >&2; exit 1; }
+  export WM_SESSION_SECRET
+  export WORLDMONITOR_API_KEY
+fi
+
+if [ -r /run/secrets/vista_runtime_env ]; then
+  VISTA_ENTITLEMENT_PROVIDER_TOKEN=$(awk -F= '$1 == "VISTA_ENTITLEMENT_SERVICE_TOKEN" {sub(/^[^=]*=/, ""); value=$0} END {print value}' /run/secrets/vista_runtime_env)
+  export VISTA_ENTITLEMENT_PROVIDER_TOKEN
+fi
+
 VISTA_RUNTIME_SECRET="/run/secrets/vista_runtime_env"
 
 if [ -r "$VISTA_RUNTIME_SECRET" ]; then
