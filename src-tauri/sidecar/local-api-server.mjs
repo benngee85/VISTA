@@ -775,6 +775,45 @@ function remoteBaseLooksPrivate(remoteBase) {
   return false;
 }
 
+
+// MLC-VISTA sovereign entitlement private-fetch boundary
+function resolveSovereignEntitlementPrivateFetchOrigin(mode, logger) {
+  if (mode !== 'docker') return null;
+
+  const rawProviderUrl = String(
+    process.env.VISTA_ENTITLEMENT_PROVIDER_URL ?? '',
+  ).trim();
+
+  if (!rawProviderUrl) return null;
+
+  try {
+    const providerUrl = new URL(rawProviderUrl);
+    const valid =
+      (providerUrl.protocol === 'http:' || providerUrl.protocol === 'https:') &&
+      providerUrl.hostname === 'vista-entitlement-service' &&
+      providerUrl.port === '46124' &&
+      (providerUrl.pathname === '' || providerUrl.pathname === '/') &&
+      providerUrl.username === '' &&
+      providerUrl.password === '' &&
+      providerUrl.search === '' &&
+      providerUrl.hash === '';
+
+    if (!valid) {
+      logger.warn(
+        '[local-api] sovereign entitlement origin rejected by private-fetch boundary',
+      );
+      return null;
+    }
+
+    return providerUrl.origin;
+  } catch {
+    logger.warn(
+      '[local-api] invalid sovereign entitlement provider URL; private fetch remains blocked',
+    );
+    return null;
+  }
+}
+
 function resolveConfig(options = {}) {
   const port = Number(options.port ?? process.env.LOCAL_API_PORT ?? 46123);
   const remoteBase = String(options.remoteBase ?? process.env.LOCAL_API_REMOTE_BASE ?? 'https://api.worldmonitor.app').replace(/\/$/, '');
@@ -809,6 +848,17 @@ function resolveConfig(options = {}) {
     ? options.allowPrivateFetchOrigins.filter((o) => typeof o === 'string' && o.length > 0)
     : [];
   const logger = options.logger ?? console;
+
+  // Register only the validated sovereign entitlement origin.
+  const sovereignEntitlementOrigin =
+    resolveSovereignEntitlementPrivateFetchOrigin(mode, logger);
+  if (
+    sovereignEntitlementOrigin &&
+    !allowPrivateFetchOrigins.includes(sovereignEntitlementOrigin)
+  ) {
+    allowPrivateFetchOrigins.push(sovereignEntitlementOrigin);
+  }
+
   if (mode === 'docker' && requestedFallback) {
     logger.warn('[local-api] Cloud fallback disabled in Docker mode (self-hosted instances must not proxy to api.worldmonitor.app)');
   }
