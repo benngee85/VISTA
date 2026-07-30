@@ -2,6 +2,7 @@ import { loadFromStorage, saveToStorage } from '@/utils';
 import { clearPanelColSpanEntry, clearPanelSpanEntry } from '@/utils/panel-storage';
 import { getAuthState } from '@/services/auth-state';
 import { isEntitled } from '@/services/entitlements';
+import { hasWmSessionCapability } from '@/services/wm-session';
 import {
   clearLegacyKeyStorage,
   migrateLegacyKeysToHttpOnlySession,
@@ -218,7 +219,10 @@ export function getBrowserTesterKey(): string {
 
 export function isProWidgetEnabled(): boolean {
   migrateLegacyKeyStorage();
-  return proSessionHint;
+  return (
+    proSessionHint
+    || hasWmSessionCapability('premium-widgets')
+  );
 }
 
 export function isProUser(): boolean {

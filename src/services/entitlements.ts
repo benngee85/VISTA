@@ -158,6 +158,50 @@ export function destroyEntitlementSubscription(): void {
   initialized = false;
 }
 
+
+/**
+ * Apply the bounded entitlement asserted by the same-origin sovereign session
+ * endpoint. No credential or provider payload is retained in browser state.
+ */
+export function applySovereignSessionEntitlement(
+  capabilities: ReadonlySet<string>,
+  validUntil: number,
+): boolean {
+  if (
+    !Number.isFinite(validUntil)
+    || validUntil <= Date.now()
+    || !capabilities.has('premium-widgets')
+  ) {
+    clearSovereignSessionEntitlement();
+    return false;
+  }
+
+  currentState = {
+    planKey: 'sovereign-baseline',
+    features: {
+      tier: capabilities.has('advanced-layers') ? 2 : 1,
+      apiAccess: true,
+      apiRateLimit: 0,
+      maxDashboards: capabilities.has('workspace-persistence') ? 10 : 1,
+      prioritySupport: false,
+      exportFormats: capabilities.has('data-export')
+        ? ['csv', 'json']
+        : [],
+      mcpAccess: capabilities.has('mcp-access'),
+      dataExport: capabilities.has('data-export'),
+    },
+    validUntil,
+  };
+  notifyListeners(currentState);
+  return true;
+}
+
+export function clearSovereignSessionEntitlement(): void {
+  if (currentState?.planKey !== 'sovereign-baseline') return;
+  currentState = null;
+  notifyListeners(null);
+}
+
 /**
  * Explicitly nulls currentState. Call on sign-out to prevent the previous
  * user's entitlements from leaking into a subsequent session.

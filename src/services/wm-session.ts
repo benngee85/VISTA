@@ -13,6 +13,10 @@
 //      ~50 fetch sites individually.
 
 import { getCanonicalApiOrigin, toApiUrl } from './runtime';
+import {
+  applySovereignSessionEntitlement,
+  clearSovereignSessionEntitlement,
+} from './entitlements';
 import { PREMIUM_RPC_PATHS } from '@/shared/premium-paths';
 import { hasPremiumIntent } from './premium-intent';
 import { isPublicSharedRpcRequest } from '@/shared/public-rpc-cache';
@@ -20,6 +24,54 @@ import { enqueueSentryCall } from '@/bootstrap/sentry-defer';
 import { PUBLIC_WEATHER_BOOTSTRAP_KEY, bootstrapTierKeyNames } from '../../shared/bootstrap-tier-keys.js';
 
 const STORAGE_KEY = 'wm-session-exp';
+const SOVEREIGN_SESSION_CAPABILITY_ALLOWLIST = new Set([
+  'premium-widgets',
+  'advanced-layers',
+  'workspace-persistence',
+  'data-export',
+  'mcp-access',
+]);
+let wmSessionCapabilities = new Set<string>();
+let wmSessionEntitlementHydrated = false;
+
+export function hasWmSessionCapability(capability: string): boolean {
+  return wmSessionCapabilities.has(capability);
+}
+
+function applyWmSessionEntitlement(data: {
+  exp?: unknown;
+  premium?: unknown;
+  entitlementSource?: unknown;
+  capabilities?: unknown;
+}): void {
+  const next = new Set<string>();
+  if (
+    data.premium === true
+    && data.entitlementSource === 'sovereign-local'
+    && Array.isArray(data.capabilities)
+  ) {
+    for (const candidate of data.capabilities) {
+      if (
+        typeof candidate === 'string'
+        && SOVEREIGN_SESSION_CAPABILITY_ALLOWLIST.has(candidate)
+      ) {
+        next.add(candidate);
+      }
+    }
+  }
+  wmSessionCapabilities = next;
+  wmSessionEntitlementHydrated = true;
+  if (
+    data.premium === true
+    && data.entitlementSource === 'sovereign-local'
+    && typeof data.exp === 'number'
+  ) {
+    applySovereignSessionEntitlement(next, data.exp * 1000);
+  } else {
+    clearSovereignSessionEntitlement();
+  }
+}
+
 const PREMIUM_STORAGE_KEY = 'vista-premium-session-exp';
 // Refresh well before expiry so a half-loaded page doesn't fail mid-flight.
 const REFRESH_MARGIN_MS = 5 * 60 * 1000;
@@ -470,6 +522,7 @@ async function fetchNewSession(body?: { widgetKey?: string; proKey?: string }): 
       premium?: unknown;
     };
     if (typeof data?.exp !== 'number') return null;
+    applyWmSessionEntitlement(data);
     if (data.premium === true) {
       premiumSessionExp = data.exp;
       try { localStorage.setItem(PREMIUM_STORAGE_KEY, String(data.exp)); } catch { /* ignore */ }
@@ -499,11 +552,11 @@ async function fetchNewSession(body?: { widgetKey?: string; proKey?: string }): 
 
 export async function ensureWmSession(): Promise<boolean> {
   if (isWmSessionDead()) return false;
-  if (isFresh(cached)) return true;
+  if (isFresh(cached) && wmSessionEntitlementHydrated) return true;
   if (inflight) return inflight;
 
   const stored = loadFromStorage();
-  if (isFresh(stored)) {
+  if (isFresh(stored) && wmSessionEntitlementHydrated) {
     cached = stored;
     return true;
   }
@@ -592,6 +645,8 @@ export function __resetWmSessionForTests(): void {
   cookiePersistenceBroken = false;
   anonymousSessionHeaderToken = null;
   useAnonymousSessionHeader = false;
+  wmSessionCapabilities = new Set<string>();
+  wmSessionEntitlementHydrated = false;
   sentryEnqueue = enqueueSentryCall;
   fetchNewSessionTimeoutMs = 10_000;
 }
