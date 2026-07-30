@@ -128,3 +128,7 @@ effective.json
 
 # Local runtime authentication
 /.secrets/
+
+# Locally distributed signed desktop packages
+/public/downloads/*
+!/public/downloads/README.md

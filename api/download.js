@@ -5,6 +5,70 @@ export const config = { runtime: 'edge' };
 
 const RELEASES_PAGE = 'https://github.com/benngee85/VISTA/releases/latest';
 
+const LOCAL_DEFAULT_VERSION = '1.0.0';
+const LOCAL_DEFAULT_BASE_PATH = '/downloads';
+
+function readEnv(name) {
+  return typeof process !== 'undefined' ? process.env?.[name] : undefined;
+}
+
+function isUpstreamHost(hostname) {
+  return hostname === 'worldmonitor.app'
+    || hostname === 'www.worldmonitor.app'
+    || hostname === 'api.worldmonitor.app'
+    || hostname.endsWith('.worldmonitor.app');
+}
+
+function useLocalDistribution(url) {
+  const mode = String(readEnv('VISTA_DESKTOP_DOWNLOAD_MODE') || '').toLowerCase();
+  if (mode === 'local') return true;
+  if (mode === 'upstream') return false;
+  return !isUpstreamHost(url.hostname);
+}
+
+function safeVersion() {
+  const configured = String(readEnv('VISTA_RELEASE_VERSION') || LOCAL_DEFAULT_VERSION);
+  return /^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$/.test(configured)
+    ? configured
+    : LOCAL_DEFAULT_VERSION;
+}
+
+function safeBasePath() {
+  const configured = String(
+    readEnv('VISTA_DESKTOP_DOWNLOAD_BASE_PATH') || LOCAL_DEFAULT_BASE_PATH
+  );
+  if (
+    !configured.startsWith('/')
+    || configured.includes('..')
+    || !/^\/[0-9A-Za-z/_-]*$/.test(configured)
+  ) {
+    return LOCAL_DEFAULT_BASE_PATH;
+  }
+  return configured.replace(/\/+$/, '') || LOCAL_DEFAULT_BASE_PATH;
+}
+
+function localFilename(platform) {
+  const version = safeVersion();
+  const defaults = {
+    'windows-exe': `MLC-VISTA_${version}_x64-setup.exe`,
+    'windows-msi': `MLC-VISTA_${version}_x64_en-US.msi`,
+    'macos-arm64': `MLC-VISTA_${version}_aarch64.dmg`,
+    'macos-x64': `MLC-VISTA_${version}_x64.dmg`,
+    'linux-appimage': `MLC-VISTA_${version}_amd64.AppImage`,
+    'linux-appimage-arm64': `MLC-VISTA_${version}_aarch64.AppImage`,
+  };
+  return defaults[platform] || null;
+}
+
+function localRedirect(url, platform) {
+  const basePath = safeBasePath();
+  const filename = localFilename(platform);
+  const targetPath = filename
+    ? `${basePath}/${encodeURIComponent(filename)}`
+    : `${basePath}/`;
+  return Response.redirect(new URL(targetPath, url.origin), 302);
+}
+
 const PLATFORM_PATTERNS = {
   'windows-exe': (name) => name.endsWith('_x64-setup.exe'),
   'windows-msi': (name) => name.endsWith('_x64_en-US.msi'),
@@ -43,6 +107,10 @@ export default async function handler(req) {
   const url = new URL(req.url);
   const platform = url.searchParams.get('platform');
   const variant = (url.searchParams.get('variant') || '').toLowerCase();
+
+  if (useLocalDistribution(url)) {
+    return localRedirect(url, platform);
+  }
 
   if (!platform || !PLATFORM_PATTERNS[platform]) {
     return Response.redirect(RELEASES_PAGE, 302);

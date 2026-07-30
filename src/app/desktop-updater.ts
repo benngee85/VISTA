@@ -1,4 +1,5 @@
 import type { AppContext, AppModule } from '@/app/app-context';
+import { getRemoteApiBaseUrl, toApiUrl } from '@/services/runtime';
 import { invokeTauri } from '@/services/tauri-bridge';
 import { trackUpdateShown, trackUpdateClicked, trackUpdateDismissed } from '@/services/analytics';
 import { escapeHtml } from '@/utils/sanitize';
@@ -68,9 +69,17 @@ export class DesktopUpdater implements AppModule {
     return DESKTOP_BUILD_VARIANT;
   }
 
+  private getDistributionUrl(path: string): string {
+    if (this.ctx.isDesktopApp) {
+      const remoteOrigin = getRemoteApiBaseUrl();
+      if (remoteOrigin) return `${remoteOrigin}${path}`;
+    }
+    return toApiUrl(path);
+  }
+
   private async checkForUpdate(): Promise<void> {
     try {
-      const res = await fetch('https://api.worldmonitor.app/api/version', {
+      const res = await fetch(this.getDistributionUrl('/api/version'), {
         signal: AbortSignal.timeout(8000),
       });
       if (!res.ok) {
@@ -98,7 +107,7 @@ export class DesktopUpdater implements AppModule {
 
       const releaseUrl = typeof data.url === 'string' && data.url
         ? data.url
-        : 'https://github.com/benngee85/VISTA/releases/latest';
+        : this.getDistributionUrl('/downloads/');
       this.logUpdaterOutcome('update_available', { current, remote, dismissed: false });
       trackUpdateShown(current, remote);
       await this.showUpdateToast(remote, releaseUrl);
@@ -153,7 +162,7 @@ export class DesktopUpdater implements AppModule {
       const platform = this.mapDesktopDownloadPlatform(runtimeInfo.os, runtimeInfo.arch);
       if (platform) {
         const variant = this.getDesktopBuildVariant();
-        return `https://api.worldmonitor.app/api/download?platform=${platform}&variant=${variant}`;
+        return this.getDistributionUrl(`/api/download?platform=${platform}&variant=${variant}`);
       }
     } catch {
       // Silent fallback to release page when desktop runtime info is unavailable.
