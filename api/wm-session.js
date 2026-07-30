@@ -130,7 +130,7 @@ async function isValidProKey(key) {
   }
   if (!/^wm_[a-f0-9]{40}$/.test(key)) return false;
   const rawUrl = process.env.VISTA_API_PLAN_VALIDATION_URL
-    || 'https://api.worldmonitor.app/api/economic/v1/list-global-tenders';
+    || 'https://api.worldmonitor.app/api/economic/v1/get-fred-series-batch';
   let url;
   try {
     url = new URL(rawUrl);
