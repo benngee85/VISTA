@@ -29,8 +29,20 @@ const OFAC_TIMEOUT_MS = 45_000;
 const PROGRAM_CODE_RE = /^[A-Z0-9][A-Z0-9-]{1,24}$/;
 
 const OFAC_SOURCES = [
-  { label: 'SDN', url: 'https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/sdn_advanced.xml' },
-  { label: 'CONSOLIDATED', url: 'https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/cons_advanced.xml' },
+  {
+    label: 'SDN',
+    urls: [
+      'https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/sdn_advanced.xml',
+      'https://www.treasury.gov/ofac/downloads/sdn_advanced.xml',
+    ],
+  },
+  {
+    label: 'CONSOLIDATED',
+    urls: [
+      'https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/cons_advanced.xml',
+      'https://www.treasury.gov/ofac/downloads/consolidated/cons_advanced.xml',
+    ],
+  },
 ];
 
 // Strip XML namespace prefix (e.g. "sanc:SanctionsEntry" → "SanctionsEntry")
@@ -117,10 +129,10 @@ function buildProgramPressure(entries) {
  * → accumulate only the minimal data structures needed for output.
  * Peak heap is proportional to the number of entries/parties, not the XML size.
  */
-async function fetchSource(source) {
+async function fetchSourceUrl(source, url) {
   console.log(`  Fetching OFAC ${source.label}...`);
   const t0 = Date.now();
-  const response = await fetch(source.url, {
+  const response = await fetch(url, {
     headers: { 'User-Agent': CHROME_UA },
     signal: AbortSignal.timeout(OFAC_TIMEOUT_MS),
   });
@@ -481,6 +493,24 @@ async function fetchSource(source) {
       }
     })();
   });
+}
+
+async function fetchSource(source) {
+  let lastError = null;
+  for (const url of source.urls) {
+    try {
+      const result = await fetchSourceUrl(source, url);
+      if (result.entries.length === 0) {
+        throw new Error(`OFAC ${source.label} returned zero parsed entries from ${new URL(url).host}`);
+      }
+      console.log(`  ${source.label}: selected ${new URL(url).host}`);
+      return result;
+    } catch (error) {
+      lastError = error;
+      console.warn(`  ${source.label}: ${new URL(url).host} unavailable: ${error.message}`);
+    }
+  }
+  throw lastError ?? new Error(`OFAC ${source.label} has no source candidates`);
 }
 
 async function fetchSanctionsPressure() {

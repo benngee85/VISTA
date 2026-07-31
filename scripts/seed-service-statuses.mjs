@@ -12,7 +12,8 @@ import { loadEnvFile, CHROME_UA, getRedisCredentials, logSeedResult, extendExist
 
 loadEnvFile(import.meta.url);
 
-const RPC_URL = 'https://api.worldmonitor.app/api/infrastructure/v1/list-service-statuses';
+const API_BASE = process.env.API_BASE_URL || process.env.WM_API_BASE_URL || 'https://api.worldmonitor.app';
+const RPC_URL = `${API_BASE.replace(/\/+$/, '')}/api/infrastructure/v1/list-service-statuses`;
 const CANONICAL_KEY = 'infra:service-statuses:v1';
 
 // Defense-in-depth auth — see seed-infra.mjs for the same pattern + rationale.

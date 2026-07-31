@@ -152,6 +152,10 @@ if (isMain) {
   runSeed('climate', 'zone-normals', CLIMATE_ZONE_NORMALS_KEY, fetchClimateZoneNormals, {
     validateFn: validate,
     ttlSeconds: NORMALS_TTL,
+    // A first sovereign baseline can legitimately traverse the complete
+    // Open-Meteo retry/proxy cascade. The generic 240s fetch deadline is
+    // shorter than that bounded operation and previously killed valid runs.
+    fetchPhaseTimeoutMs: 15 * 60 * 1000,
     sourceVersion: 'open-meteo-wmo-1991-2020-v1',
     declareRecords,
     schemaVersion: 1,

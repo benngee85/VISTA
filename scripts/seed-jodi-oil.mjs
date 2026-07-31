@@ -203,10 +203,33 @@ export function assessChinaOilCoverage(countries, now = new Date()) {
 async function fetchCsv(url) {
   const resp = await fetch(url, {
     headers: { 'User-Agent': CHROME_UA, Accept: 'text/csv,text/plain,*/*' },
-    signal: AbortSignal.timeout(30_000),
+    signal: AbortSignal.timeout(90_000),
   });
-  if (!resp.ok) throw new Error(`JODI CSV fetch failed: HTTP ${resp.status} for ${url}`);
+  if (!resp.ok) {
+    const error = new Error(`JODI CSV fetch failed: HTTP ${resp.status} for ${url}`);
+    error.httpStatus = resp.status;
+    throw error;
+  }
   return resp.text();
+}
+
+async function fetchNewestAvailable(kind, years) {
+  for (const year of years) {
+    const url = `${JODI_BASE}${kind}/${year}.csv`;
+    try {
+      const csv = await fetchCsv(url);
+      if (csv.trim()) {
+        console.log(`  ${kind}/${year}.csv selected`);
+        return csv;
+      }
+      console.warn(`  ${kind}/${year}.csv was empty`);
+    } catch (error) {
+      // Annual files are published after the calendar year begins. A 404 is
+      // an availability signal, not a transient failure worth retrying.
+      console.warn(`  ${kind}/${year}.csv unavailable: ${error.message}`);
+    }
+  }
+  return '';
 }
 
 export function mergeSourceRows(primaryCurrent, primaryPrior, secondaryCurrent, secondaryPrior) {
@@ -223,22 +246,15 @@ export function mergeSourceRows(primaryCurrent, primaryPrior, secondaryCurrent, 
 }
 
 async function fetchAllRows() {
-  const now = new Date();
-  const currentYear = now.getFullYear();
-  const priorYear = currentYear - 1;
+  const currentYear = new Date().getFullYear();
+  const candidates = Array.from({ length: 4 }, (_, offset) => currentYear - offset);
 
-  const [primaryCurrent, primaryPrior, secondaryCurrent, secondaryPrior] = await Promise.all([
-    withRetry(() => fetchCsv(`${JODI_BASE}primary/${currentYear}.csv`), 2, 2000)
-      .catch(e => { console.warn(`  primary/${currentYear}.csv failed: ${e.message}`); return ''; }),
-    withRetry(() => fetchCsv(`${JODI_BASE}primary/${priorYear}.csv`), 2, 2000)
-      .catch(e => { console.warn(`  primary/${priorYear}.csv failed: ${e.message}`); return ''; }),
-    withRetry(() => fetchCsv(`${JODI_BASE}secondary/${currentYear}.csv`), 2, 2000)
-      .catch(e => { console.warn(`  secondary/${currentYear}.csv failed: ${e.message}`); return ''; }),
-    withRetry(() => fetchCsv(`${JODI_BASE}secondary/${priorYear}.csv`), 2, 2000)
-      .catch(e => { console.warn(`  secondary/${priorYear}.csv failed: ${e.message}`); return ''; }),
+  const [primary, secondary] = await Promise.all([
+    fetchNewestAvailable('primary', candidates),
+    fetchNewestAvailable('secondary', candidates),
   ]);
 
-  return mergeSourceRows(primaryCurrent, primaryPrior, secondaryCurrent, secondaryPrior);
+  return mergeSourceRows(primary, '', secondary, '');
 }
 
 async function redisPipeline(commands) {
@@ -284,7 +300,7 @@ async function main() {
 
   try {
     console.log('  Fetching JODI CSV data (4 files)...');
-    const allRows = await withRetry(fetchAllRows, 2, 3000);
+    const allRows = await fetchAllRows();
 
     if (!allRows.length) {
       throw new Error('No KBD rows parsed from JODI CSV files');

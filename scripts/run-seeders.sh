@@ -53,9 +53,15 @@ UPSTASH_REDIS_REST_TOKEN="$CACHE_REST_TOKEN"
 export CACHE_REST_URL CACHE_REST_TOKEN
 export UPSTASH_REDIS_REST_URL UPSTASH_REDIS_REST_TOKEN
 
-# Host compatibility for API-authenticated warmers.
+# Host compatibility for API-authenticated warmers. Host seeders must
+# address the sovereign gateway rather than the hosted worldmonitor endpoint.
+VISTA_HOST_API_BASE_URL="${VISTA_HOST_API_BASE_URL:-http://127.0.0.1:${VISTA_HTTP_PORT:-8080}}"
+API_BASE_URL="$VISTA_HOST_API_BASE_URL"
+WM_API_BASE_URL="$VISTA_HOST_API_BASE_URL"
 WORLDMONITOR_API_KEY="${WORLDMONITOR_API_KEY:-${WM_API_KEY:-}}"
-export WORLDMONITOR_API_KEY
+WORLDMONITOR_RELAY_KEY="${WORLDMONITOR_RELAY_KEY:-${WORLDMONITOR_API_KEY:-}}"
+export API_BASE_URL WM_API_BASE_URL VISTA_HOST_API_BASE_URL
+export WORLDMONITOR_API_KEY WORLDMONITOR_RELAY_KEY
 
 # Source API keys from docker-compose.override.yml if present.
 # These keys are configured for the container but seeders run on the host.
@@ -76,7 +82,7 @@ fi
 # Seeders execute directly on the host, not inside Docker.
 # Translate the host-specific endpoint into the variable expected by
 # the shared LLM client code.
-LLM_API_URL="${LLM_API_URL_HOST:-http://localhost:1234/v1/chat/completions}"
+LLM_API_URL="${LLM_API_URL_HOST:-${LLM_API_URL:-http://localhost:1234/v1/chat/completions}}"
 export LLM_API_URL
 
 if [ -z "${LLM_API_KEY:-}" ] && {
@@ -254,6 +260,16 @@ done
 
 for f in "$@"; do
   name="$(basename "$f")"
+
+  # A comma-delimited selection provides deterministic, dependency-aware
+  # recovery runs without maintaining a second seeder implementation.
+  if [ -n "${VISTA_SEED_ONLY:-}" ]; then
+    case ",${VISTA_SEED_ONLY}," in
+      *",${name},"*) ;;
+      *) continue ;;
+    esac
+  fi
+
   printf "→ %s ... " "$name"
 
   case "$name" in
