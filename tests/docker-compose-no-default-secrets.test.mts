@@ -31,7 +31,7 @@ function serviceBlock(compose: string, serviceName: string): string {
   const match = normalizedCompose.match(
     new RegExp(`^  ${serviceName}:\\n([\\s\\S]*?)(?=^  [a-zA-Z0-9_-]+:\\n|^volumes:)`, 'm'),
   );
-  assert.ok(match, `docker-compose.yml must define ${serviceName} service`);
+  assert.ok(match, `compose.yaml must define ${serviceName} service`);
   return match[1];
 }
 
@@ -61,21 +61,21 @@ const SHIPPED_DEFAULT_PATTERNS: RegExp[] = [
 ];
 
 describe('docker self-hosting — no default credentials (#3804)', () => {
-  it('docker-compose.yml does not default CACHE_REST_TOKEN or UPSTASH_REDIS_REST_TOKEN to a literal', async () => {
-    const compose = await read('docker-compose.yml');
+  it('compose.yaml does not default CACHE_REST_TOKEN or UPSTASH_REDIS_REST_TOKEN to a literal', async () => {
+    const compose = await read('compose.yaml');
     const entrypoint = await read('docker/valkey-entrypoint.sh');
     assert.ok(
       !WM_LOCAL_TOKEN.test(compose),
-      'docker-compose.yml must not contain the literal wm-local-token — see #3804',
+      'compose.yaml must not contain the literal wm-local-token — see #3804',
     );
     // Belt-and-braces: any future "default" of any shape on either token name fails the test.
     assert.ok(
       !/\$\{CACHE_REST_TOKEN:-/.test(compose),
-      'docker-compose.yml must not provide a default for ${CACHE_REST_TOKEN}; require fail-closed via ${CACHE_REST_TOKEN:?...}',
+      'compose.yaml must not provide a default for ${CACHE_REST_TOKEN}; require fail-closed via ${CACHE_REST_TOKEN:?...}',
     );
     assert.ok(
       !/\$\{VALKEY_PASSWORD:-/.test(compose),
-      'docker-compose.yml must not provide a default for ${VALKEY_PASSWORD}; require fail-closed via ${VALKEY_PASSWORD:?...}',
+      'compose.yaml must not provide a default for ${VALKEY_PASSWORD}; require fail-closed via ${VALKEY_PASSWORD:?...}',
     );
     // The fail-closed assertion: EVERY expansion of either var must use
     // the ${VAR:?...} form. A bare ${VAR} silently expands to empty if
@@ -85,23 +85,23 @@ describe('docker self-hosting — no default credentials (#3804)', () => {
     assert.equal(
       bareTokenExpansions.length,
       0,
-      `docker-compose.yml must use \${CACHE_REST_TOKEN:?...} at every expansion (found ${bareTokenExpansions.length} bare \${CACHE_REST_TOKEN})`,
+      `compose.yaml must use \${CACHE_REST_TOKEN:?...} at every expansion (found ${bareTokenExpansions.length} bare \${CACHE_REST_TOKEN})`,
     );
     const barePasswordExpansions = compose.match(/\$\{VALKEY_PASSWORD(?![:?])/g) ?? [];
     assert.equal(
       barePasswordExpansions.length,
       0,
-      `docker-compose.yml must use \${VALKEY_PASSWORD:?...} at every expansion (found ${barePasswordExpansions.length} bare \${VALKEY_PASSWORD})`,
+      `compose.yaml must use \${VALKEY_PASSWORD:?...} at every expansion (found ${barePasswordExpansions.length} bare \${VALKEY_PASSWORD})`,
     );
     // Both vars must appear in at least one fail-closed expansion (i.e. the
     // file actually requires them somewhere, not just by total absence).
     assert.ok(
       /\$\{CACHE_REST_TOKEN:\?/.test(compose),
-      'docker-compose.yml must require CACHE_REST_TOKEN via ${CACHE_REST_TOKEN:?...} fail-closed syntax',
+      'compose.yaml must require CACHE_REST_TOKEN via ${CACHE_REST_TOKEN:?...} fail-closed syntax',
     );
     assert.ok(
       /\$\{VALKEY_PASSWORD:\?/.test(compose),
-      'docker-compose.yml must require VALKEY_PASSWORD via ${VALKEY_PASSWORD:?...} fail-closed syntax',
+      'compose.yaml must require VALKEY_PASSWORD via ${VALKEY_PASSWORD:?...} fail-closed syntax',
     );
     // Valkey itself must be authenticated.
     assert.match(
@@ -111,8 +111,8 @@ describe('docker self-hosting — no default credentials (#3804)', () => {
     );
   });
 
-  it('docker-compose.yml wires valkey-rest into the vista-relay seed loops', async () => {
-    const compose = await read('docker-compose.yml');
+  it('compose.yaml wires valkey-rest into the vista-relay seed loops', async () => {
+    const compose = await read('compose.yaml');
     const relay = serviceBlock(compose, 'vista-relay');
 
     assert.match(

@@ -132,3 +132,7 @@ effective.json
 # Locally distributed signed desktop packages
 /public/downloads/*
 !/public/downloads/README.md
+
+# VISTA node-local configuration and protected runtime material
+.env.node
+.secrets/

@@ -1,17 +1,21 @@
 #!/bin/zsh
 set -euo pipefail
-unsetopt BANG_HIST 2>/dev/null || true
+unsetopt BANG_HIST
 
-SCRIPT_DIR=${0:A:h}
-PROJECT_DIR=${SCRIPT_DIR:h}
+export PATH="/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin:${PATH:-}"
+REPO=$(cd "$(dirname "$0")/.." && pwd)
+cd "$REPO"
 
-cd "$PROJECT_DIR"
+ENV_ARGS=()
+for FILE in .env .env.node .env.local .secrets/runtime.env; do
+  [[ -f "$FILE" ]] && ENV_ARGS+=(--env-file "$FILE")
+done
 
-test -f .env
-test -f .secrets/runtime.env
-
-exec docker compose \
-  --project-directory "$PROJECT_DIR" \
-  --env-file "$PROJECT_DIR/.env" \
-  --env-file "$PROJECT_DIR/.secrets/runtime.env" \
-  "$@"
+exec env \
+  -u COMPOSE_FILE \
+  -u COMPOSE_ENV_FILES \
+  -u COMPOSE_PATH_SEPARATOR \
+  docker compose \
+    --project-directory "$REPO" \
+    "${ENV_ARGS[@]}" \
+    "$@"

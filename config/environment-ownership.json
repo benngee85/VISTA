@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "precedenceLowToHigh": [
+    ".env",
+    ".env.node",
+    ".env.local",
+    ".secrets/runtime.env"
+  ],
+  "layers": {
+    ".env": {
+      "scope": "fleet-or-information-environment",
+      "secretBearing": false,
+      "examples": [
+        "VISTA_FMN_SPIRAL",
+        "VISTA_PRODUCT_NAME",
+        "VISTA_VENDOR_NAME"
+      ]
+    },
+    ".env.node": {
+      "scope": "node-and-site-identity",
+      "secretBearing": false,
+      "examples": [
+        "VISTA_NODE_ID",
+        "VISTA_SITE_ID",
+        "VISTA_FEDERATION_ID"
+      ]
+    },
+    ".env.local": {
+      "scope": "local-compose-instance",
+      "secretBearing": false,
+      "examples": [
+        "COMPOSE_PROJECT_NAME",
+        "WM_PORT"
+      ]
+    },
+    ".secrets": {
+      "scope": "credential-and-private-key-material",
+      "secretBearing": true,
+      "format": "one-file-per-secret"
+    },
+    ".secrets/runtime.env": {
+      "scope": "legacy-protected-compose-interpolation",
+      "secretBearing": true,
+      "transitional": true,
+      "replacement": "one-file-per-secret service attachments"
+    }
+  },
+  "compose": {
+    "base": "compose.yaml",
+    "automaticOverride": "compose.override.yaml",
+    "alternatePlatform": "docker-compose.rocky9.yml",
+    "command": "scripts/vista-compose.zsh"
+  }
+}
