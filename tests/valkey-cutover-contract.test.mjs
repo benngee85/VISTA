@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import test from 'node:test';
 
-const compose = readFileSync('docker-compose.yml', 'utf8');
+const compose = readFileSync('compose.yaml', 'utf8');
 const rocky = readFileSync('docker-compose.rocky9.yml', 'utf8');
 const proxy = readFileSync('docker/redis-rest-proxy.mjs', 'utf8');
 const seedRunner = readFileSync('scripts/run-seeders.sh', 'utf8');
