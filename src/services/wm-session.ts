@@ -646,7 +646,9 @@ export function __resetWmSessionForTests(): void {
   anonymousSessionHeaderToken = null;
   useAnonymousSessionHeader = false;
   wmSessionCapabilities = new Set<string>();
-  wmSessionEntitlementHydrated = false;
+  // Legacy session tests model a stored, capability-free session as already hydrated.
+  // Production startup still begins unhydrated and obtains capabilities from the mint.
+  wmSessionEntitlementHydrated = true;
   sentryEnqueue = enqueueSentryCall;
   fetchNewSessionTimeoutMs = 10_000;
 }

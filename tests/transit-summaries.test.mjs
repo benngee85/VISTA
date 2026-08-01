@@ -867,10 +867,10 @@ describe('Upstash Redis client selection (insecure-http opt-in)', () => {
   function buildUpstashInit(env, httpClient, httpsClient) {
     // eslint-disable-next-line no-new-func
     const fn = new Function(
-      'process', 'http', 'https',
+      'process', 'http', 'https', 'YahooQuoteSummaryClient', 'resolveProxyString',
       `${initAndGetSrc}\nreturn { UPSTASH_ALLOW_INSECURE_HTTP, UPSTASH_ENABLED, UPSTASH_HTTP_MODULE, upstashGet };`,
     );
-    return fn({ env }, httpClient, httpsClient);
+    return fn({ env }, httpClient, httpsClient, class YahooQuoteSummaryClient {}, () => null);
   }
 
   it('https:// URL enables Upstash and routes upstashGet through the https client', () => {

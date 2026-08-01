@@ -65,7 +65,7 @@ describe('market quote refresh resilience', () => {
   it('wires last-good merging into both market publishers', () => {
     const relay = readFileSync(new URL('../scripts/ais-relay.cjs', import.meta.url), 'utf8');
     const standalone = readFileSync(new URL('../scripts/seed-market-quotes.mjs', import.meta.url), 'utf8');
-    const compose = readFileSync(new URL('../docker-compose.yml', import.meta.url), 'utf8');
+    const compose = readFileSync(new URL('../compose.yaml', import.meta.url), 'utf8');
     const envExample = readFileSync(new URL('../.env.example', import.meta.url), 'utf8');
 
     assert.match(relay, /previousPayloadPromise = envelopeRead\('market:stocks-bootstrap:v1'\)/);

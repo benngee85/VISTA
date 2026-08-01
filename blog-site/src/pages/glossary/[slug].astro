@@ -15,9 +15,11 @@ const related = term.related.map((slug) => bySlug.get(slug)).filter((t) => t != 
 
 const pageUrl = `https://www.worldmonitor.app/blog/glossary/${term.slug}/`;
 const termLabel = `${term.term}${term.abbr ? ` (${term.abbr})` : ''}`;
-const metaTitle = termLabel.length > 36
-  ? `${termLabel} | VISTA`
-  : `${termLabel} Definition | VISTA`;
+const metaTitle = term.abbr
+  ? `${term.abbr} Definition | World Monitor`
+  : termLabel.length > 36
+    ? `${termLabel} | VISTA`
+    : `${termLabel} Definition | VISTA`;
 const metaDescription = term.short.length <= 160
   ? term.short
   : `${term.short.slice(0, 157).replace(/\s+\S*$/, '')}...`;

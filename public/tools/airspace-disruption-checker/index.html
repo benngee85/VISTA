@@ -3,28 +3,28 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Airspace-Disruption Checker | VISTA</title>
+    <title>Airspace-Disruption Checker | World Monitor</title>
     <meta name="description" content="Check monitored commercial-airport disruption and bounded observed military-flight activity for one country without combining the signals into a threat score.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.worldmonitor.app/tools/airspace-disruption-checker/">
-    <meta name="lastmod" content="2026-07-25">
+    <meta name="lastmod" content="2026-07-27">
     
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Airspace-Disruption Checker | VISTA">
+    <meta property="og:title" content="Airspace-Disruption Checker | World Monitor">
     <meta property="og:description" content="Check monitored commercial-airport disruption and bounded observed military-flight activity for one country without combining the signals into a threat score.">
     <meta property="og:url" content="https://www.worldmonitor.app/tools/airspace-disruption-checker/">
-    <meta property="og:site_name" content="VISTA">
+    <meta property="og:site_name" content="World Monitor">
     <meta property="og:image" content="https://www.worldmonitor.app/favico/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="VISTA — real-time global intelligence dashboard with live markets, geopolitical data, and infrastructure monitoring">
+    <meta property="og:image:alt" content="World Monitor — real-time global intelligence dashboard with live markets, geopolitical data, and infrastructure monitoring">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Airspace-Disruption Checker | VISTA">
+    <meta name="twitter:title" content="Airspace-Disruption Checker | World Monitor">
     <meta name="twitter:description" content="Check monitored commercial-airport disruption and bounded observed military-flight activity for one country without combining the signals into a threat score.">
     <meta name="twitter:image" content="https://www.worldmonitor.app/favico/og-image.png">
-    <meta name="twitter:image:alt" content="VISTA — real-time global intelligence dashboard with live markets, geopolitical data, and infrastructure monitoring">
+    <meta name="twitter:image:alt" content="World Monitor — real-time global intelligence dashboard with live markets, geopolitical data, and infrastructure monitoring">
     <meta name="twitter:site" content="@worldmonitorai">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"VISTA airspace-disruption checker","description":"Check monitored commercial-airport disruption and bounded observed military-flight activity for one country without combining the signals into a threat score.","url":"https://www.worldmonitor.app/tools/airspace-disruption-checker/","applicationCategory":"DataApplication","operatingSystem":"Any"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"World Monitor airspace-disruption checker","description":"Check monitored commercial-airport disruption and bounded observed military-flight activity for one country without combining the signals into a threat score.","url":"https://www.worldmonitor.app/tools/airspace-disruption-checker/","applicationCategory":"DataApplication","operatingSystem":"Any"}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.worldmonitor.app/"},{"@type":"ListItem","position":2,"name":"Live tools","item":"https://www.worldmonitor.app/tools/"},{"@type":"ListItem","position":3,"name":"Airspace-disruption checker","item":"https://www.worldmonitor.app/tools/airspace-disruption-checker/"}]}</script>
     <style>
       :root { color-scheme: dark; --bg: #050807; --panel: #0c1210; --text: #eef8f0; --muted: #a8b8ad; --line: #1b2b22; --accent: #4ade80; }
@@ -77,17 +77,27 @@
       .related { list-style: none; padding: 0; margin: 12px 0 0; display: flex; flex-wrap: wrap; gap: 0 20px; }
       .related a { display: inline-flex; align-items: center; min-height: 44px; }
       .source { margin-top: 34px; font-size: 13px; color: var(--muted); }
+      table { border-collapse: collapse; width: 100%; margin-top: 16px; font-size: 14px; }
+      caption { caption-side: top; text-align: left; color: var(--muted); font-size: 13px; padding-bottom: 8px; }
+      th, td { border: 1px solid var(--line); padding: 8px 12px; text-align: left; }
+      th { color: var(--muted); font-weight: 600; background: var(--panel); }
+      td data { color: var(--text); }
+      figure { margin: 20px 0 0; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+      figcaption { margin-top: 10px; color: var(--muted); font-size: 13px; }
+      blockquote { margin: 16px 0 0; padding: 12px 16px; border-left: 2px solid var(--accent); background: var(--panel); border-radius: 0 8px 8px 0; }
+      blockquote p { margin: 0; color: var(--text); font-size: 14px; }
       footer { border-top: 1px solid var(--line); padding-top: 20px; padding-bottom: 28px; color: var(--muted); font-size: 13px; }
     </style>
   </head>
   <body>
     <header>
       <nav aria-label="Primary">
-        <a href="/">VISTA</a>
+        <a href="/">World Monitor</a>
         <a href="/countries/">Countries</a>
         <a href="/chokepoints/">Chokepoints</a>
         <a href="/crises/">Crises</a>
         <a href="/tools/">Live tools</a>
+        <a href="/research/">Research</a>
         <a href="/reference/changelog/">Changelog</a>
         <a href="/blog/glossary/">Glossary</a>
       </nav>
@@ -301,12 +311,12 @@
         <p class="tool-note">Military results are capped at 100 returned observations for the selected box. Countries with oversized or discontinuous envelopes are omitted so the tool never issues a continent-scale observation query. An empty or failed military response is unavailable, not confirmed zero activity.</p>
         <noscript><p>Enable JavaScript to check the selected country. The independent-source methodology and limitations remain available on this page.</p></noscript>
       </section>
-      <a class="cta" data-dashboard-link href="https://www.worldmonitor.app/?country=JP&amp;expanded=1&amp;utm_source=seo-tool">Investigate the selected country in VISTA →</a>
+      <a class="cta" data-dashboard-link href="https://www.worldmonitor.app/?country=JP&amp;expanded=1&amp;utm_source=seo-tool">Investigate the selected country in World Monitor →</a>
       <h2>How to read the result</h2>
       <p>“Normal” applies only to monitored airports with current source coverage. “Unknown” means telemetry was not available and is not counted as normal. Military-flight results are bounded observations from OpenSky/Wingbits-compatible ingestion and are not exhaustive.</p>
       <p class="source">Geographic filters: shared/country-bboxes.js. Live metrics: <code>/api/aviation/v1/list-airport-delays</code> and <code>/api/military/v1/list-military-flights</code>.</p>
     </main>
-    <footer>VISTA reference corpus. Crawlable pages use committed snapshots; live API results are labelled separately.</footer>
+    <footer>World Monitor reference corpus. Crawlable pages use committed snapshots; live API results are labelled separately.</footer>
     <script type="module" nonce="wm-static-bootstrap" src="/tools/live-tools.js"></script>
   </body>
 </html>

@@ -162,7 +162,7 @@ test('tracked source contains no deployment-specific local LLM address', () => {
     'server/_shared/llm-health.ts',
     'server/_shared/llm-anthropic-adapter.ts',
     'scripts/ais-relay.cjs',
-    'docker-compose.yml',
+    'compose.yaml',
   ];
 
   for (const file of files) {
@@ -186,7 +186,7 @@ test(
   'Compose injects the same three-variable module into app and relay',
   () => {
     const compose = readFileSync(
-      new URL('../docker-compose.yml', import.meta.url),
+      new URL('../compose.yaml', import.meta.url),
       'utf8',
     );
 

@@ -40,7 +40,7 @@ test('tracked Anthropic environment declarations have empty active values', () =
 });
 
 test('Compose injects all three Anthropic module variables', () => {
-  const compose = fs.readFileSync('docker-compose.yml', 'utf8');
+  const compose = fs.readFileSync('compose.yaml', 'utf8');
 
   for (const name of [
     'ANTHROPIC_BASE_URL',

@@ -248,6 +248,10 @@ const UPSTASH_HTTP_MODULE = UPSTASH_REDIS_REST_URL.startsWith('http://') ? http 
 const RELAY_ENV_PREFIX = process.env.RELAY_ENV ? `${process.env.RELAY_ENV}:` : '';
 const OREF_REDIS_KEY = `${RELAY_ENV_PREFIX}relay:oref:history:v1`;
 const CHROME_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36';
+const _yahooQuoteSummaryClient = new YahooQuoteSummaryClient({
+  userAgent: CHROME_UA,
+  resolveProxyString,
+});
 
 if (UPSTASH_REDIS_REST_URL && !UPSTASH_REDIS_REST_URL.startsWith('https://') && !UPSTASH_ALLOW_INSECURE_HTTP) {
   console.warn('[Relay] UPSTASH_REDIS_REST_URL must start with https:// — Redis disabled (set UPSTASH_ALLOW_INSECURE_HTTP=true for a trusted internal http proxy)');
@@ -2109,44 +2113,7 @@ function fetchYahooChartDirect(symbol, query = '') {
 // CONNECT egress (gate.decodo.com) but accepts the curl egress — probed
 // 2026-04-16, see scripts/_yahoo-fetch.mjs header.
 function fetchYahooQuoteSummary(symbol) {
-  return new Promise((resolve) => {
-    const modules = 'summaryDetail,defaultKeyStatistics';
-    const url = `https://query1.finance.yahoo.com/v10/finance/quoteSummary/${encodeURIComponent(symbol)}?modules=${modules}`;
-    let settled = false;
-    const settle = (value) => { if (settled) return; settled = true; resolve(value); };
-    const req = https.get(url, {
-      headers: { 'User-Agent': CHROME_UA, Accept: 'application/json' },
-      timeout: 12000,
-    }, (resp) => {
-      if (resp.statusCode !== 200) {
-        resp.resume();
-        logThrottled('warn', `yahoo-summary-${resp.statusCode}:${symbol}`, `[Sector] Yahoo quoteSummary ${symbol} HTTP ${resp.statusCode}`);
-        return settle(_yahooQuoteSummaryProxyFallback(symbol, url));
-      }
-      let body = '';
-      resp.on('data', (chunk) => { body += chunk; });
-      resp.on('end', () => {
-        try {
-          const data = JSON.parse(body);
-          const result = data?.quoteSummary?.result?.[0];
-          if (!result) return settle(null); // app-level "no data" — proxy won't change it
-          const sd = result.summaryDetail || {};
-          const ks = result.defaultKeyStatistics || {};
-          const raw = (obj) => typeof obj === 'object' && obj !== null ? (obj.raw ?? obj.fmt ?? null) : (typeof obj === 'number' ? obj : null);
-          settle({
-            trailingPE: raw(sd.trailingPE),
-            forwardPE: raw(sd.forwardPE),
-            beta: raw(sd.beta) ?? raw(ks.beta3Year),
-            ytdReturn: raw(ks.ytdReturn),
-            threeYearReturn: raw(ks.threeYearAverageReturn),
-            fiveYearReturn: raw(ks.fiveYearAverageReturn),
-          });
-        } catch { settle(_yahooQuoteSummaryProxyFallback(symbol, url)); }
-      });
-    });
-    req.on('error', (err) => { if (settled) return; logThrottled('warn', `yahoo-summary-err:${symbol}`, `[Sector] Yahoo quoteSummary ${symbol} error: ${err.message}`); settle(_yahooQuoteSummaryProxyFallback(symbol, url)); });
-    req.on('timeout', () => { if (settled) return; req.destroy(); logThrottled('warn', `yahoo-summary-timeout:${symbol}`, `[Sector] Yahoo quoteSummary ${symbol} timeout`); settle(_yahooQuoteSummaryProxyFallback(symbol, url)); });
-  });
+  return _yahooQuoteSummaryClient.fetch(symbol);
 }
 
 // Async so the curl call doesn't block the relay event loop. Returns a
@@ -2462,17 +2429,24 @@ async function seedSectorSummary() {
     return 0;
   }
 
-  const valuations = {};
-  let valCount = 0;
-  for (const s of SECTOR_SYMBOLS) {
-    const raw = await fetchYahooQuoteSummary(s);
-    const parsed = parseSectorValuation(raw);
-    if (parsed) { valuations[s] = parsed; valCount++; }
-    await sleep(150);
-  }
-
-  const payload = { sectors, valuations };
-  const ok = await envelopeWrite('market:sectors:v2', payload, MARKET_SEED_TTL, { recordCount: sectors.length, sourceVersion: 'market-sectors' });
+  const fetchedAt = Date.now();
+  const {
+    valuations,
+    valuationSources,
+    valuationCount,
+  } = await collectSectorValuations({
+    symbols: SECTOR_SYMBOLS,
+    fetchValue: fetchYahooQuoteSummary,
+    parseValue: parseSectorValuation,
+  });
+  const valuationCoverage = buildSectorValuationCoverage({
+    valuationCount,
+    expectedCount: SECTOR_SYMBOLS.length,
+    fetchedAt,
+    sources: valuationSources,
+  });
+  const publication = buildSectorValuationPublication({ sectors, valuations, valuationCoverage });
+  const ok = await envelopeWrite('market:sectors:v2', publication.payload, MARKET_SEED_TTL, publication.meta);
   const quotesKey = `market:quotes:v1:${[...SECTOR_SYMBOLS].sort().join(',')}`;
   const sectorQuotes = sectors.map((s) => ({
     symbol: s.symbol, name: s.name, display: s.name,
@@ -2480,8 +2454,8 @@ async function seedSectorSummary() {
   }));
   const quotesPayload = { quotes: sectorQuotes, finnhubSkipped: false, skipReason: '', rateLimited: false };
   const ok2 = await envelopeWrite(quotesKey, quotesPayload, MARKET_SEED_TTL, { recordCount: sectorQuotes.length, sourceVersion: 'market-sectors' });
-  const ok3 = await upstashSet('seed-meta:market:sectors', { fetchedAt: Date.now(), recordCount: sectors.length }, 604800);
-  console.log(`[Market] Seeded ${sectors.length}/${SECTOR_SYMBOLS.length} sectors, ${valCount} valuations (redis: ${ok && ok2 && ok3 ? 'OK' : 'PARTIAL'})`);
+  const ok3 = await upstashSet('seed-meta:market:sectors', publication.meta, 604800);
+  console.log(`[Market] Seeded ${sectors.length}/${SECTOR_SYMBOLS.length} sectors, ${valuationCount} valuations (redis: ${ok && ok2 && ok3 ? 'OK' : 'PARTIAL'})`);
   return sectors.length;
 }
 

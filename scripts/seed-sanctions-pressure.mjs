@@ -13,9 +13,11 @@ loadEnvFile(import.meta.url);
 const CANONICAL_KEY = 'sanctions:pressure:v1';
 const STATE_KEY = 'sanctions:pressure:state:v1';
 const ENTITY_INDEX_KEY = 'sanctions:entities:v1';
+const ENTITY_INDEX_META_KEY = `seed-meta:${ENTITY_INDEX_KEY}`;
 // Full ISO2 -> count map consumed by CII/country-risk scoring; do not replace
 // with the top-pressure display list written under CANONICAL_KEY.countries.
 const COUNTRY_COUNTS_KEY = 'sanctions:country-counts:v1';
+const COUNTRY_COUNTS_META_KEY = `seed-meta:${COUNTRY_COUNTS_KEY}`;
 const CACHE_TTL = 15 * 60 * 60; // 15h — 3h buffer over 12h cron cadence (was 12h = 0 buffer)
 // Compact entity type codes for the lookup index (saves space vs full enum strings)
 const ET_CODE = {
@@ -583,6 +585,8 @@ export function declareRecords(data) {
 
 runSeed('sanctions', 'pressure', CANONICAL_KEY, fetchSanctionsPressure, {
   ttlSeconds: CACHE_TTL,
+  lockTtlMs: 480_000,
+  fetchPhaseTimeoutMs: 420_000,
   validateFn: validate,
   sourceVersion: 'ofac-sls-advanced-xml-v1',
   recordCount: (data) => data.totalCount ?? 0,
@@ -598,6 +602,12 @@ runSeed('sanctions', 'pressure', CANONICAL_KEY, fetchSanctionsPressure, {
       ttl: CACHE_TTL,
       transform: (data) => data._state,
     },
+  ],
+  preserveKeys: [
+    ENTITY_INDEX_KEY,
+    ENTITY_INDEX_META_KEY,
+    COUNTRY_COUNTS_KEY,
+    COUNTRY_COUNTS_META_KEY,
   ],
   afterPublish: async (data, _ctx) => {
     // Write entity lookup index with seed-meta so health.js can monitor it.

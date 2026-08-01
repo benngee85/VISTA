@@ -136,3 +136,4 @@ effective.json
 # VISTA node-local configuration and protected runtime material
 .env.node
 .secrets/
+.env.before-*

@@ -45,6 +45,7 @@ COPY --from=runtime-deps /app/scripts/node_modules ./scripts/node_modules
 COPY scripts/package.json ./scripts/package.json
 # Relay script and shared helpers
 COPY scripts/ais-relay.cjs ./scripts/ais-relay.cjs
+COPY scripts/_yahoo-sector-valuations.cjs ./scripts/_yahoo-sector-valuations.cjs
 COPY scripts/_proxy-utils.cjs ./scripts/_proxy-utils.cjs
 COPY scripts/lib/usni-fleet-parser.cjs ./scripts/lib/usni-fleet-parser.cjs
 # llm-telemetry.cjs is transitively imported by _seed-utils.mjs (SIGTERM

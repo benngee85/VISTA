@@ -56,6 +56,22 @@ const IRAN_EVENTS_ENABLED = (process.env.IRAN_EVENTS_ENABLED ?? 'false').toLower
 const CONFLICT_EVENTS_OUTPUT_BUDGET_BYTES = 128 * 1024;
 const CONFLICT_EVENTS_DATA_BUDGET_BYTES = CONFLICT_EVENTS_OUTPUT_BUDGET_BYTES - 1024;
 const CONFLICT_EVENT_LISTS = ['ucdp-events', 'iran-events', 'events'] as const;
+const SECTOR_VALUATION_MAX_STALE_MS = 30 * 60_000;
+
+export function applySectorValuationFreshness(
+  data: Record<string, any>,
+  now = Date.now(),
+): void {
+  const coverage = data?.sectors?.valuationCoverage;
+  if (!coverage || typeof coverage !== 'object') return;
+  const fetchedAt = typeof coverage.fetchedAt === 'number'
+    ? coverage.fetchedAt
+    : Date.parse(String(coverage.fetchedAt ?? ''));
+  coverage.stale = Number.isFinite(fetchedAt)
+    ? now - fetchedAt > SECTOR_VALUATION_MAX_STALE_MS
+    : true;
+}
+
 
 function fitConflictEventsToBudget(data: Record<string, unknown>): void {
   const lists = CONFLICT_EVENT_LISTS.flatMap((label) => {
@@ -268,6 +284,17 @@ export const CACHE_TOOLS: ToolDef[] = [
         properties: {
           sectors: { type: 'array', items: { type: 'object', properties: { symbol: { type: 'string' }, name: { type: 'string' }, changePercent: { type: 'number' } } } },
           valuations: { type: ['object', 'array', 'null'] },
+          valuationCoverage: {
+            type: ['object', 'null'],
+            properties: {
+              valuationCount: { type: 'number' },
+              expectedValuationCount: { type: 'number' },
+              sourceStatus: { type: 'string', enum: ['ok', 'partial', 'degraded'] },
+              source: { type: 'string' },
+              fetchedAt: { type: ['string', 'number'] },
+              stale: { type: 'boolean' },
+            },
+          },
         },
       },
       'etf-flows': {
@@ -302,6 +329,7 @@ export const CACHE_TOOLS: ToolDef[] = [
     }),
     annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
     _postFilter: (data, params) => {
+      applySectorValuationFreshness(data);
       const symbols = argStrList(params.symbols);
       if (symbols.length > 0) {
         for (const label of ['stocks-bootstrap', 'commodities-bootstrap', 'crypto', 'gulf-quotes']) {
@@ -340,6 +368,10 @@ export const CACHE_TOOLS: ToolDef[] = [
     ],
     _seedMetaKey: 'seed-meta:market:stocks',
     _maxStaleMin: 30,
+    _freshnessChecks: [
+      { key: 'seed-meta:market:stocks', maxStaleMin: 30 },
+      { key: 'seed-meta:market:sectors', maxStaleMin: 30 },
+    ],
     // NOTE: `GET /api/market/v1/get-gold-intelligence` is NOT covered here.
     // The audit-time cross-reference matched on the single `market:commodities-bootstrap:v1`
     // key shared between this tool and the gold-intel handler, but the handler also reads 4
