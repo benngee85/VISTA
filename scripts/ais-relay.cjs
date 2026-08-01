@@ -32,6 +32,12 @@ const {
   buildProviderRequest,
   parseProviderResponse,
 } = require('./lib/anthropic-messages.cjs');
+const {
+  YahooQuoteSummaryClient,
+  buildSectorValuationCoverage,
+  buildSectorValuationPublication,
+  collectSectorValuations,
+} = require('./_yahoo-sector-valuations.cjs');
 const { countryNameToIso2 } = require('./shared/country-name-to-iso2.cjs');
 const {
   buildDedupMaterial,
