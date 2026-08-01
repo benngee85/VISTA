@@ -12,6 +12,8 @@ services:
       VISTA_ENTITLEMENT_TLS_CERT_PATH: "/run/secrets/vista_entitlement_cert"
       VISTA_ENTITLEMENT_TLS_KEY_PATH: "/run/secrets/vista_entitlement_key"
       UPSTASH_REDIS_REST_URL: "http://valkey-rest:8080"
+      UPSTASH_REDIS_REST_TOKEN: "${CACHE_REST_TOKEN:?CACHE_REST_TOKEN required}"
+      REDIS_TOKEN: "${CACHE_REST_TOKEN:?CACHE_REST_TOKEN required}"
       # Restricted to the private Compose network; no host port is published.
       UPSTASH_ALLOW_INSECURE_HTTP: "true"
       VISTA_ENTITLEMENT_KEY_PREFIX: "vista:entitlements:v1"
