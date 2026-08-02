@@ -15,7 +15,16 @@
 import { CLOUD_SYNC_KEYS, type CloudSyncKey } from './sync-keys';
 import { isDesktopRuntime } from '@/services/runtime';
 import { getClerkToken } from '@/services/clerk';
-import { FEEDS } from '@/config/feeds';
+import {
+  computeLegacyDefaultDisabledSources,
+  computePreStrategicDefaultDisabledSources,
+  FEEDS,
+  FRONTLINE_EUROPE_PROTECTED_SOURCES,
+  getStrategicDefaultSources,
+  INTEL_SOURCES,
+} from '@/config/feeds';
+import { FREE_MAX_SOURCES } from '@/config/panels';
+import { computeCapDisabledSources } from '@/services/source-cap';
 import {
   applyMigrationChain,
   buildMigrations,
@@ -41,6 +50,7 @@ export const CLOUD_PREFS_APPLIED_EVENT = 'wm:cloud-prefs-applied';
 
 export interface CloudPrefsAppliedDetail {
   keys: CloudSyncKey[];
+  syncVersion?: number;
 }
 
 // localStorage state keys — never uploaded to cloud
@@ -58,7 +68,7 @@ const KEY_DIRTY_KEYS = 'wm-cloud-prefs-dirty-keys';
 // the new schema version. Defaults to 1 when missing (assumes oldest).
 const KEY_LOCAL_SCHEMA_VERSION = 'wm-cloud-prefs-local-schema-version';
 
-const CURRENT_PREFS_SCHEMA_VERSION = 2;
+const CURRENT_PREFS_SCHEMA_VERSION = 4;
 const CLOUD_PREFS_REQUEST_TIMEOUT_MS = 15_000;
 
 // Migrations live in cloud-prefs-migrations.ts to keep them testable —
@@ -81,7 +91,27 @@ const CLOUD_PREFS_REQUEST_TIMEOUT_MS = 15_000;
 // 2 and subsequent sync pulls skip recovery — so a user who explicitly
 // disables every source in a category POST-migration keeps that
 // preference forever.
-const MIGRATIONS = buildMigrations(FEEDS);
+// Schema 3 (#5963): recover the frontline sources from an untouched legacy
+// default blob. The exact-set guard preserves customized source preferences
+// and prevents a stale cloud row from re-poisoning a local migration.
+// Schema 4 (#6000): re-enable strategic defaults from an untouched pre-flag
+// default/cap blob. The same exact-set guard preserves customized preferences.
+const LEGACY_PRE_STRATEGIC_DEFAULT_DISABLED = new Set(computePreStrategicDefaultDisabledSources());
+const LEGACY_PRE_STRATEGIC_CAP_DISABLED = computeCapDisabledSources(
+  FEEDS,
+  INTEL_SOURCES,
+  LEGACY_PRE_STRATEGIC_DEFAULT_DISABLED,
+  FREE_MAX_SOURCES,
+);
+const MIGRATIONS = buildMigrations(
+  FEEDS,
+  new Set(computeLegacyDefaultDisabledSources()),
+  new Set(FRONTLINE_EUROPE_PROTECTED_SOURCES),
+  LEGACY_PRE_STRATEGIC_CAP_DISABLED,
+  LEGACY_PRE_STRATEGIC_DEFAULT_DISABLED,
+  getStrategicDefaultSources(),
+  LEGACY_PRE_STRATEGIC_CAP_DISABLED,
+);
 
 type SyncState = 'synced' | 'pending' | 'syncing' | 'conflict' | 'offline' | 'signed-out' | 'error';
 
@@ -192,7 +222,7 @@ export function isCloudSyncEnabled(): boolean {
 
 // ── State helpers ─────────────────────────────────────────────────────────────
 
-function getSyncVersion(): number {
+export function getSyncVersion(): number {
   return parseInt(localStorage.getItem(KEY_SYNC_VERSION) ?? '0', 10) || 0;
 }
 
@@ -216,14 +246,14 @@ function buildCloudBlob(): Record<string, string> {
   return blob;
 }
 
-function dispatchCloudPrefsApplied(keys: CloudSyncKey[]): void {
+function dispatchCloudPrefsApplied(keys: CloudSyncKey[], syncVersion?: number): void {
   if (keys.length === 0 || typeof window === 'undefined') return;
   window.dispatchEvent(new CustomEvent<CloudPrefsAppliedDetail>(CLOUD_PREFS_APPLIED_EVENT, {
-    detail: { keys },
+    detail: { keys, ...(syncVersion === undefined ? {} : { syncVersion }) },
   }));
 }
 
-function applyCloudBlob(data: Record<string, unknown>): void {
+function applyCloudBlob(data: Record<string, unknown>, syncVersion?: number): void {
   const changedKeys: CloudSyncKey[] = [];
   _suppressPatch = true;
   try {
@@ -240,7 +270,7 @@ function applyCloudBlob(data: Record<string, unknown>): void {
   } finally {
     _suppressPatch = false;
   }
-  dispatchCloudPrefsApplied(changedKeys);
+  dispatchCloudPrefsApplied(changedKeys, syncVersion);
 }
 
 function applyMigrations(
@@ -446,7 +476,7 @@ async function resolveConflictWithMerge(token: string, variant: string, callerGe
   }
   const migratedCloud = applyMigrations(fresh.data, fresh.schemaVersion ?? 1);
   const merged = mergeCloudWithLocalDirty(migratedCloud, buildCloudBlob(), _dirtyKeys);
-  applyCloudBlob(merged);
+  applyCloudBlob(merged, fresh.syncVersion);
   setSyncVersion(fresh.syncVersion);
   setLocalSchemaVersion(CURRENT_PREFS_SCHEMA_VERSION);
   const retry = await postCloudPrefs(token, variant, merged, fresh.syncVersion);
@@ -510,7 +540,7 @@ export function onSignIn(userId: string, variant: string): Promise<void> {
         const toApply = hasDirty
           ? mergeCloudWithLocalDirty(migrated, buildCloudBlob(), _dirtyKeys)
           : migrated;
-        applyCloudBlob(toApply);
+        applyCloudBlob(toApply, cloud.syncVersion);
         setSyncVersion(cloud.syncVersion);
         // After applyCloudBlob, local data IS at CURRENT schema (applyMigrations
         // ran every step from cloud.schemaVersion to CURRENT). Mark it so the

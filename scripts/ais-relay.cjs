@@ -34,6 +34,7 @@ const {
 } = require('./lib/anthropic-messages.cjs');
 const {
   YahooQuoteSummaryClient,
+  buildSectorSeedMeta,
   buildSectorValuationCoverage,
   buildSectorValuationPublication,
   collectSectorValuations,
@@ -2429,24 +2430,43 @@ async function seedSectorSummary() {
     return 0;
   }
 
-  const fetchedAt = Date.now();
   const {
     valuations,
     valuationSources,
-    valuationCount,
+    valuationCount: valCount,
+    unavailableSymbols,
+    valuationDiagnostics,
+    lastGoodFetchedAt,
+    lastGoodMetricsUsed,
   } = await collectSectorValuations({
     symbols: SECTOR_SYMBOLS,
     fetchValue: fetchYahooQuoteSummary,
+    fetchValueDetailed: (symbol, options) => _yahooQuoteSummaryClient.fetchDetailed(symbol, options),
     parseValue: parseSectorValuation,
+    sleepFn: sleep,
+    v7UserAgent: CHROME_UA,
+    v7ResolveProxyString: resolveProxyString,
+    v7Client: _yahooQuoteSummaryClient,
+    upstashGet,
+    upstashSet,
   });
+
   const valuationCoverage = buildSectorValuationCoverage({
-    valuationCount,
+    valuationCount: valCount,
     expectedCount: SECTOR_SYMBOLS.length,
-    fetchedAt,
+    fetchedAt: Date.now(),
     sources: valuationSources,
+    unavailableSymbols,
+    valuationDiagnostics,
+    lastGoodFetchedAt,
+    lastGoodMetricsUsed,
   });
-  const publication = buildSectorValuationPublication({ sectors, valuations, valuationCoverage });
-  const ok = await envelopeWrite('market:sectors:v2', publication.payload, MARKET_SEED_TTL, publication.meta);
+  const { payload, meta: sectorMeta } = buildSectorValuationPublication({
+    sectors,
+    valuations,
+    valuationCoverage,
+  });
+  const ok = await envelopeWrite('market:sectors:v2', payload, MARKET_SEED_TTL, { recordCount: sectors.length, sourceVersion: 'market-sectors' });
   const quotesKey = `market:quotes:v1:${[...SECTOR_SYMBOLS].sort().join(',')}`;
   const sectorQuotes = sectors.map((s) => ({
     symbol: s.symbol, name: s.name, display: s.name,
@@ -2454,8 +2474,9 @@ async function seedSectorSummary() {
   }));
   const quotesPayload = { quotes: sectorQuotes, finnhubSkipped: false, skipReason: '', rateLimited: false };
   const ok2 = await envelopeWrite(quotesKey, quotesPayload, MARKET_SEED_TTL, { recordCount: sectorQuotes.length, sourceVersion: 'market-sectors' });
-  const ok3 = await upstashSet('seed-meta:market:sectors', publication.meta, 604800);
-  console.log(`[Market] Seeded ${sectors.length}/${SECTOR_SYMBOLS.length} sectors, ${valuationCount} valuations (redis: ${ok && ok2 && ok3 ? 'OK' : 'PARTIAL'})`);
+  const persistedSectorMeta = buildSectorSeedMeta(sectorMeta, ok);
+  const ok3 = await upstashSet('seed-meta:market:sectors', persistedSectorMeta, 604800);
+  console.log(`[Market] Seeded ${sectors.length}/${SECTOR_SYMBOLS.length} sectors, ${valCount}/${SECTOR_SYMBOLS.length} valuations (${valuationCoverage.sourceStatus}; redis: ${ok && ok2 && ok3 ? 'OK' : 'PARTIAL'})`);
   return sectors.length;
 }
 
@@ -6884,6 +6905,21 @@ const relayMetricsLifetime = {
   notificationDedupSetNxErrors: 0,
   notificationDedupSetNxFailOpen: 0,
   notificationDedupSetNxFailClosed: 0,
+  googleFlightsSuccess: 0,
+  googleFlights429: 0,
+  googleFlightsTimeout: 0,
+  googleFlightsAuthRejection: 0,
+  googleFlightsTerminalFailure: 0,
+  rssSuccess: 0,
+  rssTimeout: 0,
+  rssAuthRejection: 0,
+  rssFallback: 0,
+  rssTerminalFailure: 0,
+  aisSnapshotSuccess: 0,
+  aisSnapshotTimeout: 0,
+  aisSnapshotAuthRejection: 0,
+  aisSnapshotUnauthorizedClient: 0,
+  aisSnapshotTerminalFailure: 0,
 };
 let relayMetricsQueueMaxLifetime = 0;
 let relayMetricsCurrentSec = 0;
@@ -6905,6 +6941,21 @@ function createRelayMetricsBucket() {
     notificationDedupSetNxFailOpen: 0,
     notificationDedupSetNxFailClosed: 0,
     queueMax: 0,
+    googleFlightsSuccess: 0,
+    googleFlights429: 0,
+    googleFlightsTimeout: 0,
+    googleFlightsAuthRejection: 0,
+    googleFlightsTerminalFailure: 0,
+    rssSuccess: 0,
+    rssTimeout: 0,
+    rssAuthRejection: 0,
+    rssFallback: 0,
+    rssTerminalFailure: 0,
+    aisSnapshotSuccess: 0,
+    aisSnapshotTimeout: 0,
+    aisSnapshotAuthRejection: 0,
+    aisSnapshotUnauthorizedClient: 0,
+    aisSnapshotTerminalFailure: 0,
   };
 }
 
@@ -6982,6 +7033,21 @@ function getRelayRollingMetrics() {
     rollup.notificationDedupSetNxErrors += bucket.notificationDedupSetNxErrors;
     rollup.notificationDedupSetNxFailOpen += bucket.notificationDedupSetNxFailOpen;
     rollup.notificationDedupSetNxFailClosed += bucket.notificationDedupSetNxFailClosed;
+    rollup.googleFlightsSuccess += bucket.googleFlightsSuccess;
+    rollup.googleFlights429 += bucket.googleFlights429;
+    rollup.googleFlightsTimeout += bucket.googleFlightsTimeout;
+    rollup.googleFlightsAuthRejection += bucket.googleFlightsAuthRejection;
+    rollup.googleFlightsTerminalFailure += bucket.googleFlightsTerminalFailure;
+    rollup.rssSuccess += bucket.rssSuccess;
+    rollup.rssTimeout += bucket.rssTimeout;
+    rollup.rssAuthRejection += bucket.rssAuthRejection;
+    rollup.rssFallback += bucket.rssFallback;
+    rollup.rssTerminalFailure += bucket.rssTerminalFailure;
+    rollup.aisSnapshotSuccess += bucket.aisSnapshotSuccess;
+    rollup.aisSnapshotTimeout += bucket.aisSnapshotTimeout;
+    rollup.aisSnapshotAuthRejection += bucket.aisSnapshotAuthRejection;
+    rollup.aisSnapshotUnauthorizedClient += bucket.aisSnapshotUnauthorizedClient;
+    rollup.aisSnapshotTerminalFailure += bucket.aisSnapshotTerminalFailure;
     if (bucket.queueMax > rollup.queueMax) rollup.queueMax = bucket.queueMax;
   }
 
@@ -7015,6 +7081,27 @@ function getRelayRollingMetrics() {
       dedupSetNxFailOpen: rollup.notificationDedupSetNxFailOpen,
       dedupSetNxFailClosed: rollup.notificationDedupSetNxFailClosed,
     },
+    googleFlights: {
+      success: rollup.googleFlightsSuccess,
+      throttle429: rollup.googleFlights429,
+      timeout: rollup.googleFlightsTimeout,
+      authRejection: rollup.googleFlightsAuthRejection,
+      terminalFailure: rollup.googleFlightsTerminalFailure,
+    },
+    rss: {
+      success: rollup.rssSuccess,
+      timeout: rollup.rssTimeout,
+      authRejection: rollup.rssAuthRejection,
+      fallback: rollup.rssFallback,
+      terminalFailure: rollup.rssTerminalFailure,
+    },
+    aisSnapshot: {
+      success: rollup.aisSnapshotSuccess,
+      timeout: rollup.aisSnapshotTimeout,
+      authRejection: rollup.aisSnapshotAuthRejection,
+      unauthorizedClient: rollup.aisSnapshotUnauthorizedClient,
+      terminalFailure: rollup.aisSnapshotTerminalFailure,
+    },
     lifetime: {
       openskyRequests: relayMetricsLifetime.openskyRequests,
       openskyCacheHit: relayMetricsLifetime.openskyCacheHit,
@@ -7027,6 +7114,21 @@ function getRelayRollingMetrics() {
       notificationDedupSetNxFailOpen: relayMetricsLifetime.notificationDedupSetNxFailOpen,
       notificationDedupSetNxFailClosed: relayMetricsLifetime.notificationDedupSetNxFailClosed,
       queueMax: relayMetricsQueueMaxLifetime,
+      googleFlightsSuccess: relayMetricsLifetime.googleFlightsSuccess,
+      googleFlights429: relayMetricsLifetime.googleFlights429,
+      googleFlightsTimeout: relayMetricsLifetime.googleFlightsTimeout,
+      googleFlightsAuthRejection: relayMetricsLifetime.googleFlightsAuthRejection,
+      googleFlightsTerminalFailure: relayMetricsLifetime.googleFlightsTerminalFailure,
+      rssSuccess: relayMetricsLifetime.rssSuccess,
+      rssTimeout: relayMetricsLifetime.rssTimeout,
+      rssAuthRejection: relayMetricsLifetime.rssAuthRejection,
+      rssFallback: relayMetricsLifetime.rssFallback,
+      rssTerminalFailure: relayMetricsLifetime.rssTerminalFailure,
+      aisSnapshotSuccess: relayMetricsLifetime.aisSnapshotSuccess,
+      aisSnapshotTimeout: relayMetricsLifetime.aisSnapshotTimeout,
+      aisSnapshotAuthRejection: relayMetricsLifetime.aisSnapshotAuthRejection,
+      aisSnapshotUnauthorizedClient: relayMetricsLifetime.aisSnapshotUnauthorizedClient,
+      aisSnapshotTerminalFailure: relayMetricsLifetime.aisSnapshotTerminalFailure,
     },
   };
 }
@@ -9581,6 +9683,8 @@ const server = http.createServer(async (req, res) => {
   const isPublicRoute = pathname === '/health' || pathname === '/' || isRssRoute || pathname.startsWith('/widget-agent');
   if (!isPublicRoute) {
     if (!isAuthorizedRequest(req)) {
+      if (pathname.startsWith('/ais/snapshot')) incrementRelayMetric('aisSnapshotUnauthorizedClient');
+      else incrementRelayMetric('aisSnapshotAuthRejection');
       return safeEnd(res, 401, { 'Content-Type': 'application/json' },
         JSON.stringify({ error: 'Unauthorized', time: Date.now() }));
     }
@@ -9703,6 +9807,7 @@ const server = http.createServer(async (req, res) => {
     // case only (no tankers, no bbox). Used by the existing AIS density +
     // military-detection consumers, which are the vast majority of traffic.
     if (!includeTankers && !bbox) {
+      incrementRelayMetric('aisSnapshotSuccess');
       const json = includeCandidates ? lastSnapshotWithCandJson : lastSnapshotJson;
       const gz = includeCandidates ? lastSnapshotWithCandGzip : lastSnapshotGzip;
       const br = includeCandidates ? lastSnapshotWithCandBrotli : lastSnapshotBrotli;
@@ -9721,6 +9826,7 @@ const server = http.createServer(async (req, res) => {
         }, JSON.stringify(payload));
       }
     } else {
+      incrementRelayMetric('aisSnapshotSuccess');
       // Live-tanker path: bbox-filtered + tanker-included responses skip the
       // pre-gzipped cache (bbox space would explode the cache key set).
       // Handler-side 60s cache (server/worldmonitor/maritime/v1/get-vessel-snapshot.ts)
@@ -10172,6 +10278,12 @@ const GF_HEADERS = {
   'Referer': 'https://www.google.com/flights',
 };
 
+let gfGlobal429Until = 0;
+const GF_429_COOLDOWN_MS = Number(process.env.GF_429_COOLDOWN_MS) || 120 * 1000;
+const gfNegativeCache = new Map();
+const GF_NEGATIVE_CACHE_TTL = 60 * 1000;
+const GF_NEGATIVE_CACHE_MAX = 64;
+
 /**
  * Encode a Google Flights filter structure for use in f.req POST body.
  * Mirrors fli's FlightSearchFilters.encode() / DateSearchFilters.encode().
@@ -10445,13 +10557,37 @@ async function handleGoogleFlightsSearch(req, res) {
     });
 
     const body = `f.req=${encodeGfFilters(filters)}`;
+
+    // Global 429 cooldown: block upstream fetches during cooldown
+    if (Date.now() < gfGlobal429Until) {
+      incrementRelayMetric('googleFlights429');
+      const flights = [];
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ flights, cooldown: true }));
+      return;
+    }
+
     const gfResp = await fetch(GF_SHOPPING_URL, {
       method: 'POST',
       headers: GF_HEADERS,
       body,
       signal: AbortSignal.timeout(15_000),
     });
-    if (!gfResp.ok) throw new Error(`Google Flights returned ${gfResp.status}`);
+    if (gfResp.status === 429) {
+      gfGlobal429Until = Date.now() + GF_429_COOLDOWN_MS;
+      console.warn(`[Google Flights] 429 — global cooldown ${GF_429_COOLDOWN_MS / 1000}s`);
+      incrementRelayMetric('googleFlights429');
+      throw new Error(`Google Flights returned ${gfResp.status}`);
+    }
+    if (gfResp.status === 401 || gfResp.status === 403) {
+      incrementRelayMetric('googleFlightsAuthRejection');
+      throw new Error(`Google Flights returned ${gfResp.status}`);
+    }
+    if (!gfResp.ok) {
+      incrementRelayMetric('googleFlightsTerminalFailure');
+      throw new Error(`Google Flights returned ${gfResp.status}`);
+    }
+    incrementRelayMetric('googleFlightsSuccess');
 
     const text = await gfResp.text();
     const flights = parseGfFlights(text);
@@ -10459,6 +10595,12 @@ async function handleGoogleFlightsSearch(req, res) {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ flights }));
   } catch (err) {
+    const isTimeout = err?.name === 'TimeoutError' || err?.message?.includes('timed out');
+    if (isTimeout) {
+      incrementRelayMetric('googleFlightsTimeout');
+    } else if (!err?.message?.startsWith('Google Flights returned')) {
+      incrementRelayMetric('googleFlightsTerminalFailure');
+    }
     console.error('[Google Flights] search error:', err?.message || err);
     res.writeHead(502, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ error: err?.message || 'search failed', flights: [] }));
@@ -10506,15 +10648,41 @@ async function handleGoogleFlightsDates(req, res) {
     let hasPartialFailure = false;
 
     if (totalDays <= MAX_CHUNK) {
+      if (Date.now() < gfGlobal429Until) {
+        incrementRelayMetric('googleFlights429');
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ dates: [], partial: false, cooldown: true }));
+        return;
+      }
       const filters = buildDateFilters(params);
       const body = `f.req=${encodeGfFilters(filters)}`;
       const gfResp = await fetch(GF_CALENDAR_URL, { method: 'POST', headers: GF_HEADERS, body, signal: AbortSignal.timeout(20_000) });
-      if (!gfResp.ok) throw new Error(`Google Flights returned ${gfResp.status}`);
+      if (gfResp.status === 429) {
+        gfGlobal429Until = Date.now() + GF_429_COOLDOWN_MS;
+        console.warn(`[Google Flights] dates 429 — global cooldown ${GF_429_COOLDOWN_MS / 1000}s`);
+        incrementRelayMetric('googleFlights429');
+        throw new Error(`Google Flights returned ${gfResp.status}`);
+      }
+      if (gfResp.status === 401 || gfResp.status === 403) {
+        incrementRelayMetric('googleFlightsAuthRejection');
+        throw new Error(`Google Flights returned ${gfResp.status}`);
+      }
+      if (!gfResp.ok) {
+        incrementRelayMetric('googleFlightsTerminalFailure');
+        throw new Error(`Google Flights returned ${gfResp.status}`);
+      }
+      incrementRelayMetric('googleFlightsSuccess');
       const text = await gfResp.text();
       allDates.push(...parseGfDates(text, isRoundTrip));
     } else {
       const current = new Date(start);
       while (current <= end) {
+        if (Date.now() < gfGlobal429Until) {
+          incrementRelayMetric('googleFlights429');
+          hasPartialFailure = true;
+          current.setDate(current.getDate() + MAX_CHUNK);
+          continue;
+        }
         const chunkEnd = new Date(current);
         chunkEnd.setDate(chunkEnd.getDate() + MAX_CHUNK - 1);
         if (chunkEnd > end) chunkEnd.setTime(end.getTime());
@@ -10525,11 +10693,29 @@ async function handleGoogleFlightsDates(req, res) {
           endDate: chunkEnd.toISOString().slice(0, 10),
         });
         const body = `f.req=${encodeGfFilters(chunkFilters)}`;
-        const gfResp = await fetch(GF_CALENDAR_URL, { method: 'POST', headers: GF_HEADERS, body, signal: AbortSignal.timeout(20_000) });
-        if (gfResp.ok) {
+        let gfResp;
+        try {
+          gfResp = await fetch(GF_CALENDAR_URL, { method: 'POST', headers: GF_HEADERS, body, signal: AbortSignal.timeout(20_000) });
+        } catch {
+          incrementRelayMetric('googleFlightsTimeout');
+          hasPartialFailure = true;
+          current.setDate(current.getDate() + MAX_CHUNK);
+          continue;
+        }
+        if (gfResp.status === 429) {
+          gfGlobal429Until = Date.now() + GF_429_COOLDOWN_MS;
+          console.warn(`[Google Flights] chunk 429 — global cooldown ${GF_429_COOLDOWN_MS / 1000}s`);
+          incrementRelayMetric('googleFlights429');
+          hasPartialFailure = true;
+        } else if (gfResp.status === 401 || gfResp.status === 403) {
+          incrementRelayMetric('googleFlightsAuthRejection');
+          hasPartialFailure = true;
+        } else if (gfResp.ok) {
+          incrementRelayMetric('googleFlightsSuccess');
           const text = await gfResp.text();
           allDates.push(...parseGfDates(text, isRoundTrip));
         } else {
+          incrementRelayMetric('googleFlightsTerminalFailure');
           hasPartialFailure = true;
           console.warn(`[Google Flights] dates chunk ${current.toISOString().slice(0, 10)} failed: ${gfResp.status}`);
         }
@@ -10543,6 +10729,12 @@ async function handleGoogleFlightsDates(req, res) {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ dates: allDates, partial: hasPartialFailure }));
   } catch (err) {
+    const isTimeout = err?.name === 'TimeoutError' || err?.message?.includes('timed out');
+    if (isTimeout) {
+      incrementRelayMetric('googleFlightsTimeout');
+    } else if (!err?.message?.startsWith('Google Flights returned')) {
+      incrementRelayMetric('googleFlightsTerminalFailure');
+    }
     console.error('[Google Flights] dates error:', err?.message || err);
     res.writeHead(502, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ error: err?.message || 'search failed', dates: [] }));

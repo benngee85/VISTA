@@ -31,7 +31,7 @@ function serviceBlock(compose: string, serviceName: string): string {
   const match = normalizedCompose.match(
     new RegExp(`^  ${serviceName}:\\n([\\s\\S]*?)(?=^  [a-zA-Z0-9_-]+:\\n|^volumes:)`, 'm'),
   );
-  assert.ok(match, `compose.yaml must define ${serviceName} service`);
+  assert.ok(match, `docker-compose.yml must define ${serviceName} service`);
   return match[1];
 }
 
@@ -61,21 +61,21 @@ const SHIPPED_DEFAULT_PATTERNS: RegExp[] = [
 ];
 
 describe('docker self-hosting — no default credentials (#3804)', () => {
-  it('compose.yaml does not default CACHE_REST_TOKEN or UPSTASH_REDIS_REST_TOKEN to a literal', async () => {
-    const compose = await read('compose.yaml');
+  it('docker-compose.yml does not default CACHE_REST_TOKEN or UPSTASH_REDIS_REST_TOKEN to a literal', async () => {
+    const compose = await read('docker-compose.yml');
     const entrypoint = await read('docker/valkey-entrypoint.sh');
     assert.ok(
       !WM_LOCAL_TOKEN.test(compose),
-      'compose.yaml must not contain the literal wm-local-token — see #3804',
+      'docker-compose.yml must not contain the literal wm-local-token — see #3804',
     );
     // Belt-and-braces: any future "default" of any shape on either token name fails the test.
     assert.ok(
       !/\$\{CACHE_REST_TOKEN:-/.test(compose),
-      'compose.yaml must not provide a default for ${CACHE_REST_TOKEN}; require fail-closed via ${CACHE_REST_TOKEN:?...}',
+      'docker-compose.yml must not provide a default for ${CACHE_REST_TOKEN}; require fail-closed via ${CACHE_REST_TOKEN:?...}',
     );
     assert.ok(
       !/\$\{VALKEY_PASSWORD:-/.test(compose),
-      'compose.yaml must not provide a default for ${VALKEY_PASSWORD}; require fail-closed via ${VALKEY_PASSWORD:?...}',
+      'docker-compose.yml must not provide a default for ${VALKEY_PASSWORD}; require fail-closed via ${VALKEY_PASSWORD:?...}',
     );
     // The fail-closed assertion: EVERY expansion of either var must use
     // the ${VAR:?...} form. A bare ${VAR} silently expands to empty if
@@ -85,23 +85,23 @@ describe('docker self-hosting — no default credentials (#3804)', () => {
     assert.equal(
       bareTokenExpansions.length,
       0,
-      `compose.yaml must use \${CACHE_REST_TOKEN:?...} at every expansion (found ${bareTokenExpansions.length} bare \${CACHE_REST_TOKEN})`,
+      `docker-compose.yml must use \${CACHE_REST_TOKEN:?...} at every expansion (found ${bareTokenExpansions.length} bare \${CACHE_REST_TOKEN})`,
     );
     const barePasswordExpansions = compose.match(/\$\{VALKEY_PASSWORD(?![:?])/g) ?? [];
     assert.equal(
       barePasswordExpansions.length,
       0,
-      `compose.yaml must use \${VALKEY_PASSWORD:?...} at every expansion (found ${barePasswordExpansions.length} bare \${VALKEY_PASSWORD})`,
+      `docker-compose.yml must use \${VALKEY_PASSWORD:?...} at every expansion (found ${barePasswordExpansions.length} bare \${VALKEY_PASSWORD})`,
     );
     // Both vars must appear in at least one fail-closed expansion (i.e. the
     // file actually requires them somewhere, not just by total absence).
     assert.ok(
       /\$\{CACHE_REST_TOKEN:\?/.test(compose),
-      'compose.yaml must require CACHE_REST_TOKEN via ${CACHE_REST_TOKEN:?...} fail-closed syntax',
+      'docker-compose.yml must require CACHE_REST_TOKEN via ${CACHE_REST_TOKEN:?...} fail-closed syntax',
     );
     assert.ok(
       /\$\{VALKEY_PASSWORD:\?/.test(compose),
-      'compose.yaml must require VALKEY_PASSWORD via ${VALKEY_PASSWORD:?...} fail-closed syntax',
+      'docker-compose.yml must require VALKEY_PASSWORD via ${VALKEY_PASSWORD:?...} fail-closed syntax',
     );
     // Valkey itself must be authenticated.
     assert.match(
@@ -111,29 +111,29 @@ describe('docker self-hosting — no default credentials (#3804)', () => {
     );
   });
 
-  it('compose.yaml wires valkey-rest into the ais-relay seed loops', async () => {
-    const compose = await read('compose.yaml');
+  it('docker-compose.yml wires redis-rest into the ais-relay seed loops', async () => {
+    const compose = await read('docker-compose.yml');
     const relay = serviceBlock(compose, 'ais-relay');
 
     assert.match(
       relay,
-      /UPSTASH_REDIS_REST_URL:\s*"http:\/\/valkey-rest:8080"/,
-      'ais-relay must point UPSTASH_REDIS_REST_URL at the in-network valkey-rest proxy',
+      /UPSTASH_REDIS_REST_URL:\s*"http:\/\/redis-rest:8080"/,
+      'ais-relay must point UPSTASH_REDIS_REST_URL at the in-network redis-rest proxy',
     );
     assert.match(
       relay,
       /UPSTASH_REDIS_REST_TOKEN:\s*"\$\{CACHE_REST_TOKEN:\?/,
-      'ais-relay must pass the fail-closed CACHE_REST_TOKEN to valkey-rest',
+      'ais-relay must pass the fail-closed CACHE_REST_TOKEN to redis-rest',
     );
     assert.match(
       relay,
       /UPSTASH_ALLOW_INSECURE_HTTP:\s*"true"/,
-      'ais-relay must explicitly opt into the plain-http valkey-rest proxy inside the compose network',
+      'ais-relay must explicitly opt into the plain-http redis-rest proxy inside the compose network',
     );
     assert.match(
       relay,
-      /depends_on:\s*\n\s+valkey-rest:\s*\n\s+condition:\s*service_healthy/,
-      'ais-relay must wait for valkey-rest so Valkey-backed seed loops can start in the bundled stack',
+      /depends_on:\s*\n\s+redis-rest:\s*\n\s+condition:\s*service_healthy/,
+      'ais-relay must wait for redis-rest so Valkey-backed seed loops can start in the bundled stack',
     );
   });
 
