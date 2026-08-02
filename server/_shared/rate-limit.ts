@@ -24,6 +24,52 @@ export { getClientIp, hasCloudflareTransitProof, UNKNOWN_CLIENT_IP } from './cli
 // MCP limiter to unblock the suite (PR #3963).
 const REDIS_TEST_RETRY_OPTS: { retry?: false } = process.env.NODE_TEST_CONTEXT ? { retry: false } : {};
 
+interface RateLimitRedisConfig {
+  url: string | undefined;
+  token: string | undefined;
+}
+
+/**
+ * Resolve the Redis REST authority used by rate limiting.
+ *
+ * Self-hosted Compose uses CACHE_REST_* as the canonical authority.
+ * Hosted deployments retain UPSTASH_REDIS_REST_* precedence.
+ */
+function getRateLimitRedisConfig(): RateLimitRedisConfig {
+  const clean = (value: string | undefined): string | undefined => {
+    const normalized = value?.trim();
+    return normalized ? normalized : undefined;
+  };
+
+  const cacheUrl = clean(process.env.CACHE_REST_URL);
+  const redisUrl = clean(process.env.REDIS_REST_URL);
+  const upstashUrl = clean(process.env.UPSTASH_REDIS_REST_URL);
+
+  const localSelfHosted = [cacheUrl, redisUrl, upstashUrl].some(
+    (value) =>
+      value != null &&
+      /(^|\/)redis-rest(?::|\/|$)/i.test(value),
+  );
+
+  if (localSelfHosted) {
+    return {
+      url: cacheUrl ?? upstashUrl ?? redisUrl,
+      token:
+        clean(process.env.CACHE_REST_TOKEN)
+        ?? clean(process.env.REDIS_TOKEN)
+        ?? clean(process.env.UPSTASH_REDIS_REST_TOKEN),
+    };
+  }
+
+  return {
+    url: upstashUrl ?? cacheUrl ?? redisUrl,
+    token:
+      clean(process.env.UPSTASH_REDIS_REST_TOKEN)
+      ?? clean(process.env.CACHE_REST_TOKEN)
+      ?? clean(process.env.REDIS_TOKEN),
+  };
+}
+
 let ratelimit: Ratelimit | null = null;
 const GLOBAL_RATE_LIMIT = 600;
 const GLOBAL_RATE_WINDOW: Duration = '60 s';
@@ -31,8 +77,7 @@ const GLOBAL_RATE_WINDOW_SECONDS = durationToSeconds(GLOBAL_RATE_WINDOW);
 
 function getRatelimit(): Ratelimit | null {
   if (ratelimit) return ratelimit;
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  const { url, token } = getRateLimitRedisConfig();
   if (!url || !token) return null;
 
   ratelimit = new Ratelimit({
@@ -433,8 +478,7 @@ function getEndpointRatelimit(pathname: string): Ratelimit | null {
   const cached = endpointLimiters.get(pathname);
   if (cached) return cached;
 
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  const { url, token } = getRateLimitRedisConfig();
   if (!url || !token) return null;
 
   const rl = new Ratelimit({
@@ -507,8 +551,7 @@ function getScopedRatelimit(scope: string, limit: number, window: Duration): Rat
   const cached = scopedLimiters.get(cacheKey);
   if (cached) return cached;
 
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  const { url, token } = getRateLimitRedisConfig();
   if (!url || !token) return null;
 
   const rl = new Ratelimit({

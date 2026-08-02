@@ -109,6 +109,10 @@ beforeEach(() => {
   });
   checkRateLimit.mockClear().mockResolvedValue(null);
   checkFailClosedScopedIpRateLimit.mockReset().mockResolvedValue(null);
+  delete process.env.CACHE_REST_URL;
+  delete process.env.CACHE_REST_TOKEN;
+  delete process.env.REDIS_REST_URL;
+  delete process.env.REDIS_TOKEN;
   delete process.env.UPSTASH_REDIS_REST_URL;
   delete process.env.UPSTASH_REDIS_REST_TOKEN;
 });

@@ -25,6 +25,47 @@ export {
 // REDIS_TEST_RETRY_OPTS in server/_shared/rate-limit.ts and PR #3963.
 const REDIS_TEST_RETRY_OPTS = process.env.NODE_TEST_CONTEXT ? { retry: false } : {};
 
+/**
+ * Resolve the Redis REST authority used by rate limiting.
+ *
+ * Self-hosted Compose uses CACHE_REST_* as the canonical authority.
+ * Hosted deployments retain UPSTASH_REDIS_REST_* precedence.
+ */
+function getRateLimitRedisConfig() {
+  const clean = (value) => {
+    const normalized = value?.trim();
+    return normalized || undefined;
+  };
+
+  const cacheUrl = clean(process.env.CACHE_REST_URL);
+  const redisUrl = clean(process.env.REDIS_REST_URL);
+  const upstashUrl = clean(process.env.UPSTASH_REDIS_REST_URL);
+
+  const localSelfHosted = [cacheUrl, redisUrl, upstashUrl].some(
+    (value) =>
+      value != null &&
+      /(^|\/)redis-rest(?::|\/|$)/i.test(value),
+  );
+
+  if (localSelfHosted) {
+    return {
+      url: cacheUrl ?? upstashUrl ?? redisUrl,
+      token:
+        clean(process.env.CACHE_REST_TOKEN)
+        ?? clean(process.env.REDIS_TOKEN)
+        ?? clean(process.env.UPSTASH_REDIS_REST_TOKEN),
+    };
+  }
+
+  return {
+    url: upstashUrl ?? cacheUrl ?? redisUrl,
+    token:
+      clean(process.env.UPSTASH_REDIS_REST_TOKEN)
+      ?? clean(process.env.CACHE_REST_TOKEN)
+      ?? clean(process.env.REDIS_TOKEN),
+  };
+}
+
 const DEFAULT_RATE_LIMIT_SCOPE = 'global';
 const DEFAULT_RATE_LIMIT = 600;
 const DEFAULT_RATE_LIMIT_WINDOW = '60 s';
@@ -44,8 +85,7 @@ function getRatelimit(policy) {
   const cached = ratelimits.get(cacheKey);
   if (cached) return cached;
 
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  const { url, token } = getRateLimitRedisConfig();
   if (!url || !token) return null;
 
   const ratelimit = new Ratelimit({
