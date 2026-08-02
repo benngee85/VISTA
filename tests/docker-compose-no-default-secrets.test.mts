@@ -111,29 +111,29 @@ describe('docker self-hosting — no default credentials (#3804)', () => {
     );
   });
 
-  it('compose.yaml wires valkey-rest into the vista-relay seed loops', async () => {
+  it('compose.yaml wires valkey-rest into the ais-relay seed loops', async () => {
     const compose = await read('compose.yaml');
-    const relay = serviceBlock(compose, 'vista-relay');
+    const relay = serviceBlock(compose, 'ais-relay');
 
     assert.match(
       relay,
       /UPSTASH_REDIS_REST_URL:\s*"http:\/\/valkey-rest:8080"/,
-      'vista-relay must point UPSTASH_REDIS_REST_URL at the in-network valkey-rest proxy',
+      'ais-relay must point UPSTASH_REDIS_REST_URL at the in-network valkey-rest proxy',
     );
     assert.match(
       relay,
       /UPSTASH_REDIS_REST_TOKEN:\s*"\$\{CACHE_REST_TOKEN:\?/,
-      'vista-relay must pass the fail-closed CACHE_REST_TOKEN to valkey-rest',
+      'ais-relay must pass the fail-closed CACHE_REST_TOKEN to valkey-rest',
     );
     assert.match(
       relay,
       /UPSTASH_ALLOW_INSECURE_HTTP:\s*"true"/,
-      'vista-relay must explicitly opt into the plain-http valkey-rest proxy inside the compose network',
+      'ais-relay must explicitly opt into the plain-http valkey-rest proxy inside the compose network',
     );
     assert.match(
       relay,
       /depends_on:\s*\n\s+valkey-rest:\s*\n\s+condition:\s*service_healthy/,
-      'vista-relay must wait for valkey-rest so Valkey-backed seed loops can start in the bundled stack',
+      'ais-relay must wait for valkey-rest so Valkey-backed seed loops can start in the bundled stack',
     );
   });
 

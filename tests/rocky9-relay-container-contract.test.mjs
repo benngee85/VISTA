@@ -36,7 +36,7 @@ test('Rocky relay uses Node 24, direct PID 1 and no runtime package manager', ()
 });
 
 test('Rocky relay carries the validated Kubernetes-oriented controls', () => {
-  assert.match(compose, /vista-relay-rocky9:/);
+  assert.match(compose, /ais-relay-rocky9:/);
   assert.match(compose, /user: "1000710000:0"/);
   assert.match(compose, /read_only: true/);
   assert.match(compose, /mem_reservation: 384m/);
@@ -45,6 +45,6 @@ test('Rocky relay carries the validated Kubernetes-oriented controls', () => {
 });
 
 test('Rocky API resolves the parallel relay without removing Alpine rollback', () => {
-  assert.match(compose, /WS_RELAY_URL: "http:\/\/vista-relay-rocky9:3004"/);
-  assert.doesNotMatch(compose, /^\s{2}vista-relay:\s*$/m);
+  assert.match(compose, /WS_RELAY_URL: "http:\/\/ais-relay-rocky9:3004"/);
+  assert.doesNotMatch(compose, /^\s{2}ais-relay:\s*$/m);
 });

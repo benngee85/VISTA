@@ -25,8 +25,8 @@ services:
     environment:
       WORLDMONITOR_RELAY_KEY: "${WORLDMONITOR_RELAY_KEY:-}"
       RELAY_SHARED_SECRET: "${RELAY_SHARED_SECRET:?RELAY_SHARED_SECRET required}"
-      CACHE_REST_URL: "http://valkey-rest:8080"
-      UPSTASH_REDIS_REST_URL: "http://valkey-rest:8080"
+      CACHE_REST_URL: "http://redis-rest:8080"
+      UPSTASH_REDIS_REST_URL: "http://redis-rest:8080"
       CACHE_REST_TOKEN: "${CACHE_REST_TOKEN:?CACHE_REST_TOKEN required — generate with: openssl rand -hex 32}"
       UPSTASH_REDIS_REST_TOKEN: "${CACHE_REST_TOKEN:?CACHE_REST_TOKEN required — generate with: openssl rand -hex 32}"
       LOCAL_API_PORT: "46123"
@@ -37,7 +37,7 @@ services:
       WORLDMONITOR_SEED_REFRESH_KEY: "${WORLDMONITOR_SEED_REFRESH_KEY:?WORLDMONITOR_SEED_REFRESH_KEY required}"
       VISTA_SELF_HOSTED_API_PLAN_ACCESS: "${VISTA_SELF_HOSTED_API_PLAN_ACCESS:-false}"
       VISTA_API_PLAN_VALIDATION_URL: "${VISTA_API_PLAN_VALIDATION_URL:-https://api.worldmonitor.app/api/economic/v1/list-global-tenders}"
-      WS_RELAY_URL: "http://vista-relay:3004"
+      WS_RELAY_URL: "http://ais-relay:3004"
       # Sovereign entitlement-provider boundary. Hosted remains the safe
       # compatibility default until the local provider is deployed.
       VISTA_DEPLOYMENT_PROFILE: "${VISTA_DEPLOYMENT_PROFILE:-hosted}"
@@ -81,18 +81,18 @@ services:
     #   - NASA_FIRMS_API_KEY
     #   - LLM_API_KEY
     depends_on:
-      valkey-rest:
+      redis-rest:
         condition: service_healthy
-      vista-relay:
+      ais-relay:
         condition: service_started
     restart: unless-stopped
 
-  vista-relay:
+  ais-relay:
     build:
       context: .
       dockerfile: Dockerfile.relay
-    image: vista-relay:latest
-    container_name: vista-relay
+    image: ais-relay:latest
+    container_name: ais-relay
     environment:
       WORLDMONITOR_RELAY_KEY: "${WORLDMONITOR_RELAY_KEY:-}"
       RELAY_SHARED_SECRET: "${RELAY_SHARED_SECRET:?RELAY_SHARED_SECRET required}"
@@ -100,8 +100,8 @@ services:
       AISSTREAM_API_KEY: "${AISSTREAM_API_KEY:-}"
       FINNHUB_API_KEY: "${FINNHUB_API_KEY:-}"
       MARKET_YAHOO_REFRESH_INTERVAL_MS: "${MARKET_YAHOO_REFRESH_INTERVAL_MS:-900000}"
-      CACHE_REST_URL: "http://valkey-rest:8080"
-      UPSTASH_REDIS_REST_URL: "http://valkey-rest:8080"
+      CACHE_REST_URL: "http://redis-rest:8080"
+      UPSTASH_REDIS_REST_URL: "http://redis-rest:8080"
       CACHE_REST_TOKEN: "${CACHE_REST_TOKEN:?CACHE_REST_TOKEN required — generate with: openssl rand -hex 32}"
       UPSTASH_REDIS_REST_TOKEN: "${CACHE_REST_TOKEN:?CACHE_REST_TOKEN required — generate with: openssl rand -hex 32}"
       UPSTASH_ALLOW_INSECURE_HTTP: "true"
@@ -114,7 +114,7 @@ services:
       OPENROUTER_API_KEY: "${OPENROUTER_API_KEY:-}"
       PORT: "3004"
     depends_on:
-      valkey-rest:
+      redis-rest:
         condition: service_healthy
     restart: unless-stopped
 
@@ -146,12 +146,12 @@ services:
       retries: 12
       start_period: 20s
 
-  valkey-rest:
+  redis-rest:
     build:
       context: docker
       dockerfile: Dockerfile.redis-rest
-    image: vista-valkey-rest:latest
-    container_name: vista-valkey-rest
+    image: vista-redis-rest:latest
+    container_name: vista-redis-rest
     ports:
       - "127.0.0.1:8079:8080"
     environment:
