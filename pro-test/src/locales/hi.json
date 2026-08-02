@@ -22,19 +22,19 @@
     "asFeaturedIn": "इनमें उल्लेखित"
   },
   "twoPath": {
-    "proTitle": "VISTA Pro",
+    "proTitle": "World Monitor Pro",
     "proDesc": "आपका AI विश्लेषक। निजी इंटेलिजेंस डेस्क। वह प्लेटफ़ॉर्म जिस पर आप बना सकते हैं। 30+ लाइव सेवाओं के लिए एक ही कुंजी।",
     "proF1": "WM Analyst chat — सभी 30+ सेवाओं से बातचीत की तरह पूछें",
     "proF2": "AI digest — दैनिक, दिन में दो बार या साप्ताहिक — Slack, Discord, Telegram, ईमेल या webhook पर",
     "proF3": "Custom Widget Builder — AI-सहायता से बदलाव के साथ HTML/CSS/JS",
-    "proF4": "MCP connectors — VISTA को Claude, GPT या अपने LLMs से जोड़ें",
+    "proF4": "MCP connectors — WorldMonitor को Claude, GPT या अपने LLMs से जोड़ें",
     "proF5": "इक्विटी रिसर्च, स्टॉक विश्लेषण और backtesting",
     "proF6": "फ़्लाइट खोज और कीमत तुलना",
     "proF7": "अलर्ट नियम इंजन — कस्टम triggers, quiet hours, AES-256 एन्क्रिप्टेड चैनल",
     "proF8": "मार्केट watchlist, macro और central bank tracking",
     "proF9": "AI Market Implications और Regional Intelligence (जल्द: orbital surveillance, premium map layers, लंबा history)",
     "choosePlan": "अपना प्लान चुनें",
-    "entTitle": "VISTA Enterprise",
+    "entTitle": "World Monitor Enterprise",
     "entDesc": "उन टीमों के लिए जिन्हें shared monitoring, API access, deployment options, TV apps और direct support चाहिए।",
     "entF1": "Pro की हर चीज़, और साथ में:",
     "entF2": "Live-edge + satellite imagery और SAR",
@@ -80,7 +80,7 @@
     "windowTitle": "worldmonitor.app — Live Dashboard",
     "openFullScreen": "Full screen खोलें",
     "tryLiveDashboard": "Live Dashboard आज़माएँ",
-    "iframeTitle": "VISTA — Live Intelligence Dashboard",
+    "iframeTitle": "World Monitor — Live Intelligence Dashboard",
     "description": "3D WebGL globe · 50+ interactive map layers · Real-time market, macro, geopolitical, energy और infrastructure data"
   },
   "socialProof": {
@@ -108,7 +108,7 @@
     "teamsDesc": "Individual use से shared workflows, API access, TV apps और managed deployments तक जाएँ।"
   },
   "dataCoverage": {
-    "title": "VISTA क्या track करता है",
+    "title": "World Monitor क्या track करता है",
     "subtitle": "30+ service domains एक साथ ingest होते हैं। Markets, macro, geopolitics, energy, infrastructure — सब normalized और WebGL globe पर rendered।",
     "markets": "Financial Markets और Equities",
     "marketsDesc": "Global stock analysis, commodities, crypto, ETF flows, analyst targets और FRED macro data",
@@ -175,7 +175,7 @@
   "apiSection": {
     "apiTier": "API TIER",
     "title": "Programmatic Intelligence",
-    "subtitle": "VISTA data पर build करने वाले developers, analysts और teams के लिए। Pro से अलग — दोनों या कोई एक use करें।",
+    "subtitle": "World Monitor data पर build करने वाले developers, analysts और teams के लिए। Pro से अलग — दोनों या कोई एक use करें।",
     "restApi": "सभी 30+ service domains में REST API — JavaScript, Python, Ruby, Go के लिए आधिकारिक SDK",
     "authenticated": "Per-key authenticated, per-tier rate-limited",
     "structured": "Cache headers और OpenAPI 3.1 docs के साथ structured JSON",
@@ -195,7 +195,7 @@
     "security": "Government-Grade Security",
     "securityDesc": "Air-gapped deployment, on-premises Docker, dedicated cloud tenant, SOC 2 Type II path, SSO/MFA और full audit trail.",
     "aiAgents": "AI Agents और MCP",
-    "aiAgentsDesc": "Investor personas वाले autonomous intelligence agents. VISTA को MCP के ज़रिए Claude, GPT या custom LLMs के tool के रूप में connect करें।",
+    "aiAgentsDesc": "Investor personas वाले autonomous intelligence agents. World Monitor को MCP के ज़रिए Claude, GPT या custom LLMs के tool के रूप में connect करें।",
     "dataLayers": "Expanded Data Layers",
     "dataLayersDesc": "दुनिया भर में tens of thousands infrastructure assets mapped. Change detection और SAR के साथ satellite imagery integration.",
     "connectors": "100+ Data Connectors",
@@ -275,7 +275,7 @@
   },
   "faq": {
     "title": "अक्सर पूछे जाने वाले प्रश्न",
-    "q1": "क्या VISTA अभी भी मुफ़्त है?",
+    "q1": "क्या World Monitor अभी भी मुफ़्त है?",
     "a1": "हां। मुख्य प्लेटफॉर्म मुक्त रहता है। Pro इक्विटी रिसर्च, मैक्रो एनालिटिक्स और AI ब्रीफिंग जोड़ता है। Pro Business वाणिज्यिक लाइसेंस और डेटा एक्सपोर्ट जोड़ता है। Enterprise टीम डिप्लॉयमेंट और TV ऐप्स जोड़ता है।",
     "q2": "Pro के लिए भुगतान क्यों करें?",
     "a2": "Pro investors, analysts और professionals के लिए है जिन्हें stock monitoring, geopolitical analysis, economy analytics और AI-powered daily briefings चाहिए — सब एक ही key के तहत।",
@@ -284,17 +284,17 @@
     "q4": "क्या मैं Pro से शुरू करके बाद में upgrade कर सकता/सकती हूँ?",
     "a4": "हां। Pro व्यक्तिगत उपयोग के लिए है। Pro Business ($49.99/माह) वाणिज्यिक लाइसेंस, डेटा एक्सपोर्ट, 25 डैशबोर्ड और 250 MCP कॉल/दिन जोड़ता है। API योजनाएं प्रोग्रामेटिक एक्सेस को कवर करती हैं, और Enterprise कस्टम डिप्लॉयमेंट को कवर करता है। अपग्रेड बिलिंग पोर्टल के माध्यम से चलते हैं — ऐप आपको चरणों के माध्यम से मार्गदर्शन करता है।",
     "q5": "क्या यह सिर्फ़ conflict monitoring के लिए है?",
-    "a5": "नहीं। VISTA मुख्य रूप से global intelligence platform है जो stock markets, macroeconomics, geopolitical analysis, energy, infrastructure और बहुत कुछ cover करता है। Conflict tracking कई capabilities में से एक है — focus नहीं।",
+    "a5": "नहीं। World Monitor मुख्य रूप से global intelligence platform है जो stock markets, macroeconomics, geopolitical analysis, energy, infrastructure और बहुत कुछ cover करता है। Conflict tracking कई capabilities में से एक है — focus नहीं।",
     "q6": "मुख्य प्लेटफ़ॉर्म को मुफ़्त क्यों रखें?",
     "a6": "क्योंकि सार्वजनिक एक्सेस मायने रखता है। पेड प्लान गंभीर उपयोगकर्ताओं और संगठनों के लिए गहरे workflows को support करते हैं।",
     "q7": "क्या मैं अपने API keys इस्तेमाल कर सकता/सकती हूँ?",
     "a7": "हाँ। Bring-your-own-keys हमेशा काम करता है। Pro का मतलब बस यह है कि आपको 20+ अलग services के लिए register नहीं करना पड़ता।",
     "q8": "MCP क्या है?",
-    "a8": "MCP AI agents — Claude, GPT, custom LLMs — को VISTA को tool की तरह use करने देता है, जिससे वे सभी 30+ services query कर सकते हैं। Pro में शामिल। Enterprise private MCP servers और custom deployments जोड़ता है।",
+    "a8": "MCP AI agents — Claude, GPT, custom LLMs — को WorldMonitor को tool की तरह use करने देता है, जिससे वे सभी 30+ services query कर सकते हैं। Pro में शामिल। Enterprise private MCP servers और custom deployments जोड़ता है।",
     "q9": "क्या मैं अपने panels बना सकता/सकती हूँ?",
     "a9": "हाँ। Pro में Custom Widget Builder शामिल है — HTML, CSS और JavaScript से panels बनाएं, AI-assisted modification के साथ।",
-    "q10": "क्या मैं Claude या GPT को VISTA से connect कर सकता/सकती हूँ?",
-    "a10": "हाँ। MCP Pro में शामिल है — VISTA को Claude, GPT या किसी भी MCP-compatible LLM में live tool की तरह plug करें।",
+    "q10": "क्या मैं Claude या GPT को WorldMonitor से connect कर सकता/सकती हूँ?",
+    "a10": "हाँ। MCP Pro में शामिल है — WorldMonitor को Claude, GPT या किसी भी MCP-compatible LLM में live tool की तरह plug करें।",
     "q11": "Digest कितना personalized है?",
     "a11": "अपना cadence चुनें — daily, twice-daily या weekly. हम हर tracked story को आपके alert rules और watchlist के हिसाब से re-score करते हैं, 500+ sources से dedupe करते हैं, और AI Assessment व आपके context के लिए लिखे Signals to watch के साथ 30 तक ranked items भेजते हैं। Critical events के लिए real-time alerts भी उपलब्ध हैं।",
     "q12": "Refresh rate क्या है?",
@@ -304,7 +304,7 @@
   },
   "finalCta": {
     "title": "Pro से शुरू करें। Enterprise तक scale करें।",
-    "subtitle": "VISTA को मुफ़्त इस्तेमाल करते रहें, या equity research, macro analytics और AI briefings के लिए upgrade करें। अगर आपकी organization को team access, TV apps या API support चाहिए, हमसे बात करें।",
+    "subtitle": "World Monitor को मुफ़्त इस्तेमाल करते रहें, या equity research, macro analytics और AI briefings के लिए upgrade करें। अगर आपकी organization को team access, TV apps या API support चाहिए, हमसे बात करें।",
     "talkToSales": "Sales से बात करें"
   },
   "footer": {
@@ -314,9 +314,9 @@
   },
   "soonBadge": "जल्द",
   "meta": {
-    "title": "VISTA Pro — AI Analyst, Personal Intelligence Desk, Claude और GPT के लिए MCP",
-    "description": "भू-राजनीतिक AI परत। इससे सवाल पूछें, इसकी सदस्यता लें, इस पर निर्माण करें। 30+ लाइव सेवाओं पर WM Analyst chat, Slack, Discord, Telegram, ईमेल या webhook पर दैनिक, दिन में दो बार या साप्ताहिक मिलने वाला AI डाइजेस्ट, custom widget builder (HTML/CSS/JS + AI), और Claude, GPT व custom LLMs के लिए MCP connectors.",
-    "ogTitle": "VISTA Pro — Geopolitical AI Layer",
+    "title": "World Monitor Pro | AI Intelligence & MCP",
+    "description": "World Monitor Pro एक AI विश्लेषक, निर्धारित intelligence डाइजेस्ट, कस्टम विजेट, बाजार अनुसंधान, और लाइव भू-राजनीतिक और वित्तीय डेटा तक MCP एक्सेस जोड़ता है।",
+    "ogTitle": "World Monitor Pro | Geopolitical AI",
     "ogDescription": "इससे सवाल पूछें, इसकी सदस्यता लें, इस पर निर्माण करें। WM Analyst chat, आपके schedule पर AI डाइजेस्ट (दैनिक, दिन में दो बार या साप्ताहिक), custom widget builder, और Claude/GPT के लिए MCP — 30+ लाइव सेवाएँ एक key के तहत।"
   },
   "pricing": {
@@ -388,7 +388,7 @@
         "cta": "Sales से संपर्क करें"
       },
       "apiBusiness": {
-        "description": "VISTA डेटा पर अपना खुद का उत्पाद लॉन्च करें",
+        "description": "WorldMonitor डेटा पर अपना खुद का उत्पाद लॉन्च करें",
         "features": [
           "API Starter की हर चीज़",
           "पुनर्वितरण अधिकार — जो आप बेचते हैं उसमें हमारे डेटा को एम्बेड करें",
@@ -427,9 +427,9 @@
   },
   "welcome": {
     "meta": {
-      "title": "VISTA — निःशुल्क रीयल-टाइम वैश्विक इंटेलिजेंस डैशबोर्ड",
+      "title": "World Monitor — निःशुल्क रीयल-टाइम वैश्विक इंटेलिजेंस डैशबोर्ड",
       "description": "जब तक यह खबर बन जाए, तब तक आप पहले ही जान चुके होते हैं। संघर्ष, शिपिंग बाधाएं, सैन्य उड़ानें, बाजार और साइबर एक निःशुल्क लाइव विश्व मानचित्र पर, AI विश्लेषण के साथ। कोई साइनअप नहीं।",
-      "ogTitle": "VISTA — जब तक यह खबर बन जाए, तब तक आप पहले ही जान चुके होते हैं।",
+      "ogTitle": "World Monitor — जब तक यह खबर बन जाए, तब तक आप पहले ही जान चुके होते हैं।",
       "ogDescription": "दुनिया के कच्चे सिग्नल — जहाज, जेट, सायरन, केबल, बाजार — एक निःशुल्क लाइव इंटेलिजेंस मानचित्र पर, AI के साथ जो झंडा लगाता है जब वे अभिसरित होते हैं। निःशुल्क, कोई साइनअप नहीं।"
     },
     "nav": {
@@ -447,21 +447,21 @@
       "eyebrow": "निःशुल्क वैश्विक इंटेलिजेंस डैशबोर्ड · अभी लाइव",
       "headline1": "जब तक यह खबर बन जाए,",
       "headline2": "तब तक आप पहले ही जान चुके होते हैं।",
-      "sub": "सुर्खियां पिछड़ी हुई हैं। VISTA दुनिया के कच्चे सिग्नल — जहाज, जेट, सायरन, केबल, बाजार — को एक लाइव मानचित्र पर स्ट्रीम करता है, AI के साथ जो झंडा लगाता है जब वे ऐसा कुछ अभिसरित होते हैं जो महत्वपूर्ण है।",
+      "sub": "सुर्खियां पिछड़ी हुई हैं। World Monitor दुनिया के कच्चे सिग्नल — जहाज, जेट, सायरन, केबल, बाजार — को एक लाइव मानचित्र पर स्ट्रीम करता है, AI के साथ जो झंडा लगाता है जब वे ऐसा कुछ अभिसरित होते हैं जो महत्वपूर्ण है।",
       "ctaPrimary": "डैशबोर्ड लॉन्च करें",
       "ctaFree": "निःशुल्क · कोई साइनअप नहीं · सेकंड में लोड होता है",
       "ctaSecondary": "देखें कि लोग इसे कैसे उपयोग करते हैं ↓",
       "trustUsers": "2M+ उपयोगकर्ता",
       "trustOpenSource": "ओपन सोर्स · AGPL-3.0",
-      "screenshotAlt": "VISTA लाइव इंटेलिजेंस डैशबोर्ड — संघर्ष, शिपिंग और बाजार परतों के साथ वैश्विक मानचित्र",
+      "screenshotAlt": "World Monitor लाइव इंटेलिजेंस डैशबोर्ड — संघर्ष, शिपिंग और बाजार परतों के साथ वैश्विक मानचित्र",
       "plateNote": "लाइव मानचित्र से कैप्चर किया गया — इसे खोलने के लिए क्लिक करें",
       "trustBuild": "इस पर बनाएं:",
-      "positioningLink": "VISTA एक ओपन-सोर्स Palantir नहीं है"
+      "positioningLink": "WorldMonitor एक ओपन-सोर्स Palantir नहीं है"
     },
     "live": {
       "eyebrow": "अभी लाइव",
       "title": "यह पृष्ठ डैशबोर्ड के समान API से जुड़ा हुआ है।",
-      "subtitle": "सौ से अधिक सिग्नल में से चार जो VISTA चौबीसों घंटे देखता है।",
+      "subtitle": "सौ से अधिक सिग्नल में से चार जो World Monitor चौबीसों घंटे देखता है।",
       "liveBadge": "लाइव",
       "sampleBadge": "नमूना",
       "cardHeadlines": "शीर्ष सिग्नल",
@@ -626,10 +626,10 @@
       "eyebrow": "एक्सेस",
       "title1": "फ्री वेधशाला है।",
       "title2": "प्रो ऑपरेशन रूम है।",
-      "sub": "पूर्ण डैशबोर्ड फ्री है — हर परत, हर फीड, कोई साइनअप नहीं। प्रो निर्णय परत जोड़ता है।",
+      "sub": "डैशबोर्ड मुफ्त है — Resilience को छोड़कर हर मानचित्र परत, हर फीड, कोई साइन अप नहीं। Pro निर्णय परत जोड़ता है।",
       "freeTitle": "फ्री",
-      "freeDesc": "फ्री टियर एक पूर्ण उत्पाद है, परीक्षण नहीं। हर मानचित्र परत, हर फीड, हर मॉनिटर — कोई साइनअप नहीं, कोई परीक्षण घड़ी नहीं, मानचित्र पर कोई फ़ीचर वॉल नहीं।",
-      "freeF1": "सभी 56 मानचित्र परतें और 500+ फीड्स",
+      "freeDesc": "फ्री टियर एक पूर्ण उत्पाद है, ट्रायल नहीं। Resilience को छोड़कर हर मानचित्र परत, हर फीड, हर मॉनिटर — कोई साइन अप नहीं, कोई ट्रायल घड़ी नहीं।",
+      "freeF1": "Resilience को छोड़कर सभी मानचित्र परतें और 500+ फीड",
       "freeF2": "देश संक्षिप्ताएं, हॉटस्पॉट्स, अस्थिरता स्कोर्स",
       "freeF3": "चोकपॉइंट्स, केबलें, कैस्केड विश्लेषण",
       "freeF4": "ब्रेकिंग अलर्ट पाइपलाइन और वॉचलिस्ट्स",
@@ -646,28 +646,28 @@
     "faq": {
       "eyebrow": "कोई पकड़ नहीं",
       "title": "उचित प्रश्न।",
-      "q1": "क्या VISTA वाकई मुफ्त है?",
-      "a1": "हां। पूरा लाइव मानचित्र — हर लेयर, 500+ फीड, देश ब्रीफ, ब्रेकिंग अलर्ट, सभी छह मॉनिटर — कोई साइनअप और कोई ट्रायल घड़ी के बिना मुक्त है। Pro फीड के लिए भुगतान करता है: यह WM Analyst, परिदृश्य इंजन, Route Explorer, शेड्यूल किए गए डाइजेस्ट और AI क्लाइंट के लिए MCP एक्सेस जोड़ता है। कोई विज्ञापन नहीं, और कोई खाता नहीं मतलब कोई उपयोगकर्ता डेटा बेचने के लिए नहीं है।",
+      "q1": "क्या World Monitor वाकई मुफ्त है?",
+      "a1": "हाँ। लाइव मानचित्र — Resilience को छोड़कर हर परत, 500+ फीड, देश संक्षेप, तत्काल सतर्कता, सभी छह मॉनिटर — कोई साइन अप और कोई ट्रायल घड़ी के बिना मुफ्त है। Pro फीड के लिए भुगतान करता है: यह WM Analyst, परिदृश्य इंजन, Route Explorer, निर्धारित डाइजेस्ट, AI क्लाइंट के लिए MCP एक्सेस और Resilience मानचित्र परत जोड़ता है। कोई विज्ञापन नहीं, और कोई खाता नहीं मतलब कोई उपयोगकर्ता डेटा बेचने के लिए नहीं है।",
       "q2": "वैश्विक बुद्धिमत्ता डैशबोर्ड क्या है?",
-      "a2": "एक एकल लाइव दृश्य जो सिग्नल को जोड़ता है जो अधिकांश उपकरण अलग रखते हैं: संघर्ष घटनाएं, जहाज और विमान ट्रैकिंग, शिपिंग अड़चनें, उपग्रह, सबसी केबल, पाइपलाइन, बाजार और साइबर खतरे — एक रीयल-टाइम विश्व मानचित्र पर, AI स्कोरिंग और संक्षिप्त विवरण के साथ। VISTA एक मुफ्त है।",
+      "a2": "एक एकल लाइव दृश्य जो सिग्नल को जोड़ता है जो अधिकांश उपकरण अलग रखते हैं: संघर्ष घटनाएं, जहाज और विमान ट्रैकिंग, शिपिंग अड़चनें, उपग्रह, सबसी केबल, पाइपलाइन, बाजार और साइबर खतरे — एक रीयल-टाइम विश्व मानचित्र पर, AI स्कोरिंग और संक्षिप्त विवरण के साथ। World Monitor एक मुफ्त है।",
       "q3": "डेटा कहां से आता है?",
       "a3": "65+ प्रदाता, नामित: संघर्ष के लिए ACLED और UCDP, लाइव जहाजों के लिए AISStream, विमान के लिए OpenSky, आग के लिए NASA FIRMS, भूकंप के लिए USGS, बाजार और मैक्रो के लिए IMF, BIS, FRED और Finnhub — साथ ही 500+ क्यूरेटेड समाचार फीड। हर पैनल अपने स्रोत और टाइमस्टैम्प को इनलाइन उद्धृत करता है।",
       "q4": "क्या मैं हॉर्मुज़ या बाब अल-मांडब जैसी अड़चनों को रीयल टाइम में देख सकता हूं?",
       "a4": "हाँ। 13 अड़चनें लाइव AIS जहाजों की गणना, सप्ताह दर सप्ताह पारगमन परिवर्तन और विघ्न स्कोरिंग के साथ ट्रैक की जाती हैं — और घनत्व विसंगतियां को प्रत्येक जलडमरूमध्य की रोलिंग बेसलाइन के विरुद्ध फ्लैग किया जाता है।",
       "q5": "यह Liveuamap जैसे संघर्ष मानचित्र से कैसे अलग है?",
-      "a5": "संघर्ष 56 में से एक परत है। VISTA संघर्षों को शिपिंग, सैन्य उड़ानों, बुनियादी ढांचे, बाजार और साइबर के साथ जोड़ता है — फिर AI अभिसरण को स्कोर करता है: अस्थिरता सूचकांक, हॉटस्पॉट वृद्धि, पुष्टि की गई महत्वपूर्ण सतर्कताएं और दैनिक संक्षिप्त विवरण।",
+      "a5": "संघर्ष 56 में से एक परत है। World Monitor संघर्षों को शिपिंग, सैन्य उड़ानों, बुनियादी ढांचे, बाजार और साइबर के साथ जोड़ता है — फिर AI अभिसरण को स्कोर करता है: अस्थिरता सूचकांक, हॉटस्पॉट वृद्धि, पुष्टि की गई महत्वपूर्ण सतर्कताएं और दैनिक संक्षिप्त विवरण।",
       "q6": "मुझे एक सतर्कता पर भरोसा क्यों करना चाहिए?",
       "a6": "एक महत्वपूर्ण बैनर केवल तब आता है जब स्वतंत्र मूल प्रकार पुष्टि करते हैं — समाचार वर्गीकरण, कीवर्ड वेग, हॉटस्पॉट वृद्धि, सैन्य सर्ज, आधिकारिक सीरन — डीडुप्लिकेटेड और दर सीमित। कम सतर्कताएं, वास्तविक।",
       "q7": "क्या Claude या GPT जैसे AI एजेंट इसका उपयोग कर सकते हैं?",
-      "a7": "हां। VISTA एक 59-उपकरण MCP सर्वर शिप करता है, इसलिए Claude, GPT या कोई भी MCP-संगत एजेंट लाइव जोखिम स्कोर, अड़चन स्थिति, संघर्ष, बाजार और ब्रीफ़ क्वेरी कर सकते हैं — JMESPath प्रक्षेपण के साथ ताकि एजेंट बिल्कुल वही प्राप्त करें जो उन्हें चाहिए।",
+      "a7": "हां। World Monitor एक 59-उपकरण MCP सर्वर शिप करता है, इसलिए Claude, GPT या कोई भी MCP-संगत एजेंट लाइव जोखिम स्कोर, अड़चन स्थिति, संघर्ष, बाजार और ब्रीफ़ क्वेरी कर सकते हैं — JMESPath प्रक्षेपण के साथ ताकि एजेंट बिल्कुल वही प्राप्त करें जो उन्हें चाहिए।",
       "q8": "क्या मुझे एक खाता चाहिए?",
       "a8": "नहीं। डैशबोर्ड साइनअप के बिना तुरंत काम करता है। एक खाता केवल तब मायने रखता है जब आप Pro में अपग्रेड करते हैं या डिवाइस में सेटिंग्स सिंक करना चाहते हैं।",
       "q9": "क्या यह ओपन सोर्स है?",
       "a9": "हाँ — GitHub पर AGPL-3.0 के तहत ओपन सोर्स: कोड पढ़ें, स्व-होस्ट करें, या इस पर निर्माण करें। Windows, macOS और Linux के लिए नेटिव डेस्कटॉप ऐप्स भी उपलब्ध हैं, साथ ही दीवार डिस्प्ले के लिए एक Android TV ऐप।",
-      "q10": "VISTA Palantir क्यों नहीं है?",
-      "a10": "Palantir किसी संस्था के अपने डेटा को उस संस्था के अंदर operational बनाता है। VISTA दूसरे छोर से शुरू करता है: यह सार्वजनिक दुनिया के डेटा को इकट्ठा करता है, सामान्य करता है, सहसंबंधित करता है, और निगरानी करता है, फिर इस intelligence layer को एक मुफ्त dashboard और open-source code के माध्यम से प्रकाशित करता है। अलग काम, अलग उत्पाद।",
-      "q11": "Which VISTA license do I need?",
-      "a11": "Choose based on who will use the output. Pro's Personal license is for one person using VISTA for their own research and decisions. Pro Business lets one licensed user use it for company or client work, internal tools, and reports. API Starter covers API use inside one organization, with no customer redistribution. API Business lets that organization embed VISTA data in products and services for its customers. Enterprise covers custom seats, white-labeling, and deployments. These subscription licenses are separate from the AGPL/MIT source-code licenses. Full terms: worldmonitor.app/docs/terms."
+      "q10": "World Monitor Palantir क्यों नहीं है?",
+      "a10": "Palantir किसी संस्था के अपने डेटा को उस संस्था के अंदर operational बनाता है। World Monitor दूसरे छोर से शुरू करता है: यह सार्वजनिक दुनिया के डेटा को इकट्ठा करता है, सामान्य करता है, सहसंबंधित करता है, और निगरानी करता है, फिर इस intelligence layer को एक मुफ्त dashboard और open-source code के माध्यम से प्रकाशित करता है। अलग काम, अलग उत्पाद।",
+      "q11": "Which World Monitor license do I need?",
+      "a11": "Choose based on who will use the output. Pro's Personal license is for one person using World Monitor for their own research and decisions. Pro Business lets one licensed user use it for company or client work, internal tools, and reports. API Starter covers API use inside one organization, with no customer redistribution. API Business lets that organization embed World Monitor data in products and services for its customers. Enterprise covers custom seats, white-labeling, and deployments. These subscription licenses are separate from the AGPL/MIT source-code licenses. Full terms: worldmonitor.app/docs/terms."
     },
     "cta": {
       "title": "विश्व मानचित्र आपकी प्रतीक्षा नहीं करता।",

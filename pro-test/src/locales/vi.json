@@ -22,19 +22,19 @@
     "asFeaturedIn": "Được giới thiệu trên"
   },
   "twoPath": {
-    "proTitle": "VISTA Pro",
+    "proTitle": "World Monitor Pro",
     "proDesc": "Nhà phân tích AI của bạn. Bàn tình báo cá nhân. Một nền tảng để xây dựng trên đó. Một khóa cho 30+ dịch vụ trực tiếp.",
     "proF1": "Chat WM Analyst — truy vấn 30+ dịch vụ theo hội thoại",
     "proF2": "AI digest — hàng ngày, hai lần mỗi ngày hoặc hàng tuần — đến Slack, Discord, Telegram, Email hoặc webhook",
     "proF3": "Custom Widget Builder — HTML/CSS/JS với chỉnh sửa hỗ trợ AI",
-    "proF4": "Bộ kết nối MCP — cắm VISTA vào Claude, GPT hoặc LLM tùy chỉnh",
+    "proF4": "Bộ kết nối MCP — cắm WorldMonitor vào Claude, GPT hoặc LLM tùy chỉnh",
     "proF5": "Equity research, phân tích cổ phiếu và backtesting",
     "proF6": "Tìm chuyến bay và so sánh giá",
     "proF7": "Động cơ quy tắc cảnh báo — trình kích hoạt tùy chỉnh, giờ yên lặng, kênh mã hóa AES-256",
     "proF8": "Watchlist thị trường, theo dõi vĩ mô và ngân hàng trung ương",
     "proF9": "AI Market Implications và Regional Intelligence (Sắp ra mắt: giám sát quỹ đạo, lớp bản đồ cao cấp, lịch sử mở rộng)",
     "choosePlan": "Chọn gói",
-    "entTitle": "VISTA Enterprise",
+    "entTitle": "World Monitor Enterprise",
     "entDesc": "Dành cho các nhóm cần giám sát chia sẻ, truy cập API, các tùy chọn triển khai, ứng dụng TV và hỗ trợ trực tiếp.",
     "entF1": "Tất cả trong Pro, cộng thêm:",
     "entF2": "Hình ảnh vệ tinh trực tiếp và SAR",
@@ -80,7 +80,7 @@
     "windowTitle": "worldmonitor.app — Bảng điều khiển trực tiếp",
     "openFullScreen": "Mở toàn màn hình",
     "tryLiveDashboard": "Dùng thử bảng điều khiển trực tiếp",
-    "iframeTitle": "VISTA — Bảng điều khiển tình báo trực tiếp",
+    "iframeTitle": "World Monitor — Bảng điều khiển tình báo trực tiếp",
     "description": "Quả cầu WebGL 3D · 50+ lớp bản đồ tương tác · Dữ liệu thị trường, vĩ mô, địa chính trị, năng lượng và cơ sở hạ tầng theo thời gian thực"
   },
   "socialProof": {
@@ -108,7 +108,7 @@
     "teamsDesc": "Chuyển từ sử dụng cá nhân sang quy trình làm việc được chia sẻ, truy cập API, ứng dụng TV và triển khai được quản lý."
   },
   "dataCoverage": {
-    "title": "VISTA theo dõi những gì",
+    "title": "World Monitor theo dõi những gì",
     "subtitle": "30+ miền dịch vụ được thu thập đồng thời. Thị trường, vĩ mô, địa chính trị, năng lượng, cơ sở hạ tầng — tất cả được chuẩn hóa và kết xuất trên quả cầu WebGL.",
     "markets": "Thị trường tài chính và cổ phiếu",
     "marketsDesc": "Phân tích cổ phiếu toàn cầu, hàng hóa, tiền điện tử, dòng ETF, mục tiêu nhà phân tích và dữ liệu vĩ mô FRED",
@@ -175,7 +175,7 @@
   "apiSection": {
     "apiTier": "CẤP ĐỘ API",
     "title": "Tình báo lập trình",
-    "subtitle": "Dành cho nhà phát triển, nhà phân tích và các nhóm xây dựng trên dữ liệu VISTA. Riêng biệt với Pro — sử dụng cả hai hoặc một trong hai.",
+    "subtitle": "Dành cho nhà phát triển, nhà phân tích và các nhóm xây dựng trên dữ liệu World Monitor. Riêng biệt với Pro — sử dụng cả hai hoặc một trong hai.",
     "restApi": "REST API trên tất cả 30+ miền dịch vụ — SDK chính thức cho JavaScript, Python, Ruby, Go",
     "authenticated": "Xác thực theo khóa, rate-limited theo cấp độ",
     "structured": "JSON có cấu trúc với cache headers và tài liệu OpenAPI 3.1",
@@ -195,7 +195,7 @@
     "security": "Bảo mật cấp chính phủ",
     "securityDesc": "Triển khai air-gapped, Docker on-premises, tenant cloud chuyên dụng, đường SOC 2 Type II, SSO/MFA và audit trail đầy đủ.",
     "aiAgents": "AI agents và MCP",
-    "aiAgentsDesc": "Các agent tình báo tự trị với persona nhà đầu tư. Kết nối VISTA như một công cụ với Claude, GPT hoặc LLM của bạn qua MCP.",
+    "aiAgentsDesc": "Các agent tình báo tự trị với persona nhà đầu tư. Kết nối World Monitor như một công cụ với Claude, GPT hoặc LLM của bạn qua MCP.",
     "dataLayers": "Các lớp dữ liệu mở rộng",
     "dataLayersDesc": "Hàng chục nghìn tài sản cơ sở hạ tầng được ánh xạ trên toàn cầu. Tích hợp hình ảnh vệ tinh với phát hiện thay đổi và SAR.",
     "connectors": "100+ bộ kết nối dữ liệu",
@@ -275,7 +275,7 @@
   },
   "faq": {
     "title": "Câu hỏi thường gặp",
-    "q1": "VISTA vẫn miễn phí phải không?",
+    "q1": "World Monitor vẫn miễn phí phải không?",
     "a1": "Có. Nền tảng cốt lõi vẫn miễn phí. Pro thêm nghiên cứu vốn chủ sở hữu, phân tích vĩ mô và tóm tắt AI. Pro Business thêm giấy phép thương mại và xuất dữ liệu. Enterprise thêm triển khai nhóm và ứng dụng TV.",
     "q2": "Tại sao trả tiền cho Pro?",
     "a2": "Pro dành cho nhà đầu tư, nhà phân tích và chuyên gia muốn giám sát cổ phiếu, phân tích địa chính trị, phân tích kinh tế và bản tóm tắt hàng ngày bằng AI — tất cả dưới một khóa.",
@@ -284,17 +284,17 @@
     "q4": "Tôi có thể bắt đầu với Pro và nâng cấp sau không?",
     "a4": "Có. Pro dành cho sử dụng cá nhân. Pro Business ($49,99/tháng) thêm giấy phép thương mại, xuất dữ liệu, 25 bảng điều khiển và 250 lệnh gọi MCP/ngày. Các gói API bao gồm truy cập lập trình, và Enterprise bao gồm triển khai tùy chỉnh. Nâng cấp thực hiện qua cổng thông tin thanh toán — ứng dụng sẽ hướng dẫn bạn qua các bước.",
     "q5": "Cái này chỉ dành cho giám sát xung đột?",
-    "a5": "Không. VISTA chủ yếu là một nền tảng tình báo toàn cầu bao gồm thị trường cổ phiếu, kinh tế vĩ mô, phân tích địa chính trị, năng lượng, cơ sở hạ tầng và hơn thế. Theo dõi xung đột là một trong nhiều khả năng — không phải trọng tâm.",
+    "a5": "Không. World Monitor chủ yếu là một nền tảng tình báo toàn cầu bao gồm thị trường cổ phiếu, kinh tế vĩ mô, phân tích địa chính trị, năng lượng, cơ sở hạ tầng và hơn thế. Theo dõi xung đột là một trong nhiều khả năng — không phải trọng tâm.",
     "q6": "Tại sao giữ nền tảng cốt lõi miễn phí?",
     "a6": "Vì truy cập công cộng là quan trọng. Các gói trả phí tài trợ cho các quy trình làm việc sâu hơn cho người dùng nghiêm túc và tổ chức.",
     "q7": "Tôi vẫn có thể sử dụng khóa API của riêng mình?",
     "a7": "Có. Bring-your-own-keys luôn hoạt động. Pro chỉ có nghĩa là bạn không cần đăng ký với 20+ dịch vụ riêng lẻ.",
     "q8": "MCP là gì?",
-    "a8": "MCP cho phép các AI agents — Claude, GPT, LLM tùy chỉnh — sử dụng VISTA như một công cụ, truy vấn tất cả 30+ dịch vụ. Bao gồm trong Pro. Enterprise thêm máy chủ MCP riêng và triển khai tùy chỉnh.",
+    "a8": "MCP cho phép các AI agents — Claude, GPT, LLM tùy chỉnh — sử dụng WorldMonitor như một công cụ, truy vấn tất cả 30+ dịch vụ. Bao gồm trong Pro. Enterprise thêm máy chủ MCP riêng và triển khai tùy chỉnh.",
     "q9": "Tôi có thể xây dựng các bảng của riêng mình không?",
     "a9": "Có. Pro bao gồm Custom Widget Builder — xây dựng bảng từ HTML, CSS và JavaScript, với chỉnh sửa hỗ trợ AI.",
-    "q10": "Tôi có thể kết nối Claude hoặc GPT với VISTA không?",
-    "a10": "Có. MCP được bao gồm trong Pro — kết nối VISTA với Claude, GPT hoặc bất kỳ LLM nào tương thích MCP như một công cụ trực tiếp.",
+    "q10": "Tôi có thể kết nối Claude hoặc GPT với WorldMonitor không?",
+    "a10": "Có. MCP được bao gồm trong Pro — kết nối WorldMonitor với Claude, GPT hoặc bất kỳ LLM nào tương thích MCP như một công cụ trực tiếp.",
     "q11": "Digest được cá nhân hóa như thế nào?",
     "a11": "Chọn nhịp của bạn: hàng ngày, hai lần mỗi ngày hoặc hàng tuần. Chúng tôi ghi điểm lại mọi câu chuyện được theo dõi so với quy tắc cảnh báo và watchlist của bạn, loại bỏ trùng lặp trên 400+ nguồn và gửi tối đa 30 mục được xếp hạng với AI Assessment và Signals to watch được viết cho bối cảnh của bạn. Cảnh báo theo thời gian thực cũng có sẵn cho các sự kiện quan trọng.",
     "q12": "Tốc độ làm mới là bao nhiêu?",
@@ -304,7 +304,7 @@
   },
   "finalCta": {
     "title": "Bắt đầu với Pro. Mở rộng đến Enterprise.",
-    "subtitle": "Tiếp tục sử dụng VISTA miễn phí, hoặc nâng cấp để có Equity research, phân tích vĩ mô và bản tóm tắt AI. Nếu tổ chức của bạn cần truy cập nhóm, ứng dụng TV hoặc hỗ trợ API — hãy trao đổi với chúng tôi.",
+    "subtitle": "Tiếp tục sử dụng World Monitor miễn phí, hoặc nâng cấp để có Equity research, phân tích vĩ mô và bản tóm tắt AI. Nếu tổ chức của bạn cần truy cập nhóm, ứng dụng TV hoặc hỗ trợ API — hãy trao đổi với chúng tôi.",
     "talkToSales": "Liên hệ kinh doanh"
   },
   "footer": {
@@ -314,9 +314,9 @@
   },
   "soonBadge": "Sắp ra mắt",
   "meta": {
-    "title": "VISTA Pro — Nhà phân tích AI, Bàn làm việc Trí tuệ Cá nhân, MCP cho Claude & GPT",
-    "description": "Lớp AI địa chính trị. Hỏi nó, đăng ký nó, xây dựng trên nó. Chat WM Analyst trên 30+ dịch vụ trực tiếp, bản tóm tắt AI gửi hàng ngày, hai lần mỗi ngày hoặc hàng tuần đến Slack, Discord, Telegram, Email hoặc webhook, trình xây dựng widget tùy chỉnh (HTML/CSS/JS + AI), và trình kết nối MCP cho Claude, GPT và LLM tùy chỉnh.",
-    "ogTitle": "VISTA Pro — Lớp AI Địa chính trị",
+    "title": "World Monitor Pro | AI Intelligence & MCP",
+    "description": "World Monitor Pro thêm nhà phân tích AI, bản tóm tắt tình báo theo lịch trình, widget tùy chỉnh, nghiên cứu thị trường và quyền truy cập MCP vào dữ liệu địa chính trị và tài chính trực tiếp.",
+    "ogTitle": "World Monitor Pro | Geopolitical AI",
     "ogDescription": "Hỏi nó, đăng ký nó, xây dựng trên nó. Chat WM Analyst, bản tóm tắt AI theo lịch của bạn (hàng ngày, hai lần mỗi ngày hoặc hàng tuần), trình xây dựng widget tùy chỉnh, và MCP cho Claude/GPT — trên 30+ dịch vụ trực tiếp dưới một khóa."
   },
   "pricing": {
@@ -388,7 +388,7 @@
         "cta": "Liên hệ Phòng bán hàng"
       },
       "apiBusiness": {
-        "description": "Khởi chạy sản phẩm của riêng bạn trên dữ liệu VISTA",
+        "description": "Khởi chạy sản phẩm của riêng bạn trên dữ liệu WorldMonitor",
         "features": [
           "Tất cả trong API Starter",
           "Quyền phân phối lại — nhúng dữ liệu của chúng tôi vào những gì bạn bán",
@@ -427,9 +427,9 @@
   },
   "welcome": {
     "meta": {
-      "title": "VISTA — Bảng điều khiển tình báo toàn cầu trực tiếp miễn phí",
+      "title": "World Monitor — Bảng điều khiển tình báo toàn cầu trực tiếp miễn phí",
       "description": "Khi tin tức xuất hiện, bạn đã biết rồi. Xung đột, điểm thắt cổ chai vận chuyển, chuyến bay quân sự, thị trường và an ninh mạng trên một bản đồ trực tiếp miễn phí, có phân tích AI. Không cần đăng ký.",
-      "ogTitle": "VISTA — Khi tin tức xuất hiện, bạn đã biết rồi.",
+      "ogTitle": "World Monitor — Khi tin tức xuất hiện, bạn đã biết rồi.",
       "ogDescription": "Các tín hiệu thô của thế giới — tàu, máy bay, còi báo động, cáp, thị trường — trên một bản đồ tình báo trực tiếp miễn phí, có AI để phát hiệ khi chúng hội tụ. Miễn phí, không cần đăng ký."
     },
     "nav": {
@@ -447,21 +447,21 @@
       "eyebrow": "Bảng điều khiển tình báo toàn cầu miễn phí · đang hoạt động",
       "headline1": "Khi tin tức xuất hiện,",
       "headline2": "bạn đã biết rồi.",
-      "sub": "Tin tức là độ trễ. VISTA truyền phát các tín hiệu thô của thế giới — tàu, máy bay, còi báo động, cáp, thị trường — lên một bản đồ trực tiếp, với AI phát hiệ khi chúng hội tụ thành một điều quan trọng.",
+      "sub": "Tin tức là độ trễ. World Monitor truyền phát các tín hiệu thô của thế giới — tàu, máy bay, còi báo động, cáp, thị trường — lên một bản đồ trực tiếp, với AI phát hiệ khi chúng hội tụ thành một điều quan trọng.",
       "ctaPrimary": "Khởi chạy bảng điều khiển",
       "ctaFree": "Miễn phí · Không cần đăng ký · Tải trong vài giây",
       "ctaSecondary": "Xem cách mọi người sử dụng nó ↓",
       "trustUsers": "2 triệu+ người dùng",
       "trustOpenSource": "Mã nguồn mở · AGPL-3.0",
-      "screenshotAlt": "Bảng điều khiển tình báo trực tiếp VISTA — bản đồ toàn cầu với các lớp xung đột, vận chuyển và thị trường",
+      "screenshotAlt": "Bảng điều khiển tình báo trực tiếp World Monitor — bản đồ toàn cầu với các lớp xung đột, vận chuyển và thị trường",
       "plateNote": "Được chụp từ bản đồ trực tiếp — bấm để mở",
       "trustBuild": "Xây dựng trên nó:",
-      "positioningLink": "VISTA không phải là Palantir mã nguồn mở"
+      "positioningLink": "WorldMonitor không phải là Palantir mã nguồn mở"
     },
     "live": {
       "eyebrow": "Trực tiếp ngay bây giờ",
       "title": "Trang này kết nối với các API tương tự như bảng điều khiển.",
-      "subtitle": "Bốn trong số hơn trăm tín hiệu mà VISTA theo dõi quanh đồng hồ.",
+      "subtitle": "Bốn trong số hơn trăm tín hiệu mà World Monitor theo dõi quanh đồng hồ.",
       "liveBadge": "Trực tiếp",
       "sampleBadge": "Mẫu",
       "cardHeadlines": "Tín hiệu hàng đầu",
@@ -626,10 +626,10 @@
       "eyebrow": "Truy cập",
       "title1": "Miễn phí là đài quan sát.",
       "title2": "Pro là phòng hoạt động.",
-      "sub": "Bảng điều khiển đầy đủ là miễn phí — mọi lớp, mọi bản tin, không cần đăng ký. Pro thêm lớp quyết định.",
+      "sub": "Bảng điều khiển là miễn phí — mọi lớp bản đồ ngoại trừ Resilience, mọi nguồn cấp dữ liệu, không cần đăng ký. Pro thêm lớp quyết định.",
       "freeTitle": "Miễn phí",
-      "freeDesc": "Mức miễn phí là một sản phẩm đầy đủ, không phải dùng thử. Mọi lớp bản đồ, mọi bản tin, mọi màn hình giám sát — không đăng ký, không đồng hồ dùng thử, không tường lửa tính năng trên bản đồ.",
-      "freeF1": "Tất cả 56 lớp bản đồ & 500+ bản tin",
+      "freeDesc": "Gói miễn phí là một sản phẩm hoàn chỉnh, không phải bản dùng thử. Mọi lớp bản đồ ngoại trừ Resilience, mọi nguồn cấp dữ liệu, mọi công cụ giám sát — không cần đăng ký, không có hạn thời gian dùng thử.",
+      "freeF1": "Tất cả các lớp bản đồ ngoại trừ Resilience & 500+ nguồn cấp dữ liệu",
       "freeF2": "Tóm tắt quốc gia, điểm nóng, chỉ số bất ổn định",
       "freeF3": "Điểm nghẽn, cáp, phân tích tầng vòng",
       "freeF4": "Đường dẫn cảnh báo break & danh sách theo dõi",
@@ -646,28 +646,28 @@
     "faq": {
       "eyebrow": "Không có điều kiện kèm theo",
       "title": "Những câu hỏi công bằng.",
-      "q1": "VISTA có thực sự miễn phí không?",
-      "a1": "Có. Bản đồ trực tiếp đầy đủ — mọi lớp, hơn 500 nguồn cấp dữ liệu, tóm tắt quốc gia, cảnh báo đột phá, cả sáu trình giám sát — miễn phí mà không cần đăng ký và không có đồng hồ dùng thử. Pro trả tiền cho các nguồn cấp dữ liệu: nó thêm WM Analyst, công cụ tình huống, Route Explorer, tóm tắt theo lịch và truy cập MCP cho các ứng dụng AI. Không có quảng cáo và không có tài khoản có nghĩa là không có dữ liệu người dùng để bán.",
+      "q1": "World Monitor có thực sự miễn phí không?",
+      "a1": "Có. Bản đồ trực tiếp — mọi lớp ngoại trừ Resilience, 500+ nguồn cấp dữ liệu, tóm tắt quốc gia, cảnh báo tin nóng, cả sáu công cụ giám sát — miễn phí không cần đăng ký và không có hạn thời gian dùng thử. Pro trả tiền cho các nguồn cấp dữ liệu: nó thêm WM Analyst, công cụ kịch bản, Route Explorer, bản tóm tắt được lên lịch, quyền truy cập MCP cho các khách hàng AI và lớp bản đồ Resilience. Không có quảng cáo, và không có tài khoản nghĩa là không có dữ liệu người dùng để bán.",
       "q2": "Bảng điều khiển trí tuệ toàn cầu là gì?",
-      "a2": "Một chế độ xem trực tiếp duy nhất hợp nhất các tín hiệu mà hầu hết các công cụ giữ riêng: sự kiện xung đột, theo dõi tàu và máy bay, các điểm nghẽn vận chuyển, vệ tinh, cáp dưới biển, đường ống, thị trường và mối đe doạ mạng — trên một bản đồ thế giới thời gian thực, với điểm số AI và tóm tắt ở trên cùng. VISTA là một cái miễn phí.",
+      "a2": "Một chế độ xem trực tiếp duy nhất hợp nhất các tín hiệu mà hầu hết các công cụ giữ riêng: sự kiện xung đột, theo dõi tàu và máy bay, các điểm nghẽn vận chuyển, vệ tinh, cáp dưới biển, đường ống, thị trường và mối đe doạ mạng — trên một bản đồ thế giới thời gian thực, với điểm số AI và tóm tắt ở trên cùng. World Monitor là một cái miễn phí.",
       "q3": "Dữ liệu đến từ đâu?",
       "a3": "65+ nhà cung cấp, được đặt tên: ACLED và UCDP cho xung đột, AISStream cho tàu trực tiếp, OpenSky cho máy bay, NASA FIRMS cho cháy, USGS cho động đất, IMF, BIS, FRED và Finnhub cho thị trường và macro — cộng với 500+ nguồn cấp tin tức được tuyển chọn. Mọi bảng điều khiển trích dẫn các nguồn và dấu thời gian của nó theo hàng.",
       "q4": "Tôi có thể theo dõi các điểm nghẽn như Hormuz hoặc Bab el-Mandeb trong thời gian thực không?",
       "a4": "Có. 13 điểm nghẽn được theo dõi với số lượng tàu AIS trực tiếp, thay đổi vận chuyển tuần trên tuần và điểm số gián đoạn — và các bất thường mật độ được gắn cờ so với đường cơ sở lăn của mỗi eo biển.",
       "q5": "Điều này khác với bản đồ xung đột như Liveuamap như thế nào?",
-      "a5": "Xung đột là một lớp trong 56 lớp. VISTA hợp nhất xung đột với vận chuyển, chuyến bay quân sự, cơ sở hạ tầng, thị trường và mạng — sau đó AI điểm số sự hội tụ: chỉ số không ổn định, leo thang điểm nóng, cảnh báo phá vỡ được xác nhận lại và tóm tắt hàng ngày.",
+      "a5": "Xung đột là một lớp trong 56 lớp. World Monitor hợp nhất xung đột với vận chuyển, chuyến bay quân sự, cơ sở hạ tầng, thị trường và mạng — sau đó AI điểm số sự hội tụ: chỉ số không ổn định, leo thang điểm nóng, cảnh báo phá vỡ được xác nhận lại và tóm tắt hàng ngày.",
       "q6": "Tại sao tôi nên tin tưởng một cảnh báo?",
       "a6": "Một biểu ngữ phá vỡ chỉ phát ra khi các loại nguồn gốc độc lập xác nhận — phân loại tin tức, vận tốc từ khóa, leo thang điểm nóng, sự tăng vọt quân sự, còi chính thức — loại trùng và giới hạn tỷ lệ. Ít cảnh báo hơn, những cảnh báo thực sự.",
       "q7": "Các agent AI như Claude hoặc GPT có thể sử dụng nó không?",
-      "a7": "Có. VISTA cung cấp máy chủ MCP 59 công cụ, vì vậy Claude, GPT hoặc bất kỳ agent nào tương thích MCP có thể truy vấn điểm rủi ro trực tiếp, trạng thái điểm tắc nghẽn, xung đột, thị trường và bản tin — với phép chiếu JMESPath để các agent chỉ lấy chính xác những gì họ cần.",
+      "a7": "Có. World Monitor cung cấp máy chủ MCP 59 công cụ, vì vậy Claude, GPT hoặc bất kỳ agent nào tương thích MCP có thể truy vấn điểm rủi ro trực tiếp, trạng thái điểm tắc nghẽn, xung đột, thị trường và bản tin — với phép chiếu JMESPath để các agent chỉ lấy chính xác những gì họ cần.",
       "q8": "Tôi có cần một tài khoản không?",
       "a8": "Không. Bảng điều khiển hoạt động ngay lập tức mà không cần đăng ký. Một tài khoản chỉ quan trọng khi bạn nâng cấp lên Pro hoặc muốn cài đặt được đồng bộ hóa trên các thiết bị.",
       "q9": "Nó có mã nguồn mở không?",
       "a9": "Có — mã nguồn mở theo AGPL-3.0 trên GitHub: đọc mã, tự lưu trữ hoặc xây dựng dựa trên nó. Các ứng dụng máy tính để bàn gốc cho Windows, macOS và Linux cũng có sẵn, cùng với ứng dụng Android TV cho hiển thị tường.",
-      "q10": "Tại sao VISTA không phải là Palantir?",
-      "a10": "Palantir làm cho dữ liệu riêng của một tổ chức hoạt động bên trong tổ chức đó. VISTA bắt đầu từ phía khác: nó sắp xếp, chuẩn hóa, tương quan và giám sát dữ liệu công cộng trên thế giới, sau đó công bố lớp tình báo đó thông qua một bảng điều khiển miễn phí và mã nguồn mở. Công việc khác nhau, sản phẩm khác nhau.",
-      "q11": "Which VISTA license do I need?",
-      "a11": "Choose based on who will use the output. Pro's Personal license is for one person using VISTA for their own research and decisions. Pro Business lets one licensed user use it for company or client work, internal tools, and reports. API Starter covers API use inside one organization, with no customer redistribution. API Business lets that organization embed VISTA data in products and services for its customers. Enterprise covers custom seats, white-labeling, and deployments. These subscription licenses are separate from the AGPL/MIT source-code licenses. Full terms: worldmonitor.app/docs/terms."
+      "q10": "Tại sao World Monitor không phải là Palantir?",
+      "a10": "Palantir làm cho dữ liệu riêng của một tổ chức hoạt động bên trong tổ chức đó. World Monitor bắt đầu từ phía khác: nó sắp xếp, chuẩn hóa, tương quan và giám sát dữ liệu công cộng trên thế giới, sau đó công bố lớp tình báo đó thông qua một bảng điều khiển miễn phí và mã nguồn mở. Công việc khác nhau, sản phẩm khác nhau.",
+      "q11": "Which World Monitor license do I need?",
+      "a11": "Choose based on who will use the output. Pro's Personal license is for one person using World Monitor for their own research and decisions. Pro Business lets one licensed user use it for company or client work, internal tools, and reports. API Starter covers API use inside one organization, with no customer redistribution. API Business lets that organization embed World Monitor data in products and services for its customers. Enterprise covers custom seats, white-labeling, and deployments. These subscription licenses are separate from the AGPL/MIT source-code licenses. Full terms: worldmonitor.app/docs/terms."
     },
     "cta": {
       "title": "Bản đồ thế giới không chờ bạn.",

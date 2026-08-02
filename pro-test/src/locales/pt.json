@@ -22,19 +22,19 @@
     "asFeaturedIn": "Destaque em"
   },
   "twoPath": {
-    "proTitle": "VISTA Pro",
+    "proTitle": "World Monitor Pro",
     "proDesc": "O seu analista de IA. Uma mesa de inteligência pessoal. Uma plataforma sobre a qual construir. Uma chave para 30+ serviços ao vivo.",
     "proF1": "Chat WM Analyst — consulte os 30+ serviços de forma conversacional",
     "proF2": "Digest de IA — diário, duas vezes ao dia ou semanal — para Slack, Discord, Telegram, E-mail ou webhook",
     "proF3": "Construtor de widgets personalizados — HTML/CSS/JS com modificação assistida por IA",
-    "proF4": "Conectores MCP — ligue o VISTA ao Claude, GPT, LLMs personalizados",
+    "proF4": "Conectores MCP — ligue o WorldMonitor ao Claude, GPT, LLMs personalizados",
     "proF5": "Pesquisa de ações, análise de equity e backtesting",
     "proF6": "Pesquisa e comparação de preços de voos",
     "proF7": "Motor de regras de alerta — gatilhos personalizados, horas de silêncio, canais cifrados AES-256",
     "proF8": "Watchlist de mercado, tracking macro e bancos centrais",
     "proF9": "AI Market Implications e Regional Intelligence (Em breve: vigilância orbital, camadas de mapa premium, histórico alargado)",
     "choosePlan": "Escolha o seu plano",
-    "entTitle": "VISTA Enterprise",
+    "entTitle": "World Monitor Enterprise",
     "entDesc": "Para equipas que precisam de monitorização partilhada, acesso API, opções de deployment, apps TV e suporte direto.",
     "entF1": "Tudo em Pro, mais:",
     "entF2": "Imagens de satélite ao vivo e SAR",
@@ -80,7 +80,7 @@
     "windowTitle": "worldmonitor.app — Painel ao vivo",
     "openFullScreen": "Abrir em ecrã inteiro",
     "tryLiveDashboard": "Experimente o painel ao vivo",
-    "iframeTitle": "VISTA — Painel de inteligência ao vivo",
+    "iframeTitle": "World Monitor — Painel de inteligência ao vivo",
     "description": "Globo WebGL 3D · 50+ camadas de mapa interativas · Dados em tempo real de mercado, macro, geopolítica, energia e infraestrutura"
   },
   "socialProof": {
@@ -108,7 +108,7 @@
     "teamsDesc": "Passe do uso individual para fluxos partilhados, acesso API, apps TV e deployments geridos."
   },
   "dataCoverage": {
-    "title": "O que o VISTA acompanha",
+    "title": "O que o World Monitor acompanha",
     "subtitle": "30+ domínios de serviço ingeridos em simultâneo. Mercados, macro, geopolítica, energia, infraestrutura — tudo normalizado e renderizado num globo WebGL.",
     "markets": "Mercados financeiros e ações",
     "marketsDesc": "Análise global de ações, matérias-primas, cripto, fluxos de ETF, alvos de analistas e dados macro FRED",
@@ -175,7 +175,7 @@
   "apiSection": {
     "apiTier": "NÍVEL API",
     "title": "Inteligência programática",
-    "subtitle": "Para programadores, analistas e equipas que constroem sobre dados do VISTA. Separado do Pro — use ambos ou apenas um.",
+    "subtitle": "Para programadores, analistas e equipas que constroem sobre dados do World Monitor. Separado do Pro — use ambos ou apenas um.",
     "restApi": "API REST em todos os 30+ domínios de serviço — SDKs oficiais para JavaScript, Python, Ruby, Go",
     "authenticated": "Autenticado por chave, com limite de taxa por nível",
     "structured": "JSON estruturado com cabeçalhos de cache e documentação OpenAPI 3.1",
@@ -195,7 +195,7 @@
     "security": "Segurança de grau governamental",
     "securityDesc": "Deployment air-gapped, Docker on-premises, tenant cloud dedicado, percurso SOC 2 Type II, SSO/MFA e rasto de auditoria completo.",
     "aiAgents": "Agentes IA e MCP",
-    "aiAgentsDesc": "Agentes de inteligência autónomos com personas de investidor. Ligue o VISTA como ferramenta ao Claude, GPT ou LLMs personalizados via MCP.",
+    "aiAgentsDesc": "Agentes de inteligência autónomos com personas de investidor. Ligue o World Monitor como ferramenta ao Claude, GPT ou LLMs personalizados via MCP.",
     "dataLayers": "Camadas de dados alargadas",
     "dataLayersDesc": "Dezenas de milhares de ativos de infraestrutura mapeados globalmente. Integração de imagens de satélite com deteção de mudanças e SAR.",
     "connectors": "100+ conectores de dados",
@@ -275,7 +275,7 @@
   },
   "faq": {
     "title": "Perguntas frequentes",
-    "q1": "O VISTA continua grátis?",
+    "q1": "O World Monitor continua grátis?",
     "a1": "Sim. A plataforma principal permanece gratuita. Pro adiciona análise de ações, análise macroeconômica e briefings com IA. Pro Business adiciona a licença comercial e exportação de dados. Enterprise adiciona implantações em equipe e aplicativos de TV.",
     "q2": "Porquê pagar pelo Pro?",
     "a2": "O Pro é para investidores, analistas e profissionais que querem seguimento de ações, análise geopolítica, analítica económica e briefings diários IA — tudo sob uma chave.",
@@ -284,17 +284,17 @@
     "q4": "Posso começar com Pro e fazer upgrade depois?",
     "a4": "Sim. Pro é para uso pessoal. Pro Business ($49,99/mês) adiciona licença comercial, exportação de dados, 25 dashboards e 250 chamadas MCP/dia. Planos API cobrem acesso programático, e Enterprise cobre implantações personalizadas. As atualizações ocorrem pelo portal de cobrança — o aplicativo o orienta pelas etapas.",
     "q5": "É só para monitorização de conflitos?",
-    "a5": "Não. O VISTA é sobretudo uma plataforma de inteligência global que cobre mercados de ações, macroeconomia, análise geopolítica, energia, infraestrutura e mais. O seguimento de conflitos é uma entre muitas capacidades — não o foco.",
+    "a5": "Não. O World Monitor é sobretudo uma plataforma de inteligência global que cobre mercados de ações, macroeconomia, análise geopolítica, energia, infraestrutura e mais. O seguimento de conflitos é uma entre muitas capacidades — não o foco.",
     "q6": "Porquê manter a plataforma principal grátis?",
     "a6": "Porque o acesso público importa. Os planos pagos financiam fluxos mais profundos para utilizadores sérios e organizações.",
     "q7": "Ainda posso usar as minhas próprias chaves API?",
     "a7": "Sim. Bring-your-own-keys funciona sempre. O Pro significa simplesmente que não precisa de se registar em 20+ serviços separados.",
     "q8": "O que é MCP?",
-    "a8": "O MCP permite que agentes IA — Claude, GPT, LLMs personalizados — usem o VISTA como ferramenta, consultando os 30+ serviços. Incluído no Pro. O Enterprise adiciona servidores MCP privados e deployments personalizados.",
+    "a8": "O MCP permite que agentes IA — Claude, GPT, LLMs personalizados — usem o WorldMonitor como ferramenta, consultando os 30+ serviços. Incluído no Pro. O Enterprise adiciona servidores MCP privados e deployments personalizados.",
     "q9": "Posso construir os meus próprios painéis?",
     "a9": "Sim. O Pro inclui o Construtor de widgets personalizados — construa painéis a partir de HTML, CSS e JavaScript, com modificação assistida por IA.",
-    "q10": "Posso ligar o Claude ou o GPT ao VISTA?",
-    "a10": "Sim. O MCP está incluído no Pro — ligue o VISTA ao Claude, GPT ou qualquer LLM compatível com MCP como ferramenta ao vivo.",
+    "q10": "Posso ligar o Claude ou o GPT ao WorldMonitor?",
+    "a10": "Sim. O MCP está incluído no Pro — ligue o WorldMonitor ao Claude, GPT ou qualquer LLM compatível com MCP como ferramenta ao vivo.",
     "q11": "Quão personalizado é o digest?",
     "a11": "Escolha a cadência: diária, duas vezes ao dia ou semanal. Re-pontuamos cada história seguida contra as suas regras de alerta e watchlist, deduplicamos em mais de 400 fontes e enviamos até 30 itens ordenados com um Assessment de IA e Signals to watch escritos para o seu contexto. Alertas em tempo real também disponíveis para eventos críticos.",
     "q12": "Qual é a taxa de atualização?",
@@ -304,7 +304,7 @@
   },
   "finalCta": {
     "title": "Comece com Pro. Escale para Enterprise.",
-    "subtitle": "Continue a usar o VISTA grátis, ou atualize para equity research, analítica macro e briefings IA. Se a sua organização precisa de acesso em equipa, apps TV ou suporte API, fale connosco.",
+    "subtitle": "Continue a usar o World Monitor grátis, ou atualize para equity research, analítica macro e briefings IA. Se a sua organização precisa de acesso em equipa, apps TV ou suporte API, fale connosco.",
     "talkToSales": "Fale com vendas"
   },
   "footer": {
@@ -314,9 +314,9 @@
   },
   "soonBadge": "Em breve",
   "meta": {
-    "title": "VISTA Pro — Analista de IA, Mesa de Inteligência Pessoal, MCP para Claude & GPT",
-    "description": "A camada de IA geopolítica. Pergunte, assine e construa sobre ela. Chat WM Analyst em 30+ serviços ao vivo, um resumo de IA entregue diariamente, duas vezes ao dia ou semanalmente no Slack, Discord, Telegram, Email ou webhook, um construtor de widget personalizado (HTML/CSS/JS + IA) e conectores MCP para Claude, GPT e LLMs customizados.",
-    "ogTitle": "VISTA Pro — A Camada de IA Geopolítica",
+    "title": "World Monitor Pro | Inteligência de IA e MCP",
+    "description": "World Monitor Pro adiciona um analista de IA, resumos de inteligência agendados, widgets personalizados, pesquisa de mercado e acesso MCP a dados geopolíticos e financeiros em tempo real.",
+    "ogTitle": "World Monitor Pro | IA Geopolítica",
     "ogDescription": "Pergunte, assine e construa sobre ela. Chat WM Analyst, um resumo de IA conforme sua agenda (diariamente, duas vezes ao dia ou semanalmente), construtor de widget personalizado e MCP para Claude/GPT — em 30+ serviços ao vivo sob uma única chave."
   },
   "pricing": {
@@ -388,7 +388,7 @@
         "cta": "Contate Vendas"
       },
       "apiBusiness": {
-        "description": "Lance seu próprio produto com dados do VISTA",
+        "description": "Lance seu próprio produto com dados do WorldMonitor",
         "features": [
           "Tudo no API Starter",
           "Direitos de redistribuição — incorpore nossos dados no que você vende",
@@ -427,9 +427,9 @@
   },
   "welcome": {
     "meta": {
-      "title": "VISTA — Painel Gratuito de Inteligência Global em Tempo Real",
+      "title": "World Monitor — Painel Gratuito de Inteligência Global em Tempo Real",
       "description": "Quando vira notícia, você já sabia. Conflitos, gargalos de navegação, voos militares, mercados e cibernética em um mapa ao vivo gratuito, com análise por IA. Sem cadastro.",
-      "ogTitle": "VISTA — Quando vira notícia, você já sabia.",
+      "ogTitle": "World Monitor — Quando vira notícia, você já sabia.",
       "ogDescription": "Os sinais brutos do mundo — navios, jatos, sirenes, cabos, mercados — em um mapa de inteligência ao vivo gratuito, com IA que sinaliza quando convergem. Grátis, sem cadastro."
     },
     "nav": {
@@ -447,21 +447,21 @@
       "eyebrow": "Painel de inteligência global gratuito · agora ao vivo",
       "headline1": "Quando vira notícia,",
       "headline2": "você já sabia.",
-      "sub": "Manchetes são o atraso. VISTA transmite os sinais brutos do mundo — navios, jatos, sirenes, cabos, mercados — para um mapa ao vivo, com IA que sinaliza quando convergem em algo que importa.",
+      "sub": "Manchetes são o atraso. World Monitor transmite os sinais brutos do mundo — navios, jatos, sirenes, cabos, mercados — para um mapa ao vivo, com IA que sinaliza quando convergem em algo que importa.",
       "ctaPrimary": "Abrir o painel",
       "ctaFree": "Grátis · Sem cadastro · Carrega em segundos",
       "ctaSecondary": "Veja como as pessoas usam ↓",
       "trustUsers": "2M+ usuários",
       "trustOpenSource": "Open source · AGPL-3.0",
-      "screenshotAlt": "Painel de inteligência ao vivo do VISTA — mapa global com camadas de conflitos, navegação e mercados",
+      "screenshotAlt": "Painel de inteligência ao vivo do World Monitor — mapa global com camadas de conflitos, navegação e mercados",
       "plateNote": "Capturado do mapa ao vivo — clique para abrir",
       "trustBuild": "Construa sobre ele:",
-      "positioningLink": "VISTA não é um Palantir de código aberto"
+      "positioningLink": "WorldMonitor não é um Palantir de código aberto"
     },
     "live": {
       "eyebrow": "Ao vivo agora",
       "title": "Esta página está conectada às mesmas APIs do painel.",
-      "subtitle": "Quatro dos mais de cem sinais que o VISTA monitora o tempo todo.",
+      "subtitle": "Quatro dos mais de cem sinais que o World Monitor monitora o tempo todo.",
       "liveBadge": "Ao vivo",
       "sampleBadge": "Amostra",
       "cardHeadlines": "Sinais principais",
@@ -626,10 +626,10 @@
       "eyebrow": "Acesso",
       "title1": "Grátis é o observatório.",
       "title2": "Pro é a sala de operações.",
-      "sub": "O painel completo é grátis — cada camada, cada feed, sem cadastro. Pro adiciona a camada de decisão.",
+      "sub": "O dashboard é gratuito — todas as camadas de mapa exceto Resilience, todos os feeds, sem cadastro. Pro adiciona a camada de decisão.",
       "freeTitle": "Grátis",
-      "freeDesc": "O nível gratuito é um produto completo, não uma versão de teste. Cada camada de mapa, cada feed, cada monitor — sem cadastro, sem relógio de teste, sem muro de recursos no mapa.",
-      "freeF1": "Todas as 56 camadas de mapa & 500+ feeds",
+      "freeDesc": "O nível gratuito é um produto completo, não uma avaliação. Todas as camadas de mapa exceto Resilience, todos os feeds, todos os monitores — sem cadastro, sem contador de avaliação.",
+      "freeF1": "Todas as camadas de mapa exceto Resilience e 500+ feeds",
       "freeF2": "Resumos de país, pontos de acesso, pontuações de instabilidade",
       "freeF3": "Pontos críticos, cabos, análise em cascata",
       "freeF4": "Pipeline de alerta de último minuto & listas de monitoramento",
@@ -646,28 +646,28 @@
     "faq": {
       "eyebrow": "Sem pegadinhas",
       "title": "Perguntas justas.",
-      "q1": "VISTA é realmente gratuito?",
-      "a1": "Sim. O mapa ao vivo completo — todas as camadas, 500+ feeds, resumos de países, alertas de últimas notícias, todos os seis monitores — é gratuito sem cadastro e sem relógio de teste. Pro financia os feeds: adiciona WM Analyst, o mecanismo de cenários, Route Explorer, digests agendados e acesso MCP para clientes AI. Sem anúncios e sem conta significa que não há dados de usuários para vender.",
+      "q1": "World Monitor é realmente gratuito?",
+      "a1": "Sim. O mapa ao vivo — todas as camadas exceto Resilience, 500+ feeds, resumos por país, alertas de breaking, todos os seis monitores — é gratuito sem cadastro e sem contador de avaliação. Pro financia os feeds: adiciona WM Analyst, o mecanismo de cenários, Route Explorer, resumos agendados, acesso MCP para clientes AI e a camada de mapa Resilience. Sem anúncios e sem conta significa que não há dados de usuário para vender.",
       "q2": "O que é um dashboard de inteligência global?",
-      "a2": "Uma única visualização ao vivo que funde sinais que a maioria das ferramentas mantém separados: eventos de conflito, rastreamento de navios e aeronaves, pontos de estrangulamento de navegação, satélites, cabos submarinos, gasodutos, mercados e ameaças cibernéticas — em um único mapa-múndi em tempo real, com pontuação de IA e resumos no topo. VISTA é um gratuito.",
+      "a2": "Uma única visualização ao vivo que funde sinais que a maioria das ferramentas mantém separados: eventos de conflito, rastreamento de navios e aeronaves, pontos de estrangulamento de navegação, satélites, cabos submarinos, gasodutos, mercados e ameaças cibernéticas — em um único mapa-múndi em tempo real, com pontuação de IA e resumos no topo. World Monitor é um gratuito.",
       "q3": "De onde vêm os dados?",
       "a3": "65+ provedores, nomeados: ACLED e UCDP para conflitos, AISStream para navios ao vivo, OpenSky para aeronaves, NASA FIRMS para incêndios, USGS para terremotos, IMF, BIS, FRED e Finnhub para mercados e macro — mais 500+ feeds de notícias curados. Cada painel cita suas fontes e timestamps inline.",
       "q4": "Posso monitorar pontos de estrangulamento como Hormuz ou Bab el-Mandeb em tempo real?",
       "a4": "Sim. 13 pontos de estrangulamento são rastreados com contagens de navios AIS ao vivo, mudança de trânsito semana a semana e pontuação de disrupção — e anomalias de densidade são sinalizadas em relação à linha de base contínua de cada estreito.",
       "q5": "Como isso é diferente de um mapa de conflitos como Liveuamap?",
-      "a5": "Conflito é uma camada de 56. VISTA funde conflitos com navegação, voos militares, infraestrutura, mercados e cibernética — depois a IA pontua a convergência: índices de instabilidade, escalada de hotspots, alertas de breaking corroborados e resumos diários.",
+      "a5": "Conflito é uma camada de 56. World Monitor funde conflitos com navegação, voos militares, infraestrutura, mercados e cibernética — depois a IA pontua a convergência: índices de instabilidade, escalada de hotspots, alertas de breaking corroborados e resumos diários.",
       "q6": "Por que devo confiar em um alerta?",
       "a6": "Um banner de breaking dispara apenas quando tipos de origem independentes corroboram — classificação de notícias, velocidade de palavras-chave, escalada de hotspot, picos militares, sirenes oficiais — desduplicados e rate-limited. Menos alertas, alertas reais.",
       "q7": "Agentes de IA como Claude ou GPT podem usar?",
-      "a7": "Sim. VISTA oferece um servidor MCP com 59 ferramentas, então Claude, GPT ou qualquer agente compatível com MCP pode consultar scores de risco em tempo real, status de pontos críticos, conflitos, mercados e resumos — com projeção JMESPath para que agentes obtenham exatamente o que precisam.",
+      "a7": "Sim. World Monitor oferece um servidor MCP com 59 ferramentas, então Claude, GPT ou qualquer agente compatível com MCP pode consultar scores de risco em tempo real, status de pontos críticos, conflitos, mercados e resumos — com projeção JMESPath para que agentes obtenham exatamente o que precisam.",
       "q8": "Preciso de uma conta?",
       "a8": "Não. O dashboard funciona instantaneamente sem inscrição. Uma conta só importa quando você atualiza para Pro ou quer sincronizar configurações entre dispositivos.",
       "q9": "É open source?",
       "a9": "Sim — open source sob AGPL-3.0 no GitHub: leia o código, auto-hospede ou construa sobre ele. Aplicativos de desktop nativos para Windows, macOS e Linux estão disponíveis também, além de um aplicativo Android TV para exibições em parede.",
-      "q10": "Por que o VISTA não é Palantir?",
-      "a10": "Palantir torna os dados próprios de uma instituição operacionais dentro dessa instituição. VISTA começa do outro lado: reúne, normaliza, correlaciona e monitora dados do mundo público, depois publica essa camada de inteligência por meio de um painel gratuito e código aberto. Trabalho diferente, produto diferente.",
-      "q11": "Which VISTA license do I need?",
-      "a11": "Choose based on who will use the output. Pro's Personal license is for one person using VISTA for their own research and decisions. Pro Business lets one licensed user use it for company or client work, internal tools, and reports. API Starter covers API use inside one organization, with no customer redistribution. API Business lets that organization embed VISTA data in products and services for its customers. Enterprise covers custom seats, white-labeling, and deployments. These subscription licenses are separate from the AGPL/MIT source-code licenses. Full terms: worldmonitor.app/docs/terms."
+      "q10": "Por que o World Monitor não é Palantir?",
+      "a10": "Palantir torna os dados próprios de uma instituição operacionais dentro dessa instituição. World Monitor começa do outro lado: reúne, normaliza, correlaciona e monitora dados do mundo público, depois publica essa camada de inteligência por meio de um painel gratuito e código aberto. Trabalho diferente, produto diferente.",
+      "q11": "Which World Monitor license do I need?",
+      "a11": "Choose based on who will use the output. Pro's Personal license is for one person using World Monitor for their own research and decisions. Pro Business lets one licensed user use it for company or client work, internal tools, and reports. API Starter covers API use inside one organization, with no customer redistribution. API Business lets that organization embed World Monitor data in products and services for its customers. Enterprise covers custom seats, white-labeling, and deployments. These subscription licenses are separate from the AGPL/MIT source-code licenses. Full terms: worldmonitor.app/docs/terms."
     },
     "cta": {
       "title": "O mapa-múndi não espera por você.",
