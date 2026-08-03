@@ -102,6 +102,10 @@ export const Hero = () => (
           <br />
           <span className="text-wm-green text-glow">{t('welcome.hero.headline2')}</span>
         </h1>
+        <p className="mt-5 font-mono text-xs uppercase tracking-widest text-wm-green">
+          VISTA is not an open-source Palantir.
+        </p>
+
         <p className="text-base md:text-lg text-wm-muted max-w-2xl mx-auto mt-6">
           {t('welcome.hero.sub')}
         </p>

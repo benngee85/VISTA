@@ -398,8 +398,8 @@ test('signs desktop register-interest cloud fallback when shared secret is confi
     const request = remote.requests[0];
     assert.equal(request.path, '/api/leads/v1/register-interest');
     assert.equal(request.json.source, 'desktop-settings');
-    const timestamp = request.headers['x-worldmonitor-desktop-timestamp'];
-    const signature = request.headers['x-worldmonitor-desktop-signature'];
+    const timestamp = request.headers['x-vista-desktop-timestamp'];
+    const signature = request.headers['x-vista-desktop-signature'];
     assert.equal(request.headers['content-encoding'], undefined);
     assert.match(request.headers['user-agent'], /Chrome\/131\.0\.0\.0/);
     assert.match(timestamp, /^\d+$/);
@@ -561,7 +561,7 @@ test('preserves caller Authorization while hiding the sidecar transport token', 
     const response = await fetch(`http://127.0.0.1:${port}/api/header-check`, {
       headers: {
         Authorization: 'Bearer caller-oauth-token',
-        'X-VISTA-Local-Token': TEST_LOCAL_API_TOKEN,
+        'X-WorldMonitor-Local-Token': TEST_LOCAL_API_TOKEN,
       },
     });
     assert.equal(response.status, 200);
@@ -592,7 +592,7 @@ test('does not forward the sidecar transport token through Docker cloud proxy ro
   const { port } = await app.start();
 
   try {
-    const headers = { 'X-VISTA-Local-Token': TEST_LOCAL_API_TOKEN };
+    const headers = { 'X-WorldMonitor-Local-Token': TEST_LOCAL_API_TOKEN };
     const youtubeResponse = await fetch(`http://127.0.0.1:${port}/api/youtube/live`, { headers });
     assert.equal(youtubeResponse.status, 200);
 

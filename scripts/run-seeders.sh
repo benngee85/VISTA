@@ -3,7 +3,7 @@
 # Usage: ./scripts/run-seeders.sh
 #
 # Requires the worldmonitor stack to be running (uvx podman-compose up -d).
-# The Valkey REST bridge listens on localhost:8079 by default.
+# The Redis-compatible REST bridge backed by Valkey listens on localhost:8079 by default.
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
@@ -20,7 +20,7 @@ if [ -f "$PROJECT_DIR/.env" ]; then
 fi
 
 # Host seeders execute outside the Compose network. Never inherit the
-# container-only http://valkey-rest:8080 endpoint from .env.
+# container-only http://redis-rest:8080 endpoint from .env.
 if [ -f "$PROJECT_DIR/.secrets/runtime.env" ]; then
   set -a
   # shellcheck disable=SC1091
@@ -55,7 +55,7 @@ export UPSTASH_REDIS_REST_URL UPSTASH_REDIS_REST_TOKEN
 
 # Host compatibility for API-authenticated warmers. Host seeders must
 # address the sovereign gateway rather than the hosted worldmonitor endpoint.
-VISTA_HOST_API_BASE_URL="${VISTA_HOST_API_BASE_URL:-http://127.0.0.1:${VISTA_HTTP_PORT:-8080}}"
+VISTA_HOST_API_BASE_URL="${VISTA_HOST_API_BASE_URL:-http://127.0.0.1:${VISTA_HTTP_PORT:-${WM_PORT:-3000}}}"
 API_BASE_URL="$VISTA_HOST_API_BASE_URL"
 WM_API_BASE_URL="$VISTA_HOST_API_BASE_URL"
 WORLDMONITOR_API_KEY="${WORLDMONITOR_API_KEY:-${WM_API_KEY:-}}"
@@ -100,7 +100,7 @@ if [ -z "${LLM_MODEL:-}" ] &&
 fi
 
 printf '%s\n' "Host seeder endpoints:"
-printf '  Valkey REST: %s\n' "$CACHE_REST_URL"
+printf '  Redis REST compatibility bridge: %s\n' "$CACHE_REST_URL"
 printf '  LLM API:    %s\n' "$LLM_API_URL"
 printf '  LLM model:  %s\n' "$LLM_MODEL"
 

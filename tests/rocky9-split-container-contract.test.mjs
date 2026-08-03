@@ -101,13 +101,13 @@ test('parallel profile preserves the current combined service as rollback', () =
   assert.doesNotMatch(compose, /^\s{2}worldmonitor:\s*$/m);
 });
 
-test('shared Valkey REST dependency has an authenticated readiness contract', () => {
-  assert.match(compose, /^\s{2}valkey-rest:\s*$/m);
+test('shared Redis REST compatibility dependency has an authenticated readiness contract', () => {
+  assert.match(compose, /^\s{2}redis-rest:\s*$/m);
   assert.match(compose, /http:\/\/127\.0\.0\.1:8080\/ping/);
   assert.match(compose, /process\.env\.SRH_TOKEN/);
   assert.match(
     compose,
-    /depends_on:[\s\S]*valkey-rest:\n\s+condition: service_healthy/,
+    /depends_on:[\s\S]*redis-rest:\n\s+condition: service_healthy/,
   );
 });
 

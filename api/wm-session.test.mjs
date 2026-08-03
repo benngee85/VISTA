@@ -665,3 +665,136 @@ test('mint still succeeds when the cookie header is malformed', async () => {
   assert.equal(body.hadSession, false);
   assert.match(cookieValue(setCookies(resp), 'wm-session'), /^wms_/);
 });
+
+test('sovereign auto-session issues HttpOnly pro authority', async () => {
+  const previousAuto = process.env.VISTA_SOVEREIGN_AUTO_SESSION;
+  const previousApiKey = process.env.WORLDMONITOR_API_KEY;
+  const previousProviderUrl =
+    process.env.VISTA_ENTITLEMENT_PROVIDER_URL;
+  const previousProviderToken =
+    process.env.VISTA_ENTITLEMENT_PROVIDER_TOKEN;
+  const previousSubject =
+    process.env.VISTA_ENTITLEMENT_SUBJECT_ID;
+  const previousFetch = globalThis.fetch;
+
+  process.env.VISTA_SOVEREIGN_AUTO_SESSION = 'true';
+  process.env.WORLDMONITOR_API_KEY =
+    'wm_sovereign_browser_authority';
+  process.env.VISTA_ENTITLEMENT_PROVIDER_URL =
+    'https://entitlements.internal.test';
+  process.env.VISTA_ENTITLEMENT_PROVIDER_TOKEN =
+    'provider-token';
+  process.env.VISTA_ENTITLEMENT_SUBJECT_ID =
+    'urn:test:vista:node';
+
+  globalThis.fetch = async (input) => {
+    const url = String(input);
+
+    if (
+      url ===
+      'https://entitlements.internal.test/v1/entitlements/resolve'
+    ) {
+      return new Response(JSON.stringify({
+        entitlements: {
+          planKey: 'sovereign-baseline',
+          validUntil: Date.now() + 60_000,
+          features: {
+            tier: 100,
+            apiAccess: true,
+            apiRateLimit: 1000,
+            maxDashboards: 100,
+            prioritySupport: false,
+            exportFormats: ['json'],
+            mcpAccess: true,
+            dataExport: true,
+          },
+        },
+      }), {
+        status: 200,
+        headers: {
+          'content-type': 'application/json',
+        },
+      });
+    }
+
+    return previousFetch(input);
+  };
+
+  try {
+    const request = new Request(
+      'http://localhost:5173/api/wm-session',
+      {
+        method: 'POST',
+        headers: {
+          origin: 'http://localhost:5173',
+          'content-type': 'application/json',
+        },
+        body: '{}',
+      },
+    );
+
+    const response = await handler(request);
+    const payload = await response.json();
+
+    assert.equal(response.status, 200);
+    assert.equal(payload.premium, true);
+    assert.equal(payload.entitlementSource, 'sovereign-local');
+
+    const cookies =
+      typeof response.headers.getSetCookie === 'function'
+        ? response.headers.getSetCookie()
+        : [response.headers.get('set-cookie') || ''];
+
+    const proCookie = cookies.find((cookie) =>
+      cookie.startsWith('wm-pro-key=')
+      && !cookie.startsWith('wm-pro-key=;')
+      && /HttpOnly/i.test(cookie)
+    );
+
+    assert.ok(proCookie);
+    assert.match(proCookie, /HttpOnly/i);
+    assert.match(proCookie, /Secure/i);
+    assert.match(proCookie, /SameSite=Lax/i);
+    assert.doesNotMatch(
+      JSON.stringify(payload),
+      /wm_sovereign_browser_authority/,
+    );
+  } finally {
+    globalThis.fetch = previousFetch;
+
+    if (previousAuto === undefined) {
+      delete process.env.VISTA_SOVEREIGN_AUTO_SESSION;
+    } else {
+      process.env.VISTA_SOVEREIGN_AUTO_SESSION =
+        previousAuto;
+    }
+
+    if (previousApiKey === undefined) {
+      delete process.env.WORLDMONITOR_API_KEY;
+    } else {
+      process.env.WORLDMONITOR_API_KEY =
+        previousApiKey;
+    }
+
+    if (previousProviderUrl === undefined) {
+      delete process.env.VISTA_ENTITLEMENT_PROVIDER_URL;
+    } else {
+      process.env.VISTA_ENTITLEMENT_PROVIDER_URL =
+        previousProviderUrl;
+    }
+
+    if (previousProviderToken === undefined) {
+      delete process.env.VISTA_ENTITLEMENT_PROVIDER_TOKEN;
+    } else {
+      process.env.VISTA_ENTITLEMENT_PROVIDER_TOKEN =
+        previousProviderToken;
+    }
+
+    if (previousSubject === undefined) {
+      delete process.env.VISTA_ENTITLEMENT_SUBJECT_ID;
+    } else {
+      process.env.VISTA_ENTITLEMENT_SUBJECT_ID =
+        previousSubject;
+    }
+  }
+});

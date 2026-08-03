@@ -66,6 +66,10 @@ function readRuntimeConfig(): VistaAuthRuntimeConfig {
 
   const source = window.__VISTA_AUTH_CONFIG__ ?? {};
   const mode = normalizeMode(source.mode);
+  const runtimeOrigin =
+    typeof window.location?.origin === 'string'
+      ? window.location.origin
+      : '';
 
   return Object.freeze({
     mode,
@@ -84,10 +88,10 @@ function readRuntimeConfig(): VistaAuthRuntimeConfig {
     logoutUrl: stringValue(source.logoutUrl),
     redirectUri:
       stringValue(source.redirectUri)
-      || `${window.location.origin}/auth/callback`,
+      || (runtimeOrigin ? `${runtimeOrigin}/auth/callback` : ''),
     postLogoutRedirectUri:
       stringValue(source.postLogoutRedirectUri)
-      || `${window.location.origin}/`,
+      || (runtimeOrigin ? `${runtimeOrigin}/` : ''),
     scopes: stringArray(source.scopes),
     registrationEnabled: booleanValue(
       source.registrationEnabled,

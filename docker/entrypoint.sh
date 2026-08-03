@@ -11,10 +11,25 @@ set -e
 if [ -r /run/secrets/vista_runtime_env ]; then
   WM_SESSION_SECRET=$(awk -F= '$1 == "WM_SESSION_SECRET" {sub(/^[^=]*=/, ""); value=$0} END {print value}' /run/secrets/vista_runtime_env)
   WORLDMONITOR_API_KEY=$(awk -F= '$1 == "WM_API_KEY" {sub(/^[^=]*=/, ""); value=$0} END {print value}' /run/secrets/vista_runtime_env)
+  WORLDMONITOR_VALID_KEYS=$(awk -F= '$1 == "WORLDMONITOR_VALID_KEYS" {sub(/^[^=]*=/, ""); value=$0} END {print value}' /run/secrets/vista_runtime_env)
+  WORLDMONITOR_UPSTREAM_API_KEY=$(awk -F= '$1 == "WORLDMONITOR_UPSTREAM_API_KEY" {sub(/^[^=]*=/, ""); value=$0} END {print value}' /run/secrets/vista_runtime_env)
+  WORLDMONITOR_UPSTREAM_API_BASE_URL=$(awk -F= '$1 == "WORLDMONITOR_UPSTREAM_API_BASE_URL" {sub(/^[^=]*=/, ""); value=$0} END {print value}' /run/secrets/vista_runtime_env)
+
   [ -n "$WM_SESSION_SECRET" ] || { echo "FAIL: WM_SESSION_SECRET is missing" >&2; exit 1; }
   [ -n "$WORLDMONITOR_API_KEY" ] || { echo "FAIL: WM_API_KEY is missing" >&2; exit 1; }
+  [ -n "$WORLDMONITOR_VALID_KEYS" ] || { echo "FAIL: WORLDMONITOR_VALID_KEYS is missing" >&2; exit 1; }
+
   export WM_SESSION_SECRET
   export WORLDMONITOR_API_KEY
+  export WORLDMONITOR_VALID_KEYS
+
+  if [ -n "$WORLDMONITOR_UPSTREAM_API_KEY" ]; then
+    export WORLDMONITOR_UPSTREAM_API_KEY
+  fi
+
+  if [ -n "$WORLDMONITOR_UPSTREAM_API_BASE_URL" ]; then
+    export WORLDMONITOR_UPSTREAM_API_BASE_URL
+  fi
 fi
 
 if [ -r /run/secrets/vista_runtime_env ]; then
@@ -60,4 +75,30 @@ if [ -z "${LOCAL_API_TOKEN:-}" ]; then
 fi
 
 envsubst '$LOCAL_API_PORT $LOCAL_API_TOKEN' < /etc/nginx/nginx.conf.template > /tmp/nginx.conf
+
+# VISTA_POST_SECRET_API_AUTHORITY_NORMALISATION
+# Docker secret files are imported after vista_runtime_env. A dedicated
+# /run/secrets/WORLDMONITOR_API_KEY may therefore replace the earlier
+# canonical value. Reconcile the enterprise allowlist only after every
+# secret source has been loaded.
+if [ -n "${WORLDMONITOR_API_KEY:-}" ]; then
+  case ",${WORLDMONITOR_VALID_KEYS:-}," in
+    *",${WORLDMONITOR_API_KEY},"*)
+      ;;
+    *)
+      if [ -n "${WORLDMONITOR_VALID_KEYS:-}" ]; then
+        WORLDMONITOR_VALID_KEYS="${WORLDMONITOR_API_KEY},${WORLDMONITOR_VALID_KEYS}"
+      else
+        WORLDMONITOR_VALID_KEYS="${WORLDMONITOR_API_KEY}"
+      fi
+      ;;
+  esac
+
+  export WORLDMONITOR_API_KEY
+  export WORLDMONITOR_VALID_KEYS
+else
+  echo "FAIL: effective WORLDMONITOR_API_KEY is missing after secret loading" >&2
+  exit 1
+fi
+
 exec /usr/bin/supervisord -c /etc/supervisor/conf.d/worldmonitor.conf

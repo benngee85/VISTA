@@ -113,7 +113,7 @@ describe('relay warm-ping auth wiring (source guardrail)', () => {
       'utf8',
     );
     const composeSrc = await readFile(
-      new URL('../compose.yaml', import.meta.url),
+      new URL('../docker-compose.yml', import.meta.url),
       'utf8',
     );
 

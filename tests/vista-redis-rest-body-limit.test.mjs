@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
 const proxy = readFileSync('docker/redis-rest-proxy.mjs', 'utf8');
-const compose = readFileSync('compose.yaml', 'utf8');
+const compose = readFileSync('docker-compose.yml', 'utf8');
 
 test('self-hosted REST bridge accepts bounded legitimate seeded payloads', () => {
   assert.match(proxy, /DEFAULT_MAX_BODY_BYTES = 16 \* 1024 \* 1024/);

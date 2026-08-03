@@ -156,7 +156,7 @@ PYMODE
     print -r -- "configured_cache_target=${configured_cache_url#*://}"
   } >"${VISTA_EVIDENCE_DIR}/cache-endpoint-scope.txt"
 
-  if [[ "$configured_cache_url" == *"valkey-rest:"* ]] &&
+  if [[ "$configured_cache_url" == *"redis-rest:"* ]] &&
     grep -Fq 'UPSTASH_REDIS_REST_URL="${UPSTASH_REDIS_REST_URL:-' \
       scripts/run-seeders.sh; then
     vista_finding FAIL HOST-CACHE-001 seeders \

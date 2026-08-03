@@ -322,6 +322,36 @@ export default async function handler(req, ctx) {
     && await resolveSovereignNodeEntitlement();
   const effectivePremium = premium || sovereignNodePremium;
 
+  // A sovereign browser session must carry server-validated API authority on
+  // subsequent protected RPC calls. Keep that authority exclusively in the
+  // existing HttpOnly pro-key cookie: it is never returned in the JSON body
+  // and is unavailable to browser JavaScript.
+  if (sovereignNodePremium && !premium) {
+    const sovereignProKey = normalizeLegacyKey(
+      process.env.WORLDMONITOR_API_KEY,
+    );
+
+    if (!sovereignProKey) {
+      return respond(
+        { error: 'Sovereign browser authority is not configured' },
+        503,
+        cors,
+        'auth_unavailable',
+      );
+    }
+
+    headers = appendHeader(
+      headers,
+      'Set-Cookie',
+      clearReadableCookie(PRO_KEY_COOKIE),
+    );
+    headers = appendHeader(
+      headers,
+      'Set-Cookie',
+      sessionCookie(req, PRO_KEY_COOKIE, sovereignProKey),
+    );
+  }
+
   return respond({
     ok: true,
     exp: issued.exp,

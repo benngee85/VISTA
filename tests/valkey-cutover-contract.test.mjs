@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import test from 'node:test';
 
-const compose = readFileSync('compose.yaml', 'utf8');
+const compose = readFileSync('docker-compose.yml', 'utf8');
 const rocky = readFileSync('docker-compose.rocky9.yml', 'utf8');
 const proxy = readFileSync('docker/redis-rest-proxy.mjs', 'utf8');
 const seedRunner = readFileSync('scripts/run-seeders.sh', 'utf8');
@@ -46,13 +46,13 @@ test('Valkey requires authentication and persistence', () => {
 });
 
 test('REST bridge targets Valkey', () => {
-  assert.match(compose, /^  valkey-rest:$/m);
-  assert.doesNotMatch(compose, /^  redis-rest:$/m);
+  assert.match(compose, /^  redis-rest:$/m);
+  assert.doesNotMatch(compose, /^  valkey-rest:$/m);
   assert.match(compose, /@valkey:6379/);
   assert.match(proxy, /redis:\/\/valkey:6379/);
   assert.doesNotMatch(proxy, /redis:\/\/redis:6379/);
-  assert.match(compose, /http:\/\/valkey-rest:8080/);
-  assert.match(rocky, /http:\/\/valkey-rest:8080/);
+  assert.match(compose, /http:\/\/redis-rest:8080/);
+  assert.match(rocky, /http:\/\/redis-rest:8080/);
 });
 
 test('neutral cache variables retain compatibility exports', () => {

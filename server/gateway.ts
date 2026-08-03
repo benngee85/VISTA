@@ -1295,8 +1295,15 @@ export function createDomainGateway(
     // them valid, wmKey is set, !isUserApiKey, and 'wms_' doesn't startsWith
     // 'wm_'), so telemetry mislabelled them as enterprise_api_key with
     // customer_id='enterprise-unmapped'. PR #3557 round-3 review.
-    if (keyCheck.valid && wmKey && !isUserApiKey && keyCheck.kind === 'enterprise') {
-      usage.enterpriseApiKey = wmKey;
+    if (keyCheck.valid && !isUserApiKey && keyCheck.kind === 'enterprise') {
+      // validateApiKey is the credential authority and accepts enterprise
+      // credentials from either X-WorldMonitor-Key/X-Api-Key or the HttpOnly
+      // wm-pro-key/wm-widget-key cookies. Do not require a duplicate header:
+      // sovereign browser sessions deliberately keep operator credentials
+      // outside JavaScript-readable channels.
+      if (wmKey) {
+        usage.enterpriseApiKey = wmKey;
+      }
     }
 
     // ── Active-subscription gate for user API keys (#4611) ──────────────────
@@ -1484,7 +1491,10 @@ export function createDomainGateway(
     // tier ≥ 1 + mcpAccess === true above. Some ENDPOINT_ENTITLEMENTS
     // routes require tier 2, but Pro MCP callers only reach the gateway
     // through the MCP edge's whitelisted tool set.
-    const isEnterpriseAuth = keyCheck.valid && wmKey && !isUserApiKey && keyCheck.kind === 'enterprise';
+    const isEnterpriseAuth =
+      keyCheck.valid &&
+      !isUserApiKey &&
+      keyCheck.kind === 'enterprise';
     if (!isEnterpriseAuth && !internalMcpVerified && !seedRefreshVerified && !relayWarmPingVerified) {
       const entitlementCheck = await checkEntitlementDetailed(sessionUserId, pathname, corsHeaders, {
         clerkRole: sessionRole,
