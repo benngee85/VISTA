@@ -152,8 +152,38 @@ export async function readRawJsonFromUpstash(key, timeoutMs = 3_000) {
 
 /** Returns Redis credentials or null if not configured. */
 export function getRedisCredentials() {
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  const clean = (value) => {
+    const normalized = value?.trim();
+    return normalized ? normalized : undefined;
+  };
+
+  const cacheUrl = clean(process.env.CACHE_REST_URL);
+  const redisUrl = clean(process.env.REDIS_REST_URL);
+  const upstashUrl = clean(process.env.UPSTASH_REDIS_REST_URL);
+
+  const localSelfHosted = [cacheUrl, redisUrl, upstashUrl].some(
+    (value) =>
+      value != null
+      && /(^|\/)redis-rest(?::|\/|$)/i.test(value),
+  );
+
+  if (localSelfHosted) {
+    const url = cacheUrl ?? upstashUrl ?? redisUrl;
+    const token =
+      clean(process.env.CACHE_REST_TOKEN)
+      ?? clean(process.env.REDIS_TOKEN)
+      ?? clean(process.env.UPSTASH_REDIS_REST_TOKEN);
+
+    if (!url || !token) return null;
+    return { url, token };
+  }
+
+  const url = upstashUrl ?? cacheUrl ?? redisUrl;
+  const token =
+    clean(process.env.UPSTASH_REDIS_REST_TOKEN)
+    ?? clean(process.env.CACHE_REST_TOKEN)
+    ?? clean(process.env.REDIS_TOKEN);
+
   if (!url || !token) return null;
   return { url, token };
 }
