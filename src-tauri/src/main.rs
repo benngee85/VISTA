@@ -81,7 +81,7 @@ impl Default for LocalApiState {
             token: Mutex::new(None),
             port: Mutex::new(None),
             http_client: reqwest::Client::builder()
-                .use_native_tls()
+                .use_rustls_tls()
                 .pool_max_idle_per_host(2)
                 .build()
                 .unwrap_or_default(),
