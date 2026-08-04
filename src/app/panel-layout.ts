@@ -42,6 +42,7 @@ import { getCurrentTheme } from '@/utils';
 import { trackCriticalBannerAction, trackCheckoutSuccess, trackCheckoutFailed, trackGateHit, replayPendingCheckoutSuccess, replayPendingProFunnelEvents, replayPendingConversionEvents } from '@/services/analytics';
 import { getStoredMapModePreference } from '@/services/map-mode-preference';
 import { loadWidgets, saveWidget, isProUser, isProTierResolved } from '@/services/widget-store';
+import { sanitizeLockedLayers, shouldSanitizeLockedLayers } from '@/config/map-layer-definitions';
 import type { CustomWidgetSpec } from '@/services/widget-store';
 import {
   panelGateStateChanged,
@@ -81,6 +82,10 @@ import type { SupplyChainPanel } from '@/components/SupplyChainPanel';
 import { setTrustedHtml, trustedHtml } from '@/utils/dom-utils';
 import { loadPanelCollapsed, loadPanelColSpans, loadPanelSpans } from '@/utils/panel-storage';
 import { measure, mutate } from '@/utils/layout-batch';
+import {
+  hydrateGeoHubPanelFromClusters,
+  hydrateTechHubPanelFromClusters,
+} from '@/app/hub-activity-hydration';
 
 function readSessionStorageValue(key: string): string | null {
   try {
@@ -340,6 +345,7 @@ export interface PanelLayoutManagerCallbacks {
   openCountryBrief: (code: string) => void;
   openSearch: () => void;
   loadAllData: (forceAll?: boolean) => Promise<void>;
+  primeVisiblePanelData: () => void;
   updateMonitorResults: () => void;
   loadSecurityAdvisories?: () => Promise<void>;
   applyMapLayerChange?: (layer: keyof MapLayers, enabled: boolean, source: 'programmatic') => void;
@@ -873,7 +879,7 @@ export class PanelLayoutManager implements AppModule {
               <span class="variant-label">${t('header.world')}</span>
             </a>
             <span class="variant-divider"></span>
-            <a href="${vHref('tech', 'https://tech.worldmonitor.app')}"
+            <a href="${vHref('tech', 'https://tech.worldmonitor.app/dashboard')}"
                class="variant-option ${SITE_VARIANT === 'tech' ? 'active' : ''}"
                data-variant="tech"
                ${vTarget('tech')}
@@ -882,7 +888,7 @@ export class PanelLayoutManager implements AppModule {
               <span class="variant-label">${t('header.tech')}</span>
             </a>
             <span class="variant-divider"></span>
-            <a href="${vHref('finance', 'https://finance.worldmonitor.app')}"
+            <a href="${vHref('finance', 'https://finance.worldmonitor.app/dashboard')}"
                class="variant-option ${SITE_VARIANT === 'finance' ? 'active' : ''}"
                data-variant="finance"
                ${vTarget('finance')}
@@ -891,7 +897,7 @@ export class PanelLayoutManager implements AppModule {
               <span class="variant-label">${t('header.finance')}</span>
             </a>
             <span class="variant-divider"></span>
-            <a href="${vHref('commodity', 'https://commodity.worldmonitor.app')}"
+            <a href="${vHref('commodity', 'https://commodity.worldmonitor.app/dashboard')}"
                class="variant-option ${SITE_VARIANT === 'commodity' ? 'active' : ''}"
                data-variant="commodity"
                ${vTarget('commodity')}
@@ -900,7 +906,7 @@ export class PanelLayoutManager implements AppModule {
               <span class="variant-label">${t('header.commodity')}</span>
             </a>
             <span class="variant-divider"></span>
-            <a href="${vHref('energy', 'https://energy.worldmonitor.app')}"
+            <a href="${vHref('energy', 'https://energy.worldmonitor.app/dashboard')}"
                class="variant-option ${SITE_VARIANT === 'energy' ? 'active' : ''}"
                data-variant="energy"
                ${vTarget('energy')}
@@ -909,7 +915,7 @@ export class PanelLayoutManager implements AppModule {
               <span class="variant-label">${t('header.energy')}</span>
             </a>
             <span class="variant-divider"></span>
-            <a href="${vHref('happy', 'https://happy.worldmonitor.app')}"
+            <a href="${vHref('happy', 'https://happy.worldmonitor.app/dashboard')}"
                class="variant-option ${SITE_VARIANT === 'happy' ? 'active' : ''}"
                data-variant="happy"
                ${vTarget('happy')}
@@ -1955,6 +1961,11 @@ export class PanelLayoutManager implements AppModule {
     this.observePanelForHydration(panel);
     if (config?.enabled) {
       this.scheduleHydrationForPanelElement(panel.getElement(), 'near');
+      // Deferred App-owned panels (Stablecoins, ETF flows, Gulf economies,
+      // etc.) are absent when the scroll frame first scans state. Hand off
+      // again after mounting so their panel-specific loader can run without a
+      // second user scroll. App gates this callback until slow-tier readiness.
+      this.callbacks.primeVisiblePanelData();
     }
   }
 
@@ -2385,15 +2396,29 @@ export class PanelLayoutManager implements AppModule {
 
     this.lazyDefaultPanel('cross-source-signals', () => import('@/components/CrossSourceSignalsPanel'), 'CrossSourceSignalsPanel');
 
+    // Hub panels pull retained clusters at mount rather than going through
+    // callPanel()/replayPendingCalls(). That queue would have to be fed the
+    // computed activities on every clustering pass, and computing tech activities
+    // requires the tech-activity → tech-hub-index → ~62KB tech-geo chain — which
+    // applyTechHubActivities() deliberately loads only when the panel is already
+    // mounted (#4404). Pulling on mount keeps that chunk off the critical path.
     this.lazyImportedPanel('geo-hubs', () => import('@/components/GeoHubsPanel'), 'GeoHubsPanel', (GeoHubsPanel) => {
       const p = new GeoHubsPanel();
       p.setOnHubClick((hub) => { this.ctx.map?.setCenter(hub.lat, hub.lon, 4); });
+      hydrateGeoHubPanelFromClusters(p, this.ctx.latestClusters, {
+        allowEmpty: this.ctx.clustersSettled,
+      });
       return p;
     });
 
     this.lazyImportedPanel('tech-hubs', () => import('@/components/TechHubsPanel'), 'TechHubsPanel', (TechHubsPanel) => {
       const p = new TechHubsPanel();
       p.setOnHubClick((hub) => { this.ctx.map?.setCenter(hub.lat, hub.lon, 4); });
+      void hydrateTechHubPanelFromClusters(p, this.ctx.latestClusters, {
+        allowEmpty: this.ctx.clustersSettled,
+      }).catch((err) => {
+        console.error('[panel] failed to lazy-load "tech-hubs" activity data', err);
+      });
       return p;
     });
 
@@ -2725,7 +2750,9 @@ export class PanelLayoutManager implements AppModule {
       view: this.ctx.isMobile ? this.ctx.resolvedLocation : 'global',
       layers: this.ctx.mapLayers,
       timeRange: '7d',
-    }, preferGlobe);
+    }, preferGlobe, {
+      isFreeTierFallbackActive: this.callbacks.isFreeTierFallbackActive,
+    });
 
     const eagerSupplyChainPanel = this.ctx.panels['supply-chain'] as SupplyChainPanel | undefined;
     if (eagerSupplyChainPanel) {
@@ -2875,6 +2902,19 @@ export class PanelLayoutManager implements AppModule {
       if (normalized.resilienceScore && !this.ctx.map.isDeckGLActive?.()) {
         normalized = { ...normalized, resilienceScore: false };
       }
+      // MapContainer also sanitizes at the renderer boundary, but update the
+      // context and persisted URL preference with the effective state first.
+      // Otherwise a settled-free user can have the locked layer stripped from
+      // the renderer while ctx.mapLayers/localStorage retain the stale `true`
+      // value and a later preference/URL reapplication resurrects it (#6045).
+      if (shouldSanitizeLockedLayers(
+        hasPremiumAccess(getAuthState()),
+        isProTierResolved(),
+        this.callbacks.isFreeTierFallbackActive?.() === true,
+      )) {
+        normalized = sanitizeLockedLayers(normalized, false);
+      }
+      this.ctx.initialUrlState.layers = normalized;
       this.ctx.mapLayers = normalized;
       saveToStorage(STORAGE_KEYS.mapLayers, normalized);
       this.ctx.map.setLayers(normalized);

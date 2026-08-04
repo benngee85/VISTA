@@ -75,6 +75,13 @@ export const FULL_FEEDS: Record<string, Feed[]> = {
     { name: 'The Hill', url: rss('https://thehill.com/news/feed') },
     { name: 'Axios', url: rss('https://api.axios.com/feed/') },
     { name: 'Fox News', url: rss('https://moxie.foxnews.com/google-publisher/us.xml') },
+    // Canada + North America key-country pack (#5960). CA is a North America
+    // keyCountry but had zero dedicated catalog sources. CBC World is the
+    // EN-default (noise-acceptable public broadcaster); Globe and Global News
+    // stay catalog opt-in. Canadian Press has no usable public RSS/GNews feed.
+    { name: 'CBC News', url: rss('https://www.cbc.ca/webfeed/rss/rss-world') },
+    { name: 'Globe and Mail', url: rss('https://www.theglobeandmail.com/arc/outboundfeeds/rss/category/canada/?outputType=xml') },
+    { name: 'Global News', url: rss('https://globalnews.ca/feed/') },
   ],
   europe: [
     {
@@ -128,6 +135,15 @@ export const FULL_FEEDS: Record<string, Feed[]> = {
     { name: 'SVT Nyheter', url: rss('https://www.svt.se/nyheter/rss.xml'), lang: 'sv' },
     { name: 'Dagens Nyheter', url: rss('https://www.dn.se/rss/'), lang: 'sv' },
     { name: 'Svenska Dagbladet', url: rss('https://www.svd.se/feed/articles.rss'), lang: 'sv' },
+    // Arctic / Nordic security pack (#5960) — High North + Nordics beyond Sweden.
+    // no/da/fi are not UI locales, so native Nordics are left unscoped (no lang
+    // tag) so EN analysts can enable them. Yle News + Arctic Today are English.
+    { name: 'Yle News', url: rss('https://yle.fi/rss/news') },
+    { name: 'NRK', url: rss('https://www.nrk.no/nyheter/siste.rss') },
+    { name: 'Aftenposten', url: rss('https://www.aftenposten.no/rss') },
+    { name: 'DR Nyheder', url: rss('https://www.dr.dk/nyheder/service/feeds/allenyheder') },
+    // High North specialty (Berlingske/High North News lack reliable public RSS).
+    { name: 'Arctic Today', url: rss('https://news.google.com/rss/search?q=site:arctictoday.com+when:14d&hl=en-US&gl=US&ceid=US:en') },
     // Turkish (TR)
     { name: 'BBC Turkce', url: rss('https://feeds.bbci.co.uk/turkce/rss.xml'), lang: 'tr' },
     { name: 'DW Turkish', url: rss('https://rss.dw.com/xml/rss-tur-all'), lang: 'tr' },
@@ -203,12 +219,27 @@ export const FULL_FEEDS: Record<string, Feed[]> = {
     { name: 'RT Russia', url: rss('https://www.rt.com/rss/russia/') },
     // English-language (no lang tag) — always EN-digest-reachable
     { name: 'Kyiv Independent', url: rss('https://news.google.com/rss/search?q=site:kyivindependent.com+when:3d&hl=en-US&gl=US&ceid=US:en') },
-    // Ukraine depth pack (#5951) — local institutional + independent sources
-    { name: 'Ukrinform', url: rss('https://news.google.com/rss/search?q=site:ukrinform.net+when:3d&hl=en-US&gl=US&ceid=US:en') },
-    { name: 'Suspilne', url: rss('https://news.google.com/rss/search?q=site:suspilne.media+when:2d&hl=en-US&gl=US&ceid=US:en') },
+    // Ukraine depth pack (#5951) — local institutional + independent sources.
+    // Ukrinform / Suspilne are multi-URL so EN digests keep the English edition
+    // while `uk` UI users get UA-language Google News (locale boost via url key).
+    { name: 'Ukrinform', url: {
+      en: rss('https://news.google.com/rss/search?q=site:ukrinform.net+when:3d&hl=en-US&gl=US&ceid=US:en'),
+      uk: rss('https://news.google.com/rss/search?q=site:ukrinform.ua+when:3d&hl=uk&gl=UA&ceid=UA:uk'),
+    } },
+    { name: 'Suspilne', url: {
+      en: rss('https://news.google.com/rss/search?q=site:suspilne.media+when:2d&hl=en-US&gl=US&ceid=US:en'),
+      uk: rss('https://news.google.com/rss/search?q=site:suspilne.media+when:2d&hl=uk&gl=UA&ceid=UA:uk'),
+    } },
     { name: 'Ukrainska Pravda EN', url: rss('https://news.google.com/rss/search?q=site:euromaidanpress.com+when:2d&hl=en-US&gl=US&ceid=US:en') },
     { name: 'NV EN', url: rss('https://news.google.com/rss/search?q=site:english.nv.ua+when:2d&hl=en-US&gl=US&ceid=US:en') },
     { name: 'Hromadske EN', url: rss('https://news.google.com/rss/search?q=site:hromadske.ua+when:3d&hl=en-US&gl=US&ceid=US:en') },
+    // Ukrainian (uk) — native-language pack for uk locale (#5959).
+    // Locale-gated like Telex (hu) / Digi24 (ro): not EN default-on.
+    { name: 'Ukrainska Pravda', url: rss('https://news.google.com/rss/search?q=site:pravda.com.ua+when:2d&hl=uk&gl=UA&ceid=UA:uk'), lang: 'uk' },
+    { name: 'Hromadske', url: rss('https://news.google.com/rss/search?q=site:hromadske.ua+when:3d&hl=uk&gl=UA&ceid=UA:uk'), lang: 'uk' },
+    { name: 'Bihus.Info', url: rss('https://news.google.com/rss/search?q=site:bihus.info+when:7d&hl=uk&gl=UA&ceid=UA:uk'), lang: 'uk' },
+    { name: 'Slidstvo.Info', url: rss('https://news.google.com/rss/search?q=site:slidstvo.info+when:7d&hl=uk&gl=UA&ceid=UA:uk'), lang: 'uk' },
+    { name: 'ZN.UA', url: rss('https://news.google.com/rss/search?q=site:zn.ua+when:3d&hl=uk&gl=UA&ceid=UA:uk'), lang: 'uk' },
     { name: 'Moscow Times', url: rss('https://www.themoscowtimes.com/rss/news') },
     // Caucasus (#5953) — secondary Russian periphery / BRI hinterland
     { name: 'Civil.ge', url: rss('https://civil.ge/feed/') },
@@ -1176,6 +1207,27 @@ export const REGIONAL_FEED_ROLLOUT_OPT_IN_SOURCES = [
   'Ethiopia Insight', 'Dabanga Sudan', 'Citi Newsroom',
 ] as const;
 
+/** Canada pack (#5960) — EN default-on for North America keyCountry CA. */
+export const CANADA_EN_DEFAULT_SOURCES = [
+  'CBC News',
+] as const;
+
+/**
+ * Catalog opt-in sources from the Canada + Arctic/Nordic pack (#5960).
+ * Persisted denylist profiles must insert these on first boot after the pack
+ * lands — otherwise newly cataloged names are implicitly enabled for every
+ * returner (denylist semantics). CBC stays out so default-on can enable it.
+ */
+export const CANADA_ARCTIC_OPT_IN_SOURCES = [
+  'Globe and Mail',
+  'Global News',
+  'Yle News',
+  'NRK',
+  'Aftenposten',
+  'DR Nyheder',
+  'Arctic Today',
+] as const;
+
 /** Chronological feed introductions used to reconstruct untouched cap states. */
 export const REGIONAL_FEED_ROLLOUT_STAGES = [
   {
@@ -1214,6 +1266,20 @@ export const REGIONAL_FEED_ROLLOUT_STAGES = [
       ...AFRICA_DEPTH_EN_DEFAULT_SOURCES,
     ],
   },
+  {
+    // #5960 is newer than the schema-5 regional wave. Keeping its names in a
+    // final chronological stage removes them from every pre-pack fingerprint
+    // while still allowing current-cap states to be reconstructed after it.
+    introducedNames: [
+      ...CANADA_EN_DEFAULT_SOURCES,
+      ...CANADA_ARCTIC_OPT_IN_SOURCES,
+    ],
+    protectedNames: [
+      ...FRONTLINE_EUROPE_PROTECTED_SOURCES,
+      ...REGIONAL_FEED_ROLLOUT_DEFAULT_SOURCES,
+      ...CANADA_EN_DEFAULT_SOURCES,
+    ],
+  },
 ] as const;
 
 /**
@@ -1224,6 +1290,7 @@ export const REGIONAL_FEED_ROLLOUT_STAGES = [
 export const FREE_CAP_PROTECTED_SOURCES = [
   ...FRONTLINE_EUROPE_PROTECTED_SOURCES,
   ...REGIONAL_FEED_ROLLOUT_DEFAULT_SOURCES,
+  ...CANADA_EN_DEFAULT_SOURCES,
 ] as const;
 
 /**
@@ -1271,7 +1338,10 @@ export function getStrategicDefaultSources(): Set<string> {
  */
 export const DEFAULT_ENABLED_SOURCES: Record<string, string[]> = {
   politics: ['BBC World', 'Guardian World', 'AP News', 'Reuters World', 'CNN World'],
-  us: ['Reuters US', 'NPR News', 'PBS NewsHour', 'ABC News', 'CBS News', 'NBC News', 'Wall Street Journal', 'Politico', 'The Hill'],
+  // Canada pack (#5960): CBC News default-on for North America keyCountry CA
+  // (public broadcaster, world desk — noise-acceptable on the US-heavy panel).
+  // Globe and Mail + Global News remain catalog opt-in.
+  us: ['Reuters US', 'NPR News', 'PBS NewsHour', 'ABC News', 'CBS News', 'NBC News', 'Wall Street Journal', 'Politico', 'The Hill', 'CBC News'],
   // Europe defaults — Ukraine war frontline (#5949) + UA/RU balance rule (#5950):
   // ≥1 dedicated UA primary (Kyiv Independent) + ≥1 independent RU (Meduza, Moscow Times).
   // PL frontline: TVN24 + Rzeczpospolita (not all three PL; noise control).

@@ -16,8 +16,8 @@
     "energy": 18
   },
   "variantCount": 6,
-  "componentTopLevelTsFiles": 179,
-  "serviceTopLevelEntries": 223,
+  "componentTopLevelTsFiles": 181,
+  "serviceTopLevelEntries": 221,
   "apiEndpointEntries": 91,
   "panelClasses": 107,
   "protoFiles": 290,
@@ -49,10 +49,11 @@
     "sv",
     "th",
     "tr",
+    "uk",
     "vi",
     "zh"
   ],
-  "locales": 25,
+  "locales": 26,
   "workflows": [
     "analytics-collector-monitor.yml",
     "build-desktop.yml",
@@ -84,7 +85,7 @@
   "workflowCount": 26,
   "freshnessSources": 35,
   "freshnessRequiredForRisk": 2,
-  "feedDefinitions": 615,
+  "feedDefinitions": 628,
   "airportCount": 115,
   "stockExchangeCount": 29,
   "centralBankInstitutionCount": 14,
@@ -141,7 +142,7 @@
         "uriConst": "NEWS_INTELLIGENCE_UI_URI",
         "uri": "ui://worldmonitor/news-intelligence.html",
         "name": "News Intelligence (interactive)",
-        "description": "Interactive in-conversation app shell for get_news_intelligence: renders AI-classified top stories (title, category, alert flag, country, source) from VISTA's intelligence layer. Linked from the get_news_intelligence tool via _meta.ui.resourceUri; an MCP-Apps host renders it inline and streams the tool result in via postMessage. Static, data-free template — public and quota-exempt.",
+        "description": "Interactive in-conversation app shell for get_news_intelligence: renders AI-classified top stories (title, category, alert flag, country, source) from WorldMonitor's intelligence layer. Linked from the get_news_intelligence tool via _meta.ui.resourceUri; an MCP-Apps host renders it inline and streams the tool result in via postMessage. Static, data-free template — public and quota-exempt.",
         "tool": "get_news_intelligence"
       },
       {

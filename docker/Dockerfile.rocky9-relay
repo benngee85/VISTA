@@ -47,6 +47,7 @@ COPY scripts/package.json ./scripts/package.json
 COPY scripts/ais-relay.cjs ./scripts/ais-relay.cjs
 COPY scripts/_yahoo-sector-valuations.cjs ./scripts/_yahoo-sector-valuations.cjs
 COPY scripts/_proxy-utils.cjs ./scripts/_proxy-utils.cjs
+COPY scripts/_ingestion-coverage.cjs ./scripts/_ingestion-coverage.cjs
 COPY scripts/lib/usni-fleet-parser.cjs ./scripts/lib/usni-fleet-parser.cjs
 # llm-telemetry.cjs is transitively imported by _seed-utils.mjs (SIGTERM
 # telemetry flush, #4954) — missing it = silent startup crash in the image.
