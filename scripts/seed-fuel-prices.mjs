@@ -1,6 +1,10 @@
 #!/usr/bin/env node
 
-import ExcelJS from 'exceljs';
+import {
+  listXlsxSheetNames,
+  readXlsxRows,
+  xlsxCellToText,
+} from './_xlsx-reader.mjs';
 import { loadEnvFile, CHROME_UA, runSeed, readSeedSnapshot, getSharedFxRates, SHARED_FX_FALLBACKS, resolveProxyForConnect, httpsProxyFetchRaw } from './_seed-utils.mjs';
 
 loadEnvFile(import.meta.url);
@@ -342,33 +346,16 @@ async function fetchEU_CSV() {
     });
 
     const buf = Buffer.from(await resp.arrayBuffer());
-    const workbook = new ExcelJS.Workbook();
-    await workbook.xlsx.load(buf);
-    const sheetNames = workbook.worksheets.map(ws => ws.name);
+    const sheetNames = await listXlsxSheetNames(buf);
     console.log(`  [EU] XLSX sheets: ${sheetNames.join(', ')}`);
 
     // Find the "with taxes" sheet, or fall back to first sheet
     const sheetName = sheetNames.find(n => /with.tax/i.test(n))
       ?? sheetNames.find(n => /price/i.test(n))
       ?? sheetNames[0];
-    const sheet = workbook.getWorksheet(sheetName);
-
-    // Convert to array-of-arrays (like xlsx's header:1 mode)
-    const rows = [];
-    sheet.eachRow({ includeEmpty: true }, (row) => {
-      rows.push(row.values.slice(1).map(v => {
-        if (v == null) return '';
-        if (v instanceof Date) {
-          const d = v.getUTCDate().toString().padStart(2, '0');
-          const m = (v.getUTCMonth() + 1).toString().padStart(2, '0');
-          return `${d}/${m}/${v.getUTCFullYear()}`;
-        }
-        if (typeof v === 'object' && Array.isArray(v.richText)) {
-          return v.richText.map(rt => rt.text ?? '').join('');
-        }
-        return String(v);
-      }));
-    });
+    const rows = (
+      await readXlsxRows(buf, sheetName)
+    ).map((row) => row.map(xlsxCellToText));
 
     // EU Oil Bulletin XLSX format (confirmed from live file):
     // Row 0: "in EUR" | "Euro-super 95 (I)" | "Gas oil automobile..." | ...  ← column headers

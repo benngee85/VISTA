@@ -16,7 +16,11 @@
  * 6-day minimum WoW gap check passes on the next cron run.
  */
 
-import ExcelJS from 'exceljs';
+import {
+  listXlsxSheetNames,
+  readXlsxRows,
+  xlsxCellToText,
+} from './_xlsx-reader.mjs';
 import { loadEnvFile, CHROME_UA, writeExtraKey, getSharedFxRates, SHARED_FX_FALLBACKS } from './_seed-utils.mjs';
 
 loadEnvFile(import.meta.url);
@@ -176,26 +180,11 @@ async function fetchEU_CSV() {
     const resp = await globalThis.fetch(EU_XLSX_URL, { headers: { 'User-Agent': CHROME_UA }, signal: AbortSignal.timeout(60000) });
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     const buf = Buffer.from(await resp.arrayBuffer());
-    const workbook = new ExcelJS.Workbook();
-    await workbook.xlsx.load(buf);
-    const sheetNames = workbook.worksheets.map(ws => ws.name);
+    const sheetNames = await listXlsxSheetNames(buf);
     const sheetName = sheetNames.find(n => /with.tax/i.test(n)) ?? sheetNames.find(n => /price/i.test(n)) ?? sheetNames[0];
-    const sheet = workbook.getWorksheet(sheetName);
-    const rows = [];
-    sheet.eachRow({ includeEmpty: true }, (row) => {
-      rows.push(row.values.slice(1).map(v => {
-        if (v == null) return '';
-        if (v instanceof Date) {
-          const d = v.getUTCDate().toString().padStart(2, '0');
-          const m = (v.getUTCMonth() + 1).toString().padStart(2, '0');
-          return `${d}/${m}/${v.getUTCFullYear()}`;
-        }
-        if (typeof v === 'object' && Array.isArray(v.richText)) {
-          return v.richText.map(rt => rt.text ?? '').join('');
-        }
-        return String(v);
-      }));
-    });
+    const rows = (
+      await readXlsxRows(buf, sheetName)
+    ).map((row) => row.map(xlsxCellToText));
 
     let headerRowIdx = -1;
     for (let i = 0; i < Math.min(rows.length, 10); i++) {

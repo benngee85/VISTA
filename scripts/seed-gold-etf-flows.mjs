@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 
-import { createRequire } from 'node:module';
 import { loadEnvFile, CHROME_UA, runSeed } from './_seed-utils.mjs';
+import {
+  listXlsxSheetNames,
+  readXlsxRows,
+} from './_xlsx-reader.mjs';
 
 loadEnvFile(import.meta.url);
 
-const require = createRequire(import.meta.url);
 
 const GLD_KEY = 'market:gold-etf-flows:v1';
 const GLD_TTL = 86400;
@@ -56,27 +58,28 @@ function parseSpdrDate(raw) {
  * Parse the XLSX historical archive into an ascending-by-date array of
  * `{ date, tonnes, aum, nav }` records. Exposed for unit tests.
  */
-export async function parseGldArchiveXlsx(xlsxBuffer) {
-  const ExcelJS = require('exceljs');
-  const wb = new ExcelJS.Workbook();
-  await wb.xlsx.load(xlsxBuffer);
-  const ws = wb.worksheets.find(w => w.name !== 'Disclaimer') || wb.worksheets[1] || wb.worksheets[0];
-  if (!ws || ws.rowCount < 10) return [];
+export function parseGldArchiveRows(rows) {
+  if (!Array.isArray(rows) || rows.length < 10) return [];
 
   // Column layout (header row 1; observed 2026-04):
-  //   1 Date | 2 Closing Price | 3 Ounces/Share | 4 NAV/Share | 5 IOPV | 6 Mid
-  //   7 Premium/Discount | 8 Volume | 9 Total Ounces | 10 Tonnes | 11 Total NAV USD
-  const COL_DATE = 1, COL_NAV = 2, COL_TONNES = 10, COL_AUM = 11;
+  // 1 Date | 2 Closing Price | 10 Tonnes | 11 Total NAV USD
+  const COL_DATE = 0;
+  const COL_NAV = 1;
+  const COL_TONNES = 9;
+  const COL_AUM = 10;
 
   const out = [];
-  for (let r = 2; r <= ws.rowCount; r++) {
-    const row = ws.getRow(r);
-    const date = parseSpdrDate(row.getCell(COL_DATE).value);
+
+  for (const row of rows.slice(1)) {
+    const date = parseSpdrDate(row?.[COL_DATE]);
     if (!date) continue;
-    const tonnes = parseSpdrNumber(row.getCell(COL_TONNES).value);
+
+    const tonnes = parseSpdrNumber(row?.[COL_TONNES]);
     if (!Number.isFinite(tonnes) || tonnes <= 0) continue;
-    const aum = parseSpdrNumber(row.getCell(COL_AUM).value);
-    const nav = parseSpdrNumber(row.getCell(COL_NAV).value);
+
+    const aum = parseSpdrNumber(row?.[COL_AUM]);
+    const nav = parseSpdrNumber(row?.[COL_NAV]);
+
     out.push({
       date,
       tonnes,
@@ -84,9 +87,26 @@ export async function parseGldArchiveXlsx(xlsxBuffer) {
       nav: Number.isFinite(nav) ? nav : 0,
     });
   }
-  // Sort ascending so index arithmetic for deltas is obvious.
-  out.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+
+  out.sort((a, b) => (
+    a.date < b.date ? -1 : a.date > b.date ? 1 : 0
+  ));
+
   return out;
+}
+
+export async function parseGldArchiveXlsx(xlsxBuffer) {
+  const sheetNames = await listXlsxSheetNames(xlsxBuffer);
+  const sheetName = (
+    sheetNames.find((name) => name !== 'Disclaimer')
+    ?? sheetNames[1]
+    ?? sheetNames[0]
+  );
+
+  if (!sheetName) return [];
+
+  const rows = await readXlsxRows(xlsxBuffer, sheetName);
+  return parseGldArchiveRows(rows);
 }
 
 export function computeFlows(history) {
