@@ -41,7 +41,7 @@
     "preact": "^10.25.4",
     "satellite.js": "^6.0.2",
     "supercluster": "^8.0.1",
-    "telegram": "^2.26.22",
+    "teleproto": "1.228.5",
     "topojson-client": "^3.1.0",
     "uqr": "^0.1.2",
     "web-vitals": "^5.3.0",

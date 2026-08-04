@@ -11,8 +11,8 @@
  *   Prints TELEGRAM_SESSION=... to stdout.
  */
 
-import { TelegramClient } from 'telegram';
-import { StringSession } from 'telegram/sessions/index.js';
+import { TelegramClient } from 'teleproto';
+import { StringSession } from 'teleproto/sessions/index.js';
 import readline from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
 

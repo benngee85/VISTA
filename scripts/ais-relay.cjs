@@ -960,8 +960,8 @@ async function initTelegramClientIfNeeded() {
 
   let client;
   try {
-    const { TelegramClient } = await import('telegram');
-    const { StringSession } = await import('telegram/sessions/index.js');
+    const { TelegramClient } = await import('teleproto');
+    const { StringSession } = await import('teleproto/sessions/index.js');
 
     client = new TelegramClient(new StringSession(sessionStr), apiId, apiHash, {
       connectionRetries: 3,
