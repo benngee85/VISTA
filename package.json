@@ -128,7 +128,9 @@
     "test:dom": "vitest run --config vitest.dom.config.mts",
     "typecheck:dom-tests": "tsc --noEmit -p tsconfig.dom-tests.json",
     "test:convex:watch": "vitest --config vitest.config.mts",
-    "probe:cache-rest-transaction": "node scripts/probe-cache-rest-transaction.mjs"
+    "probe:cache-rest-transaction": "node scripts/probe-cache-rest-transaction.mjs",
+    "build:pro:clean-check": "node scripts/check-pro-build-cleanliness.mjs",
+    "smoke:runtime": "node scripts/runtime-smoke.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.7",
