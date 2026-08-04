@@ -47,7 +47,6 @@ Kubernetes manifests are intentionally deferred until Compose parity is proven.
 The next gate will translate these validated security contexts, health probes,
 configuration boundaries and separate services into Kubernetes resources.
 
-
 ## Self-hosted browser-origin boundary
 
 - `SELF_HOSTED_ALLOWED_ORIGINS` is a comma-separated exact-origin allowlist.
@@ -55,7 +54,6 @@ configuration boundaries and separate services into Kubernetes resources.
 - nginx forwards the caller's actual `Origin`; it does not manufacture a trusted origin.
 - `LOCAL_API_TOKEN` remains a separate transport-authentication control.
 - Kubernetes ingress origins must be added explicitly during the deployment-profile gate.
-
 
 ## Rocky relay trial profile
 
