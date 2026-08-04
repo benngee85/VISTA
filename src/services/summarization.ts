@@ -28,6 +28,7 @@ import {
   suppressServerSummarizationFor,
 } from '@/services/summarize-gate';
 import { hasPremiumAccess } from '@/services/panel-gating';
+import { createSummaryRequestController } from '@/services/summary-request-control';
 import {
   createSummarizationAttemptState,
   logChainOutcome,
@@ -64,19 +65,48 @@ export interface SummarizeOptions {
 // ── Sebuf client (replaces direct fetch to /api/{provider}-summarize) ──
 
 const newsClient = new NewsServiceClient(getRpcBaseUrl(), { fetch: (...args) => globalThis.fetch(...args) });
+
+const summaryRequestController = createSummaryRequestController({
+  maxConcurrentServerRequests: 2,
+});
+
+const SUMMARY_DEGRADED_FALLBACK_RETRY_MS = 5_000;
+
 const premiumNewsClient = new NewsServiceClient(getRpcBaseUrl(), {
   fetch: async (input, init) => {
-    const response = await premiumFetch(input, { ...init, forcePremium: true });
+    const response = await premiumFetch(input, {
+      ...init,
+      forcePremium: true,
+    });
+
+    // Keep retry parsing and suppression at this boundary. Existing source
+    // contracts ensure a rate-limited provider cannot fall through and
+    // multiply the same request across the provider chain.
     if (response.status === 429) {
       const retryAfterMs = parseSummarizeRetryAfterMs(response.headers.get('Retry-After'));
+
       if (retryAfterMs === null) {
-        // The server normally supplies Retry-After. A malformed/missing value
-        // must still stop this provider chain from multiplying the same 429.
+        // Missing or malformed server guidance must still stop this provider
+        // chain. Reuse the established protective suppression window.
         suppressServerSummarization();
       } else {
         suppressServerSummarizationFor(retryAfterMs);
       }
+    } else if (
+      response.status === 503
+      && response.headers.get('X-RateLimit-Mode') === 'degraded'
+    ) {
+      const retryAfterMs = parseSummarizeRetryAfterMs(response.headers.get('Retry-After'));
+
+      if (retryAfterMs === null) {
+        suppressServerSummarizationFor(
+          SUMMARY_DEGRADED_FALLBACK_RETRY_MS,
+        );
+      } else {
+        suppressServerSummarizationFor(retryAfterMs);
+      }
     }
+
     return response;
   },
 });
@@ -148,16 +178,18 @@ async function tryApiProvider(
       dispatched = true;
       markSummarizationAttempt(attemptState, providerDef.provider);
       try {
-        return await premiumNewsClient.summarizeArticle({
-          provider: providerDef.provider,
-          headlines,
-          mode: 'brief',
-          geoContext: geoContext || '',
-          variant: SITE_VARIANT,
-          lang: lang || 'en',
-          systemAppend: '',
-          bodies: bodies ?? [],
-        });
+        return await summaryRequestController.runServer(
+          () => premiumNewsClient.summarizeArticle({
+            provider: providerDef.provider,
+            headlines,
+            mode: 'brief',
+            geoContext: geoContext || '',
+            variant: SITE_VARIANT,
+            lang: lang || 'en',
+            systemAppend: '',
+            bodies: bodies ?? [],
+          }),
+        );
       } catch (error) {
         // Entitlement drift: probe said entitled, server said no. Suppress
         // the whole provider chain for a window so drift can't recreate the
@@ -297,21 +329,40 @@ export async function generateSummary(
     : '';
   const cacheKey = buildSummaryCacheKey(headlines, 'brief', geoContext, SITE_VARIANT, lang, undefined, bodies) + optionsSuffix;
 
-  return summaryResultBreaker.execute(
-    async () => {
-      const attemptState = createSummarizationAttemptState();
-      const result = await generateSummaryInternal(attemptState, headlines, onProgress, geoContext, lang, options);
+  return summaryRequestController.coalesce(
+    cacheKey,
+    () => summaryResultBreaker.execute(
+      async () => {
+        const attemptState = createSummarizationAttemptState();
 
-      if (result) {
-        trackLLMUsage(result.provider, result.model, result.cached);
-      } else {
-        trackLLMFailure(attemptState.lastAttemptedProvider);
-      }
+        const result = await generateSummaryInternal(attemptState,
+          headlines,
+          onProgress,
+          geoContext,
+          lang,
+          options,
+        );
 
-      return result;
-    },
-    null,
-    { cacheKey, shouldCache: (result) => result !== null },
+        if (result) {
+          trackLLMUsage(
+            result.provider,
+            result.model,
+            result.cached,
+          );
+        } else {
+          trackLLMFailure(
+            attemptState.lastAttemptedProvider,
+          );
+        }
+
+        return result;
+      },
+      null,
+      {
+        cacheKey,
+        shouldCache: (result) => result !== null,
+      },
+    ),
   );
 }
 

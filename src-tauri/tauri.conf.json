@@ -42,8 +42,8 @@
       "appimage"
     ],
     "category": "Productivity",
-    "shortDescription": "VISTA desktop app (supports World and Tech variants)",
-    "longDescription": "VISTA desktop app for real-time global intelligence. Build with VITE_VARIANT=tech to package Tech Monitor branding and dataset defaults.",
+    "shortDescription": "VISTA desktop app (all variants switchable in-app)",
+    "longDescription": "VISTA desktop app for real-time global intelligence. World, tech, finance, commodity, energy, and happy variants are selected in-app; one binary serves all variants.",
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
