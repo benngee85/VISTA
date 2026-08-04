@@ -12,22 +12,29 @@ function readEnv(name) {
   return typeof process !== 'undefined' ? process.env?.[name] : undefined;
 }
 
+const UPSTREAM_ROOT_HOST = 'worldmonitor.app';
+
 function isUpstreamHost(hostname) {
-  return hostname === 'worldmonitor.app'
-    || hostname === 'www.worldmonitor.app'
-    || hostname === 'api.worldmonitor.app'
-    || hostname.endsWith('.worldmonitor.app');
+  return hostname === UPSTREAM_ROOT_HOST
+    || hostname.endsWith(`.${UPSTREAM_ROOT_HOST}`);
 }
 
 function useLocalDistribution(url) {
-  const mode = String(readEnv('VISTA_DESKTOP_DOWNLOAD_MODE') || '').toLowerCase();
+  const mode = String(
+    readEnv('VISTA_DESKTOP_DOWNLOAD_MODE') || ''
+  ).toLowerCase();
+
   if (mode === 'local') return true;
   if (mode === 'upstream') return false;
+
   return !isUpstreamHost(url.hostname);
 }
 
 function safeVersion() {
-  const configured = String(readEnv('VISTA_RELEASE_VERSION') || LOCAL_DEFAULT_VERSION);
+  const configured = String(
+    readEnv('VISTA_RELEASE_VERSION') || LOCAL_DEFAULT_VERSION
+  );
+
   return /^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$/.test(configured)
     ? configured
     : LOCAL_DEFAULT_VERSION;
@@ -35,8 +42,10 @@ function safeVersion() {
 
 function safeBasePath() {
   const configured = String(
-    readEnv('VISTA_DESKTOP_DOWNLOAD_BASE_PATH') || LOCAL_DEFAULT_BASE_PATH
+    readEnv('VISTA_DESKTOP_DOWNLOAD_BASE_PATH')
+      || LOCAL_DEFAULT_BASE_PATH
   );
+
   if (
     !configured.startsWith('/')
     || configured.includes('..')
@@ -44,88 +53,133 @@ function safeBasePath() {
   ) {
     return LOCAL_DEFAULT_BASE_PATH;
   }
+
   return configured.replace(/\/+$/, '') || LOCAL_DEFAULT_BASE_PATH;
 }
 
 function localFilename(platform) {
   const version = safeVersion();
+
   const defaults = {
     'windows-exe': `MLC-VISTA_${version}_x64-setup.exe`,
     'windows-msi': `MLC-VISTA_${version}_x64_en-US.msi`,
     'macos-arm64': `MLC-VISTA_${version}_aarch64.dmg`,
     'macos-x64': `MLC-VISTA_${version}_x64.dmg`,
     'linux-appimage': `MLC-VISTA_${version}_amd64.AppImage`,
-    'linux-appimage-arm64': `MLC-VISTA_${version}_aarch64.AppImage`,
+    'linux-appimage-arm64':
+      `MLC-VISTA_${version}_aarch64.AppImage`,
   };
+
   return defaults[platform] || null;
 }
 
 function localRedirect(url, platform) {
   const basePath = safeBasePath();
   const filename = localFilename(platform);
+
   const targetPath = filename
     ? `${basePath}/${encodeURIComponent(filename)}`
     : `${basePath}/`;
-  return Response.redirect(new URL(targetPath, url.origin), 302);
+
+  return Response.redirect(
+    new URL(targetPath, url.origin),
+    302,
+  );
 }
 
 const PLATFORM_PATTERNS = {
   'windows-exe': (name) => name.endsWith('_x64-setup.exe'),
   'windows-msi': (name) => name.endsWith('_x64_en-US.msi'),
   'macos-arm64': (name) => name.endsWith('_aarch64.dmg'),
-  'macos-x64': (name) => name.endsWith('_x64.dmg') && !name.includes('setup'),
-  'linux-appimage': (name) => name.endsWith('_amd64.AppImage'),
-  'linux-appimage-arm64': (name) => name.endsWith('_aarch64.AppImage'),
+  'macos-x64': (name) =>
+    name.endsWith('_x64.dmg') && !name.includes('setup'),
+  'linux-appimage': (name) =>
+    name.endsWith('_amd64.AppImage'),
+  'linux-appimage-arm64': (name) =>
+    name.endsWith('_aarch64.AppImage'),
 };
 
-const VARIANT_IDENTIFIERS = {
-  full: ['worldmonitor'],
-  world: ['worldmonitor'],
-  tech: ['techmonitor'],
-  finance: ['financemonitor'],
-};
+// VISTA follows the upstream one-binary desktop model. Variant selection is
+// performed in-app; the query parameter is validated as an identity hint.
+export const SUPPORTED_VARIANTS = new Set([
+  'full',
+  'world',
+  'tech',
+  'finance',
+  'commodity',
+  'energy',
+  'happy',
+]);
+
+const DESKTOP_ASSET_IDENTIFIERS = [
+  'mlcvista',
+  'vista',
+  'worldmonitor',
+];
 
 function canonicalAssetName(name) {
-  return String(name || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
+  return String(name || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '');
 }
 
-function findAssetForVariant(assets, variant, platformMatcher) {
-  const identifiers = VARIANT_IDENTIFIERS[variant] ?? null;
-  if (!identifiers) return null;
-
+function findDesktopAsset(assets, platformMatcher) {
   return assets.find((asset) => {
     const assetName = String(asset?.name || '');
-    const normalizedAssetName = canonicalAssetName(assetName);
-    const hasVariantIdentifier = identifiers.some((identifier) =>
-      normalizedAssetName.includes(identifier)
-    );
-    return hasVariantIdentifier && platformMatcher(assetName);
+    const canonical = canonicalAssetName(assetName);
+
+    const hasDesktopIdentity =
+      DESKTOP_ASSET_IDENTIFIERS.some((identifier) =>
+        canonical.includes(identifier)
+      );
+
+    return hasDesktopIdentity && platformMatcher(assetName);
   }) ?? null;
 }
 
 export default async function handler(req) {
   const url = new URL(req.url);
   const platform = url.searchParams.get('platform');
-  const variant = (url.searchParams.get('variant') || '').toLowerCase();
+  const variant = (
+    url.searchParams.get('variant') || ''
+  ).toLowerCase();
 
+  // Self-hosted VISTA distributions remain sovereign and do not call GitHub.
   if (useLocalDistribution(url)) {
     return localRedirect(url, platform);
   }
 
-  if (!platform || !PLATFORM_PATTERNS[platform]) {
+  // Object.hasOwn prevents inherited properties such as "constructor" from
+  // being interpreted as platform matchers.
+  if (
+    !platform
+    || !Object.hasOwn(PLATFORM_PATTERNS, platform)
+  ) {
+    return Response.redirect(RELEASES_PAGE, 302);
+  }
+
+  if (
+    variant
+    && !SUPPORTED_VARIANTS.has(variant)
+  ) {
     return Response.redirect(RELEASES_PAGE, 302);
   }
 
   try {
-    const release = await fetchLatestRelease('WorldMonitor-Download-Redirect');
+    const release = await fetchLatestRelease(
+      'WorldMonitor-Download-Redirect',
+    );
+
     if (!release) {
       return Response.redirect(RELEASES_PAGE, 302);
     }
+
     const matcher = PLATFORM_PATTERNS[platform];
-    const assets = Array.isArray(release.assets) ? release.assets : [];
-    const asset = variant
-      ? findAssetForVariant(assets, variant, matcher)
-      : assets.find((a) => matcher(String(a?.name || '')));
+    const assets = Array.isArray(release.assets)
+      ? release.assets
+      : [];
+
+    const asset = findDesktopAsset(assets, matcher);
 
     if (!asset) {
       return Response.redirect(RELEASES_PAGE, 302);
@@ -134,8 +188,9 @@ export default async function handler(req) {
     return new Response(null, {
       status: 302,
       headers: {
-        'Location': asset.browser_download_url,
-        'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=60, stale-if-error=600',
+        Location: asset.browser_download_url,
+        'Cache-Control':
+          'public, s-maxage=300, stale-while-revalidate=60, stale-if-error=600',
       },
     });
   } catch {
