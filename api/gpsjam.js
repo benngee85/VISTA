@@ -14,6 +14,8 @@ const CACHE_TTL = 300_000;
 let negUntil = 0;
 const NEG_TTL = 60_000;
 
+let inFlightFetch = null;
+
 // Normalize any stored hex to the web-UI shape the map reads (pct + affected/total
 // aircraft), regardless of which schema produced it: new gpsjam.org v2 (pct),
 // legacy Wingbits v2 (npAvg, still lingering under its 48h TTL right after the
@@ -38,26 +40,55 @@ export function toWebHex(hex) {
   };
 }
 
-async function fetchGpsJamData() {
-  const now = Date.now();
-  if (cached && now - cachedAt < CACHE_TTL) return cached;
-  if (now < negUntil) return null;
-
+async function loadGpsJamData() {
   let raw;
-  try { raw = await readJsonFromUpstash(REDIS_KEY); } catch { raw = null; }
+
+  try {
+    raw = await readJsonFromUpstash(REDIS_KEY);
+  } catch {
+    raw = null;
+  }
+
   if (!raw) {
-    try { raw = await readJsonFromUpstash(REDIS_KEY_V1); } catch { raw = null; }
+    try {
+      raw = await readJsonFromUpstash(REDIS_KEY_V1);
+    } catch {
+      raw = null;
+    }
   }
 
   if (!raw?.hexes) {
-    negUntil = now + NEG_TTL;
+    negUntil = Date.now() + NEG_TTL;
     return null;
   }
 
-  const data = { ...raw, source: raw.source || 'gpsjam.org', hexes: raw.hexes.map(toWebHex) };
+  const data = {
+    ...raw,
+    source: raw.source || 'gpsjam.org',
+    hexes: raw.hexes.map(toWebHex),
+  };
+
   cached = data;
-  cachedAt = now;
+  cachedAt = Date.now();
+  negUntil = 0;
+
   return data;
+}
+
+async function fetchGpsJamData() {
+  const now = Date.now();
+
+  if (cached && now - cachedAt < CACHE_TTL) return cached;
+  if (now < negUntil) return null;
+  if (inFlightFetch) return inFlightFetch;
+
+  inFlightFetch = loadGpsJamData();
+
+  try {
+    return await inFlightFetch;
+  } finally {
+    inFlightFetch = null;
+  }
 }
 
 export default async function handler(req) {
@@ -77,7 +108,14 @@ export default async function handler(req) {
     return jsonResponse(
       { error: 'GPS interference data temporarily unavailable' },
       503,
-      { 'Cache-Control': 'no-cache, no-store', ...corsHeaders },
+      {
+        // Bound browser/CDN retry amplification while the seed is absent.
+        // The process-local negative cache uses the same 60-second window.
+        'Cache-Control': 'public, s-maxage=30, stale-if-error=300',
+        'Retry-After': '30',
+        'X-Data-Availability': 'temporarily-unavailable',
+        ...corsHeaders,
+      },
     );
   }
 

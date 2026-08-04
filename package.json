@@ -133,7 +133,8 @@
     "test:convex": "vitest run --config vitest.config.mts",
     "test:dom": "vitest run --config vitest.dom.config.mts",
     "typecheck:dom-tests": "tsc --noEmit -p tsconfig.dom-tests.json",
-    "test:convex:watch": "vitest --config vitest.config.mts"
+    "test:convex:watch": "vitest --config vitest.config.mts",
+    "probe:cache-rest-transaction": "node scripts/probe-cache-rest-transaction.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.7",

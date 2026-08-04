@@ -2,7 +2,41 @@ import { redisMultiExec } from './_upstash-json.js';
 
 const FALLBACK_REDIS_TIMEOUT_MS = 1_000;
 
-let luaUnsupported = false;
+function normalizeLuaMode(value) {
+  const normalized = value?.trim().toLowerCase();
+  if (normalized === 'enabled') return 'enabled';
+  if (normalized === 'disabled') return 'disabled';
+  return 'auto';
+}
+
+function isSelfHostedRedisRest() {
+  const authority =
+    process.env.CACHE_REST_URL
+    ?? process.env.REDIS_REST_URL
+    ?? process.env.UPSTASH_REDIS_REST_URL
+    ?? '';
+
+  try {
+    const url = new URL(authority);
+    return /^redis-rest$/i.test(url.hostname);
+  } catch {
+    return /(^|\/)redis-rest(?::|\/|$)/i.test(authority);
+  }
+}
+
+function initialLuaUnsupported() {
+  const mode = normalizeLuaMode(process.env.CACHE_REST_LUA_MODE);
+
+  if (mode === 'disabled') return true;
+  if (mode === 'enabled') return false;
+
+  // The self-hosted Redis REST bridge intentionally blocks EVAL/EVALSHA.
+  // Skip one known-failing Lua request after every process restart.
+  return isSelfHostedRedisRest();
+}
+
+let luaUnsupported = initialLuaUnsupported();
+let fallbackTransitionLogged = false;
 
 // Duration parsing mirrors @upstash/ratelimit's internal (unexported) `ms()`
 // helper. Needed only so the non-Lua fallback can pass a plain-seconds EXPIRE.
@@ -67,7 +101,14 @@ export async function limitWithFallback(rl, identifier, fallbackKey, limit, wind
       const msg = err instanceof Error ? err.message : String(err);
       if (!/Command not allowed: (EVAL|EVALSHA|SCRIPT)\b/i.test(msg)) throw err;
       luaUnsupported = true;
-      console.warn('[rate-limit] EVAL/EVALSHA rejected by this Redis endpoint — switching to the transactional non-Lua fixed-window fallback for the rest of this process');
+      if (!fallbackTransitionLogged) {
+        fallbackTransitionLogged = true;
+        console.warn(
+          '[rate-limit] EVAL/EVALSHA rejected by this Redis endpoint '
+          + '— switching to the transactional non-Lua fixed-window fallback '
+          + 'for the rest of this process',
+        );
+      }
     }
   }
 
@@ -78,6 +119,13 @@ export async function limitWithFallback(rl, identifier, fallbackKey, limit, wind
   }
 }
 
+export function getRateLimitFallbackMode() {
+  return luaUnsupported
+    ? 'transactional-fixed-window'
+    : 'lua-sliding-window';
+}
+
 export function resetRateLimitFallbackForTest() {
-  luaUnsupported = false;
+  luaUnsupported = initialLuaUnsupported();
+  fallbackTransitionLogged = false;
 }
