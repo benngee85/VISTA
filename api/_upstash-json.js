@@ -82,12 +82,11 @@ export async function readJsonBatchFromUpstashWithStatus(keys, timeoutMs = 3_000
 }
 
 export async function readJsonFromUpstash(key, timeoutMs = 3_000) {
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) return null;
+  const creds = getRedisCredentials();
+  if (!creds) return null;
 
-  const resp = await fetch(`${url}/get/${encodeURIComponent(key)}`, {
-    headers: { Authorization: `Bearer ${token}` },
+  const resp = await fetch(`${creds.url}/get/${encodeURIComponent(key)}`, {
+    headers: { Authorization: `Bearer ${creds.token}` },
     signal: AbortSignal.timeout(timeoutMs),
   });
   if (!resp.ok) return null;
@@ -128,14 +127,13 @@ export async function readJsonFromUpstash(key, timeoutMs = 3_000) {
  * @returns {Promise<unknown | null>}
  */
 export async function readRawJsonFromUpstash(key, timeoutMs = 3_000) {
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) {
+  const creds = getRedisCredentials();
+  if (!creds) {
     throw new Error('readRawJsonFromUpstash: UPSTASH_REDIS_REST_URL/TOKEN not configured');
   }
 
-  const resp = await fetch(`${url}/get/${encodeURIComponent(key)}`, {
-    headers: { Authorization: `Bearer ${token}` },
+  const resp = await fetch(`${creds.url}/get/${encodeURIComponent(key)}`, {
+    headers: { Authorization: `Bearer ${creds.token}` },
     signal: AbortSignal.timeout(timeoutMs),
   });
   if (!resp.ok) {
