@@ -174,10 +174,36 @@ function makePinnedLookup(address, family = 4) {
   };
 }
 
+function getConfiguredPrivateFetchOrigins() {
+  const origins = [];
+
+  for (const name of [
+    'UPSTASH_REDIS_REST_URL',
+    'CACHE_REST_URL',
+    'KV_REST_API_URL',
+  ]) {
+    const value = process.env[name];
+    if (!value) continue;
+
+    try {
+      const url = new URL(value);
+      if (url.protocol === 'http:' || url.protocol === 'https:') {
+        origins.push(url.origin);
+      }
+    } catch {
+      // Invalid cache configuration is handled by the cache client.
+      // Do not broaden the private-network allowlist for malformed URLs.
+    }
+  }
+
+  return [...new Set(origins)];
+}
+
 function registerSidecarAllowedPrivateFetchOrigins(port, extraOrigins = []) {
   const origins = [
     `http://127.0.0.1:${port}`,
     `http://localhost:${port}`,
+    ...getConfiguredPrivateFetchOrigins(),
     ...extraOrigins,
   ];
   for (const origin of origins) sidecarAllowedPrivateFetchOrigins.add(origin);
