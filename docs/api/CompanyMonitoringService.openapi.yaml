@@ -42,7 +42,7 @@ paths:
                                     - "example-id"
                                 "locations":
                                     - "example"
-                                "name": "WorldMonitor Analyst"
+                                "name": "VISTA Analyst"
                         schema:
                             $ref: '#/components/schemas/CreateMonitoredCompanyRequest'
                 required: true
@@ -208,7 +208,7 @@ paths:
                                       "value": "example"
                                 "customerReference": "example"
                                 "domicileCountry": "DOMICILE_COUNTRY_US"
-                                "name": "WorldMonitor Analyst"
+                                "name": "VISTA Analyst"
                                 "removeClaimIds":
                                     - "cm_claim_01ARZ3NDEKTSV4RRFFQ69G5FAV"
                         schema:
@@ -533,7 +533,7 @@ paths:
                                         - "example-id"
                                     "locations":
                                         - "example"
-                                    "name": "WorldMonitor Analyst"
+                                    "name": "VISTA Analyst"
                                   "ordinal": 0
                         schema:
                             $ref: '#/components/schemas/ImportMonitoredCompanyBatchRequest'
