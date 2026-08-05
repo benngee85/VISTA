@@ -130,7 +130,9 @@
     "test:convex:watch": "vitest --config vitest.config.mts",
     "probe:cache-rest-transaction": "node scripts/probe-cache-rest-transaction.mjs",
     "build:pro:clean-check": "node scripts/check-pro-build-cleanliness.mjs",
-    "smoke:runtime": "node scripts/runtime-smoke.mjs"
+    "smoke:runtime": "node scripts/runtime-smoke.mjs",
+    "typecheck:contract-tests": "tsc --noEmit -p tsconfig.contract-tests.json",
+    "company-monitoring:digest": "tsx scripts/recompute-company-monitoring-digest.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.7",

@@ -1,7 +1,7 @@
 ---
-title: "Build on VISTA: APIs and Developer Platform"
-description: "Build intelligence apps on World Monitor's typed API: 35 services, 290 proto files, 80+ edge functions, and auto-generated TypeScript clients. AGPL-3.0."
-metaTitle: "Developer API & Open Source Platform | VISTA"
+title: "Build on World Monitor: APIs and Developer Platform"
+description: "Build intelligence apps on World Monitor's typed API: 36 services, 295 proto files, 80+ edge functions, and auto-generated TypeScript clients. AGPL-3.0."
+metaTitle: "Developer API & Open Source Platform | World Monitor"
 keywords: "open source intelligence API, OSINT API free, geopolitical data API, intelligence platform developer, proto-first API architecture"
 audience: "Developers, data engineers, startup builders, academic researchers, open-source contributors"
 heroImage: "/blog/images/blog/build-on-worldmonitor-developer-api-open-source.jpg"
@@ -11,14 +11,14 @@ modifiedDate: "2026-07-22"
 
 Most intelligence platforms are walled gardens. You pay for access, you use their interface, and if you want to build something custom, you're out of luck. The data is locked behind a UI.
 
-VISTA is designed differently. The entire intelligence platform, every data feed, every scoring algorithm, every aggregation pipeline, is built on a **typed API layer** that developers can use, extend, and build upon.
+World Monitor is designed differently. The entire intelligence platform, every data feed, every scoring algorithm, every aggregation pipeline, is built on a **typed API layer** that developers can use, extend, and build upon.
 
 ## Proto-First Architecture
 
-VISTA uses **Protocol Buffers (protobuf)** as the single source of truth for all API contracts. The codebase contains:
+World Monitor uses **Protocol Buffers (protobuf)** as the single source of truth for all API contracts. The codebase contains:
 
-- **290 proto files** defining every data structure and service
-- **35 typed service domains** covering all intelligence verticals
+- **295 proto files** defining every data structure and service
+- **36 typed service domains** covering all intelligence verticals
 - **Auto-generated TypeScript** clients for type-safe API consumption
 - **Auto-generated OpenAPI** documentation for REST compatibility
 
@@ -38,11 +38,11 @@ Protocol Buffers enforce a contract between client and server that can't drift:
 - **Code generation:** TypeScript clients are generated, not handwritten. Zero chance of client/server mismatch.
 - **Documentation:** The proto file IS the documentation. Field names, types, and comments are the API spec.
 
-For developers building on VISTA, this means you can trust the API contracts completely. If the proto says a field is `int64`, it's `int64`. If it says `repeated string`, it's an array of strings.
+For developers building on World Monitor, this means you can trust the API contracts completely. If the proto says a field is `int64`, it's `int64`. If it says `repeated string`, it's an array of strings.
 
 ## 35 Service Domains
 
-VISTA's API is organized into domain-specific services:
+World Monitor's API is organized into domain-specific services:
 
 | Domain | What It Covers |
 |--------|---------------|
@@ -104,7 +104,7 @@ For example:
 - `api.worldmonitor.app/api/conflict/v1/events` for conflict data
 - `api.worldmonitor.app/api/intelligence/v1/cii` for Country Instability Index scores
 
-## Building with VISTA's API
+## Building with World Monitor's API
 
 ### Custom Dashboards
 
@@ -118,7 +118,7 @@ const cii = await intelligenceClient.getCII({ countries: ['US', 'CN', 'RU'] });
 
 ### Data Pipelines
 
-Feed VISTA data into your own analytics:
+Feed World Monitor data into your own analytics:
 
 - Pull conflict events into a data warehouse for historical analysis
 - Stream market data alongside geopolitical scores for correlation studies
@@ -130,11 +130,11 @@ Academic researchers can use the API programmatically:
 
 - Study the relationship between news velocity and conflict escalation
 - Analyze prediction market accuracy against actual outcomes (see [prediction markets and AI forecasting](/blog/posts/prediction-markets-ai-forecasting-geopolitics/))
-- Build custom scoring models using VISTA's raw data feeds
+- Build custom scoring models using World Monitor's raw data feeds
 
 ### Mobile Apps
 
-Build a mobile app that consumes VISTA's API for a custom mobile intelligence experience. The OpenAPI spec makes it accessible from any language (Swift, Kotlin, Python, Go).
+Build a mobile app that consumes World Monitor's API for a custom mobile intelligence experience. The OpenAPI spec makes it accessible from any language (Swift, Kotlin, Python, Go).
 
 ### Slack/Teams Bots
 
@@ -147,12 +147,12 @@ Build alerting bots that post to your team channel when:
 
 ## Developer Resources
 
-Every developer surface has a dedicated, named page you can jump to directly — the [VISTA Developer Portal](https://worldmonitor.app/developers.md) links them all in one place:
+Every developer surface has a dedicated, named page you can jump to directly — the [World Monitor Developer Portal](https://worldmonitor.app/developers.md) links them all in one place:
 
-- **[VISTA MCP Server](https://worldmonitor.app/mcp-server.md)** — the recommended agent surface at `https://worldmonitor.app/mcp`, with 59 tools over Streamable HTTP. Connect Claude, Cursor, or any MCP client. See the [MCP Overview](https://www.worldmonitor.app/docs/mcp-overview) for auth and the full catalog.
-- **[VISTA OpenAPI Specification](https://worldmonitor.app/openapi.md)** — the OpenAPI 3.1 contract for the REST API ([openapi.yaml](https://worldmonitor.app/openapi.yaml) / [openapi.json](https://worldmonitor.app/openapi.json)), so you can generate a typed client in any language.
-- **[VISTA SDKs](https://worldmonitor.app/sdks.md)** — official zero-dependency client libraries for Python, Ruby, Go, and JavaScript, plus the [`worldmonitor` CLI](https://www.worldmonitor.app/docs/cli).
-- **VISTA API docs** — the full [developer documentation](https://www.worldmonitor.app/docs/documentation) site, with an [MCP Quickstart](https://www.worldmonitor.app/docs/mcp-quickstart) and [agent auth walkthrough](https://worldmonitor.app/auth.md).
+- **[World Monitor MCP Server](https://worldmonitor.app/mcp-server.md)** — the recommended agent surface at `https://worldmonitor.app/mcp`, with 59 tools over Streamable HTTP. Connect Claude, Cursor, or any MCP client. See the [MCP Overview](https://www.worldmonitor.app/docs/mcp-overview) for auth and the full catalog.
+- **[World Monitor OpenAPI Specification](https://worldmonitor.app/openapi.md)** — the OpenAPI 3.1 contract for the REST API ([openapi.yaml](https://worldmonitor.app/openapi.yaml) / [openapi.json](https://worldmonitor.app/openapi.json)), so you can generate a typed client in any language.
+- **[World Monitor SDKs](https://worldmonitor.app/sdks.md)** — official zero-dependency client libraries for Python, Ruby, Go, and JavaScript, plus the [`worldmonitor` CLI](https://www.worldmonitor.app/docs/cli).
+- **World Monitor API docs** — the full [developer documentation](https://www.worldmonitor.app/docs/documentation) site, with an [MCP Quickstart](https://www.worldmonitor.app/docs/mcp-quickstart) and [agent auth walkthrough](https://worldmonitor.app/auth.md).
 
 ## Self-Hosting
 
@@ -187,7 +187,7 @@ The proto-first architecture makes contributing safe: the type system catches co
 
 ## The Developer Stack
 
-For reference, VISTA is built with:
+For reference, World Monitor is built with:
 
 | Layer | Technology |
 |-------|-----------|
@@ -195,7 +195,7 @@ For reference, VISTA is built with:
 | 3D Globe | globe.gl, Three.js |
 | Flat Map | deck.gl, MapLibre |
 | API | Vercel Edge Functions |
-| Contracts | Protocol Buffers (290 files) |
+| Contracts | Protocol Buffers (295 files) |
 | Desktop | Tauri (Rust) |
 | Sidecar | Node.js |
 | Caching | Redis |
@@ -204,11 +204,11 @@ For reference, VISTA is built with:
 | i18n | i18next (25 locales) |
 | Testing | Vitest, Playwright |
 
-## Why Build on VISTA?
+## Why Build on World Monitor?
 
-The intelligence industry has a consolidation problem. A handful of vendors control the data, the algorithms, and the interfaces. Analysts are locked into ecosystems they can't customize, audit, or extend. See how VISTA [compares to traditional intelligence tools](/blog/posts/worldmonitor-vs-traditional-intelligence-tools/) in practice.
+The intelligence industry has a consolidation problem. A handful of vendors control the data, the algorithms, and the interfaces. Analysts are locked into ecosystems they can't customize, audit, or extend. See how World Monitor [compares to traditional intelligence tools](/blog/posts/worldmonitor-vs-traditional-intelligence-tools/) in practice.
 
-VISTA's open, typed, proto-first architecture is the alternative:
+World Monitor's open, typed, proto-first architecture is the alternative:
 
 - **Audit everything:** Every scoring algorithm, every data pipeline, every API contract is in the codebase
 - **Extend anything:** Add data sources, build custom panels, create new service domains
@@ -216,13 +216,13 @@ VISTA's open, typed, proto-first architecture is the alternative:
 - **Deploy anywhere:** Edge functions, self-hosted, or desktop
 - **Own your intelligence:** No vendor lock-in, no API key revocation, no price hikes
 
-The intelligence platform of the future isn't a product. It's an ecosystem. VISTA is building the foundation.
+The intelligence platform of the future isn't a product. It's an ecosystem. World Monitor is building the foundation.
 
-Building an AI agent instead of an app? The same platform is exposed as a Model Context Protocol server with 59 live tools. See [how to connect Claude and other agents to VISTA's MCP server](/blog/posts/worldmonitor-mcp-server-ai-agents-real-time-intelligence/).
+Building an AI agent instead of an app? The same platform is exposed as a Model Context Protocol server with 59 live tools. See [how to connect Claude and other agents to World Monitor's MCP server](/blog/posts/worldmonitor-mcp-server-ai-agents-real-time-intelligence/).
 
 ## Frequently Asked Questions
 
-**Is the VISTA API free to use?**
+**Is the World Monitor API free to use?**
 Yes. World Monitor is AGPL-3.0 open source. You can use the public API at api.worldmonitor.app or self-host the entire stack. There are no API keys required for public endpoints and no usage fees.
 
 **What languages can I use to consume the API?**
@@ -233,4 +233,4 @@ Define your data structures in a proto file, implement a handler function, wire 
 
 ---
 
-**Start building at [github.com/koala73/worldmonitor](https://github.com/koala73/worldmonitor). 35 services, 290 proto files, and a global intelligence dataset waiting for your application.**
+**Start building at [github.com/koala73/worldmonitor](https://github.com/koala73/worldmonitor). 36 services, 295 proto files, and a global intelligence dataset waiting for your application.**
