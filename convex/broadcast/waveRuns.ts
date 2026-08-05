@@ -757,7 +757,7 @@ export const pickWaveAction = internalAction({
         // candidate emails (those that survive the non-locale filters).
         // Bounded by page size, NOT reservoir size — explicitly per-page to
         // avoid read-limit surprises on a 100k+ registration table.
-        let usersByEmail: Map<string, { localePrimary?: string }> = new Map();
+        const usersByEmail: Map<string, { localePrimary?: string }> = new Map();
         if (excludeNonEnglish) {
           const candidates: string[] = [];
           for (const row of page.page) {

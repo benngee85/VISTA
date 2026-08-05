@@ -395,7 +395,7 @@ function polymarketPlugin(): Plugin {
         const order = ALLOWED_ORDER.includes(url.searchParams.get('order') ?? '') ? url.searchParams.get('order') : 'volume';
         const ascending = ['true', 'false'].includes(url.searchParams.get('ascending') ?? '') ? url.searchParams.get('ascending') : 'false';
         const rawLimit = parseInt(url.searchParams.get('limit') ?? '', 10);
-        const limit = isNaN(rawLimit) ? 50 : Math.max(1, Math.min(100, rawLimit));
+        const limit = Number.isNaN(rawLimit) ? 50 : Math.max(1, Math.min(100, rawLimit));
 
         const params = new URLSearchParams({ closed: closed!, order: order!, ascending: ascending!, limit: String(limit) });
         if (endpoint === 'events') {

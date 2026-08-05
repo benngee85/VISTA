@@ -28,7 +28,7 @@ function evidence(overrides = {}) {
 // A callLLM double returning fixed probabilities per pass, recording calls.
 function llmDouble(byStage) {
   const calls = [];
-  const fn = async (systemPrompt, userPrompt, options = {}) => {
+  const fn = async (_systemPrompt, _userPrompt, options = {}) => {
     calls.push({ stage: options.stage, options });
     const value = byStage[options.stage];
     if (value instanceof Error) throw value;

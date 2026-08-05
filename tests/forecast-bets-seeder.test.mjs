@@ -191,7 +191,7 @@ describe('value settlement gate (#2 — no false NO on a stale pre-release read)
 
 describe('Phase-2: baselines + ensemble stage (#5525 U13)', () => {
   function llmDouble(probability) {
-    const fn = async (system, user, options = {}) => {
+    const fn = async (_system, _user, options = {}) => {
       fn.calls.push(options.stage);
       if (probability instanceof Error) throw probability;
       return { text: JSON.stringify({ probability, rationale: 'test' }), provider: 'double', model: 'double' };

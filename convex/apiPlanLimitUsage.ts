@@ -619,7 +619,6 @@ async function scanHandler(ctx: any, args: {
       }
     } catch {
       summary.blocked.push({ userId: row.userId, dimension: row.dimension, reason: "record_usage_failed" });
-      continue;
     }
   }
 

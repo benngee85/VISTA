@@ -233,23 +233,33 @@ describe('classifyMarket', () => {
 });
 
 describe('partitionMarkets / published pools', () => {
-  const pools = buildPools(RAW);
+  const built = buildBootstrapPools(RAW);
+  const pools = built.pools;
 
-  it('publishes every market exactly once across the three pools', () => {
+  it('publishes each retained market in exactly one pool', () => {
     const seen = new Map();
+    let publishedTotal = 0;
     for (const category of CATEGORIES) {
       for (const m of pools[category]) {
+        publishedTotal += 1;
         const id = marketIdentity(m);
         assert.ok(!seen.has(id), `${m.title} appears in both ${seen.get(id)} and ${category}`);
         seen.set(id, category);
       }
     }
-    assert.equal(seen.size, RAW.length, 'no market may be dropped by the partition');
+    assert.equal(seen.size, publishedTotal, 'published pools must contain no cross-pool copies');
   });
 
-  it('no longer inflates the record count with cross-pool copies', () => {
-    const total = CATEGORIES.reduce((n, c) => n + pools[c].length, 0);
-    assert.equal(total, RAW.length, 'declared record count must equal the distinct market count');
+  it('classifies every candidate before ranking and publishes no inflated copies', () => {
+    const classifiedTotal = CATEGORIES.reduce((n, c) => n + built.classified[c], 0);
+    const publishedTotal = CATEGORIES.reduce((n, c) => n + pools[c].length, 0);
+    const publishedDistinct = new Set(
+      CATEGORIES.flatMap((category) => pools[category].map(marketIdentity)),
+    ).size;
+
+    assert.equal(classifiedTotal, RAW.length, 'classification must account for every raw candidate');
+    assert.equal(publishedTotal, publishedDistinct, 'published count must equal distinct published identities');
+    assert.ok(publishedTotal <= classifiedTotal, 'ranking may filter or cap candidates but cannot create records');
   });
 
   it('every geopolitical pool entry meets the geo criteria (keyword OR venue category)', () => {

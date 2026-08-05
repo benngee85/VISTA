@@ -130,7 +130,7 @@ test('Docker sidecar preserves the authenticated proxy caller origin for handler
   assert.match(sidecar, /hdrs\.set\('Origin', incomingOrigin\)/);
   assert.match(
     sidecar,
-    /else \{[\s\S]*hdrs\.set\('Origin', \`http:\/\/127\.0\.0\.1:\$\{context\.port\}\`\)/,
+    /else \{[\s\S]*hdrs\.set\('Origin', `http:\/\/127\.0\.0\.1:\$\{context\.port\}`\)/,
     'desktop mode must retain its loopback-origin normalization',
   );
 });

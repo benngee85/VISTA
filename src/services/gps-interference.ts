@@ -25,7 +25,11 @@ export interface GpsJamData {
 
 let cachedData: GpsJamData | null = null;
 let cachedAt = 0;
+let retryAfter = 0;
+
 const CACHE_TTL = 5 * 60 * 1000;
+const FAILURE_COOLDOWN = 5 * 60 * 1000;
+const RATE_LIMIT_COOLDOWN = 15 * 60 * 1000;
 
 export function getCachedGpsInterference(): GpsJamData | null {
   return cachedData;
@@ -34,12 +38,20 @@ export function getCachedGpsInterference(): GpsJamData | null {
 export async function fetchGpsInterference(): Promise<GpsJamData | null> {
   const now = Date.now();
   if (cachedData && now - cachedAt < CACHE_TTL) return cachedData;
+  if (now < retryAfter) return cachedData;
 
   try {
     const resp = await fetch(toApiUrl('/api/gpsjam'), {
       signal: AbortSignal.timeout(20_000),
     });
-    if (!resp.ok) return cachedData;
+    if (!resp.ok) {
+      retryAfter =
+        resp.status === 429
+          ? now + RATE_LIMIT_COOLDOWN
+          : now + FAILURE_COOLDOWN;
+
+      return cachedData;
+    }
 
     const raw = await resp.json() as GpsJamData;
 
@@ -60,8 +72,10 @@ export async function fetchGpsInterference(): Promise<GpsJamData | null> {
       hexes,
     };
     cachedAt = now;
+    retryAfter = 0;
     return cachedData;
   } catch {
+    retryAfter = now + FAILURE_COOLDOWN;
     return cachedData;
   }
 }

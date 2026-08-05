@@ -18,8 +18,8 @@ const entrypoint = readFileSync(
 );
 
 test('primary cache service is Rocky 9 Valkey', () => {
-  assert.match(compose, /^  valkey:$/m);
-  assert.doesNotMatch(compose, /^  redis:$/m);
+  assert.match(compose, /^ {2}valkey:$/m);
+  assert.doesNotMatch(compose, /^ {2}redis:$/m);
 
   assert.match(
     compose,
@@ -46,8 +46,8 @@ test('Valkey requires authentication and persistence', () => {
 });
 
 test('REST bridge targets Valkey', () => {
-  assert.match(compose, /^  redis-rest:$/m);
-  assert.doesNotMatch(compose, /^  valkey-rest:$/m);
+  assert.match(compose, /^ {2}redis-rest:$/m);
+  assert.doesNotMatch(compose, /^ {2}valkey-rest:$/m);
   assert.match(compose, /@valkey:6379/);
   assert.match(proxy, /redis:\/\/valkey:6379/);
   assert.doesNotMatch(proxy, /redis:\/\/redis:6379/);

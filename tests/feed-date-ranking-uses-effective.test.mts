@@ -180,7 +180,6 @@ describe('feed-date freshness guardrail — effectivePubDateMs usage', () => {
       ...SCAN_DIRS.flatMap((dir) => listTsFiles(dir)),
       ...SCAN_FILES,
     ];
-    {
       for (const file of scanTargets) {
         const src = readFileSync(resolve(repoRoot, file), 'utf8');
         const lines = src.split(/\r?\n/);
@@ -199,7 +198,6 @@ describe('feed-date freshness guardrail — effectivePubDateMs usage', () => {
           violations.push({ file, line: i + 1, text: trimmed });
         }
       }
-    }
 
     if (violations.length > 0) {
       const lines = violations.map(
