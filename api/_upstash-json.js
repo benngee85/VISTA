@@ -96,7 +96,12 @@ export async function readJsonFromUpstash(key, timeoutMs = 3_000) {
   if (data.result == null) return null;
 
   try {
-    return unwrapEnvelope(JSON.parse(data.result)).data;
+    const parsed =
+      typeof data.result === 'string'
+        ? JSON.parse(data.result)
+        : data.result;
+
+    return unwrapEnvelope(parsed).data;
   } catch {
     return null;
   }
@@ -141,6 +146,8 @@ export async function readRawJsonFromUpstash(key, timeoutMs = 3_000) {
     throw new Error(`readRawJsonFromUpstash: Upstash GET ${key} returned a malformed response`);
   }
   if (data.result === null) return null; // genuine miss
+  if (typeof data.result !== 'string') return data.result;
+
   try {
     return JSON.parse(data.result);
   } catch (err) {
