@@ -8,6 +8,16 @@
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
+SEEDER_OUTCOME_CLASSIFIER="$SCRIPT_DIR/$(basename "scripts/seeder-outcome-classifier.sh")"
+
+if [ ! -f "$SEEDER_OUTCOME_CLASSIFIER" ]; then
+  echo "ERROR: missing seeder outcome classifier: $SEEDER_OUTCOME_CLASSIFIER" >&2
+  exit 1
+fi
+
+# shellcheck disable=SC1090
+. "$SEEDER_OUTCOME_CLASSIFIER"
+
 # Load REDIS_TOKEN (and any seeder API keys present) from .env so the
 # host-side seeders can talk to the REST proxy with the same bearer the
 # compose stack is using. Defaults removed in #3804 — the seeders fail-loud
@@ -325,13 +335,27 @@ for f in "$@"; do
   elif [ "$rc" -ne 0 ]; then
     printf "FAIL (%s)\n" "$last"
     fail=$((fail + 1))
-  elif printf '%s\n' "$last" |
-    grep -Eqi 'skip|not set|missing.*key|not found'; then
-    printf "SKIP (%s)\n" "$last"
-    skip=$((skip + 1))
   else
-    printf "OK\n"
-    ok=$((ok + 1))
+    zero_exit_outcome="$(
+      classify_zero_exit_seed_output \
+        "$output" \
+        "$last"
+    )"
+
+    case "$zero_exit_outcome" in
+      skipped)
+        printf "SKIP (%s)\n" "$last"
+        skip=$((skip + 1))
+        ;;
+      ok)
+        printf "OK\n"
+        ok=$((ok + 1))
+        ;;
+      *)
+        printf "FAIL (invalid classifier result: %s)\n" "$zero_exit_outcome"
+        fail=$((fail + 1))
+        ;;
+    esac
   fi
 done
 
