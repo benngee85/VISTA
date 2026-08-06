@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "policyId": "urn:vista:runtime-remediation:initial",
+  "decisions": ["retain", "relay", "cache", "mirror", "replace", "disable", "localise"],
+  "requiredFields": [
+    "host",
+    "evidencePartition",
+    "dependencyFamily",
+    "nispServiceArea",
+    "deploymentProfile",
+    "decision",
+    "trustBoundary",
+    "freshnessPolicy",
+    "disconnectedBehaviour",
+    "owner",
+    "evidence",
+    "residualRisk"
+  ],
+  "runtimeAggregationPrecedence": [
+    "runtime-dependency",
+    "review-required",
+    "unique-non-runtime-disposition"
+  ]
+}

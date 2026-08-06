@@ -41,7 +41,7 @@ VISTA is useful for investors, portfolio managers, energy and commodity traders,
 
 - 56 map layer types
 - 500+ curated RSS feeds
-- 529+ observed upstream hosts
+- 531+ observed upstream hosts
 - 13 maritime chokepoints with AIS-based transit intelligence
 - 31 live Country Instability Index countries
 - 196-country resilience rankings

@@ -367,6 +367,25 @@
       ]
     },
     {
+      "host": "api.airplanes.live",
+      "provider": "airplanes.live",
+      "kind": "structured",
+      "observed": true,
+      "license": "Public API restricted to non-commercial use; 1 request/second limit",
+      "attribution": "airplanes.live; link to https://airplanes.live/api-guide/ and comply with its non-commercial restriction.",
+      "status": "terms-review",
+      "references": [
+        {
+          "path": "scripts/seed-military-flights.mjs",
+          "line": 48
+        },
+        {
+          "path": "src/components/MapPopup.ts",
+          "line": 83
+        }
+      ]
+    },
+    {
       "host": "api.alternative.me",
       "provider": "Alternative.me Fear & Greed Index",
       "kind": "structured",
@@ -7162,6 +7181,25 @@
         {
           "path": "server/worldmonitor/aviation/v1/list-aviation-news.ts",
           "line": 20
+        }
+      ]
+    },
+    {
+      "host": "opendata.adsb.fi",
+      "provider": "adsb.fi Open Data",
+      "kind": "structured",
+      "observed": true,
+      "license": "Public API restricted to personal, non-commercial use; 1 request/second limit",
+      "attribution": "adsb.fi; cite and link to https://github.com/adsbfi/opendata and comply with its non-commercial restriction.",
+      "status": "terms-review",
+      "references": [
+        {
+          "path": "scripts/seed-military-flights.mjs",
+          "line": 49
+        },
+        {
+          "path": "src/components/MapPopup.ts",
+          "line": 84
         }
       ]
     },

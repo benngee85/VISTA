@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "profileId": "urn:vista:nisp17:applicability:initial",
+  "status": "working-draft",
+  "baseline": {"name": "NISP", "version": "17"},
+  "deploymentProfiles": [
+    "laboratory",
+    "sovereign-connected",
+    "coalition-federated",
+    "degraded-disconnected"
+  ],
+  "entries": [
+    {
+      "capability": "vista.api",
+      "serviceAreas": ["CR-1074", "CR-1116"],
+      "standards": [
+        {"id": "STD-00403", "name": "HTTP Semantics", "obligation": "mandatory"},
+        {"id": "STD-00405", "name": "HTTP/1.1", "obligation": "mandatory"},
+        {"id": "STD-00390", "name": "JSON", "obligation": "mandatory"},
+        {"id": "STD-01004", "name": "OpenAPI 3.1", "obligation": "mandatory"},
+        {"id": "STD-00222", "name": "URI Generic Syntax", "obligation": "mandatory"}
+      ],
+      "currentState": "partially-standardised",
+      "targetBoundary": "application-and-acquisition-apis"
+    },
+    {
+      "capability": "vista.identity",
+      "serviceAreas": ["CR-1122", "CR-1114"],
+      "standards": [
+        {"id": "STD-00334", "name": "OAuth 2.0", "obligation": "selected"},
+        {"id": "STD-00335", "name": "OAuth Bearer Token Usage", "obligation": "selected"},
+        {"id": "STD-00361", "name": "JWT", "obligation": "selected"},
+        {"id": "STD-00402", "name": "JWT Access Token Profile", "obligation": "selected"},
+        {"id": "STD-01610", "name": "OpenID Connect Core", "obligation": "selected"}
+      ],
+      "currentState": "requires-profile-selection",
+      "targetBoundary": "external-identity-provider-and-policy-enforcement"
+    },
+    {
+      "capability": "vista.foundation.dns",
+      "serviceAreas": ["CR-1080"],
+      "standards": [
+        {"id": "STD-00109", "name": "DNS Concepts", "obligation": "mandatory"},
+        {"id": "STD-00110", "name": "DNS Implementation", "obligation": "mandatory"}
+      ],
+      "currentState": "external-platform-dependency",
+      "targetBoundary": "foundation-services-plane"
+    },
+    {
+      "capability": "vista.foundation.time",
+      "serviceAreas": ["CR-1079"],
+      "standards": [
+        {"id": "STD-00311", "name": "NTPv4", "obligation": "mandatory"},
+        {"id": "STD-00918", "name": "Network Time Security", "obligation": "selected"}
+      ],
+      "currentState": "external-platform-dependency",
+      "targetBoundary": "foundation-services-plane"
+    },
+    {
+      "capability": "vista.geospatial",
+      "serviceAreas": ["CR-1086", "CR-1142"],
+      "standards": [
+        {"id": "STD-00081", "name": "FMN Spiral 5 SIP for WMS and WMTS", "obligation": "mandatory"},
+        {"id": "STD-01049", "name": "OGC WMS", "obligation": "mandatory"},
+        {"id": "STD-01053", "name": "OGC WMTS", "obligation": "mandatory"},
+        {"id": "STD-01895", "name": "OGC GeoPackage 1.4", "obligation": "mandatory"}
+      ],
+      "currentState": "provider-coupled",
+      "targetBoundary": "geospatial-service-facade"
+    },
+    {
+      "capability": "vista.acquisition",
+      "serviceAreas": ["CR-1117", "CR-1074", "CR-1084", "CR-1093", "CR-1116", "CR-1165"],
+      "standards": [
+        {"id": "STD-00403", "name": "HTTP Semantics", "obligation": "mandatory"},
+        {"id": "STD-00390", "name": "JSON", "obligation": "mandatory"},
+        {"id": "STD-01004", "name": "OpenAPI 3.1", "obligation": "mandatory"}
+      ],
+      "currentState": "distributed-provider-integrations",
+      "targetBoundary": "controlled-acquisition-gateway"
+    }
+  ]
+}

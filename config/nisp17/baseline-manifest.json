@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-06T15:25:24Z",
+  "nisp": {
+    "name": "NATO Interoperability Standards and Profiles",
+    "version": "17",
+    "sourceArchiveName": "NISP Version 17.zip",
+    "sha256": "fce5f0cc5364e62478d7ecb2f36d1ef73813d4d0cc11c7569c12b18754762f98",
+    "authority": "user-provided project baseline"
+  },
+  "runtimeClassification": {
+    "sourceArchiveName": "vista-sovereign-classification-closure-236-20260806T142159Z.zip",
+    "sha256": "f92edb09941e46f6836daebfa07d3fd0c798171cc6d04ce22d5fc42ff11ba596",
+    "closureFile": "docs/assurance/generated/classification-closure.json",
+    "planFile": "docs/assurance/generated/sovereign-remediation-plan.json",
+    "reviewedRegistryFile": "docs/assurance/generated/reviewed-host-registry.json"
+  },
+  "git": {
+    "originMain": "af180143daa7ccd7a301d08f02f798085ca082fc",
+    "upstreamMain": "d8db1c357e29e0d00fc19661fa477f2109c353a1",
+    "mergeCommit": "54c36f3d732b41986bb72724298f165293bb580c",
+    "regenerationCommit": "acd43b981a2fbd4143c894f72a2c2022cc688f24",
+    "branch": "integrate/nisp17-runtime-remediation-20260806T145248Z"
+  }
+}
