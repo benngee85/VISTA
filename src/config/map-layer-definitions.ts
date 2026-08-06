@@ -195,7 +195,7 @@ export const LAYER_EXPLANATIONS: Partial<Record<keyof MapLayers, LayerExplanatio
       'Low-severity GDACS alerts are filtered out to keep the map readable.',
       'EONET wildfires are freshness-filtered, so older open events may not appear as active map points.',
     ],
-    related: ['Natural Events layer popups', 'Weather Alerts', 'Country brief natural signals'],
+    related: ['Natural Events layer popups', 'US Weather Alerts (NWS)', 'Country brief natural signals'],
     evidence: ['docs/data-sources.mdx', 'docs/architecture.mdx', 'server/worldmonitor/natural/v1/list-natural-events.ts'],
   },
   weather: {
@@ -218,7 +218,7 @@ export const LAYER_EXPLANATIONS: Partial<Record<keyof MapLayers, LayerExplanatio
     coverage: 'curated',
     category: 'Aviation',
     purpose: 'Highlights airport disruption, closures, NOTAM-derived airspace issues, and live aircraft positions when tracking is available.',
-    source: 'FAA ASWS, AviationStack, ICAO NOTAMs, OpenSky/Wingbits aircraft tracking, and the aviation service.',
+    source: 'FAA ASWS, AviationStack, ICAO NOTAMs, adsb.lol (ODbL), Wingbits, legacy OpenSky service recovery, optional non-commercial airplanes.live/adsb.fi gap-fill, and the aviation service.',
     freshness: 'Airport disruption seeds run on a 30-minute cadence; the aviation panel also refreshes operational views on a 5-minute polling cycle.',
     confidence: 'Best for disruption triage; individual live aircraft coverage depends on ADS-B availability and configured providers.',
     limitations: [
