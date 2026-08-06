@@ -526,7 +526,16 @@ const EXCLUDED_HOSTS = new Set([
 ]);
 
 function read(rootDir, path) {
-  return readFileSync(join(rootDir, path), 'utf8');
+  try {
+    return readFileSync(join(rootDir, path), 'utf8');
+  } catch (error) {
+    // Test and development tooling can create short-lived source fixtures
+    // under scanned roots. A file may disappear after readdirSync() returns
+    // it but before readFileSync() opens it. Treat only that race as a skipped
+    // entry; every other filesystem failure remains fatal.
+    if (error?.code === 'ENOENT') return null;
+    throw error;
+  }
 }
 
 function walkSourceFiles(rootDir) {
@@ -568,6 +577,7 @@ export function scanUpstreamHosts(rootDir = ROOT) {
   };
   for (const relativePath of walkSourceFiles(rootDir)) {
     const source = read(rootDir, relativePath);
+    if (source === null) continue;
     const lineStarts = [0];
     for (let offset = source.indexOf('\n'); offset !== -1; offset = source.indexOf('\n', offset + 1)) {
       lineStarts.push(offset + 1);

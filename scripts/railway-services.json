@@ -91,7 +91,8 @@
       "shared/ephemeral-live-classifier.js",
       "shared/stocks.json",
       "shared/ticker-extract.js",
-      "shared/url-classifier.js"
+      "shared/url-classifier.js",
+      "scripts/lib/anthropic-messages.cjs"
     ],
     "documentedAt": "Dockerfile.digest-notifications"
   },
@@ -149,7 +150,8 @@
       "shared/rss-allowed-domains.cjs",
       "shared/rss-allowed-domains.json",
       "shared/source-tiers.json",
-      "shared/stocks.json"
+      "shared/stocks.json",
+      "scripts/lib/anthropic-messages.cjs"
     ],
     "documentedAt": "Dockerfile.relay"
   },
@@ -492,7 +494,8 @@
       "scripts/nixpacks.toml",
       "scripts/package-lock.json",
       "scripts/package.json",
-      "scripts/seed-forecasts.mjs"
+      "scripts/seed-forecasts.mjs",
+      "scripts/lib/anthropic-messages.cjs"
     ],
     "documentedAt": "tests/scripts-railway-nixpacks-no-escape-import.test.mts (pre-registry ENTRY_POINTS)"
   },
@@ -536,7 +539,8 @@
       "scripts/seed-forecast-resolutions.mjs",
       "scripts/seed-forecasts.mjs",
       "scripts/shared/country-names.json",
-      "shared/country-names.json"
+      "shared/country-names.json",
+      "scripts/lib/anthropic-messages.cjs"
     ],
     "documentedAt": "scripts/seed-forecast-resolutions.mjs (header docblock declares daily cron)"
   },
@@ -572,7 +576,8 @@
       "scripts/package-lock.json",
       "scripts/package.json",
       "scripts/process-simulation-tasks.mjs",
-      "scripts/seed-forecasts.mjs"
+      "scripts/seed-forecasts.mjs",
+      "scripts/lib/anthropic-messages.cjs"
     ],
     "documentedAt": "tests/scripts-railway-nixpacks-no-escape-import.test.mts (pre-registry ENTRY_POINTS)"
   },
@@ -608,7 +613,8 @@
       "scripts/package-lock.json",
       "scripts/package.json",
       "scripts/process-deep-forecast-tasks.mjs",
-      "scripts/seed-forecasts.mjs"
+      "scripts/seed-forecasts.mjs",
+      "scripts/lib/anthropic-messages.cjs"
     ],
     "documentedAt": "tests/scripts-railway-nixpacks-no-escape-import.test.mts (pre-registry ENTRY_POINTS)"
   },
@@ -634,7 +640,8 @@
       "scripts/shared/diplomacy-keywords.json",
       "scripts/shared/geo-extract.mjs",
       "scripts/shared/source-tiers.json",
-      "scripts/shared/story-identity.js"
+      "scripts/shared/story-identity.js",
+      "scripts/lib/anthropic-messages.cjs"
     ],
     "documentedAt": "tests/scripts-railway-nixpacks-no-escape-import.test.mts (added PR #3836)"
   },
@@ -1201,7 +1208,8 @@
       "scripts/shared/geography.js",
       "scripts/shared/iso2-to-region.json",
       "scripts/shared/iso3-to-iso2.json",
-      "scripts/shared/notification-dedup.cjs"
+      "scripts/shared/notification-dedup.cjs",
+      "scripts/lib/anthropic-messages.cjs"
     ],
     "documentedAt": "scripts/seed-bundle-regional.mjs (header docblock declares rootDirectory: scripts)"
   },

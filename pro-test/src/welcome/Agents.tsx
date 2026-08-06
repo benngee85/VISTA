@@ -8,7 +8,7 @@ const INSTALL_CHIPS = [
   { cmd: 'npm i worldmonitor', href: 'https://www.npmjs.com/package/worldmonitor' },
   { cmd: 'pip install worldmonitor-sdk', href: 'https://pypi.org/project/worldmonitor-sdk/' },
   { cmd: 'gem install worldmonitor', href: 'https://rubygems.org/gems/worldmonitor' },
-  { cmd: 'go get github.com/koala73/worldmonitor/sdk/go', href: 'https://pkg.go.dev/github.com/koala73/worldmonitor/sdk/go' },
+  { cmd: 'go get https://github.com/benngee85/VISTAsdk/go', href: 'https://pkg.go.dev/https://github.com/benngee85/VISTAsdk/go' },
 ] as const;
 
 export const Agents = () => (
