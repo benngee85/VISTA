@@ -28,7 +28,7 @@ describe(
           assert.match(
             source,
             new RegExp(
-              String.raw`['"]${name}['"]`,
+              `['"]${name}['"]`,
             ),
           );
         }
