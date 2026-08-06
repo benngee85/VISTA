@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-06T15:25:24.671Z",
+  "families": [
+    {
+      "dependencyFamily": "ai-and-model-services",
+      "runtimePartitionCount": 4,
+      "proposedDecisions": {
+        "localise": 4
+      }
+    },
+    {
+      "dependencyFamily": "authoritative-and-specialist-data",
+      "runtimePartitionCount": 227,
+      "proposedDecisions": {
+        "retain": 227
+      }
+    },
+    {
+      "dependencyFamily": "geospatial-and-imagery",
+      "runtimePartitionCount": 20,
+      "proposedDecisions": {
+        "cache": 20
+      }
+    },
+    {
+      "dependencyFamily": "identity-and-access",
+      "runtimePartitionCount": 6,
+      "proposedDecisions": {
+        "replace": 6
+      }
+    },
+    {
+      "dependencyFamily": "market-and-economic-data",
+      "runtimePartitionCount": 18,
+      "proposedDecisions": {
+        "relay": 18
+      }
+    },
+    {
+      "dependencyFamily": "media-and-streaming",
+      "runtimePartitionCount": 2,
+      "proposedDecisions": {
+        "disable": 2
+      }
+    },
+    {
+      "dependencyFamily": "news-and-rss",
+      "runtimePartitionCount": 344,
+      "proposedDecisions": {
+        "relay": 344
+      }
+    },
+    {
+      "dependencyFamily": "software-supply-chain",
+      "runtimePartitionCount": 2,
+      "proposedDecisions": {
+        "mirror": 2
+      }
+    },
+    {
+      "dependencyFamily": "vista-first-party",
+      "runtimePartitionCount": 9,
+      "proposedDecisions": {
+        "localise": 9
+      }
+    }
+  ]
+}
