@@ -35,6 +35,14 @@ const LOGICAL_KIND_RE = /^(?:candidate|structured|feed|operational-status)(?:\+(
 
 const SOURCE_ROOTS = ['scripts', 'server', 'api', 'src'];
 const SOURCE_EXTENSIONS = new Set(['.cjs', '.js', '.mjs', '.ts', '.tsx']);
+
+// Meta-analysis and remediation tooling contains literal upstream URLs as
+// evidence, classification rules, examples, and remediation targets. These
+// files do not themselves establish runtime acquisition relationships and
+// therefore must not recursively contaminate the source-attribution inventory.
+const SOURCE_DISCOVERY_EXCLUDED_FILES = new Set([
+  'scripts/build-sovereign-remediation-plan.mjs',
+]);
 const FEED_FILES = new Set([
   'src/config/feeds.ts',
   // LiveNewsPanel owns optional native-video HLS feeds. They are observed for
@@ -544,6 +552,7 @@ function walkSourceFiles(rootDir) {
     const absoluteDir = join(rootDir, relativeDir);
     for (const entry of readdirSync(absoluteDir, { withFileTypes: true })) {
       const relativePath = join(relativeDir, entry.name).replaceAll('\\', '/');
+      if (SOURCE_DISCOVERY_EXCLUDED_FILES.has(relativePath)) continue;
       if (entry.isDirectory()) {
         if (['node_modules', '.git', 'generated', 'e2e', 'fixtures', '__fixtures__', 'test', 'tests'].includes(entry.name)) continue;
         visit(relativePath);
